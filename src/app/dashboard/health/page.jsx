@@ -4,7 +4,7 @@ import { authOptions } from "../../api/auth/[...nextauth]/route";
 import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import AppShell from '../../../components/layout/AppShell';
-import HealthDashboard from '../../../pages/Dashboard/HealthDashboard';
+import HealthDashboard from '../../../pages-old-react-router/Dashboard/HealthDashboard';
 
 export default async function DashboardPage() {
     const session = await getServerSession(authOptions);

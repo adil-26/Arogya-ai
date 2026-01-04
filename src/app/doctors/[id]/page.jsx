@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import DoctorProfile from '../../../pages/Booking/DoctorProfile';
+import DoctorProfile from '../../../pages-old-react-router/Booking/DoctorProfile';
 
 export default function Page({ params }) {
     // In Next.js 15, params is async, so we unwrap it if needed, or just pass prompt
