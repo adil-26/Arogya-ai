@@ -29,8 +29,10 @@ export default async function DashboardPage() {
     }
 
     if (user && user.role === 'patient') {
-        // Check if essential fields are missing
-        if (!user.dob || !user.bloodGroup) {
+        // Check if essential profile fields are missing
+        const isProfileIncomplete = !user.dob || !user.bloodGroup || !user.gender || !user.phone;
+
+        if (isProfileIncomplete) {
             redirect('/onboarding');
         }
     }

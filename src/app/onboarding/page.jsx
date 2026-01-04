@@ -98,6 +98,7 @@ export default function OnboardingPage() {
                             <input
                                 type="tel"
                                 placeholder="+91 98765 43210"
+                                required
                                 value={form.phone || ''}
                                 onChange={e => setForm({ ...form, phone: e.target.value })}
                                 style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #D1D5DB' }}
