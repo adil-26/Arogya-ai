@@ -1,8 +1,8 @@
 'use client';
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-function DoctorSignupForm() {
+export default function DoctorSignup() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [form, setForm] = useState({
@@ -88,17 +88,5 @@ function DoctorSignupForm() {
                 </form>
             </div>
         </div>
-    );
-}
-
-export default function DoctorSignup() {
-    return (
-        <Suspense fallback={
-            <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <div>Loading...</div>
-            </div>
-        }>
-            <DoctorSignupForm />
-        </Suspense>
     );
 }
