@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
-import { Bell, User } from 'lucide-react';
+import { User } from 'lucide-react';
+import NotificationPanel from './NotificationPanel';
 import './DashboardHeader.css';
 
 const DashboardHeader = ({ patient }) => {
@@ -22,10 +25,10 @@ const DashboardHeader = ({ patient }) => {
             </div>
 
             <div className="header-right">
-                <button className="btn-icon-only relative">
-                    <Bell size={20} />
-                    <span className="notification-dot"></span>
-                </button>
+                {/* Notification Bell with Panel */}
+                <NotificationPanel />
+
+                {/* Profile Avatar */}
                 <div className="mini-profile">
                     <div className="avatar-small">
                         {patient.avatar ? <img src={patient.avatar} alt="Profile" /> : <User size={20} />}

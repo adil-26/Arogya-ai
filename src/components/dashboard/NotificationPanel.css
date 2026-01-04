@@ -1,0 +1,250 @@
+.notification-container {
+    position: relative;
+}
+
+.notification-bell {
+    background: white;
+    border: 1px solid #E2E8F0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #64748B;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.notification-bell:hover {
+    border-color: #0D9488;
+    color: #0D9488;
+}
+
+.notification-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 18px;
+    height: 18px;
+    background: #EF4444;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+}
+
+.notification-panel {
+    position: absolute;
+    top: 54px;
+    right: 0;
+    width: 360px;
+    max-height: 480px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    z-index: 1000;
+    animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.notif-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #F1F5F9;
+}
+
+.notif-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1E293B;
+}
+
+.mark-read-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    color: #0D9488;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.mark-read-btn:hover {
+    background: #F0FDFA;
+}
+
+.notif-list {
+    max-height: 380px;
+    overflow-y: auto;
+}
+
+.notif-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    color: #94A3B8;
+}
+
+.notif-empty svg {
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+
+.notif-empty p {
+    margin: 0 0 4px 0;
+    font-weight: 500;
+    color: #64748B;
+}
+
+.notif-empty span {
+    font-size: 0.85rem;
+}
+
+.notif-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 20px;
+    cursor: pointer;
+    transition: background 0.15s;
+    border-bottom: 1px solid #F8FAFC;
+}
+
+.notif-item:hover {
+    background: #F8FAFC;
+}
+
+.notif-item.unread {
+    background: #F0FDFA;
+}
+
+.notif-item.unread:hover {
+    background: #E6FFFA;
+}
+
+.notif-icon-wrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.notif-icon.appointment {
+    color: #2563EB;
+    background: #EFF6FF;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.notif-icon.message {
+    color: #7C3AED;
+    background: #F3E8FF;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.notif-icon.health {
+    color: #DC2626;
+    background: #FEF2F2;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.notif-icon.system {
+    color: #0D9488;
+    background: #F0FDFA;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.notif-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.notif-title {
+    margin: 0 0 2px 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1E293B;
+}
+
+.notif-message {
+    margin: 0 0 4px 0;
+    font-size: 0.85rem;
+    color: #64748B;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.notif-time {
+    font-size: 0.75rem;
+    color: #94A3B8;
+}
+
+.notif-delete {
+    background: none;
+    border: none;
+    color: #CBD5E1;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: all 0.15s;
+}
+
+.notif-item:hover .notif-delete {
+    opacity: 1;
+}
+
+.notif-delete:hover {
+    color: #EF4444;
+    background: #FEE2E2;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .notification-panel {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-height: 70vh;
+        border-radius: 20px 20px 0 0;
+    }
+}

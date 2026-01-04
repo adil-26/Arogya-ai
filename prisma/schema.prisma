@@ -52,12 +52,27 @@ model User {
   chats        ChatMessage[]
   accounts      Account[]
   sessions      Session[]
+  notifications Notification[]
   
   // Referral Relations
   wallet              Wallet?
   referralsMade       Referral[] @relation("ReferrerRelation")
   referredAs          Referral?  @relation("RefereeRelation")
   withdrawalRequests  WithdrawalRequest[]
+}
+
+// Notification System
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  type      String   // appointment, message, health, system
+  title     String
+  message   String
+  link      String?  // Optional link to navigate
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Account {
