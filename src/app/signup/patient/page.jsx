@@ -1,9 +1,9 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
-export default function PatientSignup() {
+function PatientSignupForm() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [form, setForm] = useState({
@@ -147,5 +147,17 @@ export default function PatientSignup() {
                 </form>
             </div>
         </div>
+    );
+}
+
+export default function PatientSignup() {
+    return (
+        <Suspense fallback={
+            <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div>Loading...</div>
+            </div>
+        }>
+            <PatientSignupForm />
+        </Suspense>
     );
 }
