@@ -50,16 +50,33 @@ export const authOptions = {
     ],
     callbacks: {
         async signIn({ user, account, profile }) {
-            // For Google OAuth, ensure user is created/updated properly
+            // For Google OAuth, ensure user is created/updated with patient role
             if (account.provider === "google") {
                 console.log("Google Sign-In:", user.email);
+
+                // Check if user exists
+                const existingUser = await prisma.user.findUnique({
+                    where: { email: user.email }
+                });
+
+                // If user exists but doesn't have a role, set it to patient
+                if (existingUser && !existingUser.role) {
+                    await prisma.user.update({
+                        where: { email: user.email },
+                        data: { role: 'patient' }
+                    });
+                }
+
+                // For brand new users, the PrismaAdapter will create them
+                // but we need to ensure they have the patient role
+                // This is handled in the jwt callback below
             }
             return true;
         },
         async jwt({ token, user, account }) {
             // Initial sign in - user object is available
             if (user) {
-                token.role = user.role;
+                token.role = user.role || 'patient'; // Default to patient if no role
                 token.id = user.id;
             }
             // Subsequent requests - fetch fresh data from database
@@ -69,8 +86,17 @@ export const authOptions = {
                     select: { id: true, role: true, name: true, email: true }
                 });
                 if (dbUser) {
+                    // If user has no role, set it to patient
+                    if (!dbUser.role) {
+                        await prisma.user.update({
+                            where: { email: token.email },
+                            data: { role: 'patient' }
+                        });
+                        token.role = 'patient';
+                    } else {
+                        token.role = dbUser.role;
+                    }
                     token.id = dbUser.id;
-                    token.role = dbUser.role;
                     token.name = dbUser.name;
                 }
             }
