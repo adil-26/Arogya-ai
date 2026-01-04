@@ -18,6 +18,7 @@ model User {
   email     String   @unique
   password  String?  // Hashed password
   image     String?  // For Google Auth
+  emailVerified DateTime? // Required by NextAuth
   role      String   @default("patient") // patient, doctor, admin
   status    String   @default("approved") // approved, pending (for doctors)
   
