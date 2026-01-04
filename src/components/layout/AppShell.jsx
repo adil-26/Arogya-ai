@@ -14,20 +14,14 @@ const AppShell = ({ children }) => {
   const pathname = usePathname();
   const { data: session, status } = useSession();
 
-  // Don't render anything until session is checked (prevents flash)
-  if (status === "loading") {
-    return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div>Loading...</div>
-      </div>
-    );
-  }
-
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const closeSidebar = () => setIsSidebarOpen(false);
 
-  // Check for unread messages
+  // Check for unread messages - MUST be before conditional return (React hooks rules)
   useEffect(() => {
+    // Skip if still loading
+    if (status === "loading") return;
+
     const checkUnread = async () => {
       try {
         // Get read counts from localStorage
@@ -58,7 +52,16 @@ const AppShell = ({ children }) => {
     checkUnread();
     const interval = setInterval(checkUnread, 15000);
     return () => clearInterval(interval);
-  }, []);
+  }, [status]);
+
+  // Don't render anything until session is checked (prevents flash)
+  if (status === "loading") {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div>Loading...</div>
+      </div>
+    );
+  }
 
   // Helper to check active state
   const isActive = (path) => {
