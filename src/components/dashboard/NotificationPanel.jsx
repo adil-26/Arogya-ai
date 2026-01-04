@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Bell, X, Check, Trash2, Calendar, MessageSquare, Heart, Info } from 'lucide-react';
+import { Bell, X, Check, Trash2, Calendar, MessageSquare, Heart, Info, BellRing } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import './NotificationPanel.css';
 
@@ -10,8 +10,54 @@ const NotificationPanel = () => {
     const [notifications, setNotifications] = useState([]);
     const [unreadCount, setUnreadCount] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [pushPermission, setPushPermission] = useState('default');
+    const [swRegistration, setSwRegistration] = useState(null);
     const panelRef = useRef(null);
     const router = useRouter();
+    const previousUnreadRef = useRef(0);
+
+    // Register service worker and check push permission
+    useEffect(() => {
+        if ('Notification' in window) {
+            setPushPermission(Notification.permission);
+        }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/push-sw.js')
+                .then(reg => {
+                    setSwRegistration(reg);
+                    console.log('Push SW registered');
+                })
+                .catch(err => console.error('SW registration failed:', err));
+        }
+    }, []);
+
+    // Request push notification permission
+    const requestPushPermission = async () => {
+        try {
+            const permission = await Notification.requestPermission();
+            setPushPermission(permission);
+            if (permission === 'granted') {
+                // Show test notification
+                showBrowserNotification('Notifications Enabled!', 'You will now receive push notifications.');
+            }
+        } catch (error) {
+            console.error('Failed to request permission:', error);
+        }
+    };
+
+    // Show browser notification
+    const showBrowserNotification = (title, body, link = '/dashboard/health') => {
+        if (pushPermission === 'granted' && swRegistration) {
+            swRegistration.showNotification(title, {
+                body,
+                icon: '/icons/icon-192x192.png',
+                badge: '/icons/badge-72x72.png',
+                vibrate: [100, 50, 100],
+                data: { url: link }
+            });
+        }
+    };
 
     // Fetch notifications
     const fetchNotifications = async () => {
@@ -19,8 +65,20 @@ const NotificationPanel = () => {
             const res = await fetch('/api/notifications');
             if (res.ok) {
                 const data = await res.json();
-                setNotifications(data.notifications || []);
-                setUnreadCount(data.unreadCount || 0);
+                const newNotifications = data.notifications || [];
+                const newUnreadCount = data.unreadCount || 0;
+
+                // Check for new notifications and show browser notification
+                if (newUnreadCount > previousUnreadRef.current && previousUnreadRef.current > 0) {
+                    const latestUnread = newNotifications.find(n => !n.read);
+                    if (latestUnread && pushPermission === 'granted') {
+                        showBrowserNotification(latestUnread.title, latestUnread.message, latestUnread.link);
+                    }
+                }
+                previousUnreadRef.current = newUnreadCount;
+
+                setNotifications(newNotifications);
+                setUnreadCount(newUnreadCount);
             }
         } catch (error) {
             console.error('Failed to fetch notifications:', error);
@@ -30,9 +88,9 @@ const NotificationPanel = () => {
     // Initial fetch and polling
     useEffect(() => {
         fetchNotifications();
-        const interval = setInterval(fetchNotifications, 30000); // Poll every 30s
+        const interval = setInterval(fetchNotifications, 15000); // Poll every 15s
         return () => clearInterval(interval);
-    }, []);
+    }, [pushPermission]);
 
     // Close panel when clicking outside
     useEffect(() => {
@@ -144,6 +202,40 @@ const NotificationPanel = () => {
                             </button>
                         )}
                     </div>
+
+                    {/* Push Notification Permission Banner */}
+                    {pushPermission !== 'granted' && (
+                        <div style={{
+                            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                            padding: '12px 16px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            gap: '10px'
+                        }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <BellRing size={18} color="white" />
+                                <span style={{ color: 'white', fontSize: '0.85rem', fontWeight: '500' }}>
+                                    Enable push notifications
+                                </span>
+                            </div>
+                            <button
+                                onClick={requestPushPermission}
+                                style={{
+                                    background: 'white',
+                                    color: '#667eea',
+                                    border: 'none',
+                                    padding: '6px 12px',
+                                    borderRadius: '6px',
+                                    fontSize: '0.8rem',
+                                    fontWeight: '600',
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                Enable
+                            </button>
+                        </div>
+                    )}
 
                     <div className="notif-list">
                         {notifications.length === 0 ? (
