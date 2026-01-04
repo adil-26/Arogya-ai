@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Upload, Book, Trash2, Users, Calendar, Shield, UserCheck, UserX, Search, AlertCircle, Gift, Wallet } from 'lucide-react';
+import { Upload, Book, Trash2, Users, Calendar, Shield, UserCheck, UserX, Search, AlertCircle, Gift, Wallet, Bell, Send } from 'lucide-react';
 
 export default function AdminDashboardClient({
     initialStats,
@@ -25,6 +25,12 @@ export default function AdminDashboardClient({
     });
     const [selectedFile, setSelectedFile] = useState(null);
     const [uploading, setUploading] = useState(false);
+
+    // Notification form state
+    const [notificationForm, setNotificationForm] = useState({
+        title: '', message: '', type: 'system', targetRole: 'all', link: ''
+    });
+    const [sendingNotification, setSendingNotification] = useState(false);
 
     // Handlers
     const handleDoctorAction = async (doctorId, action) => {
@@ -115,6 +121,37 @@ export default function AdminDashboardClient({
         }
     };
 
+    // Send notification to all users
+    const handleSendNotification = async (e) => {
+        e.preventDefault();
+        if (!notificationForm.title || !notificationForm.message) {
+            alert('Please fill in title and message');
+            return;
+        }
+
+        setSendingNotification(true);
+        try {
+            const res = await fetch('/api/admin/notifications', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(notificationForm)
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                alert(`✅ Notification sent to ${data.sentTo} users!`);
+                setNotificationForm({ title: '', message: '', type: 'system', targetRole: 'all', link: '' });
+            } else {
+                const err = await res.json();
+                alert('Failed: ' + err.error);
+            }
+        } catch (error) {
+            alert('Failed to send notification');
+        } finally {
+            setSendingNotification(false);
+        }
+    };
+
     // Filter users based on search
     const filteredUsers = users.filter(u =>
         u.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -123,6 +160,7 @@ export default function AdminDashboardClient({
 
     const tabs = [
         { id: 'overview', label: 'Overview', icon: Shield },
+        { id: 'notifications', label: 'Send Notifications', icon: Bell },
         { id: 'doctors', label: 'Doctor Approvals', icon: UserCheck },
         { id: 'users', label: 'All Users', icon: Users },
         { id: 'appointments', label: 'Appointments', icon: Calendar },
@@ -226,6 +264,115 @@ export default function AdminDashboardClient({
                                     </div>
                                 </div>
                             )}
+                        </div>
+                    )}
+
+                    {/* NOTIFICATIONS TAB */}
+                    {activeTab === 'notifications' && (
+                        <div>
+                            <h2 style={{ fontSize: '1.5rem', color: '#1E293B', marginBottom: '25px' }}>Send Push Notifications</h2>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '25px' }}>
+                                {/* Send Form */}
+                                <div style={{ background: 'white', borderRadius: '12px', padding: '25px' }}>
+                                    <h3 style={{ fontSize: '1.1rem', color: '#1E293B', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        <Send size={20} /> Compose Notification
+                                    </h3>
+
+                                    <form onSubmit={handleSendNotification} style={{ display: 'grid', gap: '15px' }}>
+                                        <input
+                                            type="text"
+                                            placeholder="Notification Title *"
+                                            required
+                                            value={notificationForm.title}
+                                            onChange={(e) => setNotificationForm({ ...notificationForm, title: e.target.value })}
+                                            style={{ padding: '12px', borderRadius: '8px', border: '1px solid #E2E8F0' }}
+                                        />
+
+                                        <textarea
+                                            placeholder="Message content *"
+                                            required
+                                            value={notificationForm.message}
+                                            onChange={(e) => setNotificationForm({ ...notificationForm, message: e.target.value })}
+                                            style={{ padding: '12px', borderRadius: '8px', border: '1px solid #E2E8F0', minHeight: '100px' }}
+                                        />
+
+                                        <input
+                                            type="text"
+                                            placeholder="Link (optional) e.g. /appointments"
+                                            value={notificationForm.link}
+                                            onChange={(e) => setNotificationForm({ ...notificationForm, link: e.target.value })}
+                                            style={{ padding: '12px', borderRadius: '8px', border: '1px solid #E2E8F0' }}
+                                        />
+
+                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                                            <select
+                                                value={notificationForm.type}
+                                                onChange={(e) => setNotificationForm({ ...notificationForm, type: e.target.value })}
+                                                style={{ padding: '12px', borderRadius: '8px', border: '1px solid #E2E8F0' }}
+                                            >
+                                                <option value="system">🔔 System</option>
+                                                <option value="appointment">📅 Appointment</option>
+                                                <option value="health">❤️ Health</option>
+                                                <option value="message">💬 Message</option>
+                                            </select>
+
+                                            <select
+                                                value={notificationForm.targetRole}
+                                                onChange={(e) => setNotificationForm({ ...notificationForm, targetRole: e.target.value })}
+                                                style={{ padding: '12px', borderRadius: '8px', border: '1px solid #E2E8F0' }}
+                                            >
+                                                <option value="all">👥 All Users</option>
+                                                <option value="patient">🏥 Patients Only</option>
+                                                <option value="doctor">👨‍⚕️ Doctors Only</option>
+                                            </select>
+                                        </div>
+
+                                        <button
+                                            type="submit"
+                                            disabled={sendingNotification}
+                                            style={{
+                                                padding: '14px',
+                                                background: sendingNotification ? '#94A3B8' : '#10B981',
+                                                color: 'white',
+                                                border: 'none',
+                                                borderRadius: '8px',
+                                                fontWeight: 'bold',
+                                                cursor: sendingNotification ? 'not-allowed' : 'pointer',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                gap: '8px'
+                                            }}
+                                        >
+                                            <Send size={18} />
+                                            {sendingNotification ? 'Sending...' : 'Send Notification'}
+                                        </button>
+                                    </form>
+                                </div>
+
+                                {/* Info Panel */}
+                                <div style={{ background: 'white', borderRadius: '12px', padding: '25px' }}>
+                                    <h3 style={{ fontSize: '1.1rem', color: '#1E293B', marginBottom: '20px' }}>📊 Notification Info</h3>
+
+                                    <div style={{ background: '#F0FDF4', border: '1px solid #86EFAC', borderRadius: '10px', padding: '15px', marginBottom: '15px' }}>
+                                        <p style={{ margin: 0, color: '#166534', fontWeight: '600' }}>Total Users: {stats?.totalPatients + stats?.totalDoctors || 0}</p>
+                                        <p style={{ margin: '5px 0 0 0', fontSize: '0.9rem', color: '#15803D' }}>
+                                            {stats?.totalPatients || 0} patients, {stats?.totalDoctors || 0} doctors
+                                        </p>
+                                    </div>
+
+                                    <div style={{ background: '#EFF6FF', border: '1px solid #93C5FD', borderRadius: '10px', padding: '15px' }}>
+                                        <p style={{ margin: 0, fontWeight: '600', color: '#1E40AF' }}>💡 Tips</p>
+                                        <ul style={{ margin: '10px 0 0 0', paddingLeft: '20px', color: '#3B82F6', fontSize: '0.9rem' }}>
+                                            <li>Keep messages short and clear</li>
+                                            <li>Add a link to direct users</li>
+                                            <li>Use emoji for better visibility</li>
+                                            <li>Target specific roles for relevance</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     )}
 
