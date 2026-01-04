@@ -15,6 +15,14 @@ export const authOptions = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || "mock-secret",
             // Allow linking if user exists with same email (needed for smooth UX)
             allowDangerousEmailAccountLinking: true,
+            // Force account selection every time
+            authorization: {
+                params: {
+                    prompt: "select_account",
+                    access_type: "offline",
+                    response_type: "code"
+                }
+            }
         }),
         CredentialsProvider({
             name: "Credentials",
