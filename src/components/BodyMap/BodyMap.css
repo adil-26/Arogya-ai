@@ -1,0 +1,202 @@
+.body-map-container {
+    background: white;
+    /* Clean white background for the map area */
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    min-height: 500px;
+    border: 1px solid var(--color-border);
+}
+
+.map-controls {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.view-toggle {
+    display: flex;
+    background: var(--color-bg-body);
+    border-radius: var(--radius-full);
+    padding: 4px;
+}
+
+.toggle-btn {
+    border: none;
+    background: transparent;
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.toggle-btn.active {
+    background: white;
+    color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-icon-round {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-secondary);
+}
+
+.btn-icon-round:hover {
+    background: var(--color-bg-body);
+    color: var(--color-primary);
+}
+
+.svg-wrapper {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.human-body-svg {
+    height: 400px;
+    width: auto;
+    max-width: 100%;
+    transition: transform var(--transition-normal);
+}
+
+/* SVG Interactions */
+.body-part {
+    fill: #E0E0E0;
+    /* Default neutral grey */
+    stroke: #BDBDBD;
+    stroke-width: 1;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+}
+
+.body-part:hover {
+    fill: #B2DFDB;
+    /* Light Teal hover */
+}
+
+.body-part.selected {
+    fill: var(--color-primary-light);
+    stroke: var(--color-primary-dark);
+    filter: drop-shadow(0 0 4px rgba(0, 128, 128, 0.4));
+}
+
+.body-part-static {
+    fill: #EEEEEE;
+    stroke: #E0E0E0;
+}
+
+/* Specific Organs Styling */
+.heart {
+    fill: #f8bbd0;
+}
+
+/* Soft pinkish */
+.heart:hover {
+    fill: #f48fb1;
+}
+
+.kidneys {
+    fill: #dcedc8;
+}
+
+.map-legend {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.dot.mild {
+    background-color: var(--severity-mild);
+    border: 1px solid #FFEB3B;
+}
+
+.dot.severe {
+    background-color: var(--severity-severe);
+    border: 1px solid #EF5350;
+}
+
+/* Pulse Animations for Active Issues */
+@keyframes pulse-red-organ {
+    0% {
+        filter: drop-shadow(0 0 2px rgba(229, 57, 53, 0.4));
+        fill: #FFEBEE;
+    }
+
+    50% {
+        filter: drop-shadow(0 0 8px rgba(229, 57, 53, 0.8));
+        fill: #FFCDD2;
+    }
+
+    100% {
+        filter: drop-shadow(0 0 2px rgba(229, 57, 53, 0.4));
+        fill: #FFEBEE;
+    }
+}
+
+@keyframes pulse-yellow-organ {
+    0% {
+        filter: drop-shadow(0 0 2px rgba(253, 216, 53, 0.4));
+        fill: #FFFDE7;
+    }
+
+    50% {
+        filter: drop-shadow(0 0 8px rgba(253, 216, 53, 0.8));
+        fill: #FFF9C4;
+    }
+
+    100% {
+        filter: drop-shadow(0 0 2px rgba(253, 216, 53, 0.4));
+        fill: #FFFDE7;
+    }
+}
+
+.body-part.severe-issue {
+    animation: pulse-red-organ 2s infinite ease-in-out;
+    stroke: #C62828;
+}
+
+.body-part.mild-issue {
+    animation: pulse-yellow-organ 2s infinite ease-in-out;
+    stroke: #F9A825;
+}
+
+.map-instruction {
+    margin-top: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+}

@@ -1,0 +1,732 @@
+.history-page-container {
+    padding: 0;
+    min-height: calc(100vh - 140px);
+    /* Adjust for AppShell header - no extra padding */
+    display: flex;
+    flex-direction: column;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    background: white;
+    padding: 16px 24px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.history-header h2 {
+    margin: 0;
+    color: var(--color-primary-dark);
+}
+
+.history-header p {
+    margin: 4px 0 0;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.btn-export {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid var(--color-border);
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-export:hover {
+    background: var(--color-bg-body);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.history-content-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 24px;
+    flex: 1;
+    min-height: 0;
+    /* Prevent overflow issues */
+}
+
+.history-sidebar {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.body-nav-container {
+    width: 150px;
+    /* Smaller body for navigation */
+    height: 300px;
+    margin-top: 20px;
+}
+
+.history-detail-view {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Override DetailPanel styles for this context */
+/* Override DetailPanel styles for this context */
+.history-detail-view .organ-detail-panel {
+    border: none;
+    box-shadow: none;
+}
+
+/* Mobile Stack Layout & Bottom Sheet */
+@media (max-width: 900px) {
+    .history-content-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        overflow-y: visible;
+        height: auto;
+    }
+
+    .history-sidebar {
+        width: 100%;
+        height: 60vh;
+        /* Takes up most of screen */
+        padding-bottom: 24px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .body-nav-container {
+        width: 140px;
+        height: 280px;
+        margin-top: 20px;
+    }
+
+    .history-page-container {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+        padding-bottom: 90px;
+    }
+
+    /* Convert Detail Panel to Bottom Sheet */
+    .history-detail-view {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 85vh;
+        /* 85% Height Sheet */
+        background: white;
+        z-index: 2000;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+        transform: translateY(100%);
+        /* Hidden by default */
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        display: block !important;
+        /* Ensure it's not hidden by flex issues */
+    }
+
+    .history-detail-view.mobile-open {
+        transform: translateY(0);
+        /* Slide Up */
+    }
+
+    .mobile-drag-handle {
+        width: 40px;
+        height: 5px;
+        background: #E0E0E0;
+        border-radius: 10px;
+        margin: 12px auto 4px;
+        cursor: pointer;
+    }
+
+    .history-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .btn-export {
+        align-self: flex-start;
+    }
+}
+
+/* Timeline View Styles (Root Scope) */
+.timeline-view-container {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 16px;
+}
+
+.timeline-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 12px;
+    position: relative;
+    padding-bottom: 24px;
+}
+
+.timeline-date {
+    width: 80px;
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    padding-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.timeline-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    z-index: 2;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px var(--color-primary-light);
+}
+
+.timeline-line {
+    width: 2px;
+    background: var(--color-border);
+    flex: 1;
+    margin-top: 4px;
+}
+
+.timeline-card {
+    flex: 1;
+    background: white;
+    padding: 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.timeline-header h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--color-primary-dark);
+}
+
+.timeline-loc {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 4px 0;
+}
+
+.timeline-note {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    font-style: italic;
+}
+
+/* Header Toggles (Root Scope) */
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.view-toggles {
+    display: flex;
+    background: var(--color-bg-body);
+    padding: 4px;
+    border-radius: var(--radius-full);
+}
+
+.toggle-btn {
+    padding: 6px 16px;
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.toggle-btn.active {
+    background: white;
+    color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .view-toggles {
+        width: 100%;
+    }
+
+    .toggle-btn {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+/* 
+   -----------------------------------
+   PREMIUM REPORT & HEADER ACTIONS CSS
+   -----------------------------------
+*/
+
+/* Header Actions Premium Buttons */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-secondary-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #0F766E 0%, #14B8A6 100%);
+    /* Teal Gradient */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+    /* Teal Glow */
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.btn-secondary-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(20, 184, 166, 0.4);
+}
+
+.btn-secondary-action svg {
+    opacity: 0.9;
+}
+
+/* Mobile Fixes for Buttons */
+@media (max-width: 768px) {
+    .header-actions {
+        width: 100%;
+        margin-top: 16px;
+        flex-direction: column;
+        /* Stack buttons on mobile */
+        gap: 10px;
+        align-items: stretch;
+        /* Full width */
+    }
+
+    .btn-secondary-action {
+        justify-content: center;
+        width: 100%;
+        padding: 12px;
+    }
+
+    .btn-export {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+    }
+}
+
+/* Report View Styles (Root Scope) */
+.report-view-container {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.report-section {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 24px;
+    border: 1px solid var(--color-border);
+}
+
+.report-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.report-header h3 {
+    margin: 0;
+    color: var(--color-primary-dark);
+    font-size: 1.2rem;
+    white-space: nowrap;
+}
+
+.header-line {
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+}
+
+.report-items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.report-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--color-border);
+}
+
+.report-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.item-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-part {
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.item-issue {
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.item-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.85rem;
+}
+
+.item-date {
+    color: var(--color-text-secondary);
+}
+
+.severity-tag {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.severity-tag.chronic {
+    background: #FEF2F2;
+    color: #DC2626;
+}
+
+.severity-tag.warning {
+    background: #FFFBEB;
+    color: #D97706;
+}
+
+.severity-tag.monitoring {
+    background: #EFF6FF;
+    color: #3B82F6;
+}
+
+.item-note {
+    margin: 4px 0 0;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    background: var(--color-bg-body);
+    padding: 8px;
+    border-radius: var(--radius-md);
+}
+
+/* Medical Profile Report Styles */
+.highlight-section {
+    background: #F0FDFA;
+    /* Teal-50 */
+    border-color: #CCFBF1;
+}
+
+.highlight-section .report-header h3 {
+    color: #0F766E;
+    /* Teal-700 */
+}
+
+.btn-icon-small {
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 4px;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+}
+
+.conditions-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.condition-tag {
+    background: white;
+    border: 1px solid #14B8A6;
+    /* Teal-500 */
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.cond-name {
+    font-weight: 600;
+    color: #0F766E;
+}
+
+.cond-type {
+    background: #CCFBF1;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.cond-year {
+    color: var(--color-text-secondary);
+    font-size: 0.8rem;
+    padding-left: 8px;
+    border-left: 1px solid var(--color-border);
+}
+
+.empty-state {
+    cursor: pointer;
+    border-style: dashed;
+    transition: all 0.2s;
+}
+
+.empty-state:hover {
+    border-color: var(--color-primary);
+    background: #F0FDFA;
+}
+
+.empty-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-text-secondary);
+    padding: 12px;
+}
+
+.icon-placeholder {
+    color: #CBD5E1;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* SHOWCASE MODE STYLES */
+.showcase-view-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.showcase-content {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    width: 100%;
+    max-width: 900px;
+}
+
+.showcase-visual {
+    flex: 1;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
+    transition: all 0.5s ease;
+}
+
+.showcase-info-panel {
+    flex: 1;
+    position: relative;
+}
+
+.showcase-card {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.showcase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+.showcase-header h2 {
+    margin: 0;
+    font-size: 2rem;
+    color: var(--color-primary-dark);
+    line-height: 1.2;
+}
+
+.showcase-badges {
+    display: flex;
+    gap: 8px;
+}
+
+.showcase-detail {
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.showcase-meta {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 30px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border);
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.meta-label {
+    font-size: 0.85rem;
+    color: #94A3B8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.meta-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.showcase-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--color-primary), #14B8A6);
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 900px) {
+    .showcase-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .showcase-visual {
+        height: 300px;
+    }
+
+    .showcase-card {
+        padding: 24px;
+        width: 100%;
+    }
+
+    .showcase-header h2 {
+        font-size: 1.5rem;
+    }
+}

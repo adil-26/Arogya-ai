@@ -1,0 +1,157 @@
+.health-graphs-container {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+    margin-top: 20px;
+}
+
+.graph-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.graph-header h3 {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.graph-tabs {
+    display: flex;
+    background: var(--color-bg-body);
+    border-radius: var(--radius-md);
+    padding: 4px;
+}
+
+.graph-tab {
+    border: none;
+    background: transparent;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: var(--color-text-secondary);
+}
+
+.graph-tab.active {
+    background: white;
+    color: var(--color-primary);
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+}
+
+.insight-text {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    background: #FAFAFA;
+    padding: 12px;
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--color-primary);
+    margin-bottom: 24px;
+}
+
+.highlight.negative {
+    color: #D32F2F;
+    font-weight: 600;
+}
+
+/* Abstract Bar Chart CSS */
+.bar-chart {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 150px;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.chart-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.bars-wrapper {
+    position: relative;
+    width: 20px;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.bar {
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+    transition: height 0.3s ease;
+}
+
+.water-bar {
+    background-color: #42A5F5;
+    opacity: 0.8;
+}
+
+.sleep-bar {
+    background-color: #7E57C2;
+    opacity: 0.8;
+}
+
+.fatigue-bar {
+    position: absolute;
+    width: 6px;
+    background-color: #EF5350;
+    z-index: 2;
+    opacity: 1;
+}
+
+.headache-dot {
+    position: absolute;
+    top: -10px;
+    width: 8px;
+    height: 8px;
+    background-color: #D32F2F;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.chart-column .label {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+}
+
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+}
+
+.dot.water {
+    background-color: #42A5F5;
+}
+
+.dot.headache {
+    background-color: #D32F2F;
+}
+
+.dot.sleep {
+    background-color: #7E57C2;
+}
+
+.dot.fatigue {
+    background-color: #EF5350;
+}

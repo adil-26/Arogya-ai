@@ -1,0 +1,99 @@
+.quick-actions-bar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.quick-actions-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.action-card {
+    flex: 1;
+    background: white;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    min-width: 160px;
+}
+
+.action-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border-color: #14B8A6;
+}
+
+.action-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-icon.chat {
+    background-color: #E0F2FE;
+    color: #0284C7;
+}
+
+.action-icon.appointment {
+    background-color: #F3E8FF;
+    color: #9333EA;
+}
+
+.action-icon.upload {
+    background-color: #D1FAE5;
+    color: #059669;
+}
+
+.action-icon.timeline {
+    background-color: #FEF3C7;
+    color: #D97706;
+}
+
+.action-label {
+    font-weight: 600;
+    color: #1E293B;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .quick-actions-bar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        overflow: visible;
+        padding-bottom: 0;
+        margin-bottom: 20px;
+    }
+
+    .action-card {
+        padding: 18px 16px;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        min-width: unset;
+        border-radius: 14px;
+    }
+
+    .action-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+    }
+
+    .action-label {
+        font-size: 0.85rem;
+    }
+}

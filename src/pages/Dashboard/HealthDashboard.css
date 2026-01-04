@@ -1,0 +1,274 @@
+/* ... existing layout vars ... */
+.dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    margin-bottom: var(--spacing-xl);
+    /* Legacy header style, can interpret for new if needed */
+}
+
+/* New Grid Layout: Map Left, Details Right */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    /* Wider map area */
+    gap: var(--spacing-xl);
+    align-items: start;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.main-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.side-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.visual-health-section {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+}
+
+.section-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.section-header-row h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--color-primary-dark);
+}
+
+.badge-live {
+    background-color: #FFEBEE;
+    color: #C62828;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Snapshot Section (Point 5) */
+.snapshot-section {
+    margin-top: var(--spacing-md);
+}
+
+.snapshot-section h3 {
+    margin-bottom: var(--spacing-md);
+    font-size: 1.1rem;
+}
+
+.snapshot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+}
+
+/* Summary Card Override */
+.summary-card {
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.metric-value-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    display: block;
+    margin-top: 4px;
+}
+
+.metric-subtext {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+}
+
+.score-high {
+    color: #2E7D32;
+}
+
+/* Side Section */
+.side-section {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}
+
+.info-panel-placeholder {
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--color-border);
+    padding: 40px;
+    text-align: center;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    /* Match Match Height approx */
+}
+
+/* Tabs Section (Point 6) */
+.history-tabs-section {
+    margin-top: 40px;
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    border: 1px solid var(--color-border);
+}
+
+.tabs-header {
+    display: flex;
+    gap: 20px;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding-bottom: 10px;
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-btn.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+    font-weight: 600;
+}
+
+.tab-placeholder {
+    color: var(--color-text-secondary);
+    font-style: italic;
+
+    /* Mobile Stack Layout */
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding-bottom: 80px;
+        /* Space for Bottom Nav */
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    .section-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .badge-live {
+        align-self: flex-start;
+        font-size: 0.7rem;
+    }
+
+    /* Mobile Bottom Sheet Styles */
+    .side-section {
+        position: fixed;
+        bottom: 71px;
+        /* Height of bottom nav + 1px */
+        left: 0;
+        width: 100%;
+        height: 60vh;
+        /* 60% Height Sheet */
+        background: white;
+        z-index: 900;
+        /* Below bottom nav */
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+        transform: translateY(100%);
+        /* Hidden by default */
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        padding: 0;
+        /* Reset padding */
+        display: flex;
+        flex-direction: column;
+        order: unset;
+        /* Reset order */
+        margin-bottom: 0;
+    }
+
+    .side-section.mobile-open {
+        transform: translateY(0);
+        /* Slide Up */
+    }
+
+    /* Add Handle for Mobile */
+    .mobile-drag-handle {
+        width: 40px;
+        height: 5px;
+        background: #E0E0E0;
+        border-radius: 10px;
+        margin: 12px auto 4px;
+        /* Center top */
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    /* Adjust Detail Panel inside Sheet */
+    .detail-panel-wrapper {
+        flex: 1;
+        overflow-y: auto;
+        padding-bottom: 80px;
+        /* Space for content */
+    }
+
+    .side-section .organ-detail-panel {
+        border: none;
+        box-shadow: none;
+        height: auto;
+    }
+
+    /* Hide placeholder on mobile to avoid blocking view */
+    .info-panel-placeholder {
+        display: none;
+    }
+
+    /* Ensure Quick Actions has breathing room */
+    .quick-actions-bar {
+        margin-bottom: var(--spacing-lg);
+    }
+}

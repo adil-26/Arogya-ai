@@ -1,0 +1,202 @@
+/* Records Page Styling */
+.records-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    /* Add padding for mobile bottom nav */
+    padding-bottom: 90px;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-lg);
+    gap: 16px;
+}
+
+.page-header div {
+    flex: 1;
+}
+
+.page-header h1 {
+    font-size: 1.5rem;
+    /* Smaller on mobile */
+    font-family: var(--font-heading);
+    color: var(--color-primary-dark);
+    margin: 0 0 4px 0;
+    line-height: 1.2;
+}
+
+.page-header p {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.btn-upload {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.controls-row {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+/* Search Bar Styling */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: 10px 16px;
+    gap: 10px;
+    box-shadow: var(--shadow-sm);
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--color-text-primary);
+}
+
+.search-icon {
+    color: var(--color-text-secondary);
+}
+
+/* Filter Chips Styling */
+.filter-chips {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.chip {
+    background: white;
+    border: 1px solid var(--color-border);
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.chip.active {
+    background-color: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+    font-weight: 500;
+}
+
+@media (min-width: 768px) {
+    .records-page {
+        padding-bottom: 0;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .controls-row {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .search-bar {
+        width: 320px;
+    }
+}
+
+.records-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-body);
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--color-border);
+}
+
+/* Upload Modal Specifics */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    /* High z-index */
+    backdrop-filter: blur(4px);
+}
+
+.upload-modal {
+    background: white;
+    width: 90%;
+    max-width: 450px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.3s ease-out;
+}
+
+.upload-area {
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin-bottom: var(--spacing-lg);
+}
+
+.upload-area:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-bg-body);
+    color: var(--color-primary);
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-secondary);
+}
+
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    outline: none;
+}

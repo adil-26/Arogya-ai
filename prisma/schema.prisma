@@ -1,0 +1,320 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // For Supabase connection pooling
+}
+
+// 1. User Profile
+model User {
+  id        String   @id @default(uuid())
+  name      String?
+  email     String   @unique
+  password  String?  // Hashed password
+  image     String?  // For Google Auth
+  role      String   @default("patient") // patient, doctor, admin
+  status    String   @default("approved") // approved, pending (for doctors)
+  
+  // Patient Specific
+  dob       String?  // Date of Birth (ISO String)
+  gender    String?
+  bloodGroup String?
+  phone     String?
+  address   String?
+  emergencyContact String?
+  
+  age       Int? // Kept for legacy/compatibility or calculated
+  
+  // Doctor Specific
+  specialty String?
+  licenseNo String?
+  
+  // Referral System
+  referralCode  String?   @unique  // Unique code for sharing (e.g., "ADIL2024")
+  referredBy    String?             // ID of user who referred them
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  conditions MedicalCondition[]
+  bodyIssues BodyIssue[]
+  metrics    HealthMetric[]
+  logs       DailyLog[]
+  appointments Appointment[]
+  records      MedicalRecord[]
+  chats        ChatMessage[]
+  accounts      Account[]
+  sessions      Session[]
+  
+  // Referral Relations
+  wallet              Wallet?
+  referralsMade       Referral[] @relation("ReferrerRelation")
+  referredAs          Referral?  @relation("RefereeRelation")
+  withdrawalRequests  WithdrawalRequest[]
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// 6. Appointments
+model Appointment {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  
+  doctorId    String
+  doctorName  String
+  specialty   String
+  date        String   // Store as ISO Date string
+  time        String
+  status      String   @default("scheduled") // scheduled, completed, cancelled
+  
+  createdAt   DateTime @default(now())
+}
+
+// 7. Medical Records (Files)
+model MedicalRecord {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  
+  title       String
+  type        String   // Prescription, Lab Report, X-Ray
+  doctorName  String?
+  date        String   
+  fileUrl     String?  
+  
+  createdAt   DateTime @default(now())
+}
+
+// 2. Layer 1: Confirmed Medical Conditions (The "Base Truth")
+model MedicalCondition {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  
+  name      String   // e.g., "Diabetes", "Hypertension"
+  type      String?  // e.g., "Type 2", "Stage 1"
+  since     String?  // e.g., "2018"
+  status    String   @default("active") // active, remission, cured
+  
+  createdAt DateTime @default(now())
+}
+
+// 3. Layer 2: Body Map Issues (Localized Symptoms)
+model BodyIssue {
+  id           String   @id @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+
+  organId      String   // e.g., "head", "stomach"
+  specificPart String?  // e.g., "Teeth", "Liver"
+  issue        String   // e.g., "Migraine", "Cavity"
+  
+  severity     String   // mild, moderate, severe
+  painLevel    Int      // 1-10
+  note         String?
+  
+  status       String   @default("active") // active, resolved
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// 4. Layer 3: Health Metrics (Vitals & Numbers)
+model HealthMetric {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+
+  type      String   // bp, heart_rate, sugar, bmi
+  value     String   // "120/80", "72", "140"
+  unit      String   // "mmHg", "bpm", "mg/dL"
+  status    String?  // normal, warning, critical
+  
+  recordedAt DateTime @default(now())
+}
+
+// 5. Daily Routine Logs
+model DailyLog {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+
+  date      DateTime @default(now())
+  water     Int      @default(0) // glasses
+  sleep     Float    @default(0) // hours
+  exercise  Boolean  @default(false)
+}
+
+// 8. Chat Messages (Doctor-Patient)
+model ChatMessage {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  
+  doctorId  String   // ID of the doctor being chatted with
+  sender    String   // "user" or "doctor"
+  content   String
+  
+  createdAt DateTime @default(now())
+}
+
+// 9. Library (Books, Research Papers, Guidelines)
+model LibraryItem {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  author      String?
+  category    String   // "book", "research", "guideline", "article"
+  fileUrl     String   // Path to uploaded PDF
+  coverImage  String?  // Optional cover image
+  accessLevel String   @default("all") // "all", "doctor", "patient"
+  uploadedBy  String   // Admin ID who uploaded
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// 10. Prescriptions (Medicine + Acupuncture Therapy)
+model Prescription {
+  id          String   @id @default(uuid())
+  
+  doctorId    String   // Doctor who prescribed
+  doctorName  String
+  patientId   String   // Patient receiving prescription
+  patientName String
+  
+  type        String   // "medicine" or "acupuncture"
+  diagnosis   String?  // Condition being treated
+  notes       String?  // Additional notes
+  
+  // For Medicine Prescriptions
+  medicines   String?  // JSON array of medicines
+  
+  // For Acupuncture Prescriptions
+  acupoints   String?  // JSON array of selected acupoints with technique
+  duration    String?  // e.g., "30 minutes", "6 sessions"
+  frequency   String?  // e.g., "twice weekly"
+  
+  status      String   @default("active") // "active", "completed", "cancelled"
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ============================================
+// REFERRAL SYSTEM MODELS
+// ============================================
+
+// 11. Referral Tracking
+model Referral {
+  id            String   @id @default(uuid())
+  referrerId    String                        // User who referred
+  refereeId     String   @unique              // User who signed up
+  referralType  String                        // patient_to_patient, doctor_to_doctor, doctor_to_patient
+  status        String   @default("pending")  // pending, completed, credited
+  rewardAmount  Float    @default(0)
+  createdAt     DateTime @default(now())
+  creditedAt    DateTime?
+  
+  referrer      User     @relation("ReferrerRelation", fields: [referrerId], references: [id])
+  referee       User     @relation("RefereeRelation", fields: [refereeId], references: [id])
+}
+
+// 12. E-Wallet for Users
+model Wallet {
+  id           String   @id @default(uuid())
+  userId       String   @unique
+  balance      Float    @default(0)
+  totalEarned  Float    @default(0)   // Lifetime earnings
+  totalWithdrawn Float  @default(0)   // Lifetime withdrawals
+  user         User     @relation(fields: [userId], references: [id])
+  transactions Transaction[]
+}
+
+// 13. Transaction History
+model Transaction {
+  id          String   @id @default(uuid())
+  walletId    String
+  type        String   // credit, debit, withdrawal, bonus, refund
+  amount      Float
+  description String?
+  referenceId String?  // Link to referral/withdrawal ID
+  status      String   @default("completed") // completed, pending, rejected
+  createdAt   DateTime @default(now())
+  wallet      Wallet   @relation(fields: [walletId], references: [id])
+}
+
+// 14. Withdrawal Requests
+model WithdrawalRequest {
+  id          String   @id @default(uuid())
+  userId      String
+  amount      Float
+  upiId       String?
+  bankAccount String?  // Account number
+  bankIfsc    String?  // IFSC code
+  bankName    String?  // Account holder name
+  status      String   @default("pending") // pending, approved, rejected, processed
+  adminNote   String?  // Note from admin
+  processedAt DateTime?
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+// 15. Referral Settings (Admin Configurable)
+model ReferralSettings {
+  id                    String   @id @default("default")
+  patientToPatient      Float    @default(50)    // Reward amount
+  doctorToDoctor        Float    @default(100)
+  doctorToPatient       Float    @default(75)
+  minWithdrawal         Float    @default(100)   // Minimum withdrawal amount
+  isEnabled             Boolean  @default(true)  // Enable/disable referral program
+  updatedAt             DateTime @updatedAt
+}
+
+// 16. AI Chat History (Persisting Aarogya AI conversations per user)
+model AIChatMessage {
+  id        String   @id @default(uuid())
+  userId    String
+  sender    String   // "user" or "ai"
+  content   String
+  createdAt DateTime @default(now())
+}

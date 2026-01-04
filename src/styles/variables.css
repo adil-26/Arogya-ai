@@ -1,0 +1,67 @@
+:root {
+  /* Brand Colors - Medical Theme */
+  --color-primary: #008080;   /* Teal */
+  --color-primary-light: #4DB6AC;
+  --color-primary-dark: #004D40;
+  
+  --color-secondary: #81C784; /* Soft Green */
+  --color-secondary-light: #C8E6C9;
+  
+  --color-accent: #FFB74D;    /* Light Orange */
+  --color-danger: #E57373;    /* Red for alerts */
+  
+  /* Backgrounds */
+  --color-bg-body: #F5F7FA;   /* Off-white/Light Grey */
+  --color-bg-card: #FFFFFF;
+  --color-bg-sidebar: #FFFFFF;
+  
+  /* Text */
+  --color-text-primary: #1F2937;
+  --color-text-secondary: #6B7280;
+  --color-text-inverted: #FFFFFF;
+  
+  /* Borders */
+  --color-border: #E5E7EB;
+  
+  /* Severity Colors */
+  --severity-mild: #FFF9C4;     /* Yellow-ish */
+  --severity-moderate: #FFCCBC; /* Orange-ish */
+  --severity-severe: #FFCDD2;   /* Red-ish */
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  
+  /* Typography */
+  --font-family-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-heading: 'Merriweather', serif; /* Optional trust font */
+}
+
+.dark {
+  --color-bg-body: #111827;
+  --color-bg-card: #1F2937;
+  --color-bg-sidebar: #1F2937;
+  
+  --color-text-primary: #F9FAFB;
+  --color-text-secondary: #D1D5DB;
+  
+  --color-border: #374151;
+}

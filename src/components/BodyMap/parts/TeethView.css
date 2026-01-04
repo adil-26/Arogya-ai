@@ -1,0 +1,83 @@
+.teeth-view-container {
+    text-align: center;
+    padding: 10px;
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+}
+
+.diagram-title {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+.dental-chart-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    /* Constrain width to nicely fit panel */
+    margin: 0 auto;
+    aspect-ratio: 0.8;
+    /* Approximate ratio of the image */
+}
+
+.dental-chart-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.tooth-hitbox {
+    position: absolute;
+    width: 8%;
+    /* Relative size of touch target */
+    height: 6%;
+    transform: translate(-50%, -50%);
+    /* Center on coordinate */
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Almost invisible */
+    border: 1px solid transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+    transition: all 0.2s;
+}
+
+.tooth-hitbox:hover {
+    background-color: rgba(66, 165, 245, 0.3);
+    /* Blue hover hint */
+    border-color: #42A5F5;
+}
+
+.tooth-hitbox.selected {
+    background-color: rgba(211, 47, 47, 0.4);
+    /* Red selection */
+    border: 2px solid #D32F2F;
+    box-shadow: 0 0 8px rgba(211, 47, 47, 0.6);
+}
+
+.tooth-number-badge {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #D32F2F;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 4px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.diagram-hint {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-top: 10px;
+    font-style: italic;
+}

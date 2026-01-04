@@ -1,0 +1,108 @@
+.record-card {
+    background: var(--color-bg-card);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    transition: all var(--transition-fast);
+}
+
+.record-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary-light);
+}
+
+.file-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Category Colors */
+.file-icon-wrapper.lab-report {
+    background-color: #E3F2FD;
+    color: #1976D2;
+}
+
+.file-icon-wrapper.prescription {
+    background-color: #E8F5E9;
+    color: #388E3C;
+}
+
+.file-icon-wrapper.scan {
+    background-color: #F3E5F5;
+    color: #7B1FA2;
+}
+
+.record-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.record-name {
+    font-size: 1rem;
+    font-weight: 700;
+    /* Bold title */
+    color: var(--color-text-primary);
+    margin: 0 0 4px 0;
+    line-height: 1.3;
+}
+
+.record-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.record-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    background: var(--color-bg-body);
+    border-radius: var(--radius-full);
+    color: var(--color-text-secondary);
+    width: fit-content;
+    margin-top: 2px;
+}
+
+.record-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.btn-action {
+    background: transparent;
+    border: 1px solid transparent;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-action:hover {
+    background: var(--color-bg-body);
+    color: var(--color-primary);
+    border-color: var(--color-border);
+}

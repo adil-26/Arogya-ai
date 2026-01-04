@@ -1,0 +1,9 @@
+{
+  "appId": "com.aarogya.ai",
+  "appName": "AarogyaAI",
+  "webDir": "out",
+  "server": {
+    "url": "https://gastronomical-nonbotanically-estefana.ngrok-free.dev",
+    "cleartext": true
+  }
+}
