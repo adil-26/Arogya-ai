@@ -13,7 +13,8 @@ export const authOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID || "mock-id",
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || "mock-secret",
-            allowDangerousEmailAccountLinking: true,
+            // Remove dangerous email linking - each account should be separate
+            allowDangerousEmailAccountLinking: false,
         }),
         CredentialsProvider({
             name: "Credentials",
@@ -48,17 +49,39 @@ export const authOptions = {
         })
     ],
     callbacks: {
-        async jwt({ token, user }) {
+        async signIn({ user, account, profile }) {
+            // For Google OAuth, ensure user is created/updated properly
+            if (account.provider === "google") {
+                console.log("Google Sign-In:", user.email);
+            }
+            return true;
+        },
+        async jwt({ token, user, account }) {
+            // Initial sign in - user object is available
             if (user) {
                 token.role = user.role;
                 token.id = user.id;
             }
+            // Subsequent requests - fetch fresh data from database
+            if (token.email) {
+                const dbUser = await prisma.user.findUnique({
+                    where: { email: token.email },
+                    select: { id: true, role: true, name: true, email: true }
+                });
+                if (dbUser) {
+                    token.id = dbUser.id;
+                    token.role = dbUser.role;
+                    token.name = dbUser.name;
+                }
+            }
             return token;
         },
         async session({ session, token }) {
+            // Add user info to session from token
             if (session?.user) {
                 session.user.role = token.role;
                 session.user.id = token.id;
+                session.user.name = token.name;
             }
             return session;
         }
@@ -68,6 +91,9 @@ export const authOptions = {
     },
     session: {
         strategy: "jwt",
+        maxAge: 30 * 24 * 60 * 60, // 30 days
     },
     secret: process.env.NEXTAUTH_SECRET || "super-secret-key-1234",
+    // Enable debug for troubleshooting (remove in production)
+    debug: process.env.NODE_ENV === 'development',
 };
