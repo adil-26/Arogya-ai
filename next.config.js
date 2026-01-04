@@ -15,6 +15,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Add empty turbopack config to silence Next.js 16 warning
+  // The PWA plugin works fine with Turbopack
+  turbopack: {},
 };
 
 export default withPWA(nextConfig);
