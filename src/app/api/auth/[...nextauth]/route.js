@@ -21,4 +21,5 @@ export async function POST(req, ctx) {
     }
 }
 
-
+// Export authOptions so other files can import it
+export { authOptions };
