@@ -13,8 +13,8 @@ export const authOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID || "mock-id",
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || "mock-secret",
-            // Remove dangerous email linking - each account should be separate
-            allowDangerousEmailAccountLinking: false,
+            // Allow linking if user exists with same email (needed for smooth UX)
+            allowDangerousEmailAccountLinking: true,
         }),
         CredentialsProvider({
             name: "Credentials",
@@ -43,83 +43,99 @@ export const authOptions = {
                 //     throw new Error("Invalid password");
                 // }
 
-                // 4. Return User
-                return { id: user.id, name: user.name, email: user.email, role: user.role };
+                // 4. Return User with role
+                return { id: user.id, name: user.name, email: user.email, role: user.role || 'patient' };
             }
         })
     ],
     callbacks: {
         async signIn({ user, account, profile }) {
-            // For Google OAuth, ensure user is created/updated with patient role
-            if (account.provider === "google") {
-                console.log("Google Sign-In:", user.email);
+            // For Google OAuth, ensure user has patient role
+            if (account?.provider === "google") {
+                console.log("Google Sign-In callback for:", user.email);
 
-                // Check if user exists
-                const existingUser = await prisma.user.findUnique({
-                    where: { email: user.email }
-                });
-
-                // If user exists but doesn't have a role, set it to patient
-                if (existingUser && !existingUser.role) {
-                    await prisma.user.update({
-                        where: { email: user.email },
-                        data: { role: 'patient' }
+                try {
+                    // Check if user already exists in database
+                    const existingUser = await prisma.user.findUnique({
+                        where: { email: user.email }
                     });
-                }
 
-                // For brand new users, the PrismaAdapter will create them
-                // but we need to ensure they have the patient role
-                // This is handled in the jwt callback below
+                    if (existingUser) {
+                        // User exists - update role if missing
+                        if (!existingUser.role) {
+                            await prisma.user.update({
+                                where: { email: user.email },
+                                data: { role: 'patient' }
+                            });
+                            console.log("Updated existing user role to patient");
+                        }
+                    }
+                    // If user doesn't exist, PrismaAdapter will create them
+                    // The role default in schema should set it to 'patient'
+                } catch (error) {
+                    console.error("Error in signIn callback:", error);
+                }
             }
             return true;
         },
-        async jwt({ token, user, account }) {
+        async jwt({ token, user, account, trigger }) {
+            console.log("JWT callback - user:", user?.email, "trigger:", trigger);
+
             // Initial sign in - user object is available
             if (user) {
-                token.role = user.role || 'patient'; // Default to patient if no role
+                token.role = user.role || 'patient';
                 token.id = user.id;
+                token.email = user.email;
             }
-            // Subsequent requests - fetch fresh data from database
+
+            // Fetch fresh data from database on every request
             if (token.email) {
-                const dbUser = await prisma.user.findUnique({
-                    where: { email: token.email },
-                    select: { id: true, role: true, name: true, email: true }
-                });
-                if (dbUser) {
-                    // If user has no role, set it to patient
-                    if (!dbUser.role) {
-                        await prisma.user.update({
-                            where: { email: token.email },
-                            data: { role: 'patient' }
-                        });
-                        token.role = 'patient';
-                    } else {
-                        token.role = dbUser.role;
+                try {
+                    const dbUser = await prisma.user.findUnique({
+                        where: { email: token.email },
+                        select: { id: true, role: true, name: true, email: true }
+                    });
+
+                    if (dbUser) {
+                        token.id = dbUser.id;
+                        token.role = dbUser.role || 'patient';
+                        token.name = dbUser.name;
+
+                        // Ensure role is set in database
+                        if (!dbUser.role) {
+                            await prisma.user.update({
+                                where: { email: token.email },
+                                data: { role: 'patient' }
+                            });
+                        }
                     }
-                    token.id = dbUser.id;
-                    token.name = dbUser.name;
+                } catch (error) {
+                    console.error("JWT callback database error:", error);
                 }
             }
+
             return token;
         },
         async session({ session, token }) {
             // Add user info to session from token
             if (session?.user) {
-                session.user.role = token.role;
+                session.user.role = token.role || 'patient';
                 session.user.id = token.id;
                 session.user.name = token.name;
             }
+            console.log("Session callback - role:", session?.user?.role);
             return session;
         }
     },
     pages: {
         signIn: '/login',
+        error: '/login', // Redirect to login on error
     },
     session: {
         strategy: "jwt",
         maxAge: 30 * 24 * 60 * 60, // 30 days
     },
     secret: process.env.NEXTAUTH_SECRET || "super-secret-key-1234",
-    // Enable debug for troubleshooting (remove in production)
-    debug: process.env.NODE_ENV === 'development',
+    debug: true, // Enable debug logs always for now
 };
+
