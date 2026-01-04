@@ -128,7 +128,9 @@
     }
 
     .header-right {
-        display: none;
+        display: flex;
+        /* Keep visible on mobile */
+        gap: 8px;
     }
 
     .greeting {

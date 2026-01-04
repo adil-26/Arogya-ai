@@ -203,18 +203,44 @@ const HealthDashboard = () => {
                   onClick={() => handleVitalClick(vital)}
                 />
               ))}
+              {/* Last Appointment Card - Dynamic */}
               <div className="health-metric-card summary-card">
                 <div className="metric-info">
                   <h3 className="metric-title">Last Appointment</h3>
-                  <span className="metric-value-text">Dr. Ayesha</span>
-                  <span className="metric-subtext">2 days ago</span>
+                  {latestAppointment ? (
+                    <>
+                      <span className="metric-value-text">{latestAppointment.doctorName}</span>
+                      <span className="metric-subtext">
+                        {new Date(latestAppointment.date).toLocaleDateString()}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="metric-value-text" style={{ fontSize: '0.9rem', color: '#6B7280' }}>No appointments yet</span>
+                      <span className="metric-subtext" style={{ color: '#9CA3AF' }}>Book your first checkup</span>
+                    </>
+                  )}
                 </div>
               </div>
+              {/* AI Health Score Card - Dynamic */}
               <div className="health-metric-card summary-card">
                 <div className="metric-info">
                   <h3 className="metric-title">AI Health Score</h3>
-                  <span className="metric-value-text score-high">88/100</span>
-                  <span className="metric-subtext">Excellent</span>
+                  {(() => {
+                    // Calculate health score based on logged vitals
+                    const loggedVitals = vitals.filter(v => v.value !== '--' && v.value !== '--/--');
+                    const score = loggedVitals.length > 0 ? Math.min(100, 50 + (loggedVitals.length * 12)) : 0;
+                    const scoreLabel = score >= 80 ? 'Excellent' : score >= 60 ? 'Good' : score >= 40 ? 'Fair' : 'Start logging';
+                    const scoreClass = score >= 80 ? 'score-high' : score >= 60 ? 'score-medium' : 'score-low';
+                    return (
+                      <>
+                        <span className={`metric-value-text ${scoreClass}`}>
+                          {score > 0 ? `${score}/100` : '--'}
+                        </span>
+                        <span className="metric-subtext">{scoreLabel}</span>
+                      </>
+                    );
+                  })()}
                 </div>
               </div>
             </div>

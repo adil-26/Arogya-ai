@@ -3,10 +3,18 @@ import { Bell, User } from 'lucide-react';
 import './DashboardHeader.css';
 
 const DashboardHeader = ({ patient }) => {
+    // Get time-based greeting
+    const getGreeting = () => {
+        const hour = new Date().getHours();
+        if (hour < 12) return 'Good Morning';
+        if (hour < 17) return 'Good Afternoon';
+        return 'Good Evening';
+    };
+
     return (
         <div className="dashboard-top-header">
             <div className="header-left">
-                <h1 className="greeting">Good Morning, {patient.name.split(' ')[0]}</h1>
+                <h1 className="greeting">{getGreeting()}, {patient.name?.split(' ')[0] || 'User'}</h1>
                 <div className="health-status-badge">
                     <span className="status-dot"></span>
                     Stable
