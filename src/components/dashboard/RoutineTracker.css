@@ -4,28 +4,30 @@
     padding: 24px;
     border: 1px solid #E2E8F0;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-    margin-top: 0;
 }
 
-.routine-tracker-container h3 {
+.tracker-header h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
     font-size: 1.1rem;
+    font-weight: 700;
+    color: #1E293B;
 }
 
 .date-badge {
     font-size: 0.75rem;
-    background-color: var(--color-bg-body);
-    padding: 4px 8px;
-    border-radius: var(--radius-full);
-    color: var(--color-text-secondary);
+    background: linear-gradient(135deg, #F8FAFC, #E2E8F0);
+    padding: 4px 12px;
+    border-radius: 20px;
+    color: #64748B;
+    font-weight: 500;
 }
 
 .tracker-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.5fr;
     gap: 24px;
 }
 
@@ -35,58 +37,73 @@
     }
 }
 
-/* Water Bottle Animation */
+/* ===================================== */
+/* 💧 WATER SECTION */
+/* ===================================== */
 .water-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    padding: 16px;
-    border-radius: var(--radius-md);
-    background-color: #E3F2FD;
-    transition: transform 0.1s;
+    padding: 20px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+    transition: all 0.2s ease;
+    border: 1px solid #BFDBFE;
+}
+
+.water-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.15);
 }
 
 .water-section:active {
     transform: scale(0.98);
 }
 
-.water-section h4 {
-    margin-bottom: 12px;
-    color: #1565C0;
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    color: #2563EB;
+}
+
+.section-header h4 {
+    margin: 0;
     font-size: 0.9rem;
+    font-weight: 600;
 }
 
 .bottle-container {
-    position: relative;
-    width: 60px;
-    height: 100px;
-    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
 }
 
 .bottle-body {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
-    border: 3px solid #1976D2;
-    border-radius: 0 0 12px 12px;
-    border-top: none;
+    width: 50px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 3px solid #3B82F6;
+    border-radius: 0 0 16px 16px;
     position: relative;
     overflow: hidden;
 }
 
-/* Bottle Neck */
-.bottle-container::before {
+.bottle-body::before {
     content: '';
     position: absolute;
-    top: -10px;
+    top: -12px;
     left: 50%;
     transform: translateX(-50%);
-    width: 30px;
-    height: 10px;
-    border: 3px solid #1976D2;
+    width: 24px;
+    height: 12px;
+    border: 3px solid #3B82F6;
     border-bottom: none;
-    background-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 4px 4px 0 0;
 }
 
 .water-fill {
@@ -94,35 +111,130 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #42A5F5;
+    background: linear-gradient(180deg, #60A5FA, #3B82F6);
     transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.water-surface {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.4);
+    animation: wave 2s infinite linear;
+}
+
+@keyframes wave {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.water-bubbles {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.water-bubbles span {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: bubble 2s infinite;
+}
+
+.water-bubbles span:nth-child(1) {
+    left: -8px;
+    animation-delay: 0s;
+}
+
+.water-bubbles span:nth-child(2) {
+    left: 0;
+    animation-delay: 0.5s;
+}
+
+.water-bubbles span:nth-child(3) {
+    left: 8px;
+    animation-delay: 1s;
+}
+
+@keyframes bubble {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
 }
 
 .water-info {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 8px;
 }
 
 .big-text {
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: #1565C0;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: #1E40AF;
+}
+
+.goal-text {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #60A5FA;
 }
 
 .unit {
     font-size: 0.75rem;
-    color: #1976D2;
+    color: #3B82F6;
+    margin-top: 2px;
+}
+
+.water-status {
+    font-size: 0.75rem;
+    margin-top: 6px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+.water-status.ahead {
+    background: #D1FAE5;
+    color: #059669;
+}
+
+.water-status.ontrack {
+    background: #DBEAFE;
+    color: #2563EB;
+}
+
+.water-status.behind {
+    background: #FEF3C7;
+    color: #D97706;
 }
 
 .hint-text {
     font-size: 0.7rem;
-    color: #64B5F6;
-    margin-top: 4px;
+    color: #60A5FA;
+    margin-top: 12px;
 }
 
-/* Habits List */
+/* ===================================== */
+/* HABITS LIST */
+/* ===================================== */
 .habits-list {
     display: flex;
     flex-direction: column;
@@ -131,86 +243,228 @@
 
 .habit-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
+    padding: 14px;
+    background: #F8FAFC;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    transition: all 0.2s;
+}
+
+.habit-item:hover {
+    background: #F1F5F9;
 }
 
 .habit-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .habit-icon.sleep {
-    background-color: #F3E5F5;
-    color: #7B1FA2;
+    background: linear-gradient(135deg, #E9D5FF, #DDD6FE);
+    color: #7C3AED;
 }
 
 .habit-icon.exercise {
-    background-color: #FFEBEE;
-    color: #C62828;
+    background: linear-gradient(135deg, #FECACA, #FCA5A5);
+    color: #DC2626;
 }
 
 .habit-icon.steps {
-    background-color: #E0F2F1;
-    color: #00796B;
+    background: linear-gradient(135deg, #A7F3D0, #6EE7B7);
+    color: #059669;
 }
 
 .habit-details {
     flex: 1;
 }
 
-.habit-details .label {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--color-text-secondary);
-    margin-bottom: 2px;
+.habit-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
 }
 
+.habit-details .label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #1E293B;
+}
+
+.habit-details .hint {
+    font-size: 0.7rem;
+    color: #94A3B8;
+    margin-top: 4px;
+}
+
+/* Quality Badge */
+.quality-badge {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+/* Streak Badge */
+.streak-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+    color: #D97706;
+    font-weight: 600;
+}
+
+/* Goal Tag */
+.goal-tag {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    color: #64748B;
+}
+
+/* Sleep Controls */
 .control-row {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
 }
 
 .control-row button {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    border: 1px solid var(--color-border);
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
     background: white;
     cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.15s;
 }
 
 .control-row button:hover {
-    background-color: var(--color-bg-body);
+    background: #7C3AED;
+    color: white;
+    border-color: #7C3AED;
 }
 
-.control-row .value,
-.habit-details .value {
-    font-weight: 600;
-    font-size: 0.95rem;
+.control-row .value {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #1E293B;
+    min-width: 60px;
+    text-align: center;
 }
 
-.toggle-btn-habit {
-    border: 1px solid var(--color-border);
+/* Exercise Buttons */
+.exercise-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.exercise-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
     background: white;
-    padding: 4px 12px;
-    border-radius: var(--radius-full);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 500;
     cursor: pointer;
-    color: var(--color-text-secondary);
+    transition: all 0.2s;
 }
 
-.toggle-btn-habit.done {
-    background-color: #E8F5E9;
-    color: #2E7D32;
-    border-color: transparent;
-    font-weight: 600;
+.exercise-btn.done:hover,
+.exercise-btn.done.active {
+    background: #D1FAE5;
+    color: #059669;
+    border-color: #10B981;
+}
+
+.exercise-btn.skipped:hover,
+.exercise-btn.skipped.active {
+    background: #FEE2E2;
+    color: #DC2626;
+    border-color: #EF4444;
+}
+
+/* Steps Progress Ring */
+.steps-progress {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.progress-ring-container {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+.progress-ring {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+    fill: none;
+    stroke: #E2E8F0;
+    stroke-width: 3;
+}
+
+.progress-ring-fill {
+    fill: none;
+    stroke: #10B981;
+    stroke-width: 3;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.5s ease;
+}
+
+.progress-ring-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #10B981;
+}
+
+.steps-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.steps-count {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #1E293B;
+}
+
+.steps-remaining {
+    font-size: 0.75rem;
+    color: #64748B;
+}
+
+.steps-complete {
+    font-size: 0.75rem;
+    color: #10B981;
+    font-weight: 500;
 }
