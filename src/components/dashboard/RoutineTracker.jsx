@@ -93,10 +93,19 @@ const RoutineTracker = () => {
     const waterStatus = getWaterStatus();
     const sleepQuality = getSleepQuality();
 
+
     if (loading) {
         return (
-            <div className="routine-tracker-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '200px' }}>
-                <Loader2 size={24} className="spin" style={{ animation: 'spin 1s linear infinite' }} />
+            <div className="routine-tracker-container routine-loading">
+                <div className="glow-loader">
+                    <div className="loader-ring"></div>
+                    <div className="loader-ring"></div>
+                    <div className="loader-ring"></div>
+                    <div className="loader-core">
+                        <Droplets size={20} />
+                    </div>
+                </div>
+                <p className="loading-text">Loading your routine...</p>
             </div>
         );
     }
