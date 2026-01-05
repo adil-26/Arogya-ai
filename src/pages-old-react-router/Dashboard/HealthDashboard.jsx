@@ -97,9 +97,9 @@ const HealthDashboard = () => {
     setSelectedVital(vital);
   };
 
-  const handleSaveVital = async (id, value) => {
+  const handleSaveVital = async (id, value, status = 'normal') => {
     // Optimistic Update
-    setVitals(prev => prev.map(v => v.id === id ? { ...v, value: value } : v));
+    setVitals(prev => prev.map(v => v.id === id ? { ...v, value: value, status: status } : v));
     setSelectedVital(null);
 
     // Save to Backend
@@ -110,10 +110,10 @@ const HealthDashboard = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          type: id, // or vitalObj.title
+          type: id,
           value: value,
           unit: vitalObj.unit,
-          status: 'normal' // simple default for now
+          status: status
         })
       });
     } catch (error) {

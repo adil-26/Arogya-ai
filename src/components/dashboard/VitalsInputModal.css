@@ -93,3 +93,50 @@
         opacity: 1;
     }
 }
+
+/* Validation Error Styles */
+.input-error {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    color: #DC2626;
+    font-size: 0.85rem;
+    animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    75% {
+        transform: translateX(4px);
+    }
+}
+
+.input-hint {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: #94A3B8;
+}
+
+.input-group input.error {
+    border-color: #DC2626;
+}
+
+.input-group input::-webkit-outer-spin-button,
+.input-group input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-group input[type=number] {
+    -moz-appearance: textfield;
+}
