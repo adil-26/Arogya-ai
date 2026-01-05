@@ -77,32 +77,46 @@ export async function POST(request) {
 
         const data = await request.json();
         const today = getTodayDate();
+        const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
 
-        // Upsert today's log
-        const log = await prisma.dailyLog.upsert({
+        // Find existing log for today
+        let existingLog = await prisma.dailyLog.findFirst({
             where: {
-                userId_date: {
-                    userId: user.id,
-                    date: today
-                }
-            },
-            update: {
-                ...(data.water !== undefined && { water: data.water }),
-                ...(data.sleep !== undefined && { sleep: data.sleep }),
-                ...(data.exercise !== undefined && { exercise: data.exercise }),
-                ...(data.steps !== undefined && { steps: data.steps }),
-                ...(data.exerciseStreak !== undefined && { exerciseStreak: data.exerciseStreak })
-            },
-            create: {
                 userId: user.id,
-                date: today,
-                water: data.water || 0,
-                sleep: data.sleep || 0,
-                exercise: data.exercise || false,
-                steps: data.steps || 0,
-                exerciseStreak: data.exerciseStreak || 0
+                date: {
+                    gte: today,
+                    lt: tomorrow
+                }
             }
         });
+
+        let log;
+        if (existingLog) {
+            // Update existing log
+            log = await prisma.dailyLog.update({
+                where: { id: existingLog.id },
+                data: {
+                    ...(data.water !== undefined && { water: data.water }),
+                    ...(data.sleep !== undefined && { sleep: data.sleep }),
+                    ...(data.exercise !== undefined && { exercise: data.exercise }),
+                    ...(data.steps !== undefined && { steps: data.steps }),
+                    ...(data.exerciseStreak !== undefined && { exerciseStreak: data.exerciseStreak })
+                }
+            });
+        } else {
+            // Create new log for today
+            log = await prisma.dailyLog.create({
+                data: {
+                    userId: user.id,
+                    date: today,
+                    water: data.water || 0,
+                    sleep: data.sleep || 7,
+                    exercise: data.exercise || false,
+                    steps: data.steps || 0,
+                    exerciseStreak: data.exerciseStreak || 0
+                }
+            });
+        }
 
         return NextResponse.json(log);
     } catch (error) {
