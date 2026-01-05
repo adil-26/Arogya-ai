@@ -190,14 +190,18 @@ model HealthMetric {
 
 // 5. Daily Routine Logs
 model DailyLog {
-  id        String   @id @default(uuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
 
-  date      DateTime @default(now())
-  water     Int      @default(0) // glasses
-  sleep     Float    @default(0) // hours
-  exercise  Boolean  @default(false)
+  date           DateTime @default(now())
+  water          Int      @default(0) // glasses
+  sleep          Float    @default(0) // hours
+  exercise       Boolean  @default(false)
+  steps          Int      @default(0) // step count
+  exerciseStreak Int      @default(0) // consecutive days
+
+  @@unique([userId, date])
 }
 
 // 8. Chat Messages (Doctor-Patient)

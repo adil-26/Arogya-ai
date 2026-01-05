@@ -1,18 +1,74 @@
-import React, { useState, useEffect } from 'react';
-import { Award, Moon, Activity, Footprints, Droplets, Check, X, Flame, Target, TrendingUp } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Award, Moon, Activity, Footprints, Droplets, Check, X, Flame, Target, TrendingUp, Loader2 } from 'lucide-react';
 import './RoutineTracker.css';
 
 const RoutineTracker = () => {
-    const [waterIntake, setWaterIntake] = useState(3);
+    const [waterIntake, setWaterIntake] = useState(0);
     const waterGoal = 8;
     const [sleep, setSleep] = useState(7);
     const [exercise, setExercise] = useState(null); // null = not logged, true = done, false = skipped
-    const [exerciseStreak, setExerciseStreak] = useState(3); // Days streak
-    const [steps, setSteps] = useState(4500);
+    const [exerciseStreak, setExerciseStreak] = useState(0); // Days streak
+    const [steps, setSteps] = useState(0);
     const stepsGoal = 6000;
+    const [loading, setLoading] = useState(true);
+    const [saving, setSaving] = useState(false);
+
+    // Fetch today's data on mount
+    useEffect(() => {
+        const fetchLog = async () => {
+            try {
+                const res = await fetch('/api/daily-log');
+                if (res.ok) {
+                    const data = await res.json();
+                    setWaterIntake(data.water || 0);
+                    setSleep(data.sleep || 7);
+                    setExercise(data.exercise === true ? true : data.exercise === false ? false : null);
+                    setSteps(data.steps || 0);
+                    setExerciseStreak(data.exerciseStreak || 0);
+                }
+            } catch (error) {
+                console.error('Failed to fetch daily log:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchLog();
+    }, []);
+
+    // Save to database (debounced)
+    const saveToDatabase = useCallback(async (updates) => {
+        setSaving(true);
+        try {
+            await fetch('/api/daily-log', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updates)
+            });
+        } catch (error) {
+            console.error('Failed to save daily log:', error);
+        } finally {
+            setSaving(false);
+        }
+    }, []);
 
     const addWater = () => {
-        if (waterIntake < waterGoal) setWaterIntake(prev => prev + 1);
+        if (waterIntake < waterGoal) {
+            const newValue = waterIntake + 1;
+            setWaterIntake(newValue);
+            saveToDatabase({ water: newValue });
+        }
+    };
+
+    const updateSleep = (newValue) => {
+        setSleep(newValue);
+        saveToDatabase({ sleep: newValue });
+    };
+
+    const updateExercise = (done) => {
+        setExercise(done);
+        const newStreak = done ? exerciseStreak + 1 : 0;
+        setExerciseStreak(newStreak);
+        saveToDatabase({ exercise: done, exerciseStreak: newStreak });
     };
 
     const waterPercentage = (waterIntake / waterGoal) * 100;
@@ -36,6 +92,14 @@ const RoutineTracker = () => {
 
     const waterStatus = getWaterStatus();
     const sleepQuality = getSleepQuality();
+
+    if (loading) {
+        return (
+            <div className="routine-tracker-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '200px' }}>
+                <Loader2 size={24} className="spin" style={{ animation: 'spin 1s linear infinite' }} />
+            </div>
+        );
+    }
 
     return (
         <div className="routine-tracker-container">
@@ -95,9 +159,9 @@ const RoutineTracker = () => {
                                 </span>
                             </div>
                             <div className="control-row">
-                                <button onClick={() => setSleep(s => Math.max(0, s - 0.5))}>−</button>
+                                <button onClick={() => updateSleep(Math.max(0, sleep - 0.5))}>−</button>
                                 <span className="value">{sleep} hrs</span>
-                                <button onClick={() => setSleep(s => Math.min(12, s + 0.5))}>+</button>
+                                <button onClick={() => updateSleep(Math.min(12, sleep + 0.5))}>+</button>
                             </div>
                             <span className="hint">Recommended: 7-9 hours</span>
                         </div>
@@ -118,19 +182,13 @@ const RoutineTracker = () => {
                             <div className="exercise-buttons">
                                 <button
                                     className={`exercise-btn done ${exercise === true ? 'active' : ''}`}
-                                    onClick={() => {
-                                        setExercise(true);
-                                        if (exercise !== true) setExerciseStreak(s => s + 1);
-                                    }}
+                                    onClick={() => updateExercise(true)}
                                 >
                                     <Check size={16} /> Done
                                 </button>
                                 <button
                                     className={`exercise-btn skipped ${exercise === false ? 'active' : ''}`}
-                                    onClick={() => {
-                                        setExercise(false);
-                                        setExerciseStreak(0);
-                                    }}
+                                    onClick={() => updateExercise(false)}
                                 >
                                     <X size={16} /> Skipped
                                 </button>
