@@ -1,13 +1,15 @@
 import React from 'react';
 import { Activity, Heart, Thermometer, Droplets, AlertTriangle, CheckCircle, TrendingUp, TrendingDown } from 'lucide-react';
+import { HeartbeatPulse, BPPulse, SugarAnimation, CriticalGlow } from '../animations/VitalAnimations';
 import './HealthMetricCard.css';
 
-const getIcon = (type) => {
+const getIcon = (type, status) => {
     switch (type) {
-        case 'heart': case 'hr': return <Heart size={24} />;
+        case 'heart': case 'hr':
+            return <HeartbeatPulse status={status} size={40} />;
         case 'temp': return <Thermometer size={24} />;
-        case 'sugar': return <Droplets size={24} />;
-        case 'bp': return <Activity size={24} />;
+        case 'sugar': return <SugarAnimation status={status} />;
+        case 'bp': return <HeartbeatPulse status={status} size={40} />;
         default: return <Activity size={24} />;
     }
 };
@@ -140,7 +142,7 @@ const HealthMetricCard = ({ title, value, unit, type, id, trend, onClick }) => {
             </div>
 
             <div className="icon-wrapper">
-                {getIcon(type || id)}
+                {getIcon(type || id, healthInfo.status)}
             </div>
 
             <div className="metric-info">

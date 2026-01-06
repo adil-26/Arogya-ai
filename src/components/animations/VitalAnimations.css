@@ -1,0 +1,434 @@
+/* ============================================ */
+/* VITAL ANIMATIONS CSS */
+/* ============================================ */
+
+/* Heartbeat Pulse Animation */
+.heartbeat-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heartbeat-pulse {
+    position: relative;
+    z-index: 2;
+    color: var(--pulse-color, #10B981);
+    animation: heartbeat 1s ease-in-out infinite;
+}
+
+.heartbeat-pulse svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 8px var(--pulse-color, #10B981));
+}
+
+.heartbeat-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--pulse-color, #10B981);
+    border-radius: 50%;
+    opacity: 0;
+    animation: pulse-ring-out 1s ease-out infinite;
+}
+
+.heartbeat-ring.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.heartbeat-ring.delay-2 {
+    animation-delay: 0.4s;
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.15);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.1);
+    }
+
+    60% {
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse-ring-out {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Status colors */
+.heartbeat-container.critical .heartbeat-pulse {
+    color: #DC2626;
+    --pulse-color: #DC2626;
+}
+
+.heartbeat-container.high .heartbeat-pulse {
+    color: #F59E0B;
+    --pulse-color: #F59E0B;
+}
+
+.heartbeat-container.low .heartbeat-pulse {
+    color: #3B82F6;
+    --pulse-color: #3B82F6;
+}
+
+.heartbeat-container.normal .heartbeat-pulse {
+    color: #10B981;
+    --pulse-color: #10B981;
+}
+
+.heartbeat-container.critical .heartbeat-ring {
+    border-color: #DC2626;
+}
+
+.heartbeat-container.high .heartbeat-ring {
+    border-color: #F59E0B;
+}
+
+.heartbeat-container.low .heartbeat-ring {
+    border-color: #3B82F6;
+}
+
+/* ============================================ */
+/* BP Wave Animation */
+/* ============================================ */
+.bp-animation {
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+}
+
+.bp-wave {
+    width: 200%;
+    animation: bp-scroll 2s linear infinite;
+}
+
+.bp-line {
+    stroke: #10B981;
+    stroke-linecap: round;
+}
+
+.bp-animation.high .bp-line {
+    stroke: #F59E0B;
+}
+
+.bp-animation.critical .bp-line {
+    stroke: #DC2626;
+}
+
+.bp-animation.low .bp-line {
+    stroke: #3B82F6;
+}
+
+@keyframes bp-scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* ============================================ */
+/* Sugar Molecule Animation */
+/* ============================================ */
+.sugar-animation {
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+.sugar-molecule {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    animation: sugar-rotate 4s linear infinite;
+}
+
+.sugar-molecule .atom {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #10B981;
+    border-radius: 50%;
+    animation: atom-pulse 1.5s ease-in-out infinite;
+}
+
+.sugar-animation.high .atom {
+    background: #F59E0B;
+}
+
+.sugar-animation.critical .atom {
+    background: #DC2626;
+}
+
+.atom.a1 {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0s;
+}
+
+.atom.a2 {
+    top: 25%;
+    right: 5%;
+    animation-delay: 0.2s;
+}
+
+.atom.a3 {
+    bottom: 25%;
+    right: 5%;
+    animation-delay: 0.4s;
+}
+
+.atom.a4 {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0.6s;
+}
+
+.atom.a5 {
+    bottom: 25%;
+    left: 5%;
+    animation-delay: 0.8s;
+}
+
+.atom.a6 {
+    top: 25%;
+    left: 5%;
+    animation-delay: 1s;
+}
+
+@keyframes sugar-rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes atom-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+}
+
+/* ============================================ */
+/* Critical Glow Effect */
+/* ============================================ */
+.critical-glow-wrapper {
+    position: relative;
+}
+
+.critical-glow-wrapper.active .glow-effect,
+.critical-glow-wrapper.critical .glow-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    animation: critical-glow 1.5s ease-in-out infinite;
+}
+
+.critical-glow-wrapper.critical .glow-effect {
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
+}
+
+.critical-glow-wrapper.high .glow-effect {
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+}
+
+@keyframes critical-glow {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ============================================ */
+/* Water Fill Animation */
+/* ============================================ */
+.water-animation-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.water-waves {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(59, 130, 246, 0.6), rgba(37, 99, 235, 0.9));
+    transition: height 0.5s ease;
+}
+
+.waves {
+    position: absolute;
+    top: -15px;
+    left: 0;
+    width: 200%;
+    animation: wave-animation 3s ease-in-out infinite;
+}
+
+@keyframes wave-animation {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-25%);
+    }
+}
+
+.water-bubbles-animated {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.water-bubbles-animated span {
+    position: absolute;
+    bottom: -10px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: bubble-rise 3s infinite;
+}
+
+.water-bubbles-animated span:nth-child(1) {
+    left: 10%;
+    width: 6px;
+    height: 6px;
+    animation-delay: 0s;
+}
+
+.water-bubbles-animated span:nth-child(2) {
+    left: 30%;
+    width: 4px;
+    height: 4px;
+    animation-delay: 0.5s;
+}
+
+.water-bubbles-animated span:nth-child(3) {
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    animation-delay: 1s;
+}
+
+.water-bubbles-animated span:nth-child(4) {
+    left: 70%;
+    width: 5px;
+    height: 5px;
+    animation-delay: 1.5s;
+}
+
+.water-bubbles-animated span:nth-child(5) {
+    left: 90%;
+    width: 4px;
+    height: 4px;
+    animation-delay: 2s;
+}
+
+@keyframes bubble-rise {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+}
+
+/* ============================================ */
+/* Steps Ring Animation */
+/* ============================================ */
+.steps-ring-animation {
+    position: relative;
+}
+
+.steps-ring-animation svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.ring-bg {
+    stroke: #E2E8F0;
+}
+
+.ring-progress {
+    stroke: #10B981;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.ring-glow {
+    stroke: rgba(16, 185, 129, 0.3);
+    filter: blur(4px);
+    transition: stroke-dashoffset 1s ease;
+}
+
+.ring-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.ring-value {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #10B981;
+}
