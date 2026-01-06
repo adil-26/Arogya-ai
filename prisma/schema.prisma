@@ -53,6 +53,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   notifications Notification[]
+  prescriptions Prescription[]
+  medications   Medication[]
   
   // Referral Relations
   wallet              Wallet?
@@ -337,4 +339,53 @@ model AIChatMessage {
   sender    String   // "user" or "ai"
   content   String
   createdAt DateTime @default(now())
+}
+
+// 17. Prescriptions (uploaded by patient or doctor)
+model Prescription {
+  id          String   @id @default(uuid())
+  userId      String
+  doctorId    String?  // Optional: which doctor prescribed
+  doctorName  String?  // Doctor name if not in system
+  
+  title       String   // "Blood Test Prescription", "Monthly Medication"
+  description String?  // Additional notes
+  fileUrl     String?  // URL to uploaded file (Supabase storage)
+  fileData    String?  // Base64 encoded file (alternative)
+  fileType    String?  // "pdf", "image", "jpg", "png"
+  fileName    String?  // Original file name
+  
+  issuedDate  DateTime @default(now())
+  expiryDate  DateTime?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  medications Medication[]
+}
+
+// 18. Medications (for reminders)
+model Medication {
+  id              String   @id @default(uuid())
+  userId          String
+  prescriptionId  String?  // Link to prescription if from one
+  
+  name            String   // "Metformin", "Aspirin"
+  dosage          String   // "500mg", "100mg"
+  frequency       String   // "Once daily", "Twice daily", "Every 8 hours"
+  timing          String[] // ["morning", "evening"] or ["08:00", "20:00"]
+  instructions    String?  // "Take with food", "Before meals"
+  
+  startDate       DateTime @default(now())
+  endDate         DateTime?
+  
+  isActive        Boolean  @default(true)
+  reminderEnabled Boolean  @default(true)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  prescription    Prescription? @relation(fields: [prescriptionId], references: [id])
 }
