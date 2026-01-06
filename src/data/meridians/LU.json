@@ -1,0 +1,238 @@
+{
+    "id": "LU",
+    "name": "Lung Meridian",
+    "chineseName": "肺經",
+    "pinyin": "Fèi Jīng",
+    "element": "Metal",
+    "yinYang": "Yin",
+    "pairedMeridian": "LI",
+    "totalPoints": 11,
+    "flowDirection": "From chest to thumb",
+    "peakHours": "3am - 5am",
+    "color": "#3B82F6",
+    "description": "The Lung Meridian governs respiration and the skin. It controls the circulation of Qi and is associated with grief and sadness.",
+    "sourceUrl": "https://acuiq.com/meridians/lung-meridian",
+    "acupoints": [
+        {
+            "code": "LU01",
+            "name": "Central Mansion",
+            "chinese": "中府",
+            "pinyin": "zhōng fǔ",
+            "number": 1,
+            "location": "Laterosuperior to the sternum 1 thumb width below LU2 at the level of the 1st intercostal space 6 thumb widths lateral to the anterior midline.",
+            "anatomicalLocation": "In the 1st intercostal space, 6 cun lateral to the anterior midline",
+            "cautions": "Avoid during pregnancy; contraindicated in cases of pneumothorax.",
+            "needlingDepth": "0.5-1.0 cun obliquely",
+            "treats": [
+                "heat:chest",
+                "cough",
+                "pain:chest",
+                "fever",
+                "dyspnoea"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/lung-meridian#lu01",
+            "category": "Front-Mu Point of Lung"
+        },
+        {
+            "code": "LU02",
+            "name": "Cloud Gate",
+            "chinese": "雲門",
+            "pinyin": "yún mén",
+            "number": 2,
+            "location": "In the superior lateral part of the anterior thoracic wall superior to the coracoid process of the scapula in the depression of the infraclavicular fossa 6 thumb widths lateral to the anterior midline.",
+            "anatomicalLocation": "In the infraclavicular fossa, 6 cun lateral to the midline",
+            "cautions": "Avoid deep needling due to proximity to lungs and blood vessels; contraindicated in hemoptysis.",
+            "needlingDepth": "0.5-0.8 cun obliquely",
+            "treats": [
+                "heat:chest",
+                "cough",
+                "pain:chest",
+                "dyspnoea",
+                "asthma"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/lung-meridian#lu02",
+            "category": "Regular Point"
+        },
+        {
+            "code": "LU03",
+            "name": "Celestial Storehouse",
+            "chinese": "天府",
+            "pinyin": "tiān fǔ",
+            "number": 3,
+            "location": "On the medial aspect of the upper arm 3 thumb widths below end of the axillary fold on the radial side of the biceps brachii.",
+            "anatomicalLocation": "3 cun below the axillary fold, on radial side of biceps brachii",
+            "cautions": "Avoid deep needling; caution near brachial artery.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "asthma",
+                "dizziness",
+                "cough:blood"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/lung-meridian#lu03",
+            "category": "Window of Sky Point"
+        },
+        {
+            "code": "LU04",
+            "name": "Guarding White",
+            "chinese": "俠白",
+            "pinyin": "xiá bái",
+            "number": 4,
+            "location": "On the medial aspect of the upper arm 4 thumb widths below anterior end of the axillary fold or 5 thumb widths above the cubital crease on the radial side of the biceps brachii.",
+            "anatomicalLocation": "4 cun below axillary fold, on radial side of biceps brachii",
+            "cautions": "Caution with depth to avoid damaging blood vessels.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "asthma",
+                "palpitations",
+                "retching"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/lung-meridian#lu04",
+            "category": "Regular Point"
+        },
+        {
+            "code": "LU05",
+            "name": "Cubit Marsh",
+            "chinese": "尺澤",
+            "pinyin": "chǐ zé",
+            "number": 5,
+            "location": "On the cubital crease in the depression of the radial side of the biceps brachii tendon; point is located with elbow slightly flexed.",
+            "anatomicalLocation": "At the cubital crease, on radial side of biceps brachii tendon",
+            "cautions": "Avoid in cases of severe vascular disease; caution with depth at cubital fossa.",
+            "needlingDepth": "0.8-1.2 cun perpendicular",
+            "treats": [
+                "cough",
+                "diarrhoea",
+                "dyspnoea",
+                "asthma",
+                "pain:knee"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/lung-meridian#lu05",
+            "category": "He-Sea Point, Water Point"
+        },
+        {
+            "code": "LU06",
+            "name": "Collection Hole",
+            "chinese": "孔最",
+            "pinyin": "kǒng zuì",
+            "number": 6,
+            "location": "On the palmar aspect of the forearm on the line joining LU9 and LU5 7 thumb widths above the transverse crease of the wrist.",
+            "anatomicalLocation": "7 cun above the wrist crease, on the line connecting LU5 and LU9",
+            "cautions": "Caution in cases of local inflammation or skin conditions.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "asthma",
+                "cough:blood",
+                "heat"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/lung-meridian#lu06",
+            "category": "Xi-Cleft Point"
+        },
+        {
+            "code": "LU07",
+            "name": "Interrupted Sequence",
+            "chinese": "列缺",
+            "pinyin": "liè quē",
+            "number": 7,
+            "location": "Superior to the styloid process of the radius 1.5 thumb widths above the transverse crease of the wrist between brachioradialis and tendon of the abductor policis longus.",
+            "anatomicalLocation": "1.5 cun above the wrist crease, above the styloid process of radius",
+            "cautions": "Use with caution in patients with radial nerve sensitivity.",
+            "needlingDepth": "0.3-0.5 cun obliquely",
+            "treats": [
+                "heat:chest",
+                "cough",
+                "fever",
+                "dyspnoea",
+                "phlegm",
+                "headache"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/lung-meridian#lu07",
+            "category": "Luo-Connecting Point, Confluent Point of Ren Mai"
+        },
+        {
+            "code": "LU08",
+            "name": "Channels Ditch",
+            "chinese": "經渠",
+            "pinyin": "jīng qú",
+            "number": 8,
+            "location": "1 thumb width above the transverse crease of the wrist in the depression on the lateral side of the radial artery.",
+            "anatomicalLocation": "1 cun above the wrist crease, on lateral side of radial artery",
+            "cautions": "Caution with depth; avoid radial artery.",
+            "needlingDepth": "0.3 cun perpendicular",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "dyspnoea",
+                "asthma",
+                "vomiting"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/lung-meridian#lu08",
+            "category": "Jing-River Point, Metal Point"
+        },
+        {
+            "code": "LU09",
+            "name": "Great Source",
+            "chinese": "太淵",
+            "pinyin": "tài yuān",
+            "number": 9,
+            "location": "At the radial end of the transverse crease of the wrist in the depression on the lateral side of the radial artery.",
+            "anatomicalLocation": "On the wrist crease, on lateral side of radial artery",
+            "cautions": "Caution in patients with cardiac arrhythmias; avoid excessive stimulation.",
+            "needlingDepth": "0.3 cun perpendicular",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "asthma",
+                "cough:blood",
+                "cold"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/lung-meridian#lu09",
+            "category": "Shu-Stream Point, Yuan-Source Point, Earth Point, Hui-Meeting Point of Vessels"
+        },
+        {
+            "code": "LU10",
+            "name": "Fish Border",
+            "chinese": "魚際",
+            "pinyin": "yú jì",
+            "number": 10,
+            "location": "On the radial aspect of the midpoint of the 1st metacarpal bone on the junction of the red and white skin of the hand.",
+            "anatomicalLocation": "At midpoint of 1st metacarpal bone, on thenar eminence",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "cough",
+                "fever",
+                "anxiety",
+                "sore throat",
+                "heat"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/lung-meridian#lu10",
+            "category": "Ying-Spring Point, Fire Point"
+        },
+        {
+            "code": "LU11",
+            "name": "Lesser Metal",
+            "chinese": "少商",
+            "pinyin": "shǎo shāng",
+            "number": 11,
+            "location": "On the radial side of the thumb about 0.1 thumb width posterior to the corner of the nail.",
+            "anatomicalLocation": "0.1 cun from the corner of the thumbnail, on radial side",
+            "cautions": "Avoid in patients with bleeding disorders; caution with depth.",
+            "needlingDepth": "0.1 cun shallow or prick to bleed",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "sore throat",
+                "fever",
+                "loss of consciousness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/lung-meridian#lu11",
+            "category": "Jing-Well Point, Wood Point"
+        }
+    ]
+}

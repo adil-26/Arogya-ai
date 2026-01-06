@@ -1,0 +1,188 @@
+{
+    "id": "HT",
+    "name": "Heart Meridian",
+    "chineseName": "心經",
+    "pinyin": "Xīn Jīng",
+    "element": "Fire",
+    "yinYang": "Yin",
+    "pairedMeridian": "SI",
+    "totalPoints": 9,
+    "flowDirection": "From armpit to little finger",
+    "peakHours": "11am - 1pm",
+    "color": "#EF4444",
+    "description": "The Heart Meridian governs blood circulation and houses the Shen (spirit/mind). It is associated with joy, mental clarity, and sleep.",
+    "sourceUrl": "https://acuiq.com/meridians/heart-meridian",
+    "acupoints": [
+        {
+            "code": "HT01",
+            "name": "Highest Spring",
+            "chinese": "極泉",
+            "pinyin": "jí quán",
+            "number": 1,
+            "location": "When upper arm is abducted point is in the center of the axilla on the medial side of the axillary artery.",
+            "cautions": "Contraindicated for needling; proximity to axillary artery.",
+            "needlingDepth": "Avoid needling",
+            "treats": [
+                "pain:chest",
+                "anxiety",
+                "palpitations",
+                "pain:elbow",
+                "retching"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/heart-meridian#ht01",
+            "category": "Regular Point"
+        },
+        {
+            "code": "HT02",
+            "name": "Cyan Spirit",
+            "chinese": "青靈",
+            "pinyin": "qīng líng",
+            "number": 2,
+            "location": "When elbow is flexed point is 3 thumb widths above the medial end of the transverse cubital crease.",
+            "cautions": "Caution with depth; proximity to brachial artery.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "swelling",
+                "pain",
+                "shivering",
+                "pain:costal:lateral"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/heart-meridian#ht02",
+            "category": "Regular Point"
+        },
+        {
+            "code": "HT03",
+            "name": "Lesser Sea",
+            "chinese": "少海",
+            "pinyin": "shǎo hǎi",
+            "number": 3,
+            "location": "With elbow flexed, at the midpoint of the line connecting medial end of the cubital crease and medial epicondyle.",
+            "cautions": "Caution with ulnar nerve.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "phlegm",
+                "heat",
+                "fullness:chest",
+                "pain",
+                "epilepsy"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/heart-meridian#ht03",
+            "category": "He-Sea Point, Water Point"
+        },
+        {
+            "code": "HT04",
+            "name": "Spirit Path",
+            "chinese": "靈道",
+            "pinyin": "líng dào",
+            "number": 4,
+            "location": "On the radial side of the tendon of the flexor carpi ulnaris, 1.5 thumb widths above the wrist crease.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "anxiety",
+                "swelling",
+                "pain:finger",
+                "retching",
+                "pain:heart"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/heart-meridian#ht04",
+            "category": "Jing-River Point, Metal Point"
+        },
+        {
+            "code": "HT05",
+            "name": "Inward Connection",
+            "chinese": "通里",
+            "pinyin": "tōng lǐ",
+            "number": 5,
+            "location": "On the radial side of the tendon of the flexor carpi ulnaris, 1 thumb width above the wrist crease.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "dizziness",
+                "palpitations",
+                "deficiency:qi",
+                "depression",
+                "fullness:chest"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/heart-meridian#ht05",
+            "category": "Luo-Connecting Point"
+        },
+        {
+            "code": "HT06",
+            "name": "Yin Cleft",
+            "chinese": "陰郄",
+            "pinyin": "yīn qiè",
+            "number": 6,
+            "location": "On the radial side of the tendon of the flexor carpi ulnaris, 0.5 thumb widths above the wrist crease.",
+            "cautions": "Caution in cardiac arrhythmias.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "palpitations",
+                "fullness:chest",
+                "epilepsy",
+                "pain:heart",
+                "nosebleed"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/heart-meridian#ht06",
+            "category": "Xi-Cleft Point"
+        },
+        {
+            "code": "HT07",
+            "name": "Spirit Gate",
+            "chinese": "神門",
+            "pinyin": "shén mén",
+            "number": 7,
+            "location": "At the ulnar end of the transverse crease of the wrist in the depression on the radial side of the tendon.",
+            "cautions": "Caution in cardiac arrhythmias.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "anxiety",
+                "dyspnoea",
+                "palpitations",
+                "insomnia",
+                "depression",
+                "mental disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/heart-meridian#ht07",
+            "category": "Shu-Stream Point, Yuan-Source Point, Earth Point"
+        },
+        {
+            "code": "HT08",
+            "name": "Lesser Mansion",
+            "chinese": "少府",
+            "pinyin": "shǎo fǔ",
+            "number": 8,
+            "location": "Between 4th and 5th metacarpal bones; where tip of the little finger rests when fist is made.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "pain:chest",
+                "anxiety",
+                "palpitations",
+                "deficiency:qi",
+                "cold"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/heart-meridian#ht08",
+            "category": "Ying-Spring Point, Fire Point"
+        },
+        {
+            "code": "HT09",
+            "name": "Lesser Surge",
+            "chinese": "少沖",
+            "pinyin": "shǎo chōng",
+            "number": 9,
+            "location": "On the radial side of the little finger about 0.1 thumb width from corner of the nail.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "needlingDepth": "0.1 cun shallow or prick to bleed",
+            "treats": [
+                "pain:chest",
+                "palpitations",
+                "jaundice",
+                "loss of consciousness",
+                "heat"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/heart-meridian#ht09",
+            "category": "Jing-Well Point, Wood Point"
+        }
+    ]
+}

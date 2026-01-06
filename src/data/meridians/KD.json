@@ -1,0 +1,540 @@
+{
+    "id": "KD",
+    "name": "Kidney Meridian",
+    "chineseName": "腎經",
+    "pinyin": "Shèn Jīng",
+    "element": "Water",
+    "yinYang": "Yin",
+    "pairedMeridian": "BL",
+    "totalPoints": 27,
+    "flowDirection": "From sole of foot to chest",
+    "peakHours": "5pm - 7pm",
+    "color": "#1E40AF",
+    "description": "The Kidney Meridian is the foundation of Yin and Yang in the body. It governs birth, growth, reproduction, and is associated with will power and fear.",
+    "sourceUrl": "https://acuiq.com/meridians/kidney-meridian",
+    "acupoints": [
+        {
+            "code": "KD01",
+            "name": "Bubbling Spring",
+            "chinese": "涌泉",
+            "pinyin": "yǒng quán",
+            "number": 1,
+            "location": "On the sole in the depression when foot is in plantar flexion, at the junction of the anterior 1/3 and posterior 2/3 of the line connecting base of the 2nd and 3rd toes and heel.",
+            "cautions": "Avoid in patients with severe deficiency conditions.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "cough",
+                "anxiety",
+                "dyspnoea",
+                "dizziness",
+                "cough:blood",
+                "hypertension",
+                "emergency revival"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd01",
+            "category": "Jing-Well Point, Wood Point"
+        },
+        {
+            "code": "KD02",
+            "name": "Blazing Valley",
+            "chinese": "然谷",
+            "pinyin": "rán gǔ",
+            "number": 2,
+            "location": "Anterior and inferior to the medial malleolus in the depression on the lower border of the tuberosity of the navicular bone.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "anxiety",
+                "dyspnoea",
+                "deficiency:heat",
+                "asthma",
+                "diabetes"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd02",
+            "category": "Ying-Spring Point, Fire Point"
+        },
+        {
+            "code": "KD03",
+            "name": "Great Stream",
+            "chinese": "太谿",
+            "pinyin": "tài xī",
+            "number": 3,
+            "location": "In the depression between tip of the medial malleolus and achilles tendon.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "dyspnoea",
+                "deficiency:heat",
+                "asthma",
+                "tinnitus",
+                "sore throat"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd03",
+            "category": "Shu-Stream Point, Yuan-Source Point, Earth Point"
+        },
+        {
+            "code": "KD04",
+            "name": "Large Bell",
+            "chinese": "大鐘",
+            "pinyin": "dà zhōng",
+            "number": 4,
+            "location": "Posterior and inferior to the medial malleolus in the depression anterior to the medial side of the attachment of the achilles tendon.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "cough",
+                "anxiety",
+                "asthma",
+                "cough:blood",
+                "palpitations",
+                "heel pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd04",
+            "category": "Luo-Connecting Point"
+        },
+        {
+            "code": "KD05",
+            "name": "Water Spring",
+            "chinese": "水泉",
+            "pinyin": "shuǐ quán",
+            "number": 5,
+            "location": "1 thumb width directly below KD3 in the depression of the medial side of the tuberosity of the calcaneum.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "pain:abdomen",
+                "amenorrhea",
+                "prolapse:uterus",
+                "dysfunction:urination",
+                "dysmenorrhoea"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd05",
+            "category": "Xi-Cleft Point"
+        },
+        {
+            "code": "KD06",
+            "name": "Shining Sea",
+            "chinese": "照海",
+            "pinyin": "zhào hǎi",
+            "number": 6,
+            "location": "In the depression below tip of the medial malleolus.",
+            "cautions": "Contraindicated during pregnancy.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "deficiency:heat",
+                "dizziness",
+                "constipation",
+                "fullness:chest",
+                "distension:abdomen",
+                "insomnia",
+                "sore throat"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd06",
+            "category": "Confluent Point of Yin Qiao Mai"
+        },
+        {
+            "code": "KD07",
+            "name": "Returning Flow",
+            "chinese": "復溜",
+            "pinyin": "fù liū",
+            "number": 7,
+            "location": "2 thumb widths directly above the KD3 on the anterior border of the achilles tendon.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "cough",
+                "fullness:chest",
+                "damp",
+                "oedema",
+                "cough:pus",
+                "spontaneous sweating"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd07",
+            "category": "Jing-River Point, Metal Point"
+        },
+        {
+            "code": "KD08",
+            "name": "Belief Intersection",
+            "chinese": "交信",
+            "pinyin": "jiāo xìn",
+            "number": 8,
+            "location": "0.5 thumb widths anterior to the KD7, 2 thumb widths above the KD3 posterior to the medial border of the tibia.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "heat",
+                "amenorrhea",
+                "swelling",
+                "dysentery",
+                "irregular menstruation"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd08",
+            "category": "Xi-Cleft Point of Yin Qiao Mai"
+        },
+        {
+            "code": "KD09",
+            "name": "Guest House",
+            "chinese": "築賓",
+            "pinyin": "zhù bīn",
+            "number": 9,
+            "location": "5 thumb widths directly above the KD3 at the lower end of the belly of the gastrocnemius.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "phlegm",
+                "depression",
+                "pain",
+                "goitre",
+                "vomiting:foam",
+                "mental disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd09",
+            "category": "Xi-Cleft Point of Yin Wei Mai"
+        },
+        {
+            "code": "KD10",
+            "name": "Yin Valley",
+            "chinese": "陰谷",
+            "pinyin": "yīn gǔ",
+            "number": 10,
+            "location": "When knee is flexed, on the medial side of the popliteal fossa between tendons of the semitendinosus and semimembranosus.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.8-1.5 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "depression",
+                "distension:abdomen",
+                "pain:abdomen",
+                "genital disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd10",
+            "category": "He-Sea Point, Water Point"
+        },
+        {
+            "code": "KD11",
+            "name": "Pubic Bone",
+            "chinese": "橫骨",
+            "pinyin": "héng gǔ",
+            "number": 11,
+            "location": "5 thumb widths below umbilicus on the superior border of the symphysis pubis 0.5 thumb widths lateral to the CV2.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:abdomen",
+                "prolapse:rectum",
+                "prolapse:uterus",
+                "retention:urine",
+                "benefit:digestion"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd11",
+            "category": "Meeting Point with Chong Mai"
+        },
+        {
+            "code": "KD12",
+            "name": "Great Manifestation",
+            "chinese": "大赫",
+            "pinyin": "dà hè",
+            "number": 12,
+            "location": "4 thumb widths below umbilicus 0.5 thumb widths lateral to the CV3.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "deficiency",
+                "prolapse:uterus",
+                "pain:penis",
+                "pain:genitals",
+                "infertility"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd12",
+            "category": "Meeting Point with Chong Mai"
+        },
+        {
+            "code": "KD13",
+            "name": "Qi Hole",
+            "chinese": "氣穴",
+            "pinyin": "qì xué",
+            "number": 13,
+            "location": "3 thumb widths below umbilicus 0.5 thumb widths lateral to the CV4.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:abdomen",
+                "amenorrhea",
+                "pain:back:lumbar",
+                "dysfunction:urination",
+                "diarrhoea:persistent"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd13",
+            "category": "Meeting Point with Chong Mai"
+        },
+        {
+            "code": "KD14",
+            "name": "Fourfold Fullness",
+            "chinese": "四滿",
+            "pinyin": "sì mǎn",
+            "number": 14,
+            "location": "2 thumb widths below umbilicus 0.5 thumb widths lateral to the CV5.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:abdomen",
+                "amenorrhea",
+                "stagnation:blood",
+                "prolapse:uterus",
+                "dysfunction:urination"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd14",
+            "category": "Meeting Point with Chong Mai"
+        },
+        {
+            "code": "KD15",
+            "name": "Central Flow",
+            "chinese": "中注",
+            "pinyin": "zhōng zhù",
+            "number": 15,
+            "location": "1 thumb width below umbilicus 0.5 thumb widths lateral to the CV7.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "stools:dry",
+                "constipation",
+                "pain:abdomen",
+                "dysentery"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd15",
+            "category": "Meeting Point with Chong Mai"
+        },
+        {
+            "code": "KD16",
+            "name": "Vital Point",
+            "chinese": "肓俞",
+            "pinyin": "huāng yú",
+            "number": 16,
+            "location": "0.5 thumb widths lateral to the umbilicus level with CV8.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "stools:dry",
+                "constipation",
+                "vomiting",
+                "distension:abdomen"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd16",
+            "category": "Meeting Point with Chong Mai"
+        },
+        {
+            "code": "KD17",
+            "name": "Shang Bend",
+            "chinese": "商曲",
+            "pinyin": "shāng qū",
+            "number": 17,
+            "location": "2 thumb widths above the umbilicus 0.5 thumb widths lateral to the CV10.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "appetite:weak",
+                "diarrhoea",
+                "constipation",
+                "vomiting",
+                "pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd17",
+            "category": "Meeting Point with Chong Mai"
+        },
+        {
+            "code": "KD18",
+            "name": "Stone Gate",
+            "chinese": "石關",
+            "pinyin": "shí guān",
+            "number": 18,
+            "location": "3 thumb widths above the umbilicus 0.5 thumb widths lateral to the CV11.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "constipation",
+                "vomiting",
+                "stagnation:blood",
+                "pain",
+                "hiccups"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd18",
+            "category": "Meeting Point with Chong Mai"
+        },
+        {
+            "code": "KD19",
+            "name": "Yin Capital",
+            "chinese": "陰都",
+            "pinyin": "yīn dū",
+            "number": 19,
+            "location": "4 thumb widths above the umbilicus 0.5 thumb widths lateral to the CV12.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "cough",
+                "vomiting",
+                "distension:abdomen",
+                "pain:abdomen"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd19",
+            "category": "Meeting Point with Chong Mai"
+        },
+        {
+            "code": "KD20",
+            "name": "Open Valley",
+            "chinese": "腹通谷",
+            "pinyin": "fù tōng gǔ",
+            "number": 20,
+            "location": "5 thumb widths above the umbilicus 0.5 thumb widths lateral to the CV13.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "cough",
+                "diarrhoea",
+                "dyspnoea",
+                "phlegm",
+                "palpitations"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd20",
+            "category": "Meeting Point with Chong Mai"
+        },
+        {
+            "code": "KD21",
+            "name": "Dark Gate",
+            "chinese": "幽門",
+            "pinyin": "yōu mén",
+            "number": 21,
+            "location": "6 thumb widths above the umbilicus 0.5 thumb widths lateral to the CV14.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "diarrhoea",
+                "cough:blood",
+                "vomiting"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd21",
+            "category": "Meeting Point with Chong Mai"
+        },
+        {
+            "code": "KD22",
+            "name": "Stepping Upward",
+            "chinese": "步廊",
+            "pinyin": "bù láng",
+            "number": 22,
+            "location": "In the 5th intercostal space 2 thumb widths lateral to the CV Mai.",
+            "cautions": "Avoid deep needling; risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "dyspnoea",
+                "asthma",
+                "deficiency:qi"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd22",
+            "category": "Regular Point"
+        },
+        {
+            "code": "KD23",
+            "name": "Spirit Seal",
+            "chinese": "神封",
+            "pinyin": "shén fēng",
+            "number": 23,
+            "location": "In the 4th intercostal space 2 thumb widths lateral to the anterior midline.",
+            "cautions": "Avoid deep needling; risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "asthma",
+                "fullness:chest",
+                "vomiting",
+                "abscess:breast"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd23",
+            "category": "Regular Point"
+        },
+        {
+            "code": "KD24",
+            "name": "Spirit Ruins",
+            "chinese": "靈墟",
+            "pinyin": "líng xū",
+            "number": 24,
+            "location": "In the 3rd intercostal space 2 thumb widths lateral to the anterior midline.",
+            "cautions": "Avoid deep needling; risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "asthma",
+                "palpitations",
+                "vomiting"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd24",
+            "category": "Regular Point"
+        },
+        {
+            "code": "KD25",
+            "name": "Spirit Storehouse",
+            "chinese": "神藏",
+            "pinyin": "shén cáng",
+            "number": 25,
+            "location": "In the 2nd intercostal space 2 thumb widths lateral to the anterior midline.",
+            "cautions": "Avoid deep needling; risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "asthma",
+                "fullness:chest",
+                "vomiting"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd25",
+            "category": "Regular Point"
+        },
+        {
+            "code": "KD26",
+            "name": "Lively Centre",
+            "chinese": "彧中",
+            "pinyin": "yù zhōng",
+            "number": 26,
+            "location": "In the 1st intercostal space 2 thumb widths lateral to the anterior midline.",
+            "cautions": "Avoid deep needling; risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "phlegm",
+                "asthma",
+                "cough:blood"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd26",
+            "category": "Regular Point"
+        },
+        {
+            "code": "KD27",
+            "name": "Shu Mansion",
+            "chinese": "俞府",
+            "pinyin": "yú fǔ",
+            "number": 27,
+            "location": "In the depression on the lower border of the clavicle 2 thumb widths lateral to the anterior midline.",
+            "cautions": "Avoid deep needling; risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "asthma",
+                "fullness:chest",
+                "vomiting"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/kidney-meridian#kd27",
+            "category": "Regular Point"
+        }
+    ]
+}

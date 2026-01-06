@@ -1,0 +1,173 @@
+{
+    "version": "1.0",
+    "source": "AcuIQ.com",
+    "lastUpdated": "2026-01-06",
+    "description": "Complete acupoint database with all 14 primary meridians",
+    "totalMeridians": 14,
+    "completedMeridians": 14,
+    "totalAcupoints": 361,
+    "meridians": [
+        {
+            "id": "LU",
+            "name": "Lung Meridian",
+            "chinese": "肺經",
+            "element": "Metal",
+            "points": 11,
+            "status": "complete",
+            "file": "LU.json"
+        },
+        {
+            "id": "LI",
+            "name": "Large Intestine Meridian",
+            "chinese": "大腸經",
+            "element": "Metal",
+            "points": 20,
+            "status": "complete",
+            "file": "LI.json"
+        },
+        {
+            "id": "ST",
+            "name": "Stomach Meridian",
+            "chinese": "胃經",
+            "element": "Earth",
+            "points": 45,
+            "status": "complete",
+            "file": "ST.json"
+        },
+        {
+            "id": "SP",
+            "name": "Spleen Meridian",
+            "chinese": "脾經",
+            "element": "Earth",
+            "points": 21,
+            "status": "complete",
+            "file": "SP.json"
+        },
+        {
+            "id": "HT",
+            "name": "Heart Meridian",
+            "chinese": "心經",
+            "element": "Fire",
+            "points": 9,
+            "status": "complete",
+            "file": "HT.json"
+        },
+        {
+            "id": "SI",
+            "name": "Small Intestine Meridian",
+            "chinese": "小腸經",
+            "element": "Fire",
+            "points": 19,
+            "status": "complete",
+            "file": "SI.json"
+        },
+        {
+            "id": "BL",
+            "name": "Bladder Meridian",
+            "chinese": "膀胱經",
+            "element": "Water",
+            "points": 67,
+            "status": "complete",
+            "file": "BL.json"
+        },
+        {
+            "id": "KD",
+            "name": "Kidney Meridian",
+            "chinese": "腎經",
+            "element": "Water",
+            "points": 27,
+            "status": "complete",
+            "file": "KD.json"
+        },
+        {
+            "id": "PC",
+            "name": "Pericardium Meridian",
+            "chinese": "心包經",
+            "element": "Fire",
+            "points": 9,
+            "status": "complete",
+            "file": "PC.json"
+        },
+        {
+            "id": "TB",
+            "name": "Triple Burner Meridian",
+            "chinese": "三焦經",
+            "element": "Fire",
+            "points": 23,
+            "status": "complete",
+            "file": "TB.json"
+        },
+        {
+            "id": "GB",
+            "name": "Gallbladder Meridian",
+            "chinese": "膽經",
+            "element": "Wood",
+            "points": 44,
+            "status": "complete",
+            "file": "GB.json"
+        },
+        {
+            "id": "LV",
+            "name": "Liver Meridian",
+            "chinese": "肝經",
+            "element": "Wood",
+            "points": 14,
+            "status": "complete",
+            "file": "LV.json"
+        },
+        {
+            "id": "GV",
+            "name": "Governing Vessel",
+            "chinese": "督脈",
+            "element": "Yang",
+            "points": 28,
+            "status": "complete",
+            "file": "GV.json"
+        },
+        {
+            "id": "CV",
+            "name": "Conception Vessel",
+            "chinese": "任脈",
+            "element": "Yin",
+            "points": 24,
+            "status": "complete",
+            "file": "CV.json"
+        }
+    ],
+    "dataStructure": {
+        "meridian": {
+            "id": "Meridian abbreviation (e.g., LU, LI)",
+            "name": "Full English name",
+            "chineseName": "Chinese characters",
+            "pinyin": "Pinyin pronunciation",
+            "element": "Five element association",
+            "yinYang": "Yin or Yang",
+            "pairedMeridian": "Paired meridian ID",
+            "totalPoints": "Number of acupoints",
+            "flowDirection": "Direction of Qi flow",
+            "peakHours": "Peak activity time",
+            "color": "Suggested display color",
+            "sourceUrl": "Source URL",
+            "acupoints": "Array of acupoints"
+        },
+        "acupoint": {
+            "code": "Point code (e.g., LU01)",
+            "name": "English name",
+            "chinese": "Chinese characters",
+            "pinyin": "Pinyin pronunciation",
+            "number": "Point number",
+            "location": "Anatomical location description",
+            "cautions": "Contraindications and warnings",
+            "needlingDepth": "Recommended needling depth",
+            "treats": "Array of symptoms/conditions treated",
+            "imageUrl": "URL to point diagram",
+            "category": "Point category (e.g., He-Sea, Yuan-Source)"
+        }
+    },
+    "usage": {
+        "loadAllMeridians": "import meridians from '@/data/meridians/index.json'",
+        "loadSingleMeridian": "import lungMeridian from '@/data/meridians/LU.json'",
+        "dynamicLoad": "const meridian = await import(`@/data/meridians/${id}.json`)",
+        "example": "const points = lungMeridian.acupoints.filter(p => p.treats.includes('cough'))"
+    }
+}

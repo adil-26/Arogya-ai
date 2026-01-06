@@ -1,0 +1,858 @@
+{
+    "id": "ST",
+    "name": "Stomach Meridian",
+    "chineseName": "胃經",
+    "pinyin": "Wèi Jīng",
+    "element": "Earth",
+    "yinYang": "Yang",
+    "pairedMeridian": "SP",
+    "totalPoints": 45,
+    "flowDirection": "From face to foot",
+    "peakHours": "7am - 9am",
+    "color": "#F59E0B",
+    "description": "The Stomach Meridian governs digestion and the receiving of food. It is associated with nourishment, grounding, and the emotion of pensiveness.",
+    "sourceUrl": "https://acuiq.com/meridians/stomach-meridian",
+    "acupoints": [
+        {
+            "code": "ST01",
+            "name": "Tear Container",
+            "chinese": "承泣",
+            "pinyin": "chéng qì",
+            "number": 1,
+            "location": "With eyes looking straight forward, directly below pupil between eyeball and infraorbital ridge.",
+            "cautions": "Contraindicated for needling; use only pressure.",
+            "needlingDepth": "Pressure only",
+            "treats": [
+                "tinnitus",
+                "cold",
+                "heat",
+                "wind",
+                "redness",
+                "eye disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st01",
+            "category": "Meeting Point with CV, Yang Qiao Mai"
+        },
+        {
+            "code": "ST02",
+            "name": "Four Whites",
+            "chinese": "四白",
+            "pinyin": "sì bái",
+            "number": 2,
+            "location": "Directly below pupil in the depression at the infraorbital foramen.",
+            "cautions": "Caution with infraorbital nerve.",
+            "needlingDepth": "0.2-0.3 cun perpendicular",
+            "treats": [
+                "heat",
+                "wind",
+                "deviation:eye",
+                "deviation:mouth",
+                "headache",
+                "facial pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st02",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST03",
+            "name": "Great Bone Hole",
+            "chinese": "巨髎",
+            "pinyin": "jù hé",
+            "number": 3,
+            "location": "Directly below pupil at level of lower border of ala nasi on lateral side of nasolabial groove.",
+            "cautions": "Avoid deep needling on face.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "wind",
+                "swelling",
+                "pain",
+                "deviation:mouth",
+                "nosebleed",
+                "facial pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st03",
+            "category": "Meeting Point with Yang Qiao Mai"
+        },
+        {
+            "code": "ST04",
+            "name": "Earth Granary",
+            "chinese": "地倉",
+            "pinyin": "dì cāng",
+            "number": 4,
+            "location": "Lateral to the corner of the mouth directly below pupil.",
+            "cautions": "Caution with facial nerve.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "pain",
+                "deviation:mouth",
+                "stagnation:channel",
+                "voice:loss",
+                "toothache",
+                "drooling"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st04",
+            "category": "Meeting Point with LI, Yang Qiao Mai"
+        },
+        {
+            "code": "ST05",
+            "name": "Great Reception",
+            "chinese": "大迎",
+            "pinyin": "dà yíng",
+            "number": 5,
+            "location": "Anterior to the angle of the mandible on anterior border of masseter where facial artery is palpable.",
+            "cautions": "Caution with facial nerve and artery.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "fever",
+                "wind",
+                "swelling",
+                "chills",
+                "aversion:cold",
+                "facial paralysis"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st05",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST06",
+            "name": "Jaw Bone",
+            "chinese": "頰車",
+            "pinyin": "jiá chē",
+            "number": 6,
+            "location": "One finger anterior and superior to lower angle of mandible where masseter is prominent when teeth are clenched.",
+            "cautions": "Avoid in TMJ disorders.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "wind",
+                "pain",
+                "deviation:eye",
+                "deviation:mouth",
+                "mumps",
+                "toothache"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st06",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST07",
+            "name": "Below The Arch",
+            "chinese": "下關",
+            "pinyin": "xià guān",
+            "number": 7,
+            "location": "In the depression at lower border of zygomatic arch anterior to condyloid process of mandible.",
+            "cautions": "Avoid in acute TMJ disorders.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "tinnitus",
+                "deafness",
+                "toothache",
+                "facial paralysis",
+                "TMJ pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st07",
+            "category": "Meeting Point with GB"
+        },
+        {
+            "code": "ST08",
+            "name": "Head Binding",
+            "chinese": "頭維",
+            "pinyin": "tóu wéi",
+            "number": 8,
+            "location": "0.5 thumb width within hairline at corner of forehead, 4.5 thumb widths lateral to GV24.",
+            "cautions": "Avoid deep needling.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "dizziness",
+                "eye disorders",
+                "migraines"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st08",
+            "category": "Meeting Point with GB, Yang Wei Mai"
+        },
+        {
+            "code": "ST09",
+            "name": "Human Welcome",
+            "chinese": "人迎",
+            "pinyin": "rén yíng",
+            "number": 9,
+            "location": "Level with tip of Adam's apple, on anterior border of SCM where common carotid artery is palpable.",
+            "cautions": "Caution with carotid artery; avoid in hypertension.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "dyspnoea",
+                "asthma",
+                "goitre",
+                "hypertension",
+                "sore throat"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st09",
+            "category": "Sea of Qi Point, Window of Sky Point"
+        },
+        {
+            "code": "ST10",
+            "name": "Water Protrusion",
+            "chinese": "水突",
+            "pinyin": "shuǐ tū",
+            "number": 10,
+            "location": "At anterior border of SCM, midway between ST9 and ST11.",
+            "cautions": "Same as ST9.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "cough",
+                "asthma",
+                "goitre",
+                "sore throat"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st10",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST11",
+            "name": "Qi Housing",
+            "chinese": "氣舍",
+            "pinyin": "qì shè",
+            "number": 11,
+            "location": "At superior border of sternal end of clavicle, between sternal and clavicular heads of SCM.",
+            "cautions": "Avoid deep needling; risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "asthma",
+                "goitre",
+                "sore throat"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st11",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST12",
+            "name": "Empty Basin",
+            "chinese": "缺盆",
+            "pinyin": "quē pén",
+            "number": 12,
+            "location": "In supraclavicular fossa, 4 thumb widths lateral to anterior midline.",
+            "cautions": "Avoid deep perpendicular needling; risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "asthma",
+                "pain:chest",
+                "pain:shoulder"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st12",
+            "category": "Meeting Point with LI, SI, TB, GB"
+        },
+        {
+            "code": "ST13",
+            "name": "Qi Door",
+            "chinese": "氣戶",
+            "pinyin": "qì hù",
+            "number": 13,
+            "location": "On inferior border of clavicle, 4 thumb widths lateral to anterior midline.",
+            "cautions": "Risk of pneumothorax; avoid deep perpendicular needling.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "dyspnoea",
+                "asthma",
+                "fullness:chest"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st13",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST14",
+            "name": "Store Room",
+            "chinese": "库房",
+            "pinyin": "kù fáng",
+            "number": 14,
+            "location": "In 1st intercostal space 4 thumb widths lateral to anterior midline.",
+            "cautions": "Risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "cough:blood",
+                "fullness:chest"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st14",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST15",
+            "name": "Roof",
+            "chinese": "屋翳",
+            "pinyin": "wū yì",
+            "number": 15,
+            "location": "In 2nd intercostal space 4 thumb widths lateral to anterior midline.",
+            "cautions": "Risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "dyspnoea",
+                "cough:blood",
+                "heaviness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st15",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST16",
+            "name": "Breast Window",
+            "chinese": "膺窗",
+            "pinyin": "yīng chuāng",
+            "number": 16,
+            "location": "In 3rd intercostal space 4 thumb widths lateral to anterior midline.",
+            "cautions": "Risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "fever",
+                "fullness:chest",
+                "abscess:breast",
+                "chills"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st16",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST17",
+            "name": "Breast Centre",
+            "chinese": "乳中",
+            "pinyin": "rǔ zhōng",
+            "number": 17,
+            "location": "In 4th intercostal space, center of nipple, 4 thumb widths lateral to anterior midline.",
+            "cautions": "Contraindicated for needling; use only as reference.",
+            "needlingDepth": "No needling",
+            "treats": [
+                "reference only"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st17",
+            "category": "Reference Point Only"
+        },
+        {
+            "code": "ST18",
+            "name": "Breast Root",
+            "chinese": "乳根",
+            "pinyin": "rǔ gēn",
+            "number": 18,
+            "location": "On lower border of breast in 5th intercostal space 4 thumb widths lateral to anterior midline.",
+            "cautions": "Caution in lactating women.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "swelling",
+                "abscess:breast",
+                "pain:breast",
+                "insufficient lactation"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st18",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST19",
+            "name": "Not Contained",
+            "chinese": "不容",
+            "pinyin": "bù róng",
+            "number": 19,
+            "location": "6 thumb widths above umbilicus 2 thumb widths lateral to CV14.",
+            "cautions": "Caution with depth in abdominal region.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "appetite:weak",
+                "dyspnoea",
+                "vomiting"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st19",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST20",
+            "name": "Receiving Fullness",
+            "chinese": "承满",
+            "pinyin": "chéng mǎn",
+            "number": 20,
+            "location": "5 thumb widths above umbilicus 2 thumb widths lateral to CV13.",
+            "cautions": "Caution with depth.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "vomiting",
+                "distension:abdomen",
+                "pain:epigastrium",
+                "poor appetite"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st20",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST21",
+            "name": "Beam Gate",
+            "chinese": "梁門",
+            "pinyin": "liáng mén",
+            "number": 21,
+            "location": "4 thumb widths above umbilicus 2 thumb widths lateral to CV12.",
+            "cautions": "Caution with depth.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "vomiting",
+                "distension:abdomen",
+                "diarrhoea",
+                "poor appetite"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st21",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST22",
+            "name": "Pass Gate",
+            "chinese": "關門",
+            "pinyin": "guān mén",
+            "number": 22,
+            "location": "3 thumb widths above umbilicus 2 thumb widths lateral to CV11.",
+            "cautions": "Caution with depth.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "distension:abdomen",
+                "oedema",
+                "diarrhoea",
+                "poor appetite"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st22",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST23",
+            "name": "Supreme Unity",
+            "chinese": "太乙",
+            "pinyin": "tài yǐ",
+            "number": 23,
+            "location": "2 thumb widths above umbilicus 2 thumb widths lateral to CV10.",
+            "cautions": "Caution with depth.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "anxiety",
+                "depression",
+                "distension:abdomen",
+                "mental disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st23",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST24",
+            "name": "Slippery Flesh Gate",
+            "chinese": "滑肉門",
+            "pinyin": "huá ròu mén",
+            "number": 24,
+            "location": "1 thumb width above umbilicus 2 thumb widths lateral to CV9.",
+            "cautions": "Caution with depth.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "vomiting",
+                "distension:abdomen",
+                "mental disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st24",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST25",
+            "name": "Celestial Pivot",
+            "chinese": "天樞",
+            "pinyin": "tiān shū",
+            "number": 25,
+            "location": "2 thumb widths lateral to the center of the umbilicus.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.5 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "constipation",
+                "distension:abdomen",
+                "irregular menstruation",
+                "oedema"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st25",
+            "category": "Front-Mu Point of Large Intestine"
+        },
+        {
+            "code": "ST26",
+            "name": "Outer Mound",
+            "chinese": "外陵",
+            "pinyin": "wài líng",
+            "number": 26,
+            "location": "1 thumb width below umbilicus 2 thumb widths lateral to CV7.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:abdomen",
+                "distension:abdomen"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st26",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST27",
+            "name": "Great Giant",
+            "chinese": "大巨",
+            "pinyin": "dà jù",
+            "number": 27,
+            "location": "2 thumb widths below umbilicus 2 thumb widths lateral to CV5.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "palpitations",
+                "insomnia",
+                "retention:urine",
+                "agitation"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st27",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST28",
+            "name": "Waterway",
+            "chinese": "水道",
+            "pinyin": "shuǐ dào",
+            "number": 28,
+            "location": "3 thumb widths below umbilicus 2 thumb widths lateral to CV4.",
+            "cautions": "Contraindicated during pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "constipation",
+                "pain:back",
+                "oedema",
+                "retention:urine",
+                "irregular menstruation"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st28",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST29",
+            "name": "Return",
+            "chinese": "归来",
+            "pinyin": "guī lái",
+            "number": 29,
+            "location": "4 thumb widths below umbilicus 2 thumb widths lateral to CV3.",
+            "cautions": "Contraindicated during pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "amenorrhea",
+                "swelling",
+                "prolapse:uterus",
+                "infertility",
+                "irregular menstruation"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st29",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST30",
+            "name": "Qi Surge",
+            "chinese": "氣沖",
+            "pinyin": "qì chōng",
+            "number": 30,
+            "location": "5 thumb widths below umbilicus 2 thumb widths lateral to CV2.",
+            "cautions": "Contraindicated during pregnancy; caution near femoral artery.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "constipation",
+                "heat",
+                "distension:abdomen",
+                "pain:abdomen",
+                "amenorrhea"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st30",
+            "category": "Meeting Point with Chong Mai"
+        },
+        {
+            "code": "ST31",
+            "name": "Thigh Gate",
+            "chinese": "髀關",
+            "pinyin": "bì guān",
+            "number": 31,
+            "location": "On anterior side of thigh on line connecting ASIS and lateral border of patella, level with inferior pubis symphysis.",
+            "cautions": "Caution with depth near femoral vessels.",
+            "needlingDepth": "1.0-2.0 cun perpendicular",
+            "treats": [
+                "jaundice",
+                "pain:thigh",
+                "sciatica",
+                "pain:back:lumbar",
+                "leg weakness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st31",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST32",
+            "name": "Crouching Rabbit",
+            "chinese": "伏兔",
+            "pinyin": "fú tù",
+            "number": 32,
+            "location": "On line connecting ASIS and lateral border of patella, 6 thumb widths above patella.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "1.0-2.0 cun perpendicular",
+            "treats": [
+                "pain:knee",
+                "cold",
+                "pain:back:lumbar",
+                "stagnation:channel"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st32",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST33",
+            "name": "Yin Market",
+            "chinese": "阴市",
+            "pinyin": "yīn shì",
+            "number": 33,
+            "location": "When knee is flexed, 3 thumb widths above lateral border of patella.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "1.0-2.0 cun perpendicular",
+            "treats": [
+                "pain:knee",
+                "cold",
+                "leg pain",
+                "paralysis"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st33",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST34",
+            "name": "Beam Mound",
+            "chinese": "梁丘",
+            "pinyin": "liáng qiū",
+            "number": 34,
+            "location": "2 thumb widths above lateral border of patella.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "1.0-1.5 cun perpendicular",
+            "treats": [
+                "pain:knee",
+                "pain:stomach",
+                "diarrhoea",
+                "mastitis"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st34",
+            "category": "Xi-Cleft Point"
+        },
+        {
+            "code": "ST35",
+            "name": "Calf's Nose",
+            "chinese": "牘鼻",
+            "pinyin": "dú bí",
+            "number": 35,
+            "location": "Below patella in depression lateral to patellar ligament.",
+            "cautions": "Avoid in acute knee injury.",
+            "needlingDepth": "0.5-1.0 cun oblique",
+            "treats": [
+                "pain:knee",
+                "swelling:knee",
+                "leg weakness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st35",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST36",
+            "name": "Leg Three Miles",
+            "chinese": "足三里",
+            "pinyin": "zú sān lǐ",
+            "number": 36,
+            "location": "3 thumb widths below ST35, one finger lateral to anterior border of tibia.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "1.0-2.0 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "vomiting",
+                "pain:abdomen",
+                "fatigue",
+                "immune support",
+                "digestive disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st36",
+            "category": "He-Sea Point, Earth Point, Sea of Nourishment"
+        },
+        {
+            "code": "ST37",
+            "name": "Upper Great Hollow",
+            "chinese": "上巨虛",
+            "pinyin": "shàng jù xū",
+            "number": 37,
+            "location": "6 thumb widths below ST35, one finger lateral to anterior border of tibia.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "1.0-2.0 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "constipation",
+                "pain:abdomen",
+                "dysentery"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st37",
+            "category": "Lower He-Sea Point of Large Intestine"
+        },
+        {
+            "code": "ST38",
+            "name": "Line Opening",
+            "chinese": "條口",
+            "pinyin": "tiáo kǒu",
+            "number": 38,
+            "location": "8 thumb widths below ST35, one finger lateral to anterior border of tibia.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "1.0-1.5 cun perpendicular",
+            "treats": [
+                "pain:shoulder",
+                "leg weakness",
+                "paralysis"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st38",
+            "category": "Regular Point"
+        },
+        {
+            "code": "ST39",
+            "name": "Lower Great Hollow",
+            "chinese": "下巨虛",
+            "pinyin": "xià jù xū",
+            "number": 39,
+            "location": "9 thumb widths below ST35, one finger lateral to anterior border of tibia.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "1.0-1.5 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "pain:abdomen",
+                "pain:back",
+                "mastitis"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st39",
+            "category": "Lower He-Sea Point of Small Intestine"
+        },
+        {
+            "code": "ST40",
+            "name": "Bountiful Bulge",
+            "chinese": "豐隆",
+            "pinyin": "fēng lóng",
+            "number": 40,
+            "location": "8 thumb widths above external malleolus, two fingers lateral to anterior border of tibia.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "1.0-1.5 cun perpendicular",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "dyspnoea",
+                "phlegm",
+                "asthma",
+                "mental disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st40",
+            "category": "Luo-Connecting Point"
+        },
+        {
+            "code": "ST41",
+            "name": "Dividing Cleft",
+            "chinese": "解谿",
+            "pinyin": "jiě xī",
+            "number": 41,
+            "location": "On dorsum of foot at midpoint of ankle crease between tendons of extensor digitorum and hallucis longus.",
+            "cautions": "Avoid in acute ankle injuries.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "pain:knee",
+                "dizziness",
+                "palpitations",
+                "constipation",
+                "distension:abdomen"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st41",
+            "category": "Jing-River Point, Fire Point"
+        },
+        {
+            "code": "ST42",
+            "name": "Surging Yang",
+            "chinese": "沖陽",
+            "pinyin": "chōng yáng",
+            "number": 42,
+            "location": "On dome of instep between tendons of extensor hallucis longus and extensor digitorum longus, where dorsalis pedis artery is palpable.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "fever",
+                "depression",
+                "vomiting",
+                "distension:abdomen",
+                "swelling"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st42",
+            "category": "Yuan-Source Point"
+        },
+        {
+            "code": "ST43",
+            "name": "Sunken Valley",
+            "chinese": "陷谷",
+            "pinyin": "xiàn gǔ",
+            "number": 43,
+            "location": "In depression distal to junction of 2nd and 3rd metatarsal bones.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "fever",
+                "cold",
+                "fullness:chest",
+                "distension:abdomen",
+                "pain:abdomen"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st43",
+            "category": "Shu-Stream Point, Wood Point"
+        },
+        {
+            "code": "ST44",
+            "name": "Inner Court",
+            "chinese": "内庭",
+            "pinyin": "nèi tíng",
+            "number": 44,
+            "location": "Proximal to web between 2nd and 3rd toes in depression distal and lateral to 2nd metatarsophalangeal joint.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "tinnitus",
+                "cold",
+                "constipation",
+                "pain:abdomen",
+                "toothache"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st44",
+            "category": "Ying-Spring Point, Water Point"
+        },
+        {
+            "code": "ST45",
+            "name": "Running Point",
+            "chinese": "厲兌",
+            "pinyin": "lì duì",
+            "number": 45,
+            "location": "On lateral side of 2nd toe 0.1 thumb width posterior to corner of nail.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "needlingDepth": "0.1 cun shallow or prick to bleed",
+            "treats": [
+                "appetite:weak",
+                "pain:knee",
+                "dizziness",
+                "jaundice",
+                "heat",
+                "nightmares",
+                "mental disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/stomach-meridian#st45",
+            "category": "Jing-Well Point, Metal Point"
+        }
+    ]
+}

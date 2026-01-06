@@ -1,0 +1,449 @@
+{
+    "id": "TB",
+    "name": "Triple Burner Meridian",
+    "chineseName": "三焦經",
+    "pinyin": "Sān Jiāo Jīng",
+    "element": "Fire",
+    "yinYang": "Yang",
+    "pairedMeridian": "PC",
+    "totalPoints": 23,
+    "flowDirection": "From ring finger to temple",
+    "peakHours": "9pm - 11pm",
+    "color": "#F472B6",
+    "description": "The Triple Burner Meridian governs the three body cavities and regulates water metabolism. It is associated with social relationships and communication.",
+    "sourceUrl": "https://acuiq.com/meridians/triple-burner-meridian",
+    "acupoints": [
+        {
+            "code": "TB01",
+            "name": "Surge Gate",
+            "chinese": "關衝",
+            "pinyin": "guān chōng",
+            "number": 1,
+            "location": "On the lateral side of the ring finger about 0.1 thumb width from corner of the nail.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "needlingDepth": "0.1 cun shallow or prick to bleed",
+            "treats": [
+                "fever",
+                "dizziness",
+                "tinnitus",
+                "heat",
+                "wind",
+                "sore throat"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb01",
+            "category": "Jing-Well Point, Metal Point"
+        },
+        {
+            "code": "TB02",
+            "name": "Fluid Gate",
+            "chinese": "液門",
+            "pinyin": "yè mén",
+            "number": 2,
+            "location": "When fist is clenched, in the depression proximal to the margin of the web between ring and small fingers.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "fever",
+                "tinnitus",
+                "palpitations",
+                "swelling",
+                "pain",
+                "headache"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb02",
+            "category": "Ying-Spring Point, Water Point"
+        },
+        {
+            "code": "TB03",
+            "name": "Central Islet",
+            "chinese": "中渚",
+            "pinyin": "zhōng zhǔ",
+            "number": 3,
+            "location": "On the dorsum of the hand between 4th and 5th metacarpal bones proximal to the 4th metacarpophalangeal joint.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "fever",
+                "dizziness",
+                "tinnitus",
+                "heat",
+                "redness",
+                "deafness",
+                "headache"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb03",
+            "category": "Shu-Stream Point, Wood Point"
+        },
+        {
+            "code": "TB04",
+            "name": "Yang Pool",
+            "chinese": "陽池",
+            "pinyin": "yáng chí",
+            "number": 4,
+            "location": "On the transverse crease of the dorsum of the wrist lateral to the tendon of the extensor digitorum communis.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "heat",
+                "fullness:chest",
+                "swelling",
+                "pain:shoulder",
+                "wrist pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb04",
+            "category": "Yuan-Source Point"
+        },
+        {
+            "code": "TB05",
+            "name": "Outer Gate",
+            "chinese": "外關",
+            "pinyin": "wài guān",
+            "number": 5,
+            "location": "2 thumb widths proximal to the dorsal crease of the wrist between radius and ulna.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "fever",
+                "sweating",
+                "deficiency:kidney",
+                "dizziness",
+                "tinnitus",
+                "common cold",
+                "headache"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb05",
+            "category": "Luo-Connecting Point, Confluent Point of Yang Wei Mai"
+        },
+        {
+            "code": "TB06",
+            "name": "Branch Ditch",
+            "chinese": "支溝",
+            "pinyin": "zhī gōu",
+            "number": 6,
+            "location": "3 thumb widths proximal to the dorsal crease of the wrist between radius and ulna.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "cough",
+                "tinnitus",
+                "constipation",
+                "vomiting",
+                "pain:abdomen",
+                "pain:costal:lateral"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb06",
+            "category": "Jing-River Point, Fire Point"
+        },
+        {
+            "code": "TB07",
+            "name": "Convergence And Gathering",
+            "chinese": "會宗",
+            "pinyin": "huì zōng",
+            "number": 7,
+            "location": "At the level with TB6 on the ulnar side, on the radial border of the ulna.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "tinnitus",
+                "deafness",
+                "epilepsy",
+                "pain:skin",
+                "benefit:ears"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb07",
+            "category": "Xi-Cleft Point"
+        },
+        {
+            "code": "TB08",
+            "name": "Three Yang Connection",
+            "chinese": "三陽絡",
+            "pinyin": "sān yáng luò",
+            "number": 8,
+            "location": "4 thumb widths proximal to the dorsal crease of the wrist between radius and ulna.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain",
+                "stagnation:channel",
+                "benefit:sanjiao"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb08",
+            "category": "Regular Point"
+        },
+        {
+            "code": "TB09",
+            "name": "Four Rivers",
+            "chinese": "四瀆",
+            "pinyin": "sì dú",
+            "number": 9,
+            "location": "On the lateral side of the forearm 5 thumb widths below olecranon between radius and ulna.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "fever",
+                "deafness",
+                "pain:arm",
+                "somnolence",
+                "voice:loss"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb09",
+            "category": "Regular Point"
+        },
+        {
+            "code": "TB10",
+            "name": "Heavenly Well",
+            "chinese": "天井",
+            "pinyin": "tiān jǐng",
+            "number": 10,
+            "location": "When elbow is flexed, in the depression about 1 thumb width superior to the olecranon.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "cough",
+                "fever",
+                "phlegm",
+                "sweating",
+                "palpitations",
+                "goitre"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb10",
+            "category": "He-Sea Point, Earth Point"
+        },
+        {
+            "code": "TB11",
+            "name": "Clear Cold Abyss",
+            "chinese": "清冷淵",
+            "pinyin": "qīng lěng yuān",
+            "number": 11,
+            "location": "1 thumb width above the TB10 when elbow is flexed.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "jaundice",
+                "pain",
+                "stagnation:channel",
+                "pain:costal:lateral",
+                "pain:headache"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb11",
+            "category": "Regular Point"
+        },
+        {
+            "code": "TB12",
+            "name": "Dispersing Riverbed",
+            "chinese": "消濼",
+            "pinyin": "xiāo luò",
+            "number": 12,
+            "location": "On the line joining olecranon and TB14 midway between TB11 and TB13.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "fever",
+                "dizziness",
+                "pain:back",
+                "pain:shoulder"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb12",
+            "category": "Regular Point"
+        },
+        {
+            "code": "TB13",
+            "name": "Upper Arm Convergence",
+            "chinese": "臑會",
+            "pinyin": "bù huì",
+            "number": 13,
+            "location": "On the line joining olecranon and TB14 on the posterior border of the deltoid muscle.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:shoulder",
+                "goitre",
+                "arm pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb13",
+            "category": "Meeting Point with Yang Wei Mai"
+        },
+        {
+            "code": "TB14",
+            "name": "Shoulder Bone Hole",
+            "chinese": "肩髎",
+            "pinyin": "jiān liáo",
+            "number": 14,
+            "location": "Posterior and inferior to the acromion in the depression about 1 thumb width posterior to LI15.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "1.0-1.5 cun perpendicular",
+            "treats": [
+                "wind",
+                "pain:shoulder",
+                "arm weakness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb14",
+            "category": "Meeting Point with LI, Yang Qiao Mai"
+        },
+        {
+            "code": "TB15",
+            "name": "Celestial Bone Hole",
+            "chinese": "天髎",
+            "pinyin": "tiān liáo",
+            "number": 15,
+            "location": "Midway between GB21 and SI13 at the superior angle of the scapula.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "fever",
+                "pain:shoulder",
+                "pain:neck",
+                "stiffness:neck"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb15",
+            "category": "Meeting Point with Yang Wei Mai"
+        },
+        {
+            "code": "TB16",
+            "name": "Celestial Windows",
+            "chinese": "天牖",
+            "pinyin": "tiān yǒu",
+            "number": 16,
+            "location": "Posterior and inferior to the mastoid process at the posterior border of the SCM.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "tinnitus",
+                "deafness",
+                "swelling",
+                "pain:head",
+                "visual disturbances"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb16",
+            "category": "Window of Sky Point"
+        },
+        {
+            "code": "TB17",
+            "name": "Wind Screen",
+            "chinese": "翳風",
+            "pinyin": "yì fēng",
+            "number": 17,
+            "location": "Posterior to the lobule of the ear in the depression between mastoid process and angle of the mandible.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "tinnitus",
+                "deafness",
+                "facial paralysis",
+                "toothache",
+                "mumps"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb17",
+            "category": "Meeting Point with GB"
+        },
+        {
+            "code": "TB18",
+            "name": "Spasm Vessel",
+            "chinese": "瘈脈",
+            "pinyin": "chì mài",
+            "number": 18,
+            "location": "In the center of the mastoid process at the junction of the middle and lower third of the curve.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.1-0.2 cun subcutaneously",
+            "treats": [
+                "tinnitus",
+                "deafness",
+                "headache",
+                "infantile convulsions"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb18",
+            "category": "Regular Point"
+        },
+        {
+            "code": "TB19",
+            "name": "Skull Rest",
+            "chinese": "顱息",
+            "pinyin": "lú xī",
+            "number": 19,
+            "location": "Posterior to the ear at the junction of the upper and middle third of the curve.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.1-0.2 cun subcutaneously",
+            "treats": [
+                "tinnitus",
+                "deafness",
+                "headache",
+                "infantile convulsions"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb19",
+            "category": "Regular Point"
+        },
+        {
+            "code": "TB20",
+            "name": "Angle Vertex",
+            "chinese": "角孫",
+            "pinyin": "jiǎo sūn",
+            "number": 20,
+            "location": "Directly above the apex of the ear within the hairline.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.1-0.2 cun subcutaneously",
+            "treats": [
+                "tinnitus",
+                "pain:head",
+                "toothache",
+                "swelling"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb20",
+            "category": "Meeting Point with GB, SI"
+        },
+        {
+            "code": "TB21",
+            "name": "Ear Gate",
+            "chinese": "耳門",
+            "pinyin": "ěr mén",
+            "number": 21,
+            "location": "In the depression anterior to the supratragic notch and posterior to the condyloid process.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "tinnitus",
+                "deafness",
+                "toothache",
+                "TMJ disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb21",
+            "category": "Regular Point"
+        },
+        {
+            "code": "TB22",
+            "name": "Harmony Bone Hole",
+            "chinese": "和髎",
+            "pinyin": "hé liáo",
+            "number": 22,
+            "location": "Anterior and superior to TB21 at the posterior border of the hairline of the temple.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneously",
+            "treats": [
+                "tinnitus",
+                "lockjaw",
+                "facial paralysis",
+                "headache"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb22",
+            "category": "Regular Point"
+        },
+        {
+            "code": "TB23",
+            "name": "Silk Bamboo Hollow",
+            "chinese": "絲竹空",
+            "pinyin": "sī zhú kōng",
+            "number": 23,
+            "location": "In the depression at the lateral end of the eyebrow.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneously",
+            "treats": [
+                "headache",
+                "dizziness",
+                "eye disorders",
+                "facial paralysis",
+                "tooth pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/triple-burner-meridian#tb23",
+            "category": "Regular Point"
+        }
+    ]
+}

@@ -1,0 +1,198 @@
+{
+    "id": "PC",
+    "name": "Pericardium Meridian",
+    "chineseName": "心包經",
+    "pinyin": "Xīn Bāo Jīng",
+    "element": "Fire",
+    "yinYang": "Yin",
+    "pairedMeridian": "TB",
+    "totalPoints": 9,
+    "flowDirection": "From chest to middle finger",
+    "peakHours": "7pm - 9pm",
+    "color": "#EC4899",
+    "description": "The Pericardium Meridian protects the Heart and regulates blood circulation. It is associated with emotional protection and relationships.",
+    "sourceUrl": "https://acuiq.com/meridians/pericardium-meridian",
+    "acupoints": [
+        {
+            "code": "PC01",
+            "name": "Heavenly Pool",
+            "chinese": "天池",
+            "pinyin": "tiān chí",
+            "number": 1,
+            "location": "In the 4th intercostal space 1 thumb width lateral to the nipple.",
+            "cautions": "Avoid deep needling; risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "fever",
+                "phlegm",
+                "fullness:chest",
+                "swelling",
+                "mastitis"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/pericardium-meridian#pc01",
+            "category": "Meeting Point with Gallbladder Meridian"
+        },
+        {
+            "code": "PC02",
+            "name": "Celestial Spring",
+            "chinese": "天泉",
+            "pinyin": "tiān quán",
+            "number": 2,
+            "location": "2 thumb widths below level of the anterior axillary fold between 2 heads of the biceps brachii.",
+            "cautions": "Caution with brachial artery.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "palpitations",
+                "fullness:chest",
+                "stagnation:blood"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/pericardium-meridian#pc02",
+            "category": "Regular Point"
+        },
+        {
+            "code": "PC03",
+            "name": "Marsh At The Bend",
+            "chinese": "曲澤",
+            "pinyin": "qū zé",
+            "number": 3,
+            "location": "On the transverse cubital crease at the ulnar side of the tendon of the biceps brachii.",
+            "cautions": "Caution with median nerve and brachial artery.",
+            "needlingDepth": "0.5-1.0 cun perpendicular or prick to bleed",
+            "treats": [
+                "cough",
+                "diarrhoea",
+                "dyspnoea",
+                "cough:blood",
+                "palpitations",
+                "vomiting"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/pericardium-meridian#pc03",
+            "category": "He-Sea Point, Water Point"
+        },
+        {
+            "code": "PC04",
+            "name": "Cleft Gate",
+            "chinese": "郄門",
+            "pinyin": "qiè mén",
+            "number": 4,
+            "location": "5 thumb widths above the transverse crease of the wrist on the line connecting PC3 and PC7.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:chest",
+                "anxiety",
+                "cough:blood",
+                "vomiting",
+                "stagnation:blood",
+                "epistaxis"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/pericardium-meridian#pc04",
+            "category": "Xi-Cleft Point"
+        },
+        {
+            "code": "PC05",
+            "name": "Intermediary Messenger",
+            "chinese": "間使",
+            "pinyin": "jiān shǐ",
+            "number": 5,
+            "location": "3 thumb widths above the transverse crease of the wrist between tendons of palmaris longus and flexor carpi radialis.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "phlegm",
+                "palpitations",
+                "vomiting",
+                "pain:abdomen",
+                "aversion:cold",
+                "malaria"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/pericardium-meridian#pc05",
+            "category": "Jing-River Point, Metal Point"
+        },
+        {
+            "code": "PC06",
+            "name": "Inner Gate",
+            "chinese": "內關",
+            "pinyin": "nèi guān",
+            "number": 6,
+            "location": "2 thumb widths above the transverse crease of the wrist between tendons of palmaris longus and flexor carpi radialis.",
+            "cautions": "Caution in severe deficiency conditions.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "fever",
+                "diarrhoea",
+                "anxiety",
+                "dizziness",
+                "nausea",
+                "insomnia",
+                "palpitations",
+                "vomiting"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/pericardium-meridian#pc06",
+            "category": "Luo-Connecting Point, Confluent Point of Yin Wei Mai"
+        },
+        {
+            "code": "PC07",
+            "name": "Great Mound",
+            "chinese": "大陵",
+            "pinyin": "dà líng",
+            "number": 7,
+            "location": "In the middle of the transverse crease of the wrist.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "pain:chest",
+                "fever",
+                "anxiety",
+                "palpitations",
+                "jaundice",
+                "bad breath"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/pericardium-meridian#pc07",
+            "category": "Shu-Stream Point, Yuan-Source Point, Earth Point"
+        },
+        {
+            "code": "PC08",
+            "name": "Palace Of Toil",
+            "chinese": "勞宮",
+            "pinyin": "láo gōng",
+            "number": 8,
+            "location": "At the center of the palm between 2nd and 3rd metacarpal bones.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "fever",
+                "jaundice",
+                "depression",
+                "mouth ulcers"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/pericardium-meridian#pc08",
+            "category": "Ying-Spring Point, Fire Point"
+        },
+        {
+            "code": "PC09",
+            "name": "Central Surge",
+            "chinese": "中衝",
+            "pinyin": "zhōng chōng",
+            "number": 9,
+            "location": "In the center of the tip of the middle finger.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "needlingDepth": "0.1 cun shallow or prick to bleed",
+            "treats": [
+                "fever",
+                "diarrhoea",
+                "tinnitus",
+                "heat",
+                "vomiting",
+                "loss of consciousness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/pericardium-meridian#pc09",
+            "category": "Jing-Well Point, Wood Point"
+        }
+    ]
+}

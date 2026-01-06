@@ -1,0 +1,831 @@
+{
+    "id": "GB",
+    "name": "Gallbladder Meridian",
+    "chineseName": "膽經",
+    "pinyin": "Dǎn Jīng",
+    "element": "Wood",
+    "yinYang": "Yang",
+    "pairedMeridian": "LV",
+    "totalPoints": 44,
+    "flowDirection": "From outer eye to 4th toe",
+    "peakHours": "11pm - 1am",
+    "color": "#10B981",
+    "description": "The Gallbladder Meridian governs decision-making and courage. It is associated with judgement, planning, and the smooth flow of Qi.",
+    "sourceUrl": "https://acuiq.com/meridians/gallbladder-meridian",
+    "acupoints": [
+        {
+            "code": "GB01",
+            "name": "Pupil Crevice",
+            "chinese": "瞳子髎",
+            "pinyin": "tóng zǐ hé",
+            "number": 1,
+            "location": "0.5 thumb widths lateral to the outer canthus in the depression on the lateral side of the orbit.",
+            "cautions": "Contraindicated for needling; use only pressure.",
+            "needlingDepth": "Pressure only",
+            "treats": [
+                "heat",
+                "wind",
+                "redness",
+                "swelling",
+                "deviation:eye",
+                "headache"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb01",
+            "category": "Meeting Point with TB, SI"
+        },
+        {
+            "code": "GB02",
+            "name": "Hearing Convergence",
+            "chinese": "聽會",
+            "pinyin": "tīng huì",
+            "number": 2,
+            "location": "Anterior to the intertragic notch at the posterior border of the condyloid process of the mandible; located with mouth open.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "tinnitus",
+                "heat",
+                "wind",
+                "redness",
+                "swelling",
+                "deafness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb02",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GB03",
+            "name": "Above The Arch",
+            "chinese": "上關",
+            "pinyin": "shàng guān",
+            "number": 3,
+            "location": "In front of the ear on the upper border of the zygomatic arch in the depression directly above ST7.",
+            "cautions": "Caution with temporal artery.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "fever",
+                "tinnitus",
+                "wind",
+                "pain",
+                "chills",
+                "toothache"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb03",
+            "category": "Meeting Point with TB, ST"
+        },
+        {
+            "code": "GB04",
+            "name": "Forehead Fullness",
+            "chinese": "頷厭",
+            "pinyin": "hàn yàn",
+            "number": 4,
+            "location": "Within the hairline of the temporal region at the junction of the upper 1/4 and lower 3/4 of the distance between ST8 and GB7.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "sweating",
+                "tinnitus",
+                "heat",
+                "wind",
+                "pain",
+                "migraines"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb04",
+            "category": "Meeting Point with ST, TB"
+        },
+        {
+            "code": "GB05",
+            "name": "Suspended Skull",
+            "chinese": "懸顱",
+            "pinyin": "xuán lú",
+            "number": 5,
+            "location": "Within the hairline of the temporal region midway between ST8 and GB7.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "heat",
+                "wind",
+                "pain",
+                "swelling:face",
+                "agitation",
+                "migraines"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb05",
+            "category": "Meeting Point with ST, LI, TB"
+        },
+        {
+            "code": "GB06",
+            "name": "Suspended Tuft",
+            "chinese": "懸厘",
+            "pinyin": "xuán lí",
+            "number": 6,
+            "location": "Within the hairline at the junction of the lower 1/4 and upper 3/4 of the distance between ST8 and GB7.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "tinnitus",
+                "heat",
+                "wind",
+                "pain",
+                "appetite:loss"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb06",
+            "category": "Meeting Point with ST, LI, TB"
+        },
+        {
+            "code": "GB07",
+            "name": "Temporal Hairline Curve",
+            "chinese": "曲鬢",
+            "pinyin": "qū bìn",
+            "number": 7,
+            "location": "Within the hairline at the junction of the vertical line of the posterior border of the temple and the horizontal line at the apex of the ear.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "toothache",
+                "lockjaw",
+                "facial paralysis"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb07",
+            "category": "Meeting Point with BL"
+        },
+        {
+            "code": "GB08",
+            "name": "Valley Lead",
+            "chinese": "率谷",
+            "pinyin": "shuài gǔ",
+            "number": 8,
+            "location": "Directly above the apex of the ear, 1.5 thumb widths within the hairline.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "vomiting",
+                "hangover",
+                "infantile convulsions"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb08",
+            "category": "Meeting Point with BL"
+        },
+        {
+            "code": "GB09",
+            "name": "Celestial Hub",
+            "chinese": "天衝",
+            "pinyin": "tiān chōng",
+            "number": 9,
+            "location": "0.5 thumb width posterior to GB8, 2 thumb widths directly above the posterior border of the auricle.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "epilepsy",
+                "gum disorders",
+                "goiter"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb09",
+            "category": "Meeting Point with BL"
+        },
+        {
+            "code": "GB10",
+            "name": "Floating White",
+            "chinese": "浮白",
+            "pinyin": "fú bái",
+            "number": 10,
+            "location": "Posterior and superior to the mastoid process, at the junction of the middle and lower third of the curved line connecting GB9 and GB12.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "tinnitus",
+                "deafness",
+                "toothache",
+                "goiter"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb10",
+            "category": "Meeting Point with BL"
+        },
+        {
+            "code": "GB11",
+            "name": "Head Portal Yin",
+            "chinese": "頭竅陰",
+            "pinyin": "tóu qiào yīn",
+            "number": 11,
+            "location": "Posterior and superior to the mastoid process, at the junction of the lower third and upper two thirds of the curved line connecting GB9 and GB12.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "tinnitus",
+                "deafness",
+                "dizziness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb11",
+            "category": "Meeting Point with BL"
+        },
+        {
+            "code": "GB12",
+            "name": "Completion Bone",
+            "chinese": "完骨",
+            "pinyin": "wán gǔ",
+            "number": 12,
+            "location": "In the depression posteroinferior to the mastoid process.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "headache",
+                "insomnia",
+                "facial paralysis",
+                "toothache",
+                "neck stiffness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb12",
+            "category": "Meeting Point with BL"
+        },
+        {
+            "code": "GB13",
+            "name": "Root Spirit",
+            "chinese": "本神",
+            "pinyin": "běn shén",
+            "number": 13,
+            "location": "0.5 thumb width within the hairline, at the junction of the medial two thirds and lateral third of the distance from GV24 to ST8.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "dizziness",
+                "epilepsy",
+                "infantile convulsions"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb13",
+            "category": "Meeting Point with Yang Wei Mai"
+        },
+        {
+            "code": "GB14",
+            "name": "Yang White",
+            "chinese": "陽白",
+            "pinyin": "yáng bái",
+            "number": 14,
+            "location": "On the forehead, 1 thumb width directly above the midpoint of the eyebrow.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "eye disorders",
+                "facial paralysis",
+                "lacrimation"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb14",
+            "category": "Meeting Point with LI, ST, TB, Yang Wei Mai"
+        },
+        {
+            "code": "GB15",
+            "name": "Head Overlooking Tears",
+            "chinese": "頭臨泣",
+            "pinyin": "tóu lín qì",
+            "number": 15,
+            "location": "Directly above GB14, 0.5 thumb width within the hairline, at the junction of the medial two thirds and lateral third of the distance between GV24 and ST8.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "nasal congestion",
+                "eye disorders",
+                "epilepsy"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb15",
+            "category": "Meeting Point with BL, Yang Wei Mai"
+        },
+        {
+            "code": "GB16",
+            "name": "Eye Window",
+            "chinese": "目窗",
+            "pinyin": "mù chuāng",
+            "number": 16,
+            "location": "1.5 thumb widths posterior to GB15, 1 thumb width within the hairline.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "dizziness",
+                "eye disorders",
+                "nasal congestion"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb16",
+            "category": "Meeting Point with Yang Wei Mai"
+        },
+        {
+            "code": "GB17",
+            "name": "Upright Construction",
+            "chinese": "正營",
+            "pinyin": "zhèng yíng",
+            "number": 17,
+            "location": "1.5 thumb widths posterior to GB16, 2.5 thumb widths within the hairline.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "dizziness",
+                "toothache"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb17",
+            "category": "Meeting Point with Yang Wei Mai"
+        },
+        {
+            "code": "GB18",
+            "name": "Spirit Support",
+            "chinese": "承靈",
+            "pinyin": "chéng líng",
+            "number": 18,
+            "location": "1.5 thumb widths posterior to GB17, 4 thumb widths within the hairline.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "nasal congestion",
+                "epistaxis",
+                "rhinitis"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb18",
+            "category": "Meeting Point with Yang Wei Mai"
+        },
+        {
+            "code": "GB19",
+            "name": "Brain Hollow",
+            "chinese": "腦空",
+            "pinyin": "nǎo kōng",
+            "number": 19,
+            "location": "Directly above GB20, level with the upper border of the external occipital protuberance.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "dizziness",
+                "epilepsy",
+                "neck stiffness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb19",
+            "category": "Meeting Point with Yang Wei Mai"
+        },
+        {
+            "code": "GB20",
+            "name": "Wind Pool",
+            "chinese": "風池",
+            "pinyin": "fēng chí",
+            "number": 20,
+            "location": "In the depression between the upper portion of SCM and trapezius, level with GV16.",
+            "cautions": "Caution with depth; risk to medulla oblongata.",
+            "needlingDepth": "0.8-1.2 cun towards opposite eye",
+            "treats": [
+                "headache",
+                "dizziness",
+                "common cold",
+                "neck stiffness",
+                "eye disorders",
+                "hypertension"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb20",
+            "category": "Meeting Point with TB, Yang Wei Mai, Yang Qiao Mai"
+        },
+        {
+            "code": "GB21",
+            "name": "Shoulder Well",
+            "chinese": "肩井",
+            "pinyin": "jiān jǐng",
+            "number": 21,
+            "location": "At the midpoint of the line connecting GV14 and the acromion, at the highest point of the shoulder.",
+            "cautions": "Contraindicated during pregnancy; avoid deep needling.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "headache",
+                "pain:shoulder",
+                "neck stiffness",
+                "difficult labor",
+                "insufficient lactation"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb21",
+            "category": "Meeting Point with TB, ST, Yang Wei Mai"
+        },
+        {
+            "code": "GB22",
+            "name": "Armpit Abyss",
+            "chinese": "淵腋",
+            "pinyin": "yuān yè",
+            "number": 22,
+            "location": "On the midaxillary line, 3 thumb widths below the axilla, in the 4th intercostal space.",
+            "cautions": "Risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "pain:chest",
+                "pain:costal:lateral",
+                "arm pain",
+                "swelling:axilla"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb22",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GB23",
+            "name": "Flank Sinews",
+            "chinese": "輒筋",
+            "pinyin": "zhé jīn",
+            "number": 23,
+            "location": "1 thumb width anterior to GB22, level with the nipple, in the 4th intercostal space.",
+            "cautions": "Risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "pain:chest",
+                "vomiting",
+                "dyspnoea",
+                "acid reflux"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb23",
+            "category": "Meeting Point of GB Sinew"
+        },
+        {
+            "code": "GB24",
+            "name": "Sun And Moon",
+            "chinese": "日月",
+            "pinyin": "rì yuè",
+            "number": 24,
+            "location": "Directly below the nipple, in the 7th intercostal space, 4 thumb widths lateral to the anterior midline.",
+            "cautions": "Risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "pain:costal:lateral",
+                "vomiting",
+                "acid reflux",
+                "hiccups",
+                "jaundice"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb24",
+            "category": "Front-Mu Point of Gallbladder"
+        },
+        {
+            "code": "GB25",
+            "name": "Capital Gate",
+            "chinese": "京門",
+            "pinyin": "jīng mén",
+            "number": 25,
+            "location": "On the lateral side of the abdomen, on the lower border of the free end of the 12th rib.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:costal:lateral",
+                "pain:back:lumbar",
+                "diarrhoea",
+                "distension:abdomen"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb25",
+            "category": "Front-Mu Point of Kidney"
+        },
+        {
+            "code": "GB26",
+            "name": "Girdle Vessel",
+            "chinese": "帶脈",
+            "pinyin": "dài mài",
+            "number": 26,
+            "location": "Directly below LV13 at the crossing point of the vertical line through free end of the 11th rib and horizontal line through umbilicus.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain",
+                "irregular menstruation",
+                "leucorrhea",
+                "abdominal pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb26",
+            "category": "Meeting Point with Dai Mai"
+        },
+        {
+            "code": "GB27",
+            "name": "Fifth Pivot",
+            "chinese": "五樞",
+            "pinyin": "wǔ shū",
+            "number": 27,
+            "location": "In the lateral side of the abdomen anterior to the superior iliac spine, 3 thumb widths below level of the umbilicus.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "constipation",
+                "pain:abdomen",
+                "pain:back",
+                "prolapse:uterus"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb27",
+            "category": "Meeting Point with Dai Mai"
+        },
+        {
+            "code": "GB28",
+            "name": "Linking Path",
+            "chinese": "維道",
+            "pinyin": "wéi dào",
+            "number": 28,
+            "location": "Anterior and inferior to the anterior superior iliac spine, 0.5 thumb widths anterior and inferior to GB27.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "vomiting",
+                "pain:back",
+                "prolapse:uterus",
+                "hernia"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb28",
+            "category": "Meeting Point with Dai Mai"
+        },
+        {
+            "code": "GB29",
+            "name": "Squatting Bone Hole",
+            "chinese": "居髎",
+            "pinyin": "jū hé",
+            "number": 29,
+            "location": "In the depression of the midpoint between anterosuperior iliac spine and prominence of the greater trochanter.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "1.0-2.0 cun perpendicular",
+            "treats": [
+                "pain:chest",
+                "diarrhoea",
+                "vomiting",
+                "pain:back",
+                "pain:leg",
+                "pain:hip"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb29",
+            "category": "Meeting Point with Yang Qiao Mai"
+        },
+        {
+            "code": "GB30",
+            "name": "Jumping Circle",
+            "chinese": "環跳",
+            "pinyin": "huán tiào",
+            "number": 30,
+            "location": "At the junction of the lateral 1/3 and medial 2/3 of the distance between prominence of the greater trochanter and hiatus of the sacrum.",
+            "cautions": "Caution with sciatic nerve.",
+            "needlingDepth": "2.0-3.0 cun perpendicular",
+            "treats": [
+                "pain:knee",
+                "pain:back",
+                "pain:leg",
+                "pain:hip",
+                "sciatica",
+                "hemiplegia"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb30",
+            "category": "Meeting Point with BL"
+        },
+        {
+            "code": "GB31",
+            "name": "Wind Market",
+            "chinese": "風市",
+            "pinyin": "fēng shì",
+            "number": 31,
+            "location": "On the midline of the lateral aspect of the thigh, 7 thumb widths above the transverse popliteal crease; where tip of middle finger touches when standing.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "1.0-2.0 cun perpendicular",
+            "treats": [
+                "pain:knee",
+                "wind",
+                "urticaria",
+                "sciatica",
+                "leg pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb31",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GB32",
+            "name": "Middle Ditch",
+            "chinese": "中瀆",
+            "pinyin": "zhōng dú",
+            "number": 32,
+            "location": "On the lateral aspect of the thigh, 5 thumb widths above the transverse popliteal crease, between vastus lateralis and biceps femoris.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "1.0-2.0 cun perpendicular",
+            "treats": [
+                "pain:leg",
+                "numbness",
+                "hemiplegia"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb32",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GB33",
+            "name": "Knee Yang Joint",
+            "chinese": "膝陽關",
+            "pinyin": "xī yáng guān",
+            "number": 33,
+            "location": "On the lateral side of the knee, 3 thumb widths above GB34, in the depression above the lateral epicondyle of the femur.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.8-1.2 cun perpendicular",
+            "treats": [
+                "pain:knee",
+                "numbness",
+                "leg weakness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb33",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GB34",
+            "name": "Yang Mound Spring",
+            "chinese": "陽陵泉",
+            "pinyin": "yáng líng quán",
+            "number": 34,
+            "location": "In the depression anterior and inferior to the head of the fibula.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "1.0-1.5 cun perpendicular",
+            "treats": [
+                "pain:costal:lateral",
+                "vomiting",
+                "jaundice",
+                "pain:knee",
+                "leg weakness",
+                "muscle cramps"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb34",
+            "category": "He-Sea Point, Earth Point, Hui-Meeting Point of Sinews"
+        },
+        {
+            "code": "GB35",
+            "name": "Yang Intersection",
+            "chinese": "陽交",
+            "pinyin": "yáng jiāo",
+            "number": 35,
+            "location": "7 thumb widths above the tip of the external malleolus, on the posterior border of the fibula.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:chest",
+                "pain:leg",
+                "sciatica",
+                "epilepsy"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb35",
+            "category": "Xi-Cleft Point of Yang Wei Mai"
+        },
+        {
+            "code": "GB36",
+            "name": "Outer Mound",
+            "chinese": "外丘",
+            "pinyin": "wài qiū",
+            "number": 36,
+            "location": "7 thumb widths above the tip of the external malleolus, on the anterior border of the fibula.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:chest",
+                "pain:leg",
+                "neck stiffness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb36",
+            "category": "Xi-Cleft Point"
+        },
+        {
+            "code": "GB37",
+            "name": "Bright Light",
+            "chinese": "光明",
+            "pinyin": "guāng míng",
+            "number": 37,
+            "location": "5 thumb widths above the tip of the external malleolus, on the anterior border of the fibula.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "eye disorders",
+                "pain:leg",
+                "night blindness",
+                "breast disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb37",
+            "category": "Luo-Connecting Point"
+        },
+        {
+            "code": "GB38",
+            "name": "Yang Support",
+            "chinese": "陽輔",
+            "pinyin": "yáng fǔ",
+            "number": 38,
+            "location": "4 thumb widths above the tip of the external malleolus, on the anterior border of the fibula.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:costal:lateral",
+                "pain:leg",
+                "migraines",
+                "swelling:axilla"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb38",
+            "category": "Jing-River Point, Fire Point"
+        },
+        {
+            "code": "GB39",
+            "name": "Suspended Bell",
+            "chinese": "懸鐘",
+            "pinyin": "xuán zhōng",
+            "number": 39,
+            "location": "3 thumb widths above the tip of the external malleolus, on the anterior border of the fibula.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:costal:lateral",
+                "neck stiffness",
+                "hemiplegia",
+                "pain:leg"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb39",
+            "category": "Hui-Meeting Point of Marrow"
+        },
+        {
+            "code": "GB40",
+            "name": "Mound Ruins",
+            "chinese": "丘墟",
+            "pinyin": "qiū xū",
+            "number": 40,
+            "location": "Anterior and inferior to the external malleolus, in the depression on the lateral side of the tendon of extensor digitorum longus.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "pain:costal:lateral",
+                "pain:ankle",
+                "neck stiffness",
+                "eye disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb40",
+            "category": "Yuan-Source Point"
+        },
+        {
+            "code": "GB41",
+            "name": "Foot Overlooking Tears",
+            "chinese": "足臨泣",
+            "pinyin": "zú lín qì",
+            "number": 41,
+            "location": "In the depression distal to the junction of the 4th and 5th metatarsal bones, on the lateral side of the tendon of extensor digiti minimi.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "headache",
+                "dizziness",
+                "pain:costal:lateral",
+                "eye disorders",
+                "breast disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb41",
+            "category": "Shu-Stream Point, Wood Point, Confluent Point of Dai Mai"
+        },
+        {
+            "code": "GB42",
+            "name": "Earth Five Meetings",
+            "chinese": "地五會",
+            "pinyin": "dì wǔ huì",
+            "number": 42,
+            "location": "Between the 4th and 5th metatarsal bones, proximal to the metatarsophalangeal joint.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "pain:costal:lateral",
+                "breast disorders",
+                "tinnitus"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb42",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GB43",
+            "name": "Pinched Stream",
+            "chinese": "俠谿",
+            "pinyin": "xiá xī",
+            "number": 43,
+            "location": "Between the 4th and 5th toes, proximal to the margin of the web.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.2-0.3 cun perpendicular",
+            "treats": [
+                "headache",
+                "dizziness",
+                "tinnitus",
+                "pain:costal:lateral",
+                "eye disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb43",
+            "category": "Ying-Spring Point, Water Point"
+        },
+        {
+            "code": "GB44",
+            "name": "Foot Portal Yin",
+            "chinese": "足竅陰",
+            "pinyin": "zú qiào yīn",
+            "number": 44,
+            "location": "On the lateral side of the 4th toe, 0.1 thumb width from the corner of the nail.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "needlingDepth": "0.1 cun shallow or prick to bleed",
+            "treats": [
+                "headache",
+                "deafness",
+                "tinnitus",
+                "pain:costal:lateral",
+                "insomnia"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/gallbladder-meridian#gb44",
+            "category": "Jing-Well Point, Metal Point"
+        }
+    ]
+}

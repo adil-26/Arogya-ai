@@ -1,0 +1,421 @@
+{
+    "id": "SP",
+    "name": "Spleen Meridian",
+    "chineseName": "脾經",
+    "pinyin": "Pí Jīng",
+    "element": "Earth",
+    "yinYang": "Yin",
+    "pairedMeridian": "ST",
+    "totalPoints": 21,
+    "flowDirection": "From big toe to chest",
+    "peakHours": "9am - 11am",
+    "color": "#FBBF24",
+    "description": "The Spleen Meridian governs transformation and transportation of nutrients. It is associated with digestion, muscle tone, and overthinking.",
+    "sourceUrl": "https://acuiq.com/meridians/spleen-meridian",
+    "acupoints": [
+        {
+            "code": "SP01",
+            "name": "Hidden White",
+            "chinese": "隱白",
+            "pinyin": "yǐn bái",
+            "number": 1,
+            "location": "On the medial side of the great toe 0.1 thumb width posterior to the corner of the nail.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "needlingDepth": "0.1 cun shallow or prick to bleed",
+            "treats": [
+                "heat:chest",
+                "fever",
+                "diarrhoea",
+                "dyspnoea",
+                "depression",
+                "uterine bleeding"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp01",
+            "category": "Jing-Well Point, Wood Point"
+        },
+        {
+            "code": "SP02",
+            "name": "Great Capital",
+            "chinese": "大都",
+            "pinyin": "dà dū",
+            "number": 2,
+            "location": "On the medial side of the great toe distal and inferior to the 1st metatarsodigital joint.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "constipation",
+                "heat",
+                "vomiting",
+                "distension:abdomen"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp02",
+            "category": "Ying-Spring Point, Fire Point"
+        },
+        {
+            "code": "SP03",
+            "name": "Great White",
+            "chinese": "太白",
+            "pinyin": "tài bái",
+            "number": 3,
+            "location": "Proximal and inferior to the 1st metatarsophalangeal joint in the depression at the junction of the red and white skin.",
+            "cautions": "Caution in patients with cardiac arrhythmias.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "pain:knee",
+                "constipation",
+                "heat",
+                "vomiting",
+                "distension:abdomen"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp03",
+            "category": "Shu-Stream Point, Yuan-Source Point, Earth Point"
+        },
+        {
+            "code": "SP04",
+            "name": "Grandfather Grandson",
+            "chinese": "公孫",
+            "pinyin": "gōng sūn",
+            "number": 4,
+            "location": "In the depression distal and inferior to the base of the 1st metatarsal bone.",
+            "cautions": "Contraindicated during pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "jaundice",
+                "depression",
+                "vomiting",
+                "distension:abdomen",
+                "heart pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp04",
+            "category": "Luo-Connecting Point, Confluent Point of Chong Mai"
+        },
+        {
+            "code": "SP05",
+            "name": "Metal Hill",
+            "chinese": "商丘",
+            "pinyin": "shāng qiū",
+            "number": 5,
+            "location": "In the depression distal and inferior to the medial malleolus.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "cough",
+                "fever",
+                "jaundice",
+                "cold",
+                "constipation",
+                "hemorrhoids"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp05",
+            "category": "Jing-River Point, Metal Point"
+        },
+        {
+            "code": "SP06",
+            "name": "Three Yin Intersection",
+            "chinese": "三陰交",
+            "pinyin": "sān yīn jiāo",
+            "number": 6,
+            "location": "3 thumb widths directly above the tip of the medial malleolus posterior to the medial border of the tibia.",
+            "cautions": "Contraindicated during pregnancy except for labor induction.",
+            "needlingDepth": "1.0-1.5 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "dizziness",
+                "tinnitus",
+                "palpitations",
+                "distension:abdomen",
+                "insomnia",
+                "irregular menstruation",
+                "infertility"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp06",
+            "category": "Meeting Point of 3 Yin Meridians"
+        },
+        {
+            "code": "SP07",
+            "name": "Leaking Valley",
+            "chinese": "漏谷",
+            "pinyin": "lòu gǔ",
+            "number": 7,
+            "location": "6 thumb widths from tip of the medial malleolus posterior to the medial border of the tibia.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "swelling",
+                "damp",
+                "oedema",
+                "depression:sadness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp07",
+            "category": "Regular Point"
+        },
+        {
+            "code": "SP08",
+            "name": "Earth's Cure",
+            "chinese": "地機",
+            "pinyin": "dì jī",
+            "number": 8,
+            "location": "3 thumb widths below SP9 on the line connecting tip of the medial malleolus and SP9.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "appetite:weak",
+                "diarrhoea",
+                "distension:abdomen",
+                "pain:abdomen",
+                "stagnation:blood",
+                "dysmenorrhoea"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp08",
+            "category": "Xi-Cleft Point"
+        },
+        {
+            "code": "SP09",
+            "name": "Yin Mound Spring",
+            "chinese": "陰陵泉",
+            "pinyin": "yīn líng quán",
+            "number": 9,
+            "location": "On the lower border of the medial condyle of the tibia in the depression posterior and inferior to the medial condyle.",
+            "cautions": "Avoid in cases of knee inflammation.",
+            "needlingDepth": "1.0-2.0 cun perpendicular",
+            "treats": [
+                "heat:chest",
+                "fever",
+                "diarrhoea",
+                "dyspnoea",
+                "jaundice",
+                "oedema",
+                "urinary disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp09",
+            "category": "He-Sea Point, Water Point"
+        },
+        {
+            "code": "SP10",
+            "name": "Sea Of Blood",
+            "chinese": "血海",
+            "pinyin": "xuè hǎi",
+            "number": 10,
+            "location": "When knee is flexed, 2 thumb widths above the mediosuperior border of the patella on the bulge of the quadriceps femoris.",
+            "cautions": "Contraindicated in bleeding disorders; caution with anticoagulants.",
+            "needlingDepth": "1.0-1.5 cun perpendicular",
+            "treats": [
+                "pain:knee",
+                "amenorrhea",
+                "stagnation:blood",
+                "urticaria",
+                "eczema",
+                "irregular menstruation"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp10",
+            "category": "Regular Point"
+        },
+        {
+            "code": "SP11",
+            "name": "Winnower Gate",
+            "chinese": "箕門",
+            "pinyin": "jī mén",
+            "number": 11,
+            "location": "6 thumb widths above the SP10 on the line drawn from SP10 to the SP12.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "heat",
+                "pain",
+                "damp",
+                "retention:urine",
+                "enuresis"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp11",
+            "category": "Regular Point"
+        },
+        {
+            "code": "SP12",
+            "name": "Surging Gate",
+            "chinese": "沖門",
+            "pinyin": "chōng mén",
+            "number": 12,
+            "location": "Superior to the lateral end of the inguinal groove lateral to the pulsating femoral artery, 3.5 thumb widths lateral to the CV2.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "heat",
+                "pain:abdomen",
+                "stagnation:blood",
+                "retention:urine"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp12",
+            "category": "Meeting Point with LV"
+        },
+        {
+            "code": "SP13",
+            "name": "Bowel Abode",
+            "chinese": "府舍",
+            "pinyin": "fǔ shè",
+            "number": 13,
+            "location": "4 thumb widths below center of the umbilicus 0.7 thumb widths superior to the SP12, 4 thumb widths lateral to the anterior midline.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "constipation",
+                "pain:abdomen",
+                "pain:thigh",
+                "benefit:digestion"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp13",
+            "category": "Meeting Point with LV, Yin Wei Mai"
+        },
+        {
+            "code": "SP14",
+            "name": "Abdominal Bind",
+            "chinese": "腹結",
+            "pinyin": "fù jié",
+            "number": 14,
+            "location": "1.3 thumb widths below SP15, 4 thumb widths lateral to the anterior midline.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "cough",
+                "diarrhoea",
+                "constipation",
+                "distension:abdomen",
+                "dysentery"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp14",
+            "category": "Regular Point"
+        },
+        {
+            "code": "SP15",
+            "name": "Great Horizontal",
+            "chinese": "大横",
+            "pinyin": "dà héng",
+            "number": 15,
+            "location": "4 thumb widths lateral to the center of the umbilicus lateral to the rectus abdominis.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "cold",
+                "constipation",
+                "stagnation:qi",
+                "damp"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp15",
+            "category": "Meeting Point with Yin Wei Mai"
+        },
+        {
+            "code": "SP16",
+            "name": "Abdominal Lament",
+            "chinese": "腹哀",
+            "pinyin": "fù āi",
+            "number": 16,
+            "location": "3 thumb widths above the center of the umbilicus, 4 thumb widths lateral to the anterior midline.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "constipation",
+                "dysentery",
+                "pain:periumbilical",
+                "stools:blood",
+                "stools:undigested"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp16",
+            "category": "Meeting Point with Yin Wei Mai"
+        },
+        {
+            "code": "SP17",
+            "name": "Food Cavity",
+            "chinese": "食竇",
+            "pinyin": "shí dòu",
+            "number": 17,
+            "location": "In the 5th intercostal space 6 thumb widths lateral to the anterior midline.",
+            "cautions": "Avoid deep needling; risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "jaundice",
+                "fullness:chest",
+                "distension:abdomen",
+                "swelling:breast"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp17",
+            "category": "Regular Point"
+        },
+        {
+            "code": "SP18",
+            "name": "Celestial Cleft",
+            "chinese": "天谿",
+            "pinyin": "tiān xī",
+            "number": 18,
+            "location": "In the 4th intercostal space 6 thumb widths lateral to the anterior midline.",
+            "cautions": "Avoid deep needling; risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "fullness:chest",
+                "abscess:breast",
+                "hiccups"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp18",
+            "category": "Regular Point"
+        },
+        {
+            "code": "SP19",
+            "name": "Chest Village",
+            "chinese": "胸鄉",
+            "pinyin": "xiōng xiāng",
+            "number": 19,
+            "location": "In the 3rd intercostal space 6 thumb widths lateral to the anterior midline.",
+            "cautions": "Avoid deep needling; risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "fullness:chest",
+                "fullness:costal:lateral"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp19",
+            "category": "Regular Point"
+        },
+        {
+            "code": "SP20",
+            "name": "Complete Nourishment",
+            "chinese": "周榮",
+            "pinyin": "zhōu róng",
+            "number": 20,
+            "location": "In the 2nd intercostal space 6 thumb widths lateral to the anterior midline.",
+            "cautions": "Avoid deep needling; risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "fullness:chest",
+                "pain:costal:lateral"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp20",
+            "category": "Regular Point"
+        },
+        {
+            "code": "SP21",
+            "name": "Great Enveloping",
+            "chinese": "大包",
+            "pinyin": "dà bāo",
+            "number": 21,
+            "location": "On the mid-axillary line in the 6th intercostal space.",
+            "cautions": "Avoid deep needling; risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "asthma",
+                "fullness:chest",
+                "pain all over body"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/spleen-meridian#sp21",
+            "category": "Great Luo of Spleen"
+        }
+    ]
+}

@@ -1,0 +1,476 @@
+{
+    "id": "CV",
+    "name": "Conception Vessel",
+    "chineseName": "任脈",
+    "pinyin": "Rèn Mài",
+    "element": "Yin",
+    "yinYang": "Yin",
+    "pairedMeridian": "GV",
+    "totalPoints": 24,
+    "flowDirection": "From perineum to lower lip",
+    "peakHours": "N/A - Extra vessel",
+    "color": "#6366F1",
+    "description": "The Conception Vessel governs all Yin meridians. It runs along the front midline and controls reproduction and the Yin organs.",
+    "sourceUrl": "https://acuiq.com/meridians/conception-vessel",
+    "acupoints": [
+        {
+            "code": "CV01",
+            "name": "Meeting Of Yin",
+            "chinese": "會陰",
+            "pinyin": "huì yīn",
+            "number": 1,
+            "location": "Between anus and root of the scrotum in males/posterior labial commissure in females.",
+            "cautions": "Caution with genitourinary infection.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "depression",
+                "amenorrhea",
+                "prolapse:rectum",
+                "prolapse:uterus",
+                "coma"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv01",
+            "category": "Meeting Point of CV, GV, Chong Mai"
+        },
+        {
+            "code": "CV02",
+            "name": "Curved Bone",
+            "chinese": "曲骨",
+            "pinyin": "qū gǔ",
+            "number": 2,
+            "location": "On the midpoint of the upper border of the symphysis pubis.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "deficiency",
+                "damp",
+                "fullness",
+                "enuresis",
+                "urination:painful"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv02",
+            "category": "Meeting Point with LV"
+        },
+        {
+            "code": "CV03",
+            "name": "Central Pivot",
+            "chinese": "中極",
+            "pinyin": "zhōng jí",
+            "number": 3,
+            "location": "On the anterior midline 4 thumb widths below umbilicus.",
+            "cautions": "Caution in pregnancy and UTI.",
+            "needlingDepth": "0.5-1.5 cun perpendicular",
+            "treats": [
+                "amenorrhea",
+                "pain:back",
+                "damp",
+                "oedema",
+                "urinary disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv03",
+            "category": "Front-Mu Point of Bladder, Meeting Point with SP, KD, LV"
+        },
+        {
+            "code": "CV04",
+            "name": "Original Qi Gate",
+            "chinese": "關元",
+            "pinyin": "guān yuán",
+            "number": 4,
+            "location": "On the anterior midline 3 thumb widths below umbilicus.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.5 cun perpendicular",
+            "treats": [
+                "cough",
+                "diarrhoea",
+                "anxiety",
+                "dyspnoea",
+                "deficiency:kidney",
+                "infertility",
+                "impotence"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv04",
+            "category": "Front-Mu Point of Small Intestine, Meeting Point with SP, KD, LV"
+        },
+        {
+            "code": "CV05",
+            "name": "Stone Gate",
+            "chinese": "石門",
+            "pinyin": "shí mén",
+            "number": 5,
+            "location": "On the anterior midline 2 thumb widths below umbilicus.",
+            "cautions": "Contraindicated during pregnancy.",
+            "needlingDepth": "0.5-1.5 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "pain",
+                "dysentery",
+                "oedema",
+                "retention:urine"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv05",
+            "category": "Front-Mu Point of Triple Burner"
+        },
+        {
+            "code": "CV06",
+            "name": "Sea Of Qi",
+            "chinese": "氣海",
+            "pinyin": "qì hǎi",
+            "number": 6,
+            "location": "On the anterior midline 1.5 thumb widths below umbilicus.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.5 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "dyspnoea",
+                "constipation",
+                "weakness:yang",
+                "distension:abdomen",
+                "fatigue"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv06",
+            "category": "Regular Point"
+        },
+        {
+            "code": "CV07",
+            "name": "Yin Intersection",
+            "chinese": "陰交",
+            "pinyin": "yīn jiāo",
+            "number": 7,
+            "location": "On the anterior midline 1 thumb width below umbilicus.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.5 cun perpendicular",
+            "treats": [
+                "pain:chest",
+                "pain:knee",
+                "constipation",
+                "pain:abdomen",
+                "amenorrhea"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv07",
+            "category": "Meeting Point with Chong Mai, KD"
+        },
+        {
+            "code": "CV08",
+            "name": "Spirit Palace Gate",
+            "chinese": "神闕",
+            "pinyin": "shén què",
+            "number": 8,
+            "location": "In the center of the umbilicus.",
+            "cautions": "No needling; use moxa only.",
+            "needlingDepth": "Moxa only",
+            "treats": [
+                "distension:abdomen",
+                "prolapse:rectum",
+                "oedema",
+                "cold:blood",
+                "unconsciousness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv08",
+            "category": "Regular Point - Moxa only"
+        },
+        {
+            "code": "CV09",
+            "name": "Water Separation",
+            "chinese": "水分",
+            "pinyin": "shuǐ fēn",
+            "number": 9,
+            "location": "On the anterior midline 1 thumb width above the umbilicus.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:chest",
+                "oedema",
+                "deficiency:stomach",
+                "dysfunction:breathing",
+                "pain:heart"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv09",
+            "category": "Regular Point"
+        },
+        {
+            "code": "CV10",
+            "name": "Lower Stomach",
+            "chinese": "下脘",
+            "pinyin": "xià wǎn",
+            "number": 10,
+            "location": "On the anterior midline 2 thumb widths above the umbilicus.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:epigastrium",
+                "nausea",
+                "stagnation:food",
+                "fullness:abdomen",
+                "urine:dark"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv10",
+            "category": "Meeting Point with SP"
+        },
+        {
+            "code": "CV11",
+            "name": "Strengthen The Interior",
+            "chinese": "建里",
+            "pinyin": "jiàn lǐ",
+            "number": 11,
+            "location": "On the anterior midline 3 thumb widths above the umbilicus.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "vomiting",
+                "distension:abdomen",
+                "oedema",
+                "pain:heart",
+                "disorder:turmoil"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv11",
+            "category": "Regular Point"
+        },
+        {
+            "code": "CV12",
+            "name": "Stomach Centre",
+            "chinese": "中脘",
+            "pinyin": "zhōng wǎn",
+            "number": 12,
+            "location": "On the anterior midline 4 thumb widths above the umbilicus.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "appetite:weak",
+                "diarrhoea",
+                "dyspnoea",
+                "cold",
+                "depression",
+                "nausea",
+                "vomiting"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv12",
+            "category": "Front-Mu Point of Stomach, Hui-Meeting Point of Fu Organs"
+        },
+        {
+            "code": "CV13",
+            "name": "Upper Stomach",
+            "chinese": "上脘",
+            "pinyin": "shàng wǎn",
+            "number": 13,
+            "location": "On the anterior midline 5 thumb widths above the umbilicus.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "phlegm",
+                "palpitations",
+                "jaundice",
+                "heat",
+                "vomiting"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv13",
+            "category": "Meeting Point with ST, SI"
+        },
+        {
+            "code": "CV14",
+            "name": "Great Palace Gate",
+            "chinese": "巨闕",
+            "pinyin": "jù què",
+            "number": 14,
+            "location": "On the anterior midline 6 thumb widths above the umbilicus.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-1.0 cun oblique",
+            "treats": [
+                "pain:chest",
+                "anxiety",
+                "palpitations",
+                "vomiting",
+                "mental disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv14",
+            "category": "Front-Mu Point of Heart"
+        },
+        {
+            "code": "CV15",
+            "name": "Dove Tail",
+            "chinese": "鳩尾",
+            "pinyin": "jiū wěi",
+            "number": 15,
+            "location": "Below the xiphoid process, 7 thumb widths above umbilicus.",
+            "cautions": "Caution in pregnancy; avoid deep needling.",
+            "needlingDepth": "0.3-0.5 cun oblique downward",
+            "treats": [
+                "pain:chest",
+                "anxiety",
+                "palpitations",
+                "epilepsy",
+                "hiccups"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv15",
+            "category": "Luo-Connecting Point"
+        },
+        {
+            "code": "CV16",
+            "name": "Central Palace",
+            "chinese": "中庭",
+            "pinyin": "zhōng tíng",
+            "number": 16,
+            "location": "On the sternum level with the 5th intercostal space.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "fullness:chest",
+                "hiccups",
+                "vomiting",
+                "difficulty swallowing"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv16",
+            "category": "Regular Point"
+        },
+        {
+            "code": "CV17",
+            "name": "Chest Centre",
+            "chinese": "膻中",
+            "pinyin": "tán zhōng",
+            "number": 17,
+            "location": "On the anterior midline level with the 4th intercostal space, between the nipples.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "dyspnoea",
+                "asthma",
+                "insufficient lactation"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv17",
+            "category": "Front-Mu Point of Pericardium, Hui-Meeting Point of Qi"
+        },
+        {
+            "code": "CV18",
+            "name": "Jade Hall",
+            "chinese": "玉堂",
+            "pinyin": "yù táng",
+            "number": 18,
+            "location": "On the anterior midline level with the 3rd intercostal space.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "dyspnoea",
+                "asthma",
+                "vomiting"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv18",
+            "category": "Regular Point"
+        },
+        {
+            "code": "CV19",
+            "name": "Purple Palace",
+            "chinese": "紫宮",
+            "pinyin": "zǐ gōng",
+            "number": 19,
+            "location": "On the anterior midline level with the 2nd intercostal space.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "dyspnoea",
+                "asthma"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv19",
+            "category": "Regular Point"
+        },
+        {
+            "code": "CV20",
+            "name": "Florid Canopy",
+            "chinese": "華蓋",
+            "pinyin": "huá gài",
+            "number": 20,
+            "location": "On the anterior midline level with the 1st intercostal space.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "dyspnoea",
+                "asthma",
+                "sore throat"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv20",
+            "category": "Regular Point"
+        },
+        {
+            "code": "CV21",
+            "name": "Jade Pivot",
+            "chinese": "璇璣",
+            "pinyin": "xuán jī",
+            "number": 21,
+            "location": "On the anterior midline in the center of the manubrium sterni.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "dyspnoea",
+                "asthma",
+                "sore throat"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv21",
+            "category": "Regular Point"
+        },
+        {
+            "code": "CV22",
+            "name": "Celestial Chimney",
+            "chinese": "天突",
+            "pinyin": "tiān tū",
+            "number": 22,
+            "location": "In the center of the suprasternal fossa, 0.5 thumb width above the sternal notch.",
+            "cautions": "Angle needle posteriorly along posterior aspect of sternum.",
+            "needlingDepth": "0.3-0.5 cun first perpendicular then downward",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "asthma",
+                "sore throat",
+                "loss of voice"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv22",
+            "category": "Window of Sky Point, Meeting Point with Yin Wei Mai"
+        },
+        {
+            "code": "CV23",
+            "name": "Ridge Spring",
+            "chinese": "廉泉",
+            "pinyin": "lián quán",
+            "number": 23,
+            "location": "Above the Adam's apple in the depression of the upper border of the hyoid bone.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun oblique towards root of tongue",
+            "treats": [
+                "aphasia",
+                "difficulty swallowing",
+                "drooling",
+                "sore throat",
+                "stiffness of tongue"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv23",
+            "category": "Meeting Point with Yin Wei Mai"
+        },
+        {
+            "code": "CV24",
+            "name": "Receiving Fluid",
+            "chinese": "承漿",
+            "pinyin": "chéng jiāng",
+            "number": 24,
+            "location": "In the depression in the center of the mentolabial groove.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "facial paralysis",
+                "toothache",
+                "gum disorders",
+                "drooling",
+                "mouth ulcers"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/conception-vessel#cv24",
+            "category": "Meeting Point with GV, ST, LI"
+        }
+    ]
+}

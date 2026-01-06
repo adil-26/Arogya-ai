@@ -1,0 +1,1515 @@
+{
+    "version": "1.0",
+    "source": "AcuIQ.com",
+    "lastUpdated": "2026-01-06",
+    "totalMeridians": 14,
+    "totalAcupoints": 143,
+    "meridians": [
+        {
+            "id": "LU",
+            "name": "Lung Meridian",
+            "chinese": "肺經",
+            "element": "Metal",
+            "totalPoints": 11,
+            "complete": true
+        },
+        {
+            "id": "LI",
+            "name": "Large Intestine Meridian",
+            "chinese": "大腸經",
+            "element": "Metal",
+            "totalPoints": 20,
+            "complete": true
+        },
+        {
+            "id": "ST",
+            "name": "Stomach Meridian",
+            "chinese": "胃經",
+            "element": "Earth",
+            "totalPoints": 45,
+            "complete": false
+        },
+        {
+            "id": "SP",
+            "name": "Spleen Meridian",
+            "chinese": "脾經",
+            "element": "Earth",
+            "totalPoints": 21,
+            "complete": false
+        },
+        {
+            "id": "HT",
+            "name": "Heart Meridian",
+            "chinese": "心經",
+            "element": "Fire",
+            "totalPoints": 9,
+            "complete": true
+        },
+        {
+            "id": "SI",
+            "name": "Small Intestine Meridian",
+            "chinese": "小腸經",
+            "element": "Fire",
+            "totalPoints": 19,
+            "complete": true
+        },
+        {
+            "id": "BL",
+            "name": "Bladder Meridian",
+            "chinese": "膀胱經",
+            "element": "Water",
+            "totalPoints": 67,
+            "complete": false
+        },
+        {
+            "id": "KD",
+            "name": "Kidney Meridian",
+            "chinese": "腎經",
+            "element": "Water",
+            "totalPoints": 27,
+            "complete": false
+        },
+        {
+            "id": "PC",
+            "name": "Pericardium Meridian",
+            "chinese": "心包經",
+            "element": "Fire",
+            "totalPoints": 9,
+            "complete": true
+        },
+        {
+            "id": "TB",
+            "name": "Triple Burner Meridian",
+            "chinese": "三焦經",
+            "element": "Fire",
+            "totalPoints": 23,
+            "complete": false
+        },
+        {
+            "id": "GB",
+            "name": "Gallbladder Meridian",
+            "chinese": "膽經",
+            "element": "Wood",
+            "totalPoints": 44,
+            "complete": false
+        },
+        {
+            "id": "LV",
+            "name": "Liver Meridian",
+            "chinese": "肝經",
+            "element": "Wood",
+            "totalPoints": 14,
+            "complete": true
+        },
+        {
+            "id": "GV",
+            "name": "Governing Vessel",
+            "chinese": "督脈",
+            "element": "Yang",
+            "totalPoints": 28,
+            "complete": false
+        },
+        {
+            "id": "CV",
+            "name": "Conception Vessel",
+            "chinese": "任脈",
+            "element": "Yin",
+            "totalPoints": 24,
+            "complete": false
+        }
+    ],
+    "acupoints": [
+        {
+            "code": "LU01",
+            "name": "Central Mansion",
+            "chinese": "中府",
+            "pinyin": "zhōng fǔ",
+            "meridian": "LU",
+            "location": "Laterosuperior to the sternum 1 thumb width below LU2 at the level of the 1st intercostal space 6 thumb widths lateral to the anterior midline.",
+            "cautions": "Avoid during pregnancy; contraindicated in cases of pneumothorax.",
+            "treats": [
+                "heat:chest",
+                "cough",
+                "pain:chest",
+                "fever",
+                "dyspnoea"
+            ]
+        },
+        {
+            "code": "LU02",
+            "name": "Cloud Gate",
+            "chinese": "雲門",
+            "pinyin": "yún mén",
+            "meridian": "LU",
+            "location": "In the superior lateral part of the anterior thoracic wall superior to the coracoid process of the scapula in the depression of the infraclavicular fossa 6 thumb widths lateral to the anterior midline.",
+            "cautions": "Avoid deep needling due to proximity to lungs and blood vessels.",
+            "treats": [
+                "heat:chest",
+                "cough",
+                "pain:chest",
+                "dyspnoea",
+                "asthma"
+            ]
+        },
+        {
+            "code": "LU03",
+            "name": "Celestial Storehouse",
+            "chinese": "天府",
+            "pinyin": "tiān fǔ",
+            "meridian": "LU",
+            "location": "On the medial aspect of the upper arm 3 thumb widths below end of the axillary fold on the radial side of the biceps brachii.",
+            "cautions": "Avoid deep needling; caution near brachial artery.",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "asthma",
+                "dizziness",
+                "cough:blood"
+            ]
+        },
+        {
+            "code": "LU04",
+            "name": "Guarding White",
+            "chinese": "俠白",
+            "pinyin": "xiá bái",
+            "meridian": "LU",
+            "location": "On the medial aspect of the upper arm 4 thumb widths below anterior end of the axillary fold.",
+            "cautions": "Caution with depth to avoid damaging blood vessels.",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "asthma",
+                "palpitations",
+                "retching"
+            ]
+        },
+        {
+            "code": "LU05",
+            "name": "Cubit Marsh",
+            "chinese": "尺澤",
+            "pinyin": "chǐ zé",
+            "meridian": "LU",
+            "location": "On the cubital crease in the depression of the radial side of the biceps brachii tendon.",
+            "cautions": "Avoid in cases of severe vascular disease.",
+            "treats": [
+                "cough",
+                "diarrhoea",
+                "dyspnoea",
+                "asthma",
+                "pain:knee"
+            ]
+        },
+        {
+            "code": "LU06",
+            "name": "Collection Hole",
+            "chinese": "孔最",
+            "pinyin": "kǒng zuì",
+            "meridian": "LU",
+            "location": "On the palmar aspect of the forearm 7 thumb widths above the transverse crease of the wrist.",
+            "cautions": "Caution in local inflammation.",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "asthma",
+                "cough:blood",
+                "heat"
+            ]
+        },
+        {
+            "code": "LU07",
+            "name": "Interrupted Sequence",
+            "chinese": "列缺",
+            "pinyin": "liè quē",
+            "meridian": "LU",
+            "location": "Superior to the styloid process of the radius 1.5 thumb widths above the transverse crease of the wrist.",
+            "cautions": "Use with caution in patients with radial nerve sensitivity.",
+            "treats": [
+                "heat:chest",
+                "cough",
+                "fever",
+                "dyspnoea",
+                "phlegm"
+            ]
+        },
+        {
+            "code": "LU08",
+            "name": "Channels Ditch",
+            "chinese": "經渠",
+            "pinyin": "jīng qú",
+            "meridian": "LU",
+            "location": "1 thumb width above the transverse crease of the wrist on the lateral side of the radial artery.",
+            "cautions": "Caution with depth.",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "dyspnoea",
+                "asthma",
+                "vomiting"
+            ]
+        },
+        {
+            "code": "LU09",
+            "name": "Great Source",
+            "chinese": "太淵",
+            "pinyin": "tài yuān",
+            "meridian": "LU",
+            "location": "At the radial end of the transverse crease of the wrist on the lateral side of the radial artery.",
+            "cautions": "Caution in cardiac arrhythmias.",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "asthma",
+                "cough:blood",
+                "cold"
+            ]
+        },
+        {
+            "code": "LU10",
+            "name": "Fish Border",
+            "chinese": "魚際",
+            "pinyin": "yú jì",
+            "meridian": "LU",
+            "location": "On the radial aspect of the midpoint of the 1st metacarpal bone.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "cough",
+                "fever",
+                "anxiety",
+                "tongue:coating:yellow",
+                "deficiency:heat"
+            ]
+        },
+        {
+            "code": "LU11",
+            "name": "Lesser Metal",
+            "chinese": "少商",
+            "pinyin": "shǎo shāng",
+            "meridian": "LU",
+            "location": "On the radial side of the thumb about 0.1 thumb width posterior to the corner of the nail.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "sweating",
+                "cold",
+                "heat"
+            ]
+        },
+        {
+            "code": "LI01",
+            "name": "Metal Yang",
+            "chinese": "商陽",
+            "pinyin": "shāng yáng",
+            "meridian": "LI",
+            "location": "On the radial side of the index finger about 0.1 thumb width posterior to the corner of the nail.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "tinnitus",
+                "heat",
+                "fullness:chest"
+            ]
+        },
+        {
+            "code": "LI02",
+            "name": "Second Space",
+            "chinese": "二間",
+            "pinyin": "èr jiān",
+            "meridian": "LI",
+            "location": "In the depression of the radial side of the index finger distal to the 2nd metacarpophalangeal joint.",
+            "cautions": "Caution in local skin infections.",
+            "treats": [
+                "tinnitus",
+                "cold",
+                "pain:shoulder",
+                "deviation:eye"
+            ]
+        },
+        {
+            "code": "LI03",
+            "name": "Third Space",
+            "chinese": "三間",
+            "pinyin": "sān jiān",
+            "meridian": "LI",
+            "location": "On the radial side of the index finger proximal to the head of the 2nd metacarpal bone.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "fever",
+                "diarrhoea",
+                "tinnitus",
+                "cold",
+                "heat"
+            ]
+        },
+        {
+            "code": "LI04",
+            "name": "Junction Valley",
+            "chinese": "合谷",
+            "pinyin": "hé gǔ",
+            "meridian": "LI",
+            "location": "On the dorsum of the hand between 1st & 2nd metacarpal bones approximately in the middle of the 2nd metacarpal bone.",
+            "cautions": "Contraindicated during pregnancy.",
+            "treats": [
+                "fever",
+                "tinnitus",
+                "headache",
+                "amenorrhea",
+                "wind",
+                "pain"
+            ]
+        },
+        {
+            "code": "LI05",
+            "name": "Yang Stream",
+            "chinese": "陽谿",
+            "pinyin": "yáng xī",
+            "meridian": "LI",
+            "location": "On the radial side of the wrist in the depression between tendons of the extensor pollicus longus and brevis.",
+            "cautions": "Caution with depth.",
+            "treats": [
+                "cough",
+                "fever",
+                "tinnitus",
+                "cold",
+                "heat"
+            ]
+        },
+        {
+            "code": "LI06",
+            "name": "Diverging Passage",
+            "chinese": "偏歴",
+            "pinyin": "piān lì",
+            "meridian": "LI",
+            "location": "On the line connecting LI5 and LI11 3 thumb widths above the crease of the wrist.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "tinnitus",
+                "heat",
+                "wind",
+                "pain:elbow",
+                "pain:shoulder"
+            ]
+        },
+        {
+            "code": "LI07",
+            "name": "Warm Flow",
+            "chinese": "溫溜",
+            "pinyin": "wēn liū",
+            "meridian": "LI",
+            "location": "On the line connecting LI5 and LI11, 5 thumb widths above the crease of the wrist.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "heat",
+                "distension:abdomen",
+                "pain:abdomen",
+                "redness",
+                "swelling"
+            ]
+        },
+        {
+            "code": "LI08",
+            "name": "Lower Ridge",
+            "chinese": "下廉",
+            "pinyin": "xià lián",
+            "meridian": "LI",
+            "location": "On the line joining LI5 and LI11 4 thumb widths below cubital crease.",
+            "cautions": "Avoid in areas of skin damage.",
+            "treats": [
+                "dyspnoea",
+                "dizziness",
+                "heat",
+                "pain:abdomen",
+                "wind"
+            ]
+        },
+        {
+            "code": "LI09",
+            "name": "Upper Ridge",
+            "chinese": "上廉",
+            "pinyin": "shàng lián",
+            "meridian": "LI",
+            "location": "On the line joining LI5 and LI11, 3 thumb widths below cubital crease.",
+            "cautions": "Caution in local inflammation.",
+            "treats": [
+                "pain:chest",
+                "dyspnoea",
+                "pain:abdomen",
+                "pain:shoulder"
+            ]
+        },
+        {
+            "code": "LI10",
+            "name": "Arm Three Miles",
+            "chinese": "手三里",
+            "pinyin": "shǒu sān lǐ",
+            "meridian": "LI",
+            "location": "On the line joining LI5 and LI11, 2 thumb widths below cubital crease.",
+            "cautions": "Avoid in local inflammation.",
+            "treats": [
+                "diarrhoea",
+                "vomiting",
+                "pain:abdomen",
+                "deviation:mouth"
+            ]
+        },
+        {
+            "code": "LI11",
+            "name": "Pond At The Bend",
+            "chinese": "曲池",
+            "pinyin": "qū chí",
+            "meridian": "LI",
+            "location": "In the depression at the lateral end of the transverse cubital crease.",
+            "cautions": "Caution in severe hypertension.",
+            "treats": [
+                "diarrhoea",
+                "dizziness",
+                "heat",
+                "vomiting",
+                "fever",
+                "hypertension"
+            ]
+        },
+        {
+            "code": "LI12",
+            "name": "Elbow Bone Hole",
+            "chinese": "肘髎",
+            "pinyin": "zhǒu hé",
+            "meridian": "LI",
+            "location": "On the lateral side of the upper arm 1 thumb width above LI11.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "pain",
+                "somnolence",
+                "numbness:shoulder",
+                "contraction"
+            ]
+        },
+        {
+            "code": "LI13",
+            "name": "Arm Five Li",
+            "chinese": "手五里",
+            "pinyin": "shǒu wǔ lǐ",
+            "meridian": "LI",
+            "location": "On the line connecting LI11 and LI15, 3 thumb widths above LI11.",
+            "cautions": "Caution with depth and angle.",
+            "treats": [
+                "cough",
+                "anxiety",
+                "phlegm",
+                "jaundice",
+                "deficiency:qi"
+            ]
+        },
+        {
+            "code": "LI14",
+            "name": "Upper Arm Prominence",
+            "chinese": "臂臑",
+            "pinyin": "bì bù",
+            "meridian": "LI",
+            "location": "On the line connecting LI11 and LI15, 7 thumb widths above LI11.",
+            "cautions": "Caution with depth to avoid nerve damage.",
+            "treats": [
+                "pain:chest",
+                "redness",
+                "swelling",
+                "goitre"
+            ]
+        },
+        {
+            "code": "LI15",
+            "name": "Shoulder And Clavicle",
+            "chinese": "肩髃",
+            "pinyin": "jiān dòu",
+            "meridian": "LI",
+            "location": "Anteroinferior to the acromion on the upper portion of the deltoid muscle.",
+            "cautions": "Avoid deep perpendicular needling; risk of pneumothorax.",
+            "treats": [
+                "wind",
+                "pain:shoulder",
+                "goitre",
+                "hemiplegia"
+            ]
+        },
+        {
+            "code": "LI16",
+            "name": "Great Bone",
+            "chinese": "巨骨",
+            "pinyin": "jù gǔ",
+            "meridian": "LI",
+            "location": "In the upper aspect of the shoulder between acromial extremity of the clavicle and scapular spine.",
+            "cautions": "Avoid deep perpendicular needling.",
+            "treats": [
+                "pain:back",
+                "pain:shoulder",
+                "epilepsy",
+                "goitre"
+            ]
+        },
+        {
+            "code": "LI17",
+            "name": "Celestial Tripod",
+            "chinese": "天鼎",
+            "pinyin": "tiān dǐng",
+            "meridian": "LI",
+            "location": "On the lateral side of the neck at the posterior border of the SCM muscle.",
+            "cautions": "Caution near carotid artery and jugular vein.",
+            "treats": [
+                "goitre",
+                "dysfunction:breathing",
+                "pharyngitis",
+                "voice:loss"
+            ]
+        },
+        {
+            "code": "LI18",
+            "name": "Beside The Prominence",
+            "chinese": "扶突",
+            "pinyin": "fú tū",
+            "meridian": "LI",
+            "location": "On the lateral side of the neck, level with tip of the adam's apple.",
+            "cautions": "Avoid deep needling; proximity to carotid artery.",
+            "treats": [
+                "cough",
+                "asthma",
+                "swelling",
+                "pain:throat",
+                "pain:face"
+            ]
+        },
+        {
+            "code": "LI19",
+            "name": "Grain Bone Hole",
+            "chinese": "禾髎",
+            "pinyin": "hé liáo",
+            "meridian": "LI",
+            "location": "On the face directly below the lateral margin of the nostril.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "nasal:congestion",
+                "epistaxis",
+                "deviation:mouth"
+            ]
+        },
+        {
+            "code": "LI20",
+            "name": "Welcome Fragrance",
+            "chinese": "迎香",
+            "pinyin": "yíng xiāng",
+            "meridian": "LI",
+            "location": "In the nasolabial groove at the level of the midpoint of the lateral border of the ala nasi.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "nasal:congestion",
+                "epistaxis",
+                "rhinitis",
+                "facial:pain"
+            ]
+        },
+        {
+            "code": "HT01",
+            "name": "Highest Spring",
+            "chinese": "極泉",
+            "pinyin": "jí quán",
+            "meridian": "HT",
+            "location": "When upper arm is abducted point is in the center of the axilla on the medial side of the axillary artery.",
+            "cautions": "Contraindicated for needling; proximity to axillary artery.",
+            "treats": [
+                "pain:chest",
+                "anxiety",
+                "palpitations",
+                "pain:elbow",
+                "retching"
+            ]
+        },
+        {
+            "code": "HT02",
+            "name": "Cyan Spirit",
+            "chinese": "青靈",
+            "pinyin": "qīng líng",
+            "meridian": "HT",
+            "location": "When elbow is flexed point is 3 thumb widths above the medial end of the transverse cubital crease.",
+            "cautions": "Caution with depth; proximity to brachial artery.",
+            "treats": [
+                "swelling",
+                "pain",
+                "shivering",
+                "pain:costal:lateral"
+            ]
+        },
+        {
+            "code": "HT03",
+            "name": "Lesser Sea",
+            "chinese": "少海",
+            "pinyin": "shǎo hǎi",
+            "meridian": "HT",
+            "location": "With elbow flexed, at the midpoint of the line connecting medial end of the cubital crease and medial epicondyle.",
+            "cautions": "Caution with ulnar nerve.",
+            "treats": [
+                "phlegm",
+                "heat",
+                "fullness:chest",
+                "pain",
+                "epilepsy"
+            ]
+        },
+        {
+            "code": "HT04",
+            "name": "Spirit Path",
+            "chinese": "靈道",
+            "pinyin": "líng dào",
+            "meridian": "HT",
+            "location": "On the radial side of the tendon of the flexor carpi ulnaris, 1.5 thumb widths above the wrist crease.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "anxiety",
+                "swelling",
+                "pain:finger",
+                "retching",
+                "pain:heart"
+            ]
+        },
+        {
+            "code": "HT05",
+            "name": "Inward Connection",
+            "chinese": "通里",
+            "pinyin": "tōng lǐ",
+            "meridian": "HT",
+            "location": "On the radial side of the tendon of the flexor carpi ulnaris, 1 thumb width above the wrist crease.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "dizziness",
+                "palpitations",
+                "deficiency:qi",
+                "depression",
+                "fullness:chest"
+            ]
+        },
+        {
+            "code": "HT06",
+            "name": "Yin Cleft",
+            "chinese": "陰郄",
+            "pinyin": "yīn qiè",
+            "meridian": "HT",
+            "location": "On the radial side of the tendon of the flexor carpi ulnaris, 0.5 thumb widths above the wrist crease.",
+            "cautions": "Caution in cardiac arrhythmias.",
+            "treats": [
+                "palpitations",
+                "fullness:chest",
+                "epilepsy",
+                "pain:heart",
+                "nosebleed"
+            ]
+        },
+        {
+            "code": "HT07",
+            "name": "Spirit Gate",
+            "chinese": "神門",
+            "pinyin": "shén mén",
+            "meridian": "HT",
+            "location": "At the ulnar end of the transverse crease of the wrist in the depression on the radial side of the tendon.",
+            "cautions": "Caution in cardiac arrhythmias.",
+            "treats": [
+                "anxiety",
+                "dyspnoea",
+                "palpitations",
+                "cold",
+                "heat",
+                "insomnia"
+            ]
+        },
+        {
+            "code": "HT08",
+            "name": "Lesser Mansion",
+            "chinese": "少府",
+            "pinyin": "shǎo fǔ",
+            "meridian": "HT",
+            "location": "Between 4th and 5th metacarpal bones; where tip of the little finger rests when fist is made.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "pain:chest",
+                "anxiety",
+                "palpitations",
+                "deficiency:qi",
+                "cold"
+            ]
+        },
+        {
+            "code": "HT09",
+            "name": "Lesser Surge",
+            "chinese": "少沖",
+            "pinyin": "shǎo chōng",
+            "meridian": "HT",
+            "location": "On the radial side of the little finger about 0.1 thumb width from corner of the nail.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "treats": [
+                "pain:chest",
+                "palpitations",
+                "jaundice",
+                "deficiency:qi",
+                "heat"
+            ]
+        },
+        {
+            "code": "SI01",
+            "name": "Lesser Marsh",
+            "chinese": "少澤",
+            "pinyin": "shǎo zé",
+            "meridian": "SI",
+            "location": "On the ulnar side of the little finger about 0.1 thumb width from corner of the nail.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "fever",
+                "dizziness",
+                "tinnitus"
+            ]
+        },
+        {
+            "code": "SI02",
+            "name": "Front Valley",
+            "chinese": "前谷",
+            "pinyin": "qián gǔ",
+            "meridian": "SI",
+            "location": "On the ulnar end of the crease in the front of the metacarpophalangeal joint of the little finger.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "cough",
+                "tinnitus",
+                "cough:blood",
+                "fullness:chest",
+                "pain:back"
+            ]
+        },
+        {
+            "code": "SI03",
+            "name": "Back Stream",
+            "chinese": "後谿",
+            "pinyin": "hòu xī",
+            "meridian": "SI",
+            "location": "On the ulnar end of the distal palmar crease proximal to the 5th metacarpophalangeal joint.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "fever",
+                "pain:knee",
+                "tinnitus",
+                "jaundice",
+                "cold"
+            ]
+        },
+        {
+            "code": "SI04",
+            "name": "Wrist Bone",
+            "chinese": "腕骨",
+            "pinyin": "wàn gǔ",
+            "meridian": "SI",
+            "location": "On the ulnar side of the palm between base of the 5th metacarpal bone and hamate bone.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "fever",
+                "tinnitus",
+                "jaundice",
+                "heat",
+                "deficiency:spleen"
+            ]
+        },
+        {
+            "code": "SI05",
+            "name": "Yang Valley",
+            "chinese": "陽谷",
+            "pinyin": "yáng gǔ",
+            "meridian": "SI",
+            "location": "At the ulnar end of the transverse crease on the dorsal aspect of the wrist.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "pain:chest",
+                "fever",
+                "tinnitus",
+                "heat",
+                "redness"
+            ]
+        },
+        {
+            "code": "SI06",
+            "name": "Support The Aged",
+            "chinese": "養老",
+            "pinyin": "yǎng lǎo",
+            "meridian": "SI",
+            "location": "Dorsal to the head of the ulna; on the radial side of the styloid process.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "pain:back",
+                "pain:shoulder",
+                "pain:back:lumbar"
+            ]
+        },
+        {
+            "code": "SI07",
+            "name": "Branch Of Uprightness",
+            "chinese": "支正",
+            "pinyin": "zhī zhèng",
+            "meridian": "SI",
+            "location": "On the line joining SI5 and SI8 5 thumb widths proximal to the dorsal wrist crease.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "fever",
+                "anxiety",
+                "dizziness",
+                "cold",
+                "heat"
+            ]
+        },
+        {
+            "code": "SI08",
+            "name": "Small Sea",
+            "chinese": "小海",
+            "pinyin": "xiǎo hǎi",
+            "meridian": "SI",
+            "location": "When elbow is flexed, in the depression between olecranon and medial epicondyle.",
+            "cautions": "Caution with ulnar nerve.",
+            "treats": [
+                "pain:chest",
+                "palpitations",
+                "jaundice",
+                "deficiency:qi",
+                "heat"
+            ]
+        },
+        {
+            "code": "SI09",
+            "name": "True Shoulder",
+            "chinese": "肩貞",
+            "pinyin": "jiān zhēn",
+            "meridian": "SI",
+            "location": "Posterior and inferior to the shoulder joint; 1 thumb width above the posterior end of the axillary fold.",
+            "cautions": "Caution in acute shoulder injury.",
+            "treats": [
+                "tinnitus",
+                "wind",
+                "numbness",
+                "pain:scapula",
+                "pain:shoulder"
+            ]
+        },
+        {
+            "code": "SI10",
+            "name": "Upper Arm Shu Point",
+            "chinese": "臑俞",
+            "pinyin": "bù yú",
+            "meridian": "SI",
+            "location": "Directly above the posterior end of the axillary fold inferior to the scapular spine.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "fever",
+                "pain:shoulder",
+                "chills",
+                "pain:arm"
+            ]
+        },
+        {
+            "code": "SI11",
+            "name": "Heavenly Gathering",
+            "chinese": "天宗",
+            "pinyin": "tiān zōng",
+            "meridian": "SI",
+            "location": "On the scapula in the depression of the center of the subscapular fossa.",
+            "cautions": "Caution in acute shoulder injury.",
+            "treats": [
+                "cough",
+                "stagnation:qi",
+                "fullness:chest",
+                "pain:elbow",
+                "pain:scapula"
+            ]
+        },
+        {
+            "code": "SI12",
+            "name": "Grasping The Wind",
+            "chinese": "秉風",
+            "pinyin": "bǐng fēng",
+            "meridian": "SI",
+            "location": "In the center of the suprascapular fossa directly above SI11.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "wind",
+                "benefit:shoulders",
+                "benefit:scapula"
+            ]
+        },
+        {
+            "code": "SI13",
+            "name": "Crooked Wall",
+            "chinese": "曲垣",
+            "pinyin": "qū yuán",
+            "meridian": "SI",
+            "location": "On the medial extremity of the suprascapular fossa.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "pain:shoulder",
+                "contraction:shoulder",
+                "benefit:shoulders"
+            ]
+        },
+        {
+            "code": "SI14",
+            "name": "Outer Shoulder Point",
+            "chinese": "肩外俞",
+            "pinyin": "jiān wài yú",
+            "meridian": "SI",
+            "location": "3 thumb widths lateral to the lower border of the spinous process of the 1st thoracic vertebra.",
+            "cautions": "Avoid deep perpendicular needling; risk of pneumothorax.",
+            "treats": [
+                "fever",
+                "wind",
+                "pain:scapula",
+                "pain:shoulder"
+            ]
+        },
+        {
+            "code": "SI15",
+            "name": "Middle Shoulder Point",
+            "chinese": "肩中俞",
+            "pinyin": "jiān zhōng yú",
+            "meridian": "SI",
+            "location": "2 thumb widths lateral to the lower border of the spinous process of the 7th cervical vertebra.",
+            "cautions": "Avoid deep perpendicular needling.",
+            "treats": [
+                "cough",
+                "fever",
+                "pain:scapula",
+                "pain:shoulder"
+            ]
+        },
+        {
+            "code": "SI16",
+            "name": "Celestial Windows",
+            "chinese": "天窗",
+            "pinyin": "tiān chuāng",
+            "meridian": "SI",
+            "location": "In the lateral aspect of the neck posterior to the SCM.",
+            "cautions": "Caution near jugular vein.",
+            "treats": [
+                "dizziness",
+                "tinnitus",
+                "heat",
+                "depression",
+                "numbness"
+            ]
+        },
+        {
+            "code": "SI17",
+            "name": "Celestial Hood",
+            "chinese": "天容",
+            "pinyin": "tiān róng",
+            "meridian": "SI",
+            "location": "Posterior to the angle of the mandible on the anterior border of the SCM.",
+            "cautions": "Caution near facial nerve.",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "fever",
+                "asthma",
+                "tinnitus"
+            ]
+        },
+        {
+            "code": "SI18",
+            "name": "Cheek Bone Hole",
+            "chinese": "顴髎",
+            "pinyin": "quán hé",
+            "meridian": "SI",
+            "location": "Directly below outer canthus in the depression on the lower border of the zygoma.",
+            "cautions": "Caution with facial nerve.",
+            "treats": [
+                "pain:chest",
+                "heat",
+                "wind",
+                "swelling",
+                "pain:leg"
+            ]
+        },
+        {
+            "code": "SI19",
+            "name": "Palace Of Hearing",
+            "chinese": "聽宮",
+            "pinyin": "tīng gōng",
+            "meridian": "SI",
+            "location": "Anterior to the tragus in the depression formed when mouth is open.",
+            "cautions": "Avoid deep needling; caution with TMJ disorders.",
+            "treats": [
+                "tinnitus",
+                "deafness",
+                "earache",
+                "toothache"
+            ]
+        },
+        {
+            "code": "PC01",
+            "name": "Heavenly Pool",
+            "chinese": "天池",
+            "pinyin": "tiān chí",
+            "meridian": "PC",
+            "location": "In the 4th intercostal space 1 thumb width lateral to the nipple.",
+            "cautions": "Avoid deep needling; risk of pneumothorax.",
+            "treats": [
+                "cough",
+                "fever",
+                "phlegm",
+                "fullness:chest",
+                "swelling"
+            ]
+        },
+        {
+            "code": "PC02",
+            "name": "Celestial Spring",
+            "chinese": "天泉",
+            "pinyin": "tiān quán",
+            "meridian": "PC",
+            "location": "2 thumb widths below level of the anterior axillary fold between 2 heads of the biceps brachii.",
+            "cautions": "Caution with brachial artery.",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "palpitations",
+                "fullness:chest",
+                "stagnation:blood"
+            ]
+        },
+        {
+            "code": "PC03",
+            "name": "Marsh At The Bend",
+            "chinese": "曲澤",
+            "pinyin": "qū zé",
+            "meridian": "PC",
+            "location": "On the transverse cubital crease at the ulnar side of the tendon of the biceps brachii.",
+            "cautions": "Caution with median nerve and brachial artery.",
+            "treats": [
+                "cough",
+                "diarrhoea",
+                "dyspnoea",
+                "cough:blood",
+                "palpitations"
+            ]
+        },
+        {
+            "code": "PC04",
+            "name": "Cleft Gate",
+            "chinese": "郄門",
+            "pinyin": "qiè mén",
+            "meridian": "PC",
+            "location": "5 thumb widths above the transverse crease of the wrist on the line connecting PC3 and PC7.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "pain:chest",
+                "anxiety",
+                "cough:blood",
+                "vomiting",
+                "stagnation:blood"
+            ]
+        },
+        {
+            "code": "PC05",
+            "name": "Intermediary Messenger",
+            "chinese": "間使",
+            "pinyin": "jiān shǐ",
+            "meridian": "PC",
+            "location": "3 thumb widths above the transverse crease of the wrist between tendons of palmaris longus and flexor carpi radialis.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "phlegm",
+                "palpitations",
+                "vomiting",
+                "pain:abdomen",
+                "aversion:cold"
+            ]
+        },
+        {
+            "code": "PC06",
+            "name": "Inner Gate",
+            "chinese": "內關",
+            "pinyin": "nèi guān",
+            "meridian": "PC",
+            "location": "2 thumb widths above the transverse crease of the wrist between tendons of palmaris longus and flexor carpi radialis.",
+            "cautions": "Caution in severe deficiency conditions.",
+            "treats": [
+                "fever",
+                "diarrhoea",
+                "anxiety",
+                "dizziness",
+                "nausea",
+                "insomnia"
+            ]
+        },
+        {
+            "code": "PC07",
+            "name": "Great Mound",
+            "chinese": "大陵",
+            "pinyin": "dà líng",
+            "meridian": "PC",
+            "location": "In the middle of the transverse crease of the wrist.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "pain:chest",
+                "fever",
+                "anxiety",
+                "palpitations",
+                "jaundice"
+            ]
+        },
+        {
+            "code": "PC08",
+            "name": "Palace Of Toil",
+            "chinese": "勞宮",
+            "pinyin": "láo gōng",
+            "meridian": "PC",
+            "location": "At the center of the palm between 2nd and 3rd metacarpal bones.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "fever",
+                "jaundice",
+                "depression"
+            ]
+        },
+        {
+            "code": "PC09",
+            "name": "Central Surge",
+            "chinese": "中衝",
+            "pinyin": "zhōng chōng",
+            "meridian": "PC",
+            "location": "In the center of the tip of the middle finger.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "treats": [
+                "fever",
+                "diarrhoea",
+                "tinnitus",
+                "heat",
+                "vomiting"
+            ]
+        },
+        {
+            "code": "LV01",
+            "name": "Big Mound",
+            "chinese": "大敦",
+            "pinyin": "dà dūn",
+            "meridian": "LV",
+            "location": "On the lateral side of the terminal phalanx of the great toe 0.1 thumb width from corner of the nail.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "treats": [
+                "anxiety",
+                "weakness",
+                "constipation",
+                "depression",
+                "distension:abdomen"
+            ]
+        },
+        {
+            "code": "LV02",
+            "name": "Passing Between",
+            "chinese": "行間",
+            "pinyin": "xíng jiān",
+            "meridian": "LV",
+            "location": "On the dorsum of the foot between 1st and 2nd toe proximal to the margin of the web.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "pain:chest",
+                "diarrhoea",
+                "anxiety",
+                "dizziness",
+                "cough:blood"
+            ]
+        },
+        {
+            "code": "LV03",
+            "name": "Great Surge",
+            "chinese": "太沖",
+            "pinyin": "tài chōng",
+            "meridian": "LV",
+            "location": "On the dorsum of the foot in the depression distal to the junction of the 1st and 2nd metatarsal bones.",
+            "cautions": "Caution in hypertension.",
+            "treats": [
+                "cough",
+                "diarrhoea",
+                "anxiety",
+                "dyspnoea",
+                "sweating",
+                "headache",
+                "stress"
+            ]
+        },
+        {
+            "code": "LV04",
+            "name": "Mound Centre",
+            "chinese": "中封",
+            "pinyin": "zhōng fēng",
+            "meridian": "LV",
+            "location": "Anterior to the medial malleolus.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "jaundice",
+                "deficiency:qi",
+                "heaviness",
+                "numbness",
+                "pain"
+            ]
+        },
+        {
+            "code": "LV05",
+            "name": "Woodworm Channel",
+            "chinese": "蠡溝",
+            "pinyin": "lǐ gōu",
+            "meridian": "LV",
+            "location": "5 thumb widths above the tip of the medial malleolus on the midline of the medial surface of the tibia.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "anxiety",
+                "palpitations",
+                "cold",
+                "depression",
+                "swelling"
+            ]
+        },
+        {
+            "code": "LV06",
+            "name": "Central Capital",
+            "chinese": "中都",
+            "pinyin": "zhōng dū",
+            "meridian": "LV",
+            "location": "7 thumb widths above the tip of the medial malleolus.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "diarrhoea",
+                "numbness",
+                "damp",
+                "pain:hypogastrium"
+            ]
+        },
+        {
+            "code": "LV07",
+            "name": "Knee Joint",
+            "chinese": "膝關",
+            "pinyin": "xī guān",
+            "meridian": "LV",
+            "location": "Posterior and inferior to the medial condyle of the tibia.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "pain:knee",
+                "pain:abdomen",
+                "wind",
+                "gout",
+                "pain:throat"
+            ]
+        },
+        {
+            "code": "LV08",
+            "name": "Spring At The Bend",
+            "chinese": "曲泉",
+            "pinyin": "qū quán",
+            "meridian": "LV",
+            "location": "When knee is flexed, at the medial end of the transverse popliteal crease.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "dyspnoea",
+                "pain:knee",
+                "cold",
+                "heat",
+                "pain:abdomen"
+            ]
+        },
+        {
+            "code": "LV09",
+            "name": "Yin Wrapping",
+            "chinese": "陰包",
+            "pinyin": "yīn bāo",
+            "meridian": "LV",
+            "location": "4 thumb widths above the medial epicondyle of the femur.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "retention:urine",
+                "enuresis",
+                "dysfunction:urination",
+                "pain:abdomen:inferior"
+            ]
+        },
+        {
+            "code": "LV10",
+            "name": "Leg Five Miles",
+            "chinese": "足五里",
+            "pinyin": "zú wǔ lǐ",
+            "meridian": "LV",
+            "location": "3 thumb widths directly below ST30 at the proximal end of the thigh.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "cough",
+                "swelling",
+                "retention:urine",
+                "dysfunction:breathing",
+                "somnolence"
+            ]
+        },
+        {
+            "code": "LV11",
+            "name": "Yin Corner",
+            "chinese": "陰廉",
+            "pinyin": "yīn lián",
+            "meridian": "LV",
+            "location": "2 thumb widths directly below ST30.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "pain:knee",
+                "infertility",
+                "benefit:uterus",
+                "pain:thigh:medial"
+            ]
+        },
+        {
+            "code": "LV12",
+            "name": "Urgent Pulse",
+            "chinese": "急脈",
+            "pinyin": "jí mài",
+            "meridian": "LV",
+            "location": "Lateral to the pubic tubercle in the inguinal groove.",
+            "cautions": "Caution in pregnancy.",
+            "treats": [
+                "prolapse:uterus",
+                "pain:penis",
+                "pain:genitals",
+                "pain:hypogastrium"
+            ]
+        },
+        {
+            "code": "LV13",
+            "name": "Bright Gate",
+            "chinese": "章門",
+            "pinyin": "zhāng mén",
+            "meridian": "LV",
+            "location": "On the lateral side of the abdomen below the free end of the 11th rib.",
+            "cautions": "No specific contraindications.",
+            "treats": [
+                "diarrhoea",
+                "vomiting",
+                "distension:abdomen",
+                "jaundice"
+            ]
+        },
+        {
+            "code": "LV14",
+            "name": "Gate Of Hope",
+            "chinese": "期門",
+            "pinyin": "qī mén",
+            "meridian": "LV",
+            "location": "On the mammillary line 2 ribs below the nipple in the 6th intercostal space.",
+            "cautions": "Avoid deep needling; risk of pneumothorax.",
+            "treats": [
+                "vomiting",
+                "distension:abdomen",
+                "pain:chest",
+                "depression"
+            ]
+        }
+    ],
+    "commonSymptoms": [
+        {
+            "id": "cough",
+            "name": "Cough",
+            "category": "Respiratory"
+        },
+        {
+            "id": "fever",
+            "name": "Fever",
+            "category": "General"
+        },
+        {
+            "id": "headache",
+            "name": "Headache",
+            "category": "Pain"
+        },
+        {
+            "id": "pain:back",
+            "name": "Back Pain",
+            "category": "Pain"
+        },
+        {
+            "id": "pain:shoulder",
+            "name": "Shoulder Pain",
+            "category": "Pain"
+        },
+        {
+            "id": "pain:knee",
+            "name": "Knee Pain",
+            "category": "Pain"
+        },
+        {
+            "id": "pain:chest",
+            "name": "Chest Pain",
+            "category": "Pain"
+        },
+        {
+            "id": "pain:abdomen",
+            "name": "Abdominal Pain",
+            "category": "Digestive"
+        },
+        {
+            "id": "asthma",
+            "name": "Asthma",
+            "category": "Respiratory"
+        },
+        {
+            "id": "dyspnoea",
+            "name": "Breathing Difficulty",
+            "category": "Respiratory"
+        },
+        {
+            "id": "diarrhoea",
+            "name": "Diarrhea",
+            "category": "Digestive"
+        },
+        {
+            "id": "vomiting",
+            "name": "Vomiting",
+            "category": "Digestive"
+        },
+        {
+            "id": "constipation",
+            "name": "Constipation",
+            "category": "Digestive"
+        },
+        {
+            "id": "dizziness",
+            "name": "Dizziness",
+            "category": "Neurological"
+        },
+        {
+            "id": "tinnitus",
+            "name": "Tinnitus",
+            "category": "ENT"
+        },
+        {
+            "id": "anxiety",
+            "name": "Anxiety",
+            "category": "Mental Health"
+        },
+        {
+            "id": "depression",
+            "name": "Depression",
+            "category": "Mental Health"
+        },
+        {
+            "id": "insomnia",
+            "name": "Insomnia",
+            "category": "Sleep"
+        },
+        {
+            "id": "palpitations",
+            "name": "Palpitations",
+            "category": "Cardiovascular"
+        },
+        {
+            "id": "hypertension",
+            "name": "Hypertension",
+            "category": "Cardiovascular"
+        }
+    ]
+}

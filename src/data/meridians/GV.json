@@ -1,0 +1,545 @@
+{
+    "id": "GV",
+    "name": "Governing Vessel",
+    "chineseName": "督脈",
+    "pinyin": "Dū Mài",
+    "element": "Yang",
+    "yinYang": "Yang",
+    "pairedMeridian": "CV",
+    "totalPoints": 28,
+    "flowDirection": "From coccyx to upper lip",
+    "peakHours": "N/A - Extra vessel",
+    "color": "#7C3AED",
+    "description": "The Governing Vessel governs all Yang meridians. It runs along the spine and controls the brain, spinal cord, and back.",
+    "sourceUrl": "https://acuiq.com/meridians/governing-vessel",
+    "acupoints": [
+        {
+            "code": "GV01",
+            "name": "Long Strength",
+            "chinese": "長強",
+            "pinyin": "cháng qiáng",
+            "number": 1,
+            "location": "Midway between tip of the coccyx and anus, locate point with patient in the prone position.",
+            "cautions": "Caution in spinal conditions.",
+            "needlingDepth": "0.5-1.0 cun oblique",
+            "treats": [
+                "diarrhoea",
+                "anxiety",
+                "cold",
+                "pain",
+                "damp",
+                "hemorrhoids",
+                "prolapse"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv01",
+            "category": "Luo-Connecting Point"
+        },
+        {
+            "code": "GV02",
+            "name": "Lumbar Point",
+            "chinese": "腰俞",
+            "pinyin": "yāo yú",
+            "number": 2,
+            "location": "In the hiatus of the sacrum.",
+            "cautions": "Caution in sacral conditions.",
+            "needlingDepth": "0.5-1.0 cun oblique",
+            "treats": [
+                "pain:hip",
+                "epilepsy",
+                "haemorrhoids",
+                "pain:back:lumbar",
+                "sweating:deficiency"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv02",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV03",
+            "name": "Yang Lumbar Gate",
+            "chinese": "腰陽關",
+            "pinyin": "yāo yáng guān",
+            "number": 3,
+            "location": "Below spinous process of the 4th lumbar vertebra at the level with iliac crest.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "numbness",
+                "pain:back:lumbar",
+                "urine:white",
+                "benefit:legs",
+                "benefit:back:lumbar"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv03",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV04",
+            "name": "Life Gate",
+            "chinese": "命門",
+            "pinyin": "mìng mén",
+            "number": 4,
+            "location": "Below spinous process of the 2nd lumbar vertebra.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "fever",
+                "anxiety",
+                "deficiency:kidney",
+                "dizziness",
+                "tinnitus",
+                "impotence",
+                "low back pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv04",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV05",
+            "name": "Suspended Pivot",
+            "chinese": "懸樞",
+            "pinyin": "xuán shū",
+            "number": 5,
+            "location": "Below spinous process of the 1st lumbar vertebra.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:hip",
+                "epilepsy",
+                "haemorrhoids",
+                "pain:back:lumbar",
+                "sweating:deficiency"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv05",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV06",
+            "name": "Spine Centre",
+            "chinese": "脊中",
+            "pinyin": "jǐ zhōng",
+            "number": 6,
+            "location": "Below spinous process of the 11th thoracic vertebra.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun oblique",
+            "treats": [
+                "fever",
+                "diarrhoea",
+                "jaundice",
+                "cold:common",
+                "vomiting"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv06",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV07",
+            "name": "Central Pivot",
+            "chinese": "中樞",
+            "pinyin": "zhōng shū",
+            "number": 7,
+            "location": "Below spinous process of the 10th thoracic vertebra.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun oblique",
+            "treats": [
+                "fever",
+                "jaundice",
+                "cold:common",
+                "vomiting",
+                "amenorrhea"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv07",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV08",
+            "name": "Sinew Contraction",
+            "chinese": "筋縮",
+            "pinyin": "jīn suō",
+            "number": 8,
+            "location": "Below spinous process of the 9th thoracic vertebra.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun oblique",
+            "treats": [
+                "fever",
+                "jaundice",
+                "cold:common",
+                "vomiting",
+                "wind",
+                "muscle spasms"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv08",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV09",
+            "name": "Reaching Yang",
+            "chinese": "至陽",
+            "pinyin": "zhì yáng",
+            "number": 9,
+            "location": "Below spinous process of the 7th thoracic vertebra at the level with inferior angle of the scapula.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun oblique",
+            "treats": [
+                "cough",
+                "fever",
+                "dyspnoea",
+                "jaundice",
+                "deficiency:qi"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv09",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV10",
+            "name": "Spirit Tower",
+            "chinese": "霊台",
+            "pinyin": "líng tái",
+            "number": 10,
+            "location": "Below spinous process of the 6th thoracic vertebra.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun oblique",
+            "treats": [
+                "cough",
+                "fever",
+                "dyspnoea",
+                "asthma",
+                "cold:common"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv10",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV11",
+            "name": "Spirit Path",
+            "chinese": "神道",
+            "pinyin": "shén dào",
+            "number": 11,
+            "location": "Below spinous process of the 5th thoracic vertebra.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun oblique",
+            "treats": [
+                "cough",
+                "fever",
+                "anxiety",
+                "dizziness",
+                "palpitations",
+                "poor memory"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv11",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV12",
+            "name": "Body Pillar",
+            "chinese": "身柱",
+            "pinyin": "shēn zhù",
+            "number": 12,
+            "location": "Below spinous process of the 3rd thoracic vertebra.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun oblique",
+            "treats": [
+                "heat:chest",
+                "cough",
+                "fever",
+                "dyspnoea",
+                "sweating"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv12",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV13",
+            "name": "Way Of Happiness",
+            "chinese": "陶道",
+            "pinyin": "táo dào",
+            "number": 13,
+            "location": "Below spinous process of the 1st thoracic vertebra.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun oblique",
+            "treats": [
+                "fever",
+                "heat",
+                "depression",
+                "chills",
+                "malaria"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv13",
+            "category": "Meeting Point with BL"
+        },
+        {
+            "code": "GV14",
+            "name": "Great Vertebra",
+            "chinese": "大椎",
+            "pinyin": "dà zhuī",
+            "number": 14,
+            "location": "Below spinous process of the 7th cervical vertebra at the level of the shoulders.",
+            "cautions": "Caution with C7 vertebra.",
+            "needlingDepth": "0.5-1.0 cun oblique",
+            "treats": [
+                "fever",
+                "cough",
+                "asthma",
+                "common cold",
+                "neck stiffness",
+                "heat exhaustion"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv14",
+            "category": "Meeting Point of all Yang Meridians"
+        },
+        {
+            "code": "GV15",
+            "name": "Mute's Gate",
+            "chinese": "瘂門",
+            "pinyin": "yǎ mén",
+            "number": 15,
+            "location": "0.5 thumb width below GV16 in the depression below the 1st cervical vertebra.",
+            "cautions": "No deep needling; risk to medulla oblongata.",
+            "needlingDepth": "0.5-1.0 cun oblique towards chin",
+            "treats": [
+                "aphasia",
+                "sudden loss of voice",
+                "stiffness of tongue",
+                "deafness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv15",
+            "category": "Meeting Point with Yang Wei Mai"
+        },
+        {
+            "code": "GV16",
+            "name": "Wind Mansion",
+            "chinese": "風府",
+            "pinyin": "fēng fǔ",
+            "number": 16,
+            "location": "Directly below external occipital protuberance in the depression between trapezius muscles.",
+            "cautions": "No deep needling; risk to medulla oblongata.",
+            "needlingDepth": "0.5-1.0 cun oblique towards chin",
+            "treats": [
+                "wind",
+                "headache",
+                "stiffness:neck",
+                "dizziness",
+                "stroke"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv16",
+            "category": "Sea of Marrow Point, Meeting Point with Yang Wei Mai"
+        },
+        {
+            "code": "GV17",
+            "name": "Brain's Door",
+            "chinese": "腦戶",
+            "pinyin": "nǎo hù",
+            "number": 17,
+            "location": "1.5 thumb widths directly above GV16 in the depression above external occipital protuberance.",
+            "cautions": "No deep needling.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "dizziness",
+                "neck pain",
+                "visual disturbances",
+                "epilepsy"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv17",
+            "category": "Meeting Point with BL"
+        },
+        {
+            "code": "GV18",
+            "name": "Unyielding Space",
+            "chinese": "強間",
+            "pinyin": "qiáng jiān",
+            "number": 18,
+            "location": "1.5 thumb widths directly above GV17.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "dizziness",
+                "neck stiffness",
+                "insomnia"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv18",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV19",
+            "name": "Posterior Vertex",
+            "chinese": "後頂",
+            "pinyin": "hòu dǐng",
+            "number": 19,
+            "location": "1.5 thumb widths directly above GV18.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "dizziness",
+                "epilepsy",
+                "palpitations"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv19",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV20",
+            "name": "Hundred Meetings",
+            "chinese": "百會",
+            "pinyin": "bǎi huì",
+            "number": 20,
+            "location": "On the midline of the head, 7 thumb widths directly above the posterior hairline.",
+            "cautions": "Caution in infants with open fontanelle.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "dizziness",
+                "insomnia",
+                "prolapse",
+                "stroke",
+                "mental disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv20",
+            "category": "Meeting Point of all Yang Meridians and LV"
+        },
+        {
+            "code": "GV21",
+            "name": "Before Vertex",
+            "chinese": "前頂",
+            "pinyin": "qián dǐng",
+            "number": 21,
+            "location": "1.5 thumb widths anterior to GV20.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "dizziness",
+                "epilepsy",
+                "nasal congestion"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv21",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV22",
+            "name": "Fontanel Meeting",
+            "chinese": "囟會",
+            "pinyin": "xìn huì",
+            "number": 22,
+            "location": "3 thumb widths anterior to GV20.",
+            "cautions": "Caution in infants.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "dizziness",
+                "nasal congestion",
+                "rhinitis"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv22",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV23",
+            "name": "Upper Star",
+            "chinese": "上星",
+            "pinyin": "shàng xīng",
+            "number": 23,
+            "location": "1 thumb width directly above the midpoint of the anterior hairline.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "nasal congestion",
+                "epistaxis",
+                "mental disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv23",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV24",
+            "name": "Spirit Court",
+            "chinese": "神庭",
+            "pinyin": "shén tíng",
+            "number": 24,
+            "location": "0.5 thumb width directly above the midpoint of the anterior hairline.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun subcutaneous",
+            "treats": [
+                "headache",
+                "anxiety",
+                "dizziness",
+                "insomnia",
+                "epilepsy"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv24",
+            "category": "Meeting Point with BL, ST"
+        },
+        {
+            "code": "GV25",
+            "name": "White Bone Hole",
+            "chinese": "素髎",
+            "pinyin": "sù liáo",
+            "number": 25,
+            "location": "On the tip of the nose.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.2-0.3 cun oblique upward",
+            "treats": [
+                "nasal congestion",
+                "epistaxis",
+                "rhinitis",
+                "loss of consciousness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv25",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV26",
+            "name": "Water Trough",
+            "chinese": "水溝",
+            "pinyin": "shuǐ gōu",
+            "number": 26,
+            "location": "Below the nose at the junction of the upper and middle third of the philtrum.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun oblique upward",
+            "treats": [
+                "loss of consciousness",
+                "shock",
+                "epilepsy",
+                "facial paralysis",
+                "mental disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv26",
+            "category": "Meeting Point with LI, ST - Revival Point"
+        },
+        {
+            "code": "GV27",
+            "name": "Mouth Centre",
+            "chinese": "兌端",
+            "pinyin": "duì duān",
+            "number": 27,
+            "location": "On the junction of the upper lip and philtrum.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.2-0.3 cun oblique",
+            "treats": [
+                "toothache",
+                "gum disorders",
+                "loss of consciousness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv27",
+            "category": "Regular Point"
+        },
+        {
+            "code": "GV28",
+            "name": "Gum Intersection",
+            "chinese": "齦交",
+            "pinyin": "yín jiāo",
+            "number": 28,
+            "location": "On the junction of the upper lip frenulum and gum.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.2-0.3 cun oblique upward",
+            "treats": [
+                "toothache",
+                "gum disorders",
+                "nasal polyps"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/governing-vessel#gv28",
+            "category": "Meeting Point with CV, ST"
+        }
+    ]
+}

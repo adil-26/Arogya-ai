@@ -253,7 +253,7 @@ const MedicationReminders = () => {
                             <div className="med-content">
                                 <div className="med-header-row">
                                     <h4>{med.name}</h4>
-                                    <span className="dosage-badge">{med.dosage}</span>
+                                    {med.dosage && <span className="dosage-badge">{med.dosage}</span>}
                                     {med.source === 'doctor' && (
                                         <span className="doctor-badge">Rx</span>
                                     )}
@@ -263,7 +263,7 @@ const MedicationReminders = () => {
                                 </p>
                                 {med.source === 'doctor' && med.doctorName && (
                                     <p className="doctor-name">
-                                        <Stethoscope size={12} /> Dr. {med.doctorName}
+                                        <Stethoscope size={12} /> {med.doctorName.startsWith('Dr.') ? med.doctorName : `Dr. ${med.doctorName}`}
                                     </p>
                                 )}
                                 {med.timing && med.timing.length > 0 && (

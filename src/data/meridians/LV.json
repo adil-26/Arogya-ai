@@ -1,0 +1,293 @@
+{
+    "id": "LV",
+    "name": "Liver Meridian",
+    "chineseName": "肝經",
+    "pinyin": "Gān Jīng",
+    "element": "Wood",
+    "yinYang": "Yin",
+    "pairedMeridian": "GB",
+    "totalPoints": 14,
+    "flowDirection": "From big toe to chest",
+    "peakHours": "1am - 3am",
+    "color": "#22C55E",
+    "description": "The Liver Meridian governs the smooth flow of Qi and blood. It is associated with planning, decision-making, and the emotion of anger.",
+    "sourceUrl": "https://acuiq.com/meridians/liver-meridian",
+    "acupoints": [
+        {
+            "code": "LV01",
+            "name": "Big Mound",
+            "chinese": "大敦",
+            "pinyin": "dà dūn",
+            "number": 1,
+            "location": "On the lateral side of the terminal phalanx of the great toe 0.1 thumb width from corner of the nail.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "needlingDepth": "0.1 cun shallow or prick to bleed",
+            "treats": [
+                "anxiety",
+                "weakness",
+                "constipation",
+                "depression",
+                "distension:abdomen",
+                "genital disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/liver-meridian#lv01",
+            "category": "Jing-Well Point, Wood Point"
+        },
+        {
+            "code": "LV02",
+            "name": "Passing Between",
+            "chinese": "行間",
+            "pinyin": "xíng jiān",
+            "number": 2,
+            "location": "On the dorsum of the foot between 1st and 2nd toe proximal to the margin of the web.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "pain:chest",
+                "diarrhoea",
+                "anxiety",
+                "dizziness",
+                "cough:blood",
+                "headache",
+                "eye disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/liver-meridian#lv02",
+            "category": "Ying-Spring Point, Fire Point"
+        },
+        {
+            "code": "LV03",
+            "name": "Great Surge",
+            "chinese": "太沖",
+            "pinyin": "tài chōng",
+            "number": 3,
+            "location": "On the dorsum of the foot in the depression distal to the junction of the 1st and 2nd metatarsal bones.",
+            "cautions": "Caution in hypertension.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "cough",
+                "diarrhoea",
+                "anxiety",
+                "dyspnoea",
+                "sweating",
+                "headache",
+                "stress",
+                "hypertension",
+                "eye disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/liver-meridian#lv03",
+            "category": "Shu-Stream Point, Yuan-Source Point, Earth Point"
+        },
+        {
+            "code": "LV04",
+            "name": "Mound Centre",
+            "chinese": "中封",
+            "pinyin": "zhōng fēng",
+            "number": 4,
+            "location": "Anterior to the medial malleolus.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "jaundice",
+                "deficiency:qi",
+                "heaviness",
+                "numbness",
+                "pain",
+                "genital disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/liver-meridian#lv04",
+            "category": "Jing-River Point, Metal Point"
+        },
+        {
+            "code": "LV05",
+            "name": "Woodworm Channel",
+            "chinese": "蠡溝",
+            "pinyin": "lǐ gōu",
+            "number": 5,
+            "location": "5 thumb widths above the tip of the medial malleolus on the midline of the medial surface of the tibia.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun horizontal",
+            "treats": [
+                "anxiety",
+                "palpitations",
+                "cold",
+                "depression",
+                "swelling",
+                "genital disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/liver-meridian#lv05",
+            "category": "Luo-Connecting Point"
+        },
+        {
+            "code": "LV06",
+            "name": "Central Capital",
+            "chinese": "中都",
+            "pinyin": "zhōng dū",
+            "number": 6,
+            "location": "7 thumb widths above the tip of the medial malleolus.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun horizontal",
+            "treats": [
+                "diarrhoea",
+                "numbness",
+                "damp",
+                "pain:hypogastrium",
+                "uterine bleeding"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/liver-meridian#lv06",
+            "category": "Xi-Cleft Point"
+        },
+        {
+            "code": "LV07",
+            "name": "Knee Joint",
+            "chinese": "膝關",
+            "pinyin": "xī guān",
+            "number": 7,
+            "location": "Posterior and inferior to the medial condyle of the tibia.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "pain:knee",
+                "pain:abdomen",
+                "wind",
+                "gout",
+                "pain:throat"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/liver-meridian#lv07",
+            "category": "Regular Point"
+        },
+        {
+            "code": "LV08",
+            "name": "Spring At The Bend",
+            "chinese": "曲泉",
+            "pinyin": "qū quán",
+            "number": 8,
+            "location": "When knee is flexed, at the medial end of the transverse popliteal crease.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.8-1.5 cun perpendicular",
+            "treats": [
+                "dyspnoea",
+                "pain:knee",
+                "cold",
+                "heat",
+                "pain:abdomen",
+                "genital disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/liver-meridian#lv08",
+            "category": "He-Sea Point, Water Point"
+        },
+        {
+            "code": "LV09",
+            "name": "Yin Wrapping",
+            "chinese": "陰包",
+            "pinyin": "yīn bāo",
+            "number": 9,
+            "location": "4 thumb widths above the medial epicondyle of the femur.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.8-1.5 cun perpendicular",
+            "treats": [
+                "retention:urine",
+                "enuresis",
+                "dysfunction:urination",
+                "pain:abdomen:inferior"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/liver-meridian#lv09",
+            "category": "Regular Point"
+        },
+        {
+            "code": "LV10",
+            "name": "Leg Five Miles",
+            "chinese": "足五里",
+            "pinyin": "zú wǔ lǐ",
+            "number": 10,
+            "location": "3 thumb widths directly below ST30 at the proximal end of the thigh.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "cough",
+                "swelling",
+                "retention:urine",
+                "dysfunction:breathing",
+                "somnolence"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/liver-meridian#lv10",
+            "category": "Regular Point"
+        },
+        {
+            "code": "LV11",
+            "name": "Yin Corner",
+            "chinese": "陰廉",
+            "pinyin": "yīn lián",
+            "number": 11,
+            "location": "2 thumb widths directly below ST30.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:knee",
+                "infertility",
+                "benefit:uterus",
+                "pain:thigh:medial",
+                "irregular menstruation"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/liver-meridian#lv11",
+            "category": "Regular Point"
+        },
+        {
+            "code": "LV12",
+            "name": "Urgent Pulse",
+            "chinese": "急脈",
+            "pinyin": "jí mài",
+            "number": 12,
+            "location": "Lateral to the pubic tubercle in the inguinal groove.",
+            "cautions": "Caution in pregnancy.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "prolapse:uterus",
+                "pain:penis",
+                "pain:genitals",
+                "pain:hypogastrium"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/liver-meridian#lv12",
+            "category": "Regular Point"
+        },
+        {
+            "code": "LV13",
+            "name": "Bright Gate",
+            "chinese": "章門",
+            "pinyin": "zhāng mén",
+            "number": 13,
+            "location": "On the lateral side of the abdomen below the free end of the 11th rib.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "vomiting",
+                "distension:abdomen",
+                "jaundice",
+                "hepatomegaly",
+                "splenomegaly"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/liver-meridian#lv13",
+            "category": "Front-Mu Point of Spleen, Hui-Meeting Point of Zang Organs"
+        },
+        {
+            "code": "LV14",
+            "name": "Gate Of Hope",
+            "chinese": "期門",
+            "pinyin": "qī mén",
+            "number": 14,
+            "location": "On the mammillary line 2 ribs below the nipple in the 6th intercostal space.",
+            "cautions": "Avoid deep needling; risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "vomiting",
+                "distension:abdomen",
+                "pain:chest",
+                "depression",
+                "hiccups",
+                "liver disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/liver-meridian#lv14",
+            "category": "Front-Mu Point of Liver, Meeting Point with Yin Wei Mai, SP"
+        }
+    ]
+}

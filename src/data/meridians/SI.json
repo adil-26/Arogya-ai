@@ -1,0 +1,387 @@
+{
+    "id": "SI",
+    "name": "Small Intestine Meridian",
+    "chineseName": "小腸經",
+    "pinyin": "Xiǎo Cháng Jīng",
+    "element": "Fire",
+    "yinYang": "Yang",
+    "pairedMeridian": "HT",
+    "totalPoints": 19,
+    "flowDirection": "From little finger to ear",
+    "peakHours": "1pm - 3pm",
+    "color": "#F97316",
+    "description": "The Small Intestine Meridian is responsible for separating the pure from the impure. It governs mental clarity and discernment.",
+    "sourceUrl": "https://acuiq.com/meridians/small-intestine-meridian",
+    "acupoints": [
+        {
+            "code": "SI01",
+            "name": "Lesser Marsh",
+            "chinese": "少澤",
+            "pinyin": "shǎo zé",
+            "number": 1,
+            "location": "On the ulnar side of the little finger about 0.1 thumb width from corner of the nail.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "needlingDepth": "0.1 cun shallow or prick to bleed",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "fever",
+                "dizziness",
+                "tinnitus",
+                "insufficient lactation"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si01",
+            "category": "Jing-Well Point, Metal Point"
+        },
+        {
+            "code": "SI02",
+            "name": "Front Valley",
+            "chinese": "前谷",
+            "pinyin": "qián gǔ",
+            "number": 2,
+            "location": "On the ulnar end of the crease in the front of the metacarpophalangeal joint of the little finger.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.2-0.3 cun perpendicular",
+            "treats": [
+                "cough",
+                "tinnitus",
+                "cough:blood",
+                "fullness:chest",
+                "pain:back"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si02",
+            "category": "Ying-Spring Point, Water Point"
+        },
+        {
+            "code": "SI03",
+            "name": "Back Stream",
+            "chinese": "後谿",
+            "pinyin": "hòu xī",
+            "number": 3,
+            "location": "On the ulnar end of the distal palmar crease proximal to the 5th metacarpophalangeal joint.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "fever",
+                "pain:knee",
+                "tinnitus",
+                "jaundice",
+                "cold",
+                "neck stiffness",
+                "back pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si03",
+            "category": "Shu-Stream Point, Wood Point, Confluent Point of Du Mai"
+        },
+        {
+            "code": "SI04",
+            "name": "Wrist Bone",
+            "chinese": "腕骨",
+            "pinyin": "wàn gǔ",
+            "number": 4,
+            "location": "On the ulnar side of the palm between base of the 5th metacarpal bone and hamate bone.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "fever",
+                "tinnitus",
+                "jaundice",
+                "heat",
+                "deficiency:spleen",
+                "wrist pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si04",
+            "category": "Yuan-Source Point"
+        },
+        {
+            "code": "SI05",
+            "name": "Yang Valley",
+            "chinese": "陽谷",
+            "pinyin": "yáng gǔ",
+            "number": 5,
+            "location": "At the ulnar end of the transverse crease on the dorsal aspect of the wrist.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "pain:chest",
+                "fever",
+                "tinnitus",
+                "heat",
+                "redness",
+                "wrist pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si05",
+            "category": "Jing-River Point, Fire Point"
+        },
+        {
+            "code": "SI06",
+            "name": "Support The Aged",
+            "chinese": "養老",
+            "pinyin": "yǎng lǎo",
+            "number": 6,
+            "location": "Dorsal to the head of the ulna; on the radial side of the styloid process.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "pain:back",
+                "pain:shoulder",
+                "pain:back:lumbar",
+                "vision problems",
+                "arm pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si06",
+            "category": "Xi-Cleft Point"
+        },
+        {
+            "code": "SI07",
+            "name": "Branch Of Uprightness",
+            "chinese": "支正",
+            "pinyin": "zhī zhèng",
+            "number": 7,
+            "location": "On the line joining SI5 and SI8 5 thumb widths proximal to the dorsal wrist crease.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "fever",
+                "anxiety",
+                "dizziness",
+                "cold",
+                "heat",
+                "neck stiffness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si07",
+            "category": "Luo-Connecting Point"
+        },
+        {
+            "code": "SI08",
+            "name": "Small Sea",
+            "chinese": "小海",
+            "pinyin": "xiǎo hǎi",
+            "number": 8,
+            "location": "When elbow is flexed, in the depression between olecranon and medial epicondyle.",
+            "cautions": "Caution with ulnar nerve.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "pain:chest",
+                "palpitations",
+                "jaundice",
+                "deficiency:qi",
+                "heat",
+                "elbow pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si08",
+            "category": "He-Sea Point, Earth Point"
+        },
+        {
+            "code": "SI09",
+            "name": "True Shoulder",
+            "chinese": "肩貞",
+            "pinyin": "jiān zhēn",
+            "number": 9,
+            "location": "Posterior and inferior to the shoulder joint; 1 thumb width above the posterior end of the axillary fold.",
+            "cautions": "Caution in acute shoulder injury.",
+            "needlingDepth": "1.0-1.5 cun perpendicular",
+            "treats": [
+                "tinnitus",
+                "wind",
+                "numbness",
+                "pain:scapula",
+                "pain:shoulder"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si09",
+            "category": "Regular Point"
+        },
+        {
+            "code": "SI10",
+            "name": "Upper Arm Shu Point",
+            "chinese": "臑俞",
+            "pinyin": "bù yú",
+            "number": 10,
+            "location": "Directly above the posterior end of the axillary fold inferior to the scapular spine.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun oblique",
+            "treats": [
+                "fever",
+                "pain:shoulder",
+                "chills",
+                "pain:arm",
+                "scapular pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si10",
+            "category": "Meeting Point with Yang Wei Mai, Yang Qiao Mai, LI, TB"
+        },
+        {
+            "code": "SI11",
+            "name": "Heavenly Gathering",
+            "chinese": "天宗",
+            "pinyin": "tiān zōng",
+            "number": 11,
+            "location": "On the scapula in the depression of the center of the subscapular fossa.",
+            "cautions": "Caution in acute shoulder injury.",
+            "needlingDepth": "0.5-1.0 cun oblique",
+            "treats": [
+                "cough",
+                "stagnation:qi",
+                "fullness:chest",
+                "pain:elbow",
+                "pain:scapula",
+                "breast disorders"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si11",
+            "category": "Regular Point"
+        },
+        {
+            "code": "SI12",
+            "name": "Grasping The Wind",
+            "chinese": "秉風",
+            "pinyin": "bǐng fēng",
+            "number": 12,
+            "location": "In the center of the suprascapular fossa directly above SI11.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "wind",
+                "benefit:shoulders",
+                "benefit:scapula",
+                "shoulder pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si12",
+            "category": "Meeting Point with LI, TB, GB"
+        },
+        {
+            "code": "SI13",
+            "name": "Crooked Wall",
+            "chinese": "曲垣",
+            "pinyin": "qū yuán",
+            "number": 13,
+            "location": "On the medial extremity of the suprascapular fossa.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun oblique",
+            "treats": [
+                "pain:shoulder",
+                "contraction:shoulder",
+                "benefit:shoulders",
+                "scapular pain"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si13",
+            "category": "Regular Point"
+        },
+        {
+            "code": "SI14",
+            "name": "Outer Shoulder Point",
+            "chinese": "肩外俞",
+            "pinyin": "jiān wài yú",
+            "number": 14,
+            "location": "3 thumb widths lateral to the lower border of the spinous process of the 1st thoracic vertebra.",
+            "cautions": "Avoid deep perpendicular needling; risk of pneumothorax.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "fever",
+                "wind",
+                "pain:scapula",
+                "pain:shoulder",
+                "neck stiffness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si14",
+            "category": "Regular Point"
+        },
+        {
+            "code": "SI15",
+            "name": "Middle Shoulder Point",
+            "chinese": "肩中俞",
+            "pinyin": "jiān zhōng yú",
+            "number": 15,
+            "location": "2 thumb widths lateral to the lower border of the spinous process of the 7th cervical vertebra.",
+            "cautions": "Avoid deep perpendicular needling.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "cough",
+                "fever",
+                "pain:scapula",
+                "pain:shoulder",
+                "asthma"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si15",
+            "category": "Regular Point"
+        },
+        {
+            "code": "SI16",
+            "name": "Celestial Windows",
+            "chinese": "天窗",
+            "pinyin": "tiān chuāng",
+            "number": 16,
+            "location": "In the lateral aspect of the neck posterior to the SCM.",
+            "cautions": "Caution near jugular vein.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "dizziness",
+                "tinnitus",
+                "heat",
+                "depression",
+                "numbness",
+                "deafness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si16",
+            "category": "Window of Sky Point"
+        },
+        {
+            "code": "SI17",
+            "name": "Celestial Hood",
+            "chinese": "天容",
+            "pinyin": "tiān róng",
+            "number": 17,
+            "location": "Posterior to the angle of the mandible on the anterior border of the SCM.",
+            "cautions": "Caution near facial nerve.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "cough",
+                "pain:chest",
+                "fever",
+                "asthma",
+                "tinnitus",
+                "sore throat"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si17",
+            "category": "Window of Sky Point"
+        },
+        {
+            "code": "SI18",
+            "name": "Cheek Bone Hole",
+            "chinese": "顴髎",
+            "pinyin": "quán hé",
+            "number": 18,
+            "location": "Directly below outer canthus in the depression on the lower border of the zygoma.",
+            "cautions": "Caution with facial nerve.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "pain:chest",
+                "heat",
+                "wind",
+                "swelling",
+                "facial pain",
+                "toothache"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si18",
+            "category": "Meeting Point with TB"
+        },
+        {
+            "code": "SI19",
+            "name": "Palace Of Hearing",
+            "chinese": "聽宮",
+            "pinyin": "tīng gōng",
+            "number": 19,
+            "location": "Anterior to the tragus in the depression formed when mouth is open.",
+            "cautions": "Avoid deep needling; caution with TMJ disorders.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "tinnitus",
+                "deafness",
+                "earache",
+                "toothache",
+                "otitis media"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/small-intestine-meridian#si19",
+            "category": "Meeting Point with TB, GB"
+        }
+    ]
+}

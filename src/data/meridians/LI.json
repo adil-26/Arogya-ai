@@ -1,0 +1,394 @@
+{
+    "id": "LI",
+    "name": "Large Intestine Meridian",
+    "chineseName": "大腸經",
+    "pinyin": "Dà Cháng Jīng",
+    "element": "Metal",
+    "yinYang": "Yang",
+    "pairedMeridian": "LU",
+    "totalPoints": 20,
+    "flowDirection": "From index finger to nose",
+    "peakHours": "5am - 7am",
+    "color": "#F59E0B",
+    "description": "The Large Intestine Meridian is responsible for elimination and release. It is associated with letting go and is paired with the Lung Meridian.",
+    "sourceUrl": "https://acuiq.com/meridians/large-intestine-meridian",
+    "acupoints": [
+        {
+            "code": "LI01",
+            "name": "Metal Yang",
+            "chinese": "商陽",
+            "pinyin": "shāng yáng",
+            "number": 1,
+            "location": "On the radial side of the index finger about 0.1 thumb width posterior to the corner of the nail.",
+            "cautions": "Avoid in patients with bleeding disorders.",
+            "needlingDepth": "0.1 cun shallow or prick to bleed",
+            "treats": [
+                "cough",
+                "dyspnoea",
+                "tinnitus",
+                "heat",
+                "fullness:chest"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li01",
+            "category": "Jing-Well Point, Metal Point"
+        },
+        {
+            "code": "LI02",
+            "name": "Second Space",
+            "chinese": "二間",
+            "pinyin": "èr jiān",
+            "number": 2,
+            "location": "In the depression of the radial side of the index finger distal to the 2nd metacarpophalangeal joint.",
+            "cautions": "Caution in local skin infections.",
+            "needlingDepth": "0.2-0.3 cun perpendicular",
+            "treats": [
+                "tinnitus",
+                "cold",
+                "pain:shoulder",
+                "deviation:eye"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li02",
+            "category": "Ying-Spring Point, Water Point"
+        },
+        {
+            "code": "LI03",
+            "name": "Third Space",
+            "chinese": "三間",
+            "pinyin": "sān jiān",
+            "number": 3,
+            "location": "On the radial side of the index finger proximal to the head of the 2nd metacarpal bone.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "fever",
+                "diarrhoea",
+                "tinnitus",
+                "cold",
+                "heat"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li03",
+            "category": "Shu-Stream Point, Wood Point"
+        },
+        {
+            "code": "LI04",
+            "name": "Junction Valley",
+            "chinese": "合谷",
+            "pinyin": "hé gǔ",
+            "number": 4,
+            "location": "On the dorsum of the hand between 1st & 2nd metacarpal bones approximately in the middle of the 2nd metacarpal bone on the radial side.",
+            "cautions": "Contraindicated during pregnancy.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "fever",
+                "tinnitus",
+                "headache",
+                "amenorrhea",
+                "wind",
+                "pain",
+                "toothache"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li04",
+            "category": "Yuan-Source Point, Command Point for Face and Mouth"
+        },
+        {
+            "code": "LI05",
+            "name": "Yang Stream",
+            "chinese": "陽谿",
+            "pinyin": "yáng xī",
+            "number": 5,
+            "location": "On the radial side of the wrist in the depression between tendons of the extensor pollicus longus and brevis.",
+            "cautions": "Caution with depth.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "cough",
+                "fever",
+                "tinnitus",
+                "cold",
+                "heat"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li05",
+            "category": "Jing-River Point, Fire Point"
+        },
+        {
+            "code": "LI06",
+            "name": "Diverging Passage",
+            "chinese": "偏歴",
+            "pinyin": "piān lì",
+            "number": 6,
+            "location": "On the line connecting LI5 and LI11 3 thumb widths above the crease of the wrist.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-0.8 cun perpendicular",
+            "treats": [
+                "tinnitus",
+                "heat",
+                "wind",
+                "pain:elbow",
+                "pain:shoulder"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li06",
+            "category": "Luo-Connecting Point"
+        },
+        {
+            "code": "LI07",
+            "name": "Warm Flow",
+            "chinese": "溫溜",
+            "pinyin": "wēn liū",
+            "number": 7,
+            "location": "On the line connecting LI5 and LI11, 5 thumb widths above the crease of the wrist.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "heat",
+                "distension:abdomen",
+                "pain:abdomen",
+                "redness",
+                "swelling"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li07",
+            "category": "Xi-Cleft Point"
+        },
+        {
+            "code": "LI08",
+            "name": "Lower Ridge",
+            "chinese": "下廉",
+            "pinyin": "xià lián",
+            "number": 8,
+            "location": "On the line joining LI5 and LI11 4 thumb widths below cubital crease.",
+            "cautions": "Avoid in areas of skin damage.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "dyspnoea",
+                "dizziness",
+                "heat",
+                "pain:abdomen",
+                "wind"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li08",
+            "category": "Regular Point"
+        },
+        {
+            "code": "LI09",
+            "name": "Upper Ridge",
+            "chinese": "上廉",
+            "pinyin": "shàng lián",
+            "number": 9,
+            "location": "On the line joining LI5 and LI11, 3 thumb widths below cubital crease.",
+            "cautions": "Caution in local inflammation.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:chest",
+                "dyspnoea",
+                "pain:abdomen",
+                "pain:shoulder"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li09",
+            "category": "Regular Point"
+        },
+        {
+            "code": "LI10",
+            "name": "Arm Three Miles",
+            "chinese": "手三里",
+            "pinyin": "shǒu sān lǐ",
+            "number": 10,
+            "location": "On the line joining LI5 and LI11, 2 thumb widths below cubital crease.",
+            "cautions": "Avoid in local inflammation.",
+            "needlingDepth": "0.8-1.2 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "vomiting",
+                "pain:abdomen",
+                "deviation:mouth",
+                "arm weakness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li10",
+            "category": "Regular Point"
+        },
+        {
+            "code": "LI11",
+            "name": "Pond At The Bend",
+            "chinese": "曲池",
+            "pinyin": "qū chí",
+            "number": 11,
+            "location": "When elbow is flexed, in the depression at the lateral end of the transverse cubital crease.",
+            "cautions": "Caution in severe hypertension.",
+            "needlingDepth": "1.0-1.5 cun perpendicular",
+            "treats": [
+                "diarrhoea",
+                "dizziness",
+                "heat",
+                "vomiting",
+                "fever",
+                "hypertension",
+                "skin conditions"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li11",
+            "category": "He-Sea Point, Earth Point"
+        },
+        {
+            "code": "LI12",
+            "name": "Elbow Bone Hole",
+            "chinese": "肘髎",
+            "pinyin": "zhǒu hé",
+            "number": 12,
+            "location": "On the lateral side of the upper arm 1 thumb width above LI11.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain",
+                "somnolence",
+                "numbness:shoulder",
+                "contraction"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li12",
+            "category": "Regular Point"
+        },
+        {
+            "code": "LI13",
+            "name": "Arm Five Li",
+            "chinese": "手五里",
+            "pinyin": "shǒu wǔ lǐ",
+            "number": 13,
+            "location": "On the line connecting LI11 and LI15, 3 thumb widths above LI11.",
+            "cautions": "Caution with depth and angle.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "cough",
+                "anxiety",
+                "phlegm",
+                "jaundice",
+                "deficiency:qi"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li13",
+            "category": "Regular Point"
+        },
+        {
+            "code": "LI14",
+            "name": "Upper Arm Prominence",
+            "chinese": "臂臑",
+            "pinyin": "bì bù",
+            "number": 14,
+            "location": "On the line connecting LI11 and LI15, 7 thumb widths above LI11.",
+            "cautions": "Caution with depth to avoid nerve damage.",
+            "needlingDepth": "0.5-1.0 cun perpendicular",
+            "treats": [
+                "pain:chest",
+                "redness",
+                "swelling",
+                "goitre",
+                "eye conditions"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li14",
+            "category": "Regular Point"
+        },
+        {
+            "code": "LI15",
+            "name": "Shoulder And Clavicle",
+            "chinese": "肩髃",
+            "pinyin": "jiān dòu",
+            "number": 15,
+            "location": "Anteroinferior to the acromion on the upper portion of the deltoid muscle.",
+            "cautions": "Avoid deep perpendicular needling; risk of pneumothorax.",
+            "needlingDepth": "0.8-1.5 cun oblique",
+            "treats": [
+                "wind",
+                "pain:shoulder",
+                "goitre",
+                "hemiplegia",
+                "arm weakness"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li15",
+            "category": "Meeting Point with Yang Qiao Mai"
+        },
+        {
+            "code": "LI16",
+            "name": "Great Bone",
+            "chinese": "巨骨",
+            "pinyin": "jù gǔ",
+            "number": 16,
+            "location": "In the upper aspect of the shoulder between acromial extremity of the clavicle and scapular spine.",
+            "cautions": "Avoid deep perpendicular needling.",
+            "needlingDepth": "0.5-1.0 cun oblique",
+            "treats": [
+                "pain:back",
+                "pain:shoulder",
+                "epilepsy",
+                "goitre"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li16",
+            "category": "Meeting Point with Yang Qiao Mai"
+        },
+        {
+            "code": "LI17",
+            "name": "Celestial Tripod",
+            "chinese": "天鼎",
+            "pinyin": "tiān dǐng",
+            "number": 17,
+            "location": "On the lateral side of the neck at the posterior border of the SCM muscle.",
+            "cautions": "Caution near carotid artery and jugular vein.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "goitre",
+                "dysfunction:breathing",
+                "pharyngitis",
+                "voice:loss"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li17",
+            "category": "Regular Point"
+        },
+        {
+            "code": "LI18",
+            "name": "Beside The Prominence",
+            "chinese": "扶突",
+            "pinyin": "fú tū",
+            "number": 18,
+            "location": "On the lateral side of the neck, level with tip of the adam's apple.",
+            "cautions": "Avoid deep needling; proximity to carotid artery.",
+            "needlingDepth": "0.3-0.5 cun perpendicular",
+            "treats": [
+                "cough",
+                "asthma",
+                "swelling",
+                "pain:throat",
+                "pain:face"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li18",
+            "category": "Regular Point"
+        },
+        {
+            "code": "LI19",
+            "name": "Grain Bone Hole",
+            "chinese": "禾髎",
+            "pinyin": "hé liáo",
+            "number": 19,
+            "location": "On the face directly below the lateral margin of the nostril.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "nasal:congestion",
+                "epistaxis",
+                "deviation:mouth"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li19",
+            "category": "Regular Point"
+        },
+        {
+            "code": "LI20",
+            "name": "Welcome Fragrance",
+            "chinese": "迎香",
+            "pinyin": "yíng xiāng",
+            "number": 20,
+            "location": "In the nasolabial groove at the level of the midpoint of the lateral border of the ala nasi.",
+            "cautions": "No specific contraindications.",
+            "needlingDepth": "0.3-0.5 cun oblique",
+            "treats": [
+                "nasal:congestion",
+                "epistaxis",
+                "rhinitis",
+                "facial:pain",
+                "loss of smell"
+            ],
+            "imageUrl": "https://acuiq.com/meridians/large-intestine-meridian#li20",
+            "category": "Meeting Point with Stomach Meridian"
+        }
+    ]
+}
