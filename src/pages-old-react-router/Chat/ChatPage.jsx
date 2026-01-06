@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Paperclip, AlertTriangle, ShieldCheck, Trash2 } from 'lucide-react';
+import { Send, Paperclip, AlertTriangle, ShieldCheck, Trash2, Sparkles, Mic, Image } from 'lucide-react';
 import ChatMessage from '../../components/chat/ChatMessage';
 import './ChatPage.css';
 
@@ -13,9 +13,17 @@ const ChatPage = () => {
     const defaultMessage = {
         id: 1,
         sender: 'ai',
-        text: "Hello! I'm Aarogya AI. I can help you understand your symptoms or reports.\n\nPlease note: I am an AI assistant, not a doctor. My advice is for informational purposes only.",
+        text: "👋 Hello! I'm **Aarogya AI**, your health assistant.\n\nI can help you:\n• Understand symptoms\n• Explain medical reports\n• Provide diet & wellness tips\n\n⚠️ *I'm an AI assistant, not a doctor. Always consult a healthcare professional for serious concerns.*",
         timestamp: new Date().toISOString()
     };
+
+    // Quick suggestion prompts
+    const quickSuggestions = [
+        { icon: '💊', text: 'What does this medicine do?', color: '#8B5CF6' },
+        { icon: '🩺', text: 'Explain my blood report', color: '#0EA5E9' },
+        { icon: '😷', text: 'I have headache and fever', color: '#F59E0B' },
+        { icon: '🍎', text: 'Diet tips for better health', color: '#10B981' },
+    ];
 
     // Load chat history on mount
     useEffect(() => {
@@ -54,20 +62,17 @@ const ChatPage = () => {
 
     useEffect(scrollToBottom, [messages, isTyping]);
 
-    // Save messages to server when they change (debounced)
+    // Save messages to server
     useEffect(() => {
         if (!historyLoaded || messages.length === 0) return;
 
         const saveHistory = async () => {
             try {
-                // First clear old history, then save new
                 await fetch('/api/chat-history', { method: 'DELETE' });
-
                 const messagesToSave = messages.map(m => ({
                     sender: m.sender,
                     content: m.text
                 }));
-
                 await fetch('/api/chat-history', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -78,7 +83,6 @@ const ChatPage = () => {
             }
         };
 
-        // Debounce save
         const timeout = setTimeout(saveHistory, 2000);
         return () => clearTimeout(timeout);
     }, [messages, historyLoaded]);
@@ -127,7 +131,7 @@ const ChatPage = () => {
             const errorMsg = {
                 id: Date.now() + 1,
                 sender: 'ai',
-                text: "Sorry, I'm having trouble connecting right now.",
+                text: "⚠️ Sorry, I'm having trouble connecting right now. Please try again in a moment.",
                 timestamp: new Date().toISOString()
             };
             setMessages(prev => [...prev, errorMsg]);
@@ -143,6 +147,10 @@ const ChatPage = () => {
         }
     };
 
+    const handleQuickSuggestion = (text) => {
+        setInput(text);
+    };
+
     const handleClearHistory = async () => {
         if (!confirm("Clear all chat history?")) return;
         try {
@@ -153,99 +161,111 @@ const ChatPage = () => {
         }
     };
 
-    const handleFileUpload = () => {
-        const userMsg = {
-            id: Date.now(),
-            sender: 'user',
-            text: "Uploaded report for analysis",
-            attachment: { name: "blood_test_report.pdf" },
-            timestamp: new Date().toISOString()
-        };
-        setMessages(prev => [...prev, userMsg]);
-        setIsTyping(true);
-
-        setTimeout(() => {
-            const aiMsg = {
-                id: Date.now() + 1,
-                sender: 'ai',
-                text: "I've analyzed your blood report. \n\nObservations:\n- **Hemoglobin**: 13.5 g/dL (Normal)\n- **WBC Count**: Slightly elevated (11,000). This might indicate a minor infection.\n\nRecommendation: Please consult a General Physician for a follow-up.",
-                timestamp: new Date().toISOString()
-            };
-            setMessages(prev => [...prev, aiMsg]);
-            setIsTyping(false);
-        }, 2500);
-    }
-
     if (!historyLoaded) {
         return (
-            <div className="chat-page" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <p>Loading chat history...</p>
+            <div className="chat-page chat-loading">
+                <div className="chat-loading-animation">
+                    <div className="chat-loader-ring"></div>
+                    <div className="chat-loader-ring"></div>
+                    <div className="chat-loader-ring"></div>
+                    <div className="chat-loader-core">
+                        <span>🤖</span>
+                    </div>
+                </div>
+                <p className="chat-loading-text">Starting Aarogya AI...</p>
             </div>
         );
     }
 
     return (
         <div className="chat-page">
+            {/* Enhanced Header */}
             <div className="chat-header">
                 <div className="header-info">
-                    <h2>Aarogya AI Assistant</h2>
-                    <span className="online-badge">Online</span>
+                    <div className="ai-avatar">
+                        <span className="avatar-emoji">🤖</span>
+                        <span className="pulse-dot"></span>
+                    </div>
+                    <div className="header-text">
+                        <h2>Aarogya AI</h2>
+                        <span className="online-badge">
+                            <span className="status-dot"></span>
+                            Online • Ready to help
+                        </span>
+                    </div>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <button
-                        onClick={handleClearHistory}
-                        style={{
-                            background: 'rgba(239, 68, 68, 0.1)',
-                            border: 'none',
-                            padding: '6px 12px',
-                            borderRadius: '6px',
-                            color: '#EF4444',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '4px',
-                            fontSize: '0.8rem'
-                        }}
-                    >
-                        <Trash2 size={14} /> Clear
+                <div className="header-actions">
+                    <button className="btn-clear" onClick={handleClearHistory} title="Clear History">
+                        <Trash2 size={16} />
+                        <span className="btn-text">Clear</span>
                     </button>
                     <div className="security-badge">
-                        <ShieldCheck size={16} />
-                        <span>Private & Secure</span>
+                        <ShieldCheck size={14} />
+                        <span>Encrypted</span>
                     </div>
                 </div>
             </div>
 
+            {/* Disclaimer Banner */}
             <div className="disclaimer-banner">
-                <AlertTriangle size={16} />
-                <span>Disclaimer: This AI provides health information, not medical diagnosis. Always consult a doctor for serious concerns.</span>
+                <AlertTriangle size={14} />
+                <span>AI assistant • Not a substitute for medical advice</span>
             </div>
 
+            {/* Messages Area */}
             <div className="messages-container">
                 {messages.map(msg => (
                     <ChatMessage key={msg.id} message={msg} />
                 ))}
                 {isTyping && (
                     <div className="typing-indicator">
-                        <span>•</span><span>•</span><span>•</span>
+                        <div className="typing-dot"></div>
+                        <div className="typing-dot"></div>
+                        <div className="typing-dot"></div>
                     </div>
                 )}
                 <div ref={messagesEndRef} />
             </div>
 
+            {/* Quick Suggestions */}
+            {messages.length <= 1 && (
+                <div className="quick-suggestions">
+                    <p className="suggestions-label">
+                        <Sparkles size={14} /> Try asking:
+                    </p>
+                    <div className="suggestions-grid">
+                        {quickSuggestions.map((suggestion, idx) => (
+                            <button
+                                key={idx}
+                                className="suggestion-chip"
+                                onClick={() => handleQuickSuggestion(suggestion.text)}
+                                style={{ '--chip-color': suggestion.color }}
+                            >
+                                <span className="chip-icon">{suggestion.icon}</span>
+                                <span className="chip-text">{suggestion.text}</span>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* Input Area */}
             <div className="chat-input-area">
-                <button className="btn-icon attachment-btn" onClick={handleFileUpload} title="Upload Report">
-                    <Paperclip size={20} />
-                </button>
-                <textarea
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyDown={handleKeyPress}
-                    placeholder="Type your symptoms or ask a question..."
-                    rows={1}
-                />
-                <button className="btn-send" onClick={handleSend} disabled={!input.trim() && !isTyping}>
-                    <Send size={20} />
+                <div className="input-wrapper">
+                    <textarea
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        onKeyDown={handleKeyPress}
+                        placeholder="Describe your symptoms or ask a question..."
+                        rows={1}
+                    />
+                </div>
+                <button
+                    className="btn-send"
+                    onClick={handleSend}
+                    disabled={!input.trim() || isTyping}
+                >
+                    <Send size={18} />
                 </button>
             </div>
         </div>
