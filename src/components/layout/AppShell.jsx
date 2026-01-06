@@ -3,28 +3,53 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Calendar, FileText, MessageSquare, Settings, Menu, X, Bell, Gift, Wallet } from 'lucide-react';
+import { LayoutDashboard, Calendar, FileText, MessageSquare, Settings, Menu, X, Bell, Gift, Wallet, User, LogOut, ChevronDown, MoreVertical, Pill, BookOpen } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
 import './AppShell.css';
 
 const AppShell = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
   const [unreadMessages, setUnreadMessages] = useState(0);
   const pathname = usePathname();
   const { data: session, status } = useSession();
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const closeSidebar = () => setIsSidebarOpen(false);
+  const closeMenus = () => {
+    setIsProfileOpen(false);
+    setIsMoreMenuOpen(false);
+  };
 
-  // Check for unread messages - MUST be before conditional return (React hooks rules)
+  // All navigation items
+  const navItems = [
+    { path: '/dashboard/health', label: 'Dashboard', icon: LayoutDashboard },
+    { path: '/history', label: 'History', icon: FileText },
+    { path: '/appointments', label: 'Appointments', icon: Calendar },
+    { path: '/dashboard/messages', label: 'Messages', icon: MessageSquare },
+    { path: '/records', label: 'Records', icon: FileText },
+    { path: '/chat', label: 'AI Assistant', icon: MessageSquare },
+    { path: '/library', label: 'Library', icon: BookOpen },
+    { path: '/dashboard/referral', label: 'Refer & Earn', icon: Gift },
+    { path: '/dashboard/wallet', label: 'My Wallet', icon: Wallet },
+  ];
+
+  // Get current page title
+  const getPageTitle = () => {
+    const current = navItems.find(item => pathname.startsWith(item.path));
+    if (current) return current.label;
+    if (pathname.startsWith('/profile')) return 'Profile';
+    if (pathname.startsWith('/settings')) return 'Settings';
+    return 'Dashboard';
+  };
+
+  // Check for unread messages
   useEffect(() => {
-    // Skip if still loading
     if (status === "loading") return;
 
     const checkUnread = async () => {
       try {
-        // Get read counts from localStorage
         const storedCounts = localStorage.getItem('patient_read_counts');
         const readCounts = storedCounts ? JSON.parse(storedCounts) : {};
 
@@ -54,7 +79,16 @@ const AppShell = ({ children }) => {
     return () => clearInterval(interval);
   }, [status]);
 
-  // Don't render anything until session is checked (prevents flash)
+  // Close menus when clicking outside
+  useEffect(() => {
+    const handleClickOutside = () => closeMenus();
+    if (isProfileOpen || isMoreMenuOpen) {
+      document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
+    }
+  }, [isProfileOpen, isMoreMenuOpen]);
+
+  // Loading state
   if (status === "loading") {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -86,61 +120,24 @@ const AppShell = ({ children }) => {
           </button>
         </div>
         <nav className="nav-menu">
-          <Link href="/dashboard/health" className={`nav-item ${isActive('/dashboard/health') ? 'active' : ''}`} onClick={closeSidebar}>
-            <LayoutDashboard size={20} />
-            <span>Dashboard</span>
-          </Link>
-          <Link href="/history" className={`nav-item ${isActive('/history') ? 'active' : ''}`} onClick={closeSidebar}>
-            <FileText size={20} />
-            <span>History</span>
-          </Link>
-          <Link href="/appointments" className={`nav-item ${isActive('/appointments') ? 'active' : ''}`} onClick={closeSidebar}>
-            <Calendar size={20} />
-            <span>Appointments</span>
-          </Link>
-          <Link href="/dashboard/messages" className={`nav-item ${isActive('/dashboard/messages') ? 'active' : ''}`} onClick={closeSidebar} style={{ position: 'relative' }}>
-            <MessageSquare size={20} />
-            <span>Messages</span>
-            {unreadMessages > 0 && (
-              <span style={{
-                position: 'absolute',
-                right: '15px',
-                background: '#EF4444',
-                color: 'white',
-                fontSize: '0.65rem',
-                fontWeight: 'bold',
-                padding: '2px 7px',
-                borderRadius: '10px',
-                minWidth: '18px',
-                textAlign: 'center'
-              }}>
-                {unreadMessages}
-              </span>
-            )}
-          </Link>
-          <Link href="/records" className={`nav-item ${isActive('/records') ? 'active' : ''}`} onClick={closeSidebar}>
-            <FileText size={20} />
-            <span>Records</span>
-          </Link>
-          <Link href="/chat" className={`nav-item ${isActive('/chat') ? 'active' : ''}`} onClick={closeSidebar}>
-            <MessageSquare size={20} />
-            <span>AI Assistant</span>
-          </Link>
-          <Link href="/library" className={`nav-item ${isActive('/library') ? 'active' : ''}`} onClick={closeSidebar}>
-            <FileText size={20} />
-            <span>Library</span>
-          </Link>
-          <Link href="/dashboard/referral" className={`nav-item ${isActive('/dashboard/referral') ? 'active' : ''}`} onClick={closeSidebar}>
-            <Gift size={20} />
-            <span>Refer & Earn</span>
-          </Link>
-          <Link href="/dashboard/wallet" className={`nav-item ${isActive('/dashboard/wallet') ? 'active' : ''}`} onClick={closeSidebar}>
-            <Wallet size={20} />
-            <span>My Wallet</span>
-          </Link>
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              href={item.path}
+              className={`nav-item ${isActive(item.path) ? 'active' : ''}`}
+              onClick={closeSidebar}
+              style={{ position: 'relative' }}
+            >
+              <item.icon size={20} />
+              <span>{item.label}</span>
+              {item.path === '/dashboard/messages' && unreadMessages > 0 && (
+                <span className="nav-badge">{unreadMessages}</span>
+              )}
+            </Link>
+          ))}
         </nav>
 
-        <div className="user-profile-summary" onClick={() => setIsProfileOpen(!isProfileOpen)} style={{ cursor: 'pointer', position: 'relative' }}>
+        <div className="user-profile-summary" onClick={(e) => { e.stopPropagation(); setIsProfileOpen(!isProfileOpen); }} style={{ cursor: 'pointer', position: 'relative' }}>
           <div className="avatar">{session?.user?.name?.[0] || 'U'}</div>
           <div className="info">
             <span className="name">{session?.user?.name || 'User'}</span>
@@ -171,10 +168,79 @@ const AppShell = ({ children }) => {
             <button className="mobile-menu-toggle" onClick={toggleSidebar}>
               <Menu size={24} />
             </button>
-            <h1 className="page-title">Medical Dashboard</h1>
+            <h1 className="page-title">{getPageTitle()}</h1>
           </div>
-          <div className="actions">
-            <button className="btn-icon"><Settings size={20} /></button>
+
+          <div className="header-actions">
+            {/* More Menu (for all tabs) */}
+            <div className="header-dropdown-container">
+              <button
+                className="btn-icon"
+                onClick={(e) => { e.stopPropagation(); setIsMoreMenuOpen(!isMoreMenuOpen); setIsProfileOpen(false); }}
+              >
+                <MoreVertical size={20} />
+              </button>
+              {isMoreMenuOpen && (
+                <div className="header-dropdown more-menu">
+                  {navItems.slice(0, 6).map((item) => (
+                    <Link
+                      key={item.path}
+                      href={item.path}
+                      className={`dropdown-link ${isActive(item.path) ? 'active' : ''}`}
+                      onClick={closeMenus}
+                    >
+                      <item.icon size={16} />
+                      <span>{item.label}</span>
+                    </Link>
+                  ))}
+                  <div className="dropdown-divider" />
+                  {navItems.slice(6).map((item) => (
+                    <Link
+                      key={item.path}
+                      href={item.path}
+                      className={`dropdown-link ${isActive(item.path) ? 'active' : ''}`}
+                      onClick={closeMenus}
+                    >
+                      <item.icon size={16} />
+                      <span>{item.label}</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Profile Menu */}
+            <div className="header-dropdown-container">
+              <button
+                className="btn-icon profile-btn"
+                onClick={(e) => { e.stopPropagation(); setIsProfileOpen(!isProfileOpen); setIsMoreMenuOpen(false); }}
+              >
+                <User size={20} />
+              </button>
+              {isProfileOpen && (
+                <div className="header-dropdown profile-menu">
+                  <div className="dropdown-user">
+                    <div className="avatar-small">{session?.user?.name?.[0] || 'U'}</div>
+                    <div className="user-info">
+                      <span className="user-name">{session?.user?.name || 'User'}</span>
+                      <span className="user-email">{session?.user?.email || ''}</span>
+                    </div>
+                  </div>
+                  <div className="dropdown-divider" />
+                  <Link href="/profile" className="dropdown-link" onClick={closeMenus}>
+                    <User size={16} />
+                    <span>My Profile</span>
+                  </Link>
+                  <button
+                    className="dropdown-link logout"
+                    onClick={() => signOut({ callbackUrl: '/login' })}
+                  >
+                    <LogOut size={16} />
+                    <span>Logout</span>
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </header>
 
@@ -202,7 +268,7 @@ const AppShell = ({ children }) => {
             <span>Book</span>
           </Link>
           <Link href="/library" className={`bottom-nav-item ${isActive('/library') ? 'active' : ''}`}>
-            <FileText size={24} />
+            <BookOpen size={24} />
             <span>Lib</span>
           </Link>
         </nav>
