@@ -1,14 +1,16 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Pill, Plus, Edit2, Trash2, Bell, BellOff, Clock, Calendar, Check, X, Loader2, AlertCircle } from 'lucide-react';
+import { Pill, Plus, Edit2, Trash2, Bell, BellOff, Clock, Calendar, Check, X, Loader2, AlertCircle, Stethoscope, User } from 'lucide-react';
 import './MedicationReminders.css';
 
 const MedicationReminders = () => {
-    const [medications, setMedications] = useState([]);
+    const [myMedications, setMyMedications] = useState([]);
+    const [doctorMedications, setDoctorMedications] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showAddModal, setShowAddModal] = useState(false);
     const [editingMed, setEditingMed] = useState(null);
+    const [activeTab, setActiveTab] = useState('all'); // 'all', 'mine', 'doctor'
 
     const [formData, setFormData] = useState({
         name: '',
@@ -37,15 +39,23 @@ const MedicationReminders = () => {
     ];
 
     useEffect(() => {
-        fetchMedications();
+        fetchAllMedications();
     }, []);
 
-    const fetchMedications = async () => {
+    const fetchAllMedications = async () => {
         try {
-            const res = await fetch('/api/medications?active=true');
-            if (res.ok) {
-                const data = await res.json();
-                setMedications(data.medications || []);
+            // Fetch self-added medications
+            const myRes = await fetch('/api/medications?active=true');
+            if (myRes.ok) {
+                const data = await myRes.json();
+                setMyMedications(data.medications || []);
+            }
+
+            // Fetch doctor-prescribed medications
+            const docRes = await fetch('/api/my-prescriptions');
+            if (docRes.ok) {
+                const data = await docRes.json();
+                setDoctorMedications(data.medications || []);
             }
         } catch (error) {
             console.error('Failed to fetch medications:', error);
@@ -53,6 +63,18 @@ const MedicationReminders = () => {
             setLoading(false);
         }
     };
+
+    // Combined and filtered medications
+    const allMedications = [
+        ...myMedications.map(m => ({ ...m, source: 'self' })),
+        ...doctorMedications.map(m => ({ ...m, source: 'doctor' }))
+    ];
+
+    const filteredMedications = activeTab === 'all'
+        ? allMedications
+        : activeTab === 'mine'
+            ? allMedications.filter(m => m.source === 'self')
+            : allMedications.filter(m => m.source === 'doctor');
 
     const handleSubmit = async () => {
         if (!formData.name || !formData.dosage) {
@@ -73,7 +95,7 @@ const MedicationReminders = () => {
             });
 
             if (res.ok) {
-                fetchMedications();
+                fetchAllMedications();
                 closeModal();
             }
         } catch (error) {
@@ -87,7 +109,7 @@ const MedicationReminders = () => {
         try {
             const res = await fetch(`/api/medications?id=${id}`, { method: 'DELETE' });
             if (res.ok) {
-                fetchMedications();
+                fetchAllMedications();
             }
         } catch (error) {
             console.error('Delete error:', error);
@@ -176,19 +198,46 @@ const MedicationReminders = () => {
             <div className="med-header">
                 <div>
                     <h2><Pill size={20} /> My Medications</h2>
-                    <p className="subtitle">{medications.length} active medication(s)</p>
+                    <p className="subtitle">
+                        {allMedications.length} medication(s)
+                        {doctorMedications.length > 0 && ` • ${doctorMedications.length} from doctor`}
+                    </p>
                 </div>
                 <button className="btn-add" onClick={() => setShowAddModal(true)}>
                     <Plus size={18} />
-                    <span>Add Medication</span>
+                    <span>Add</span>
                 </button>
             </div>
 
+            {/* Filter Tabs */}
+            {allMedications.length > 0 && (
+                <div className="med-tabs">
+                    <button
+                        className={`med-tab ${activeTab === 'all' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('all')}
+                    >
+                        All ({allMedications.length})
+                    </button>
+                    <button
+                        className={`med-tab ${activeTab === 'mine' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('mine')}
+                    >
+                        <User size={14} /> Mine ({myMedications.length})
+                    </button>
+                    <button
+                        className={`med-tab ${activeTab === 'doctor' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('doctor')}
+                    >
+                        <Stethoscope size={14} /> Doctor ({doctorMedications.length})
+                    </button>
+                </div>
+            )}
+
             {/* Medications List */}
-            {medications.length === 0 ? (
+            {filteredMedications.length === 0 ? (
                 <div className="empty-state">
                     <Pill size={48} />
-                    <h3>No medications added</h3>
+                    <h3>No medications {activeTab !== 'all' ? 'in this category' : 'added'}</h3>
                     <p>Add your medications to set up reminders</p>
                     <button className="btn-add" onClick={() => setShowAddModal(true)}>
                         <Plus size={16} /> Add Medication
@@ -196,24 +245,32 @@ const MedicationReminders = () => {
                 </div>
             ) : (
                 <div className="medications-list">
-                    {medications.map((med) => (
-                        <div key={med.id} className={`medication-card ${!med.reminderEnabled ? 'muted' : ''}`}>
-                            <div className="med-icon">
-                                <Pill size={20} />
+                    {filteredMedications.map((med) => (
+                        <div key={med.id} className={`medication-card ${!med.reminderEnabled && med.source === 'self' ? 'muted' : ''} ${med.source === 'doctor' ? 'doctor-rx' : ''}`}>
+                            <div className={`med-icon ${med.source === 'doctor' ? 'doctor' : ''}`}>
+                                {med.source === 'doctor' ? <Stethoscope size={20} /> : <Pill size={20} />}
                             </div>
                             <div className="med-content">
                                 <div className="med-header-row">
                                     <h4>{med.name}</h4>
                                     <span className="dosage-badge">{med.dosage}</span>
+                                    {med.source === 'doctor' && (
+                                        <span className="doctor-badge">Rx</span>
+                                    )}
                                 </div>
                                 <p className="frequency">
                                     <Clock size={12} /> {med.frequency}
                                 </p>
+                                {med.source === 'doctor' && med.doctorName && (
+                                    <p className="doctor-name">
+                                        <Stethoscope size={12} /> Dr. {med.doctorName}
+                                    </p>
+                                )}
                                 {med.timing && med.timing.length > 0 && (
                                     <div className="timing-tags">
                                         {med.timing.map(t => (
                                             <span key={t} className="timing-tag">
-                                                {timingOptions.find(o => o.id === t)?.label}
+                                                {timingOptions.find(o => o.id === t)?.label || t}
                                             </span>
                                         ))}
                                     </div>
@@ -223,25 +280,29 @@ const MedicationReminders = () => {
                                         <AlertCircle size={12} /> {med.instructions}
                                     </p>
                                 )}
-                                <p className="next-dose">
-                                    Next: {getNextDose(med)}
-                                </p>
+                                {med.source === 'self' && (
+                                    <p className="next-dose">
+                                        Next: {getNextDose(med)}
+                                    </p>
+                                )}
                             </div>
-                            <div className="med-actions">
-                                <button
-                                    className={`btn-reminder ${med.reminderEnabled ? 'active' : ''}`}
-                                    onClick={() => toggleReminder(med)}
-                                    title={med.reminderEnabled ? 'Disable reminder' : 'Enable reminder'}
-                                >
-                                    {med.reminderEnabled ? <Bell size={16} /> : <BellOff size={16} />}
-                                </button>
-                                <button className="btn-edit" onClick={() => openEdit(med)}>
-                                    <Edit2 size={16} />
-                                </button>
-                                <button className="btn-delete" onClick={() => handleDelete(med.id)}>
-                                    <Trash2 size={16} />
-                                </button>
-                            </div>
+                            {med.source === 'self' && (
+                                <div className="med-actions">
+                                    <button
+                                        className={`btn-reminder ${med.reminderEnabled ? 'active' : ''}`}
+                                        onClick={() => toggleReminder(med)}
+                                        title={med.reminderEnabled ? 'Disable reminder' : 'Enable reminder'}
+                                    >
+                                        {med.reminderEnabled ? <Bell size={16} /> : <BellOff size={16} />}
+                                    </button>
+                                    <button className="btn-edit" onClick={() => openEdit(med)}>
+                                        <Edit2 size={16} />
+                                    </button>
+                                    <button className="btn-delete" onClick={() => handleDelete(med.id)}>
+                                        <Trash2 size={16} />
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>

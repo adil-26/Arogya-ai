@@ -83,6 +83,69 @@
     margin: 0 0 20px;
 }
 
+/* Medication Tabs */
+.med-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #E2E8F0;
+}
+
+.med-tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: #F1F5F9;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #64748B;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.med-tab:hover {
+    background: #E2E8F0;
+}
+
+.med-tab.active {
+    background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+    color: white;
+}
+
+/* Doctor Prescription Styling */
+.medication-card.doctor-rx {
+    border-left: 4px solid #10B981;
+    background: linear-gradient(135deg, #F0FDF4, white);
+}
+
+.med-icon.doctor {
+    background: linear-gradient(135deg, #D1FAE5, #A7F3D0);
+    color: #059669;
+}
+
+.doctor-badge {
+    padding: 2px 8px;
+    background: linear-gradient(135deg, #10B981, #059669);
+    color: white;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.doctor-name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: #059669;
+    font-weight: 500;
+    margin: 6px 0;
+}
+
 /* Medications List */
 .medications-list {
     display: flex;
