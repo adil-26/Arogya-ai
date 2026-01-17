@@ -55,6 +55,31 @@ export async function DELETE(request) {
     }
 }
 
+// PATCH: Update user (Toggle Premium)
+export async function PATCH(request) {
+    try {
+        if (!await isAdmin(request)) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
+        const { userId, action, value } = await request.json();
+
+        if (action === 'togglePremium') {
+            const updatedUser = await prisma.user.update({
+                where: { id: userId },
+                data: { isPremium: value }
+            });
+            return NextResponse.json({ message: "Success", user: updatedUser });
+        }
+
+        return NextResponse.json({ error: "Invalid action" }, { status: 400 });
+
+    } catch (error) {
+        console.error("User update error:", error);
+        return NextResponse.json({ error: "Update failed" }, { status: 500 });
+    }
+}
+
 // GET: Get all users with optional filters
 export async function GET(request) {
     try {
@@ -76,6 +101,7 @@ export async function GET(request) {
                 email: true,
                 role: true,
                 status: true,
+                isPremium: true,
                 createdAt: true,
                 phone: true
             },

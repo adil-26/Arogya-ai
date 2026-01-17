@@ -21,6 +21,7 @@ model User {
   emailVerified DateTime? // Required by NextAuth
   role      String   @default("patient") // patient, doctor, admin
   status    String   @default("approved") // approved, pending (for doctors)
+  isPremium Boolean  @default(false)      // Controls access to advanced AI features
   
   // Patient Specific
   dob       String?  // Date of Birth (ISO String)

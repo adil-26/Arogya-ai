@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Upload, Book, Trash2, Users, Calendar, Shield, UserCheck, UserX, Search, AlertCircle, Gift, Wallet, Bell, Send } from 'lucide-react';
+import { Upload, Book, Trash2, Users, Calendar, Shield, UserCheck, UserX, Search, AlertCircle, Gift, Wallet, Bell, Send, Crown, Star } from 'lucide-react';
 
 export default function AdminDashboardClient({
     initialStats,
@@ -50,6 +50,26 @@ export default function AdminDashboardClient({
             }
         } catch (error) {
             alert("Action failed");
+        }
+    };
+
+    const handleTogglePremium = async (userId, currentValue) => {
+        try {
+            const res = await fetch('/api/admin/users', {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId, action: 'togglePremium', value: !currentValue })
+            });
+
+            if (res.ok) {
+                setUsers(prev => prev.map(u =>
+                    u.id === userId ? { ...u, isPremium: !currentValue } : u
+                ));
+            } else {
+                alert("Failed to update premium status");
+            }
+        } catch (error) {
+            alert("Update failed");
         }
     };
 
@@ -443,6 +463,7 @@ export default function AdminDashboardClient({
                                             <th style={{ padding: '14px', textAlign: 'left', borderBottom: '1px solid #E2E8F0', fontWeight: '600', color: '#475569' }}>Email</th>
                                             <th style={{ padding: '14px', textAlign: 'left', borderBottom: '1px solid #E2E8F0', fontWeight: '600', color: '#475569' }}>Role</th>
                                             <th style={{ padding: '14px', textAlign: 'left', borderBottom: '1px solid #E2E8F0', fontWeight: '600', color: '#475569' }}>Status</th>
+                                            <th style={{ padding: '14px', textAlign: 'left', borderBottom: '1px solid #E2E8F0', fontWeight: '600', color: '#475569' }}>Plan</th>
                                             <th style={{ padding: '14px', textAlign: 'left', borderBottom: '1px solid #E2E8F0', fontWeight: '600', color: '#475569' }}>Joined</th>
                                             <th style={{ padding: '14px', textAlign: 'left', borderBottom: '1px solid #E2E8F0', fontWeight: '600', color: '#475569' }}>Actions</th>
                                         </tr>
@@ -475,12 +496,30 @@ export default function AdminDashboardClient({
                                                         {user.status || 'active'}
                                                     </span>
                                                 </td>
-                                                <td style={{ padding: '14px', borderBottom: '1px solid #F1F5F9', color: '#64748B' }}>{new Date(user.createdAt).toLocaleDateString('en-GB')}</td>
                                                 <td style={{ padding: '14px', borderBottom: '1px solid #F1F5F9' }}>
+                                                    {user.isPremium ? (
+                                                        <span style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#D97706', fontWeight: '600', fontSize: '0.85rem' }}>
+                                                            <Crown size={14} fill="#D97706" /> Premium
+                                                        </span>
+                                                    ) : (
+                                                        <span style={{ color: '#64748B', fontSize: '0.85rem' }}>Basic</span>
+                                                    )}
+                                                </td>
+                                                <td style={{ padding: '14px', borderBottom: '1px solid #F1F5F9', color: '#64748B' }}>{new Date(user.createdAt).toLocaleDateString('en-GB')}</td>
+                                                <td style={{ padding: '14px', borderBottom: '1px solid #F1F5F9', display: 'flex', gap: '8px' }}>
                                                     {user.role !== 'admin' && (
-                                                        <button onClick={() => handleDeleteUser(user.id)} style={{ padding: '6px 12px', background: '#FEE2E2', color: '#DC2626', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: '500' }}>
-                                                            <Trash2 size={14} />
-                                                        </button>
+                                                        <>
+                                                            <button
+                                                                onClick={() => handleTogglePremium(user.id, user.isPremium)}
+                                                                title={user.isPremium ? "Revoke Premium" : "Grant Premium"}
+                                                                style={{ padding: '6px 12px', background: user.isPremium ? '#FEF3C7' : '#F1F5F9', color: '#D97706', border: 'none', borderRadius: '6px', cursor: 'pointer' }}
+                                                            >
+                                                                {user.isPremium ? <UserX size={14} /> : <Star size={14} />}
+                                                            </button>
+                                                            <button onClick={() => handleDeleteUser(user.id)} style={{ padding: '6px 12px', background: '#FEE2E2', color: '#DC2626', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: '500' }}>
+                                                                <Trash2 size={14} />
+                                                            </button>
+                                                        </>
                                                     )}
                                                 </td>
                                             </tr>
