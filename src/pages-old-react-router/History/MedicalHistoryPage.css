@@ -49,11 +49,42 @@
 
 .history-content-grid {
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 320px 1fr 360px;
+    /* 3-Column Layout */
     gap: 24px;
     flex: 1;
     min-height: 0;
-    /* Prevent overflow issues */
+    height: calc(100vh - 140px);
+    /* Fixed height for scrolling panels */
+    overflow: hidden;
+    /* Prevent body scroll */
+}
+
+.history-summary-sidebar {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 100%;
+}
+
+.history-detail-view {
+    /* Center Panel */
+    background: white;
+    height: 100%;
+    overflow-y: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.history-sidebar {
+    /* Left Panel (Body Map) */
+    height: 100%;
+    overflow-y: auto;
 }
 
 .history-sidebar {
@@ -64,21 +95,30 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: hidden;
+    /* Prevent double scroll */
 }
 
 .body-nav-container {
-    width: 150px;
-    /* Smaller body for navigation */
-    height: 300px;
+    width: 100%;
+    max-width: 320px;
+    height: 500px;
+    /* Increased from 300px to allow full body view */
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .history-detail-view {
     background: white;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
-    overflow: hidden;
+    overflow-y: auto;
+    /* Enable scrolling for long content */
+    overflow-x: hidden;
     position: relative;
+    height: 100%;
+    /* Fill the grid area */
 }
 
 /* Override DetailPanel styles for this context */
@@ -88,8 +128,47 @@
     box-shadow: none;
 }
 
+/* Tablet Layout (1200px and below) */
+@media (max-width: 1200px) {
+    .history-content-grid {
+        grid-template-columns: 260px 1fr;
+        /* Hide right sidebar or stack */
+    }
+
+    .history-summary-sidebar {
+        display: none;
+        /* Temporarily hide on tablet to fit layout */
+    }
+}
+
 /* Mobile Stack Layout & Bottom Sheet */
-@media (max-width: 900px) {
+/* Mobile Backdrop - Hidden by default on desktop */
+.mobile-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(2px);
+}
+
+.mobile-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Mobile Stack Layout & Bottom Sheet */
+@media (max-width: 768px) {
+    .mobile-backdrop {
+        display: block;
+    }
+
     .history-content-grid {
         display: flex;
         flex-direction: column;
@@ -98,18 +177,23 @@
         height: auto;
     }
 
+    .history-summary-sidebar {
+        display: flex;
+        height: auto;
+    }
+
     .history-sidebar {
         width: 100%;
         height: 60vh;
-        /* Takes up most of screen */
         padding-bottom: 24px;
         flex-direction: column;
         align-items: center;
     }
 
     .body-nav-container {
-        width: 140px;
-        height: 280px;
+        width: 100%;
+        max-width: 280px;
+        height: 450px;
         margin-top: 20px;
     }
 
@@ -120,7 +204,6 @@
         padding-bottom: 90px;
     }
 
-    /* Convert Detail Panel to Bottom Sheet */
     .history-detail-view {
         position: fixed;
         bottom: 0;
@@ -130,12 +213,12 @@
         /* 85% Height Sheet */
         background: white;
         z-index: 2000;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
-        transform: translateY(100%);
+        border-top-left-radius: 24px;
+        border-top-right-radius: 24px;
+        box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
+        transform: translateY(110%);
         /* Hidden by default */
-        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
         display: block !important;
         /* Ensure it's not hidden by flex issues */
     }
@@ -300,7 +383,7 @@
     .header-content {
         flex-direction: column;
         align-items: flex-start;
-        gap: 12px;
+        gap: 16px;
         width: 100%;
     }
 
@@ -618,6 +701,19 @@
     align-items: center;
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
     transition: all 0.5s ease;
+    animation: zoomIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .showcase-info-panel {
@@ -728,5 +824,100 @@
 
     .showcase-header h2 {
         font-size: 1.5rem;
+    }
+}
+
+/* ---------------------------
+   MICRO-INTERACTIONS & POLISH
+   --------------------------- */
+
+/* Card Hovers */
+.history-header,
+.report-section,
+.timeline-card,
+.showcase-card {
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.timeline-card:hover,
+.report-section:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Button Interactions */
+.btn-secondary-action:active,
+.btn-export:active,
+.toggle-btn:active,
+.layer-btn:active {
+    transform: scale(0.96);
+}
+
+/* Layer Button Polish */
+.layer-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.layer-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: #f8fafc;
+}
+
+.layer-btn.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+    /* If using text, but emoji works too */
+    transform: scale(1.1);
+}
+
+/* Timeline Item Entrance */
+.timeline-item {
+    opacity: 0;
+    animation: slideInRight 0.5s ease forwards;
+}
+
+/* Staggered Delay for Timeline Items */
+.timeline-item:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.timeline-item:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.timeline-item:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.timeline-item:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.timeline-item:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }

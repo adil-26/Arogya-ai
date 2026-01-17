@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, Calendar, Upload, Activity, Sparkles, Clock, FileText, TrendingUp, ChevronRight } from 'lucide-react';
+import { MessageSquare, Calendar, Upload, Activity, Sparkles, Clock, FileText, TrendingUp, ChevronRight, QrCode } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import './QuickActions.css';
 
-const QuickActions = () => {
+const QuickActions = (props) => {
     const router = useRouter();
     const navigate = (path) => router.push(path);
 
@@ -109,9 +109,6 @@ const QuickActions = () => {
                     <div className="action-icon">
                         <Activity size={20} />
                     </div>
-                    {weekSummary.hasAnomaly && (
-                        <span className="anomaly-badge">!</span>
-                    )}
                 </div>
                 <div className="action-content">
                     <span className="action-label">Timeline</span>
@@ -121,7 +118,35 @@ const QuickActions = () => {
                 </div>
                 <ChevronRight size={14} className="action-accent" />
             </button>
-        </div>
+
+            {/* 🔗 SHARE CARD */}
+            <button
+                type="button"
+                className="action-card enhanced"
+                onClick={(e) => {
+                    e.preventDefault();
+                    if (props.onShare) props.onShare();
+                }}
+                onTouchEnd={(e) => {
+                    // Prevent ghost clicks if both fire
+                    e.preventDefault();
+                    if (props.onShare) props.onShare();
+                }}
+            >
+                <div className="action-icon-wrapper share">
+                    <div className="action-icon" style={{ background: 'linear-gradient(135deg, #F1F5F9, #E2E8F0)', color: '#475569' }}>
+                        <QrCode size={20} />
+                    </div>
+                </div>
+                <div className="action-content">
+                    <span className="action-label">Share QR</span>
+                    <span className="action-hint">
+                        Profile Link
+                    </span>
+                </div>
+                <ChevronRight size={14} className="action-accent" />
+            </button>
+        </div >
     );
 };
 

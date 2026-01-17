@@ -61,6 +61,10 @@ model User {
   referralsMade       Referral[] @relation("ReferrerRelation")
   referredAs          Referral?  @relation("RefereeRelation")
   withdrawalRequests  WithdrawalRequest[]
+  
+  // Medical History System
+  medicalHistory      PatientMedicalHistory?
+
 }
 
 // Notification System
@@ -367,5 +371,174 @@ model Medication {
   prescription    Prescription? @relation(fields: [prescriptionId], references: [id])
   
   @@map("medication")
+}
+
+// ============================================
+// MEDICAL HISTORY SYSTEM MODELS
+// ============================================
+
+model PatientMedicalHistory {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Section Links
+  birthHistory     BirthHistory?
+  childhoodHistory ChildhoodHistory?
+  femaleHistory    FemaleReproductiveHistory?
+  maleHistory      MaleReproductiveHistory?
+  familyHistory    FamilyMedicalHistory[]
+  surgeries        Surgery[]
+  allergies        Allergy[]
+  accidents        AccidentHistory[]
+  
+  completionStatus Float @default(0) // Percentage 0-100
+  lastUpdated      DateTime @updatedAt // Track when they last worked on it
+}
+
+model BirthHistory {
+  id              String @id @default(uuid())
+  historyId       String @unique
+  patientHistory  PatientMedicalHistory @relation(fields: [historyId], references: [id], onDelete: Cascade)
+  
+  birthTerm       String? // full-term, premature, post-term
+  prematureWeeks  Int?
+  deliveryType    String? // vaginal, c-section, assisted
+  cSectionType    String? // planned, emergency
+  birthWeight     String? // low, normal, high
+  complications   String[] // Array of strings (stored as JSON in Postgres usually, or scalar list)
+  nicudays        Int?
+  birthInjury     String?
+  congenitalDefect String?
+  
+  motherHealthIssues String[] // diabetes, bp, smoking, etc
+  medications     String?
+}
+
+model ChildhoodHistory {
+  id              String @id @default(uuid())
+  historyId       String @unique
+  patientHistory  PatientMedicalHistory @relation(fields: [historyId], references: [id], onDelete: Cascade)
+  
+  developmentalDelays String? // none, late-walking, etc
+  walkingAge      String?
+  speakingAge     String?
+  
+  childhoodIllnesses String[] // measles, mumps, etc
+  
+  vaccinationStatus String? // fully, partially, none
+  missingVaccines   String[]
+  hasVaccineCard    Boolean @default(false)
+  vaccineReactions  String?
+  
+  hospitalizations ChildhoodHospitalization[]
+}
+
+model ChildhoodHospitalization {
+  id              String @id @default(uuid())
+  childhoodId     String
+  childhoodHistory ChildhoodHistory @relation(fields: [childhoodId], references: [id], onDelete: Cascade)
+  
+  age             Int
+  reason          String
+  durationDays    Int
+  surgery         Boolean @default(false)
+}
+
+model FemaleReproductiveHistory {
+  id              String @id @default(uuid())
+  historyId       String @unique
+  patientHistory  PatientMedicalHistory @relation(fields: [historyId], references: [id], onDelete: Cascade)
+  
+  menarcheAge     Int?
+  cycleRegularity String? // regular, irregular
+  flowCharacteristics String? // heavy, painful
+  pcosDiagnosed   Boolean @default(false)
+  endometriosis   Boolean @default(false)
+  
+  pregnancies     Pregnancy[]
+  contraception   String?
+  breastConcern   String?
+}
+
+model Pregnancy {
+  id              String @id @default(uuid())
+  femaleHistoryId String
+  femaleHistory   FemaleReproductiveHistory @relation(fields: [femaleHistoryId], references: [id], onDelete: Cascade)
+  
+  outcome         String // live-birth, miscarriage
+  year            Int
+  deliveryType    String
+  complications   String[]
+}
+
+model MaleReproductiveHistory {
+  id              String @id @default(uuid())
+  historyId       String @unique
+  patientHistory  PatientMedicalHistory @relation(fields: [historyId], references: [id], onDelete: Cascade)
+  
+  pubertyAge      String? // early, normal, late
+  genitalIssues   String[] // undescended, hernia, etc
+  circumcision    Boolean?
+  currentConcerns String[]
+  sexualHealth    String[]
+}
+
+model FamilyMedicalHistory {
+  id              String @id @default(uuid())
+  historyId       String
+  patientHistory  PatientMedicalHistory @relation(fields: [historyId], references: [id], onDelete: Cascade)
+  
+  relation        String // Mother, Father, Sibling
+  conditions      String[] // diabetes, heart-disease
+  ageDiagnosed    String?
+  status          String? // managed, deceased
+}
+
+model Surgery {
+  id              String @id @default(uuid())
+  historyId       String
+  patientHistory  PatientMedicalHistory @relation(fields: [historyId], references: [id], onDelete: Cascade)
+  
+  type            String
+  bodyPart        String
+  year            Int
+  hospital        String?
+  complications   String?
+}
+
+model Allergy {
+  id              String @id @default(uuid())
+  historyId       String
+  patientHistory  PatientMedicalHistory @relation(fields: [historyId], references: [id], onDelete: Cascade)
+  
+  type            String // drug, food, environmental
+  allergen        String // Penicillin, Peanuts
+  reaction        String?
+  severity        String?
+}
+
+model AccidentHistory {
+  id              String @id @default(uuid())
+  historyId       String
+  patientHistory  PatientMedicalHistory @relation(fields: [historyId], references: [id], onDelete: Cascade)
+  
+  type            String // vehicle, fall, etc
+  year            Int
+  age             Int
+  
+  injuries        AccidentInjury[]
+  treatment       String?
+  hospitalDays    Int?
+  lastingEffects  String[]
+}
+
+model AccidentInjury {
+  id              String @id @default(uuid())
+  accidentId      String
+  accident        AccidentHistory @relation(fields: [accidentId], references: [id], onDelete: Cascade)
+  
+  bodyPart        String
+  injuryType      String
 }
 

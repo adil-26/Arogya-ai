@@ -15,7 +15,7 @@ export default withAuth(
 
         // Admin trying to access patient pages
         if (role === 'admin') {
-            const patientPaths = ['/dashboard', '/appointments', '/chat', '/history', '/records', '/profile', '/onboarding'];
+            const patientPaths = ['/dashboard', '/appointments', '/chat', '/history', '/medical-history', '/records', '/profile', '/onboarding'];
             const isPatientPath = patientPaths.some(p => path.startsWith(p));
 
             if (isPatientPath) {
@@ -30,7 +30,7 @@ export default withAuth(
 
         // Doctor trying to access patient pages
         if (role === 'doctor') {
-            const patientPaths = ['/dashboard', '/appointments', '/chat', '/history', '/records', '/profile', '/onboarding'];
+            const patientPaths = ['/dashboard', '/appointments', '/chat', '/history', '/medical-history', '/records', '/profile', '/onboarding'];
             const isPatientPath = patientPaths.some(p => path.startsWith(p));
 
             if (isPatientPath && path !== '/dashboard/health') {
@@ -83,6 +83,7 @@ export const config = {
         '/profile/:path*',
         '/doctor/:path*',
         '/admin/:path*',
-        '/onboarding/:path*'
+        '/onboarding/:path*',
+        '/medical-history/:path*'
     ]
 };

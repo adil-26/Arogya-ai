@@ -13,6 +13,13 @@ export const prisma =
         log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
     });
 
+if (process.env.NODE_ENV !== 'production') {
+    if (!globalForPrisma.prisma) {
+        globalForPrisma.prisma = prisma;
+        console.log("Global Prisma Client Initialized");
+    }
+}
+
 // Prevent multiple instances in development
 if (process.env.NODE_ENV !== "production") {
     globalForPrisma.prisma = prisma;

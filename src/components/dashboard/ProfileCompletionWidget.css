@@ -1,0 +1,139 @@
+.profile-completion-widget {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+    /* Blue tint shadow */
+    border: 1px solid #e2e8f0;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.result-verified {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+    border-color: #bbf7d0;
+}
+
+/* Decorative background element */
+.profile-completion-widget::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, #eff6ff 0%, transparent 70%);
+    z-index: 0;
+}
+
+.completion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Changed to center for better verified alignment */
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Rest of verified logic */
+.result-verified .completion-header {
+    margin-bottom: 0;
+}
+
+.completion-header h3 {
+    font-size: 1.1rem;
+    color: #1e293b;
+    margin: 0 0 5px 0;
+    font-weight: 600;
+}
+
+.completion-header p {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin: 0;
+}
+
+.completion-badge {
+    background: #e0f2fe;
+    color: #0284c7;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.completion-track {
+    width: 100%;
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.completion-fill {
+    height: 100%;
+    background: #3b82f6;
+    border-radius: 5px;
+    transition: width 1s ease-out;
+}
+
+.completion-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.benefits-list {
+    display: flex;
+    gap: 15px;
+}
+
+.benefits-list span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+.btn-continue-profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-continue-profile:hover {
+    background: #1d4ed8;
+}
+
+.btn-review-profile {
+    background: white;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-review-profile:hover {
+    background: #dcfce7;
+}

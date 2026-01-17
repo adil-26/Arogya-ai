@@ -10,18 +10,13 @@ export default async function DashboardLayout({ children }) {
         redirect('/login');
     }
 
-    // Fetch user to check role
-    const user = await prisma.user.findUnique({
-        where: { email: session.user.email },
-        select: { role: true }
-    });
-
-    // Role-based access control - only patients can access patient dashboard
-    if (user) {
-        if (user.role === 'admin') {
+    // Role-based access control - Check session role directly
+    // This avoids hitting the DB (findUnique) on every request, fixing connection pool timeouts
+    if (session?.user?.role) {
+        if (session.user.role === 'admin') {
             redirect('/admin');
         }
-        if (user.role === 'doctor') {
+        if (session.user.role === 'doctor') {
             redirect('/doctor');
         }
     }

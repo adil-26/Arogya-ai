@@ -11,12 +11,17 @@ export async function GET(request) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
+        const { searchParams } = new URL(request.url);
+        const limit = searchParams.get('limit');
+
         const appointments = await prisma.appointment.findMany({
             where: { userId: session.user.id },
-            orderBy: { date: 'desc' }
+            orderBy: { date: 'desc' },
+            take: limit ? parseInt(limit) : undefined
         });
         return NextResponse.json(appointments);
     } catch (error) {
+        console.error("Appointments Fetch Error:", error);
         return NextResponse.json({ error: "Failed to fetch appointments" }, { status: 500 });
     }
 }

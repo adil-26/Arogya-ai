@@ -11,13 +11,16 @@ import RoutineTracker from '../../components/dashboard/RoutineTracker';
 import HealthGraphs from '../../components/dashboard/HealthGraphs';
 import VitalsInputModal from '../../components/dashboard/VitalsInputModal';
 import UpcomingAppointmentCard from '../../components/dashboard/UpcomingAppointmentCard';
+import ProfileCompletionWidget from '../../components/dashboard/ProfileCompletionWidget';
+import ShareQRModal from '../../components/dashboard/ShareQRModal';
 import './HealthDashboard.css';
 
-const HealthDashboard = () => {
+const HealthDashboard = ({ completionStatus = 0 }) => {
   const { data: session, status } = useSession();
   const router = useRouter(); // Use Next.js Router
   const [selectedOrgan, setSelectedOrgan] = useState(null);
   const [selectedVital, setSelectedVital] = useState(null); // For Input Modal
+  const [showQR, setShowQR] = useState(false);
 
   // Issues State (Mock Data persistence simulated by passing ID)
   // In a real app, issues would be fetched from Context/API based on ID
@@ -139,11 +142,15 @@ const HealthDashboard = () => {
       <DashboardHeader patient={patient} />
 
       {/* 2. Quick Action Bar */}
-      <QuickActions />
+      <QuickActions onShare={() => {
+        console.log("QuickActions: Share Clicked");
+        setShowQR(true);
+      }} />
 
       <div className="dashboard-grid">
         {/* LEFT COLUMN (2fr) */}
         <div className="main-column">
+          <ProfileCompletionWidget completionPercentage={completionStatus} />
           <RoutineTracker />
 
           <div className="visual-health-section">
@@ -173,6 +180,7 @@ const HealthDashboard = () => {
               <BodyMapContainer
                 onOrganSelect={handleOrganSelect}
                 issues={issues}
+                userGender={patient.gender}
               />
             </div>
           </div>
@@ -266,6 +274,8 @@ const HealthDashboard = () => {
           onSave={handleSaveVital}
         />
       )}
+
+      {showQR && <ShareQRModal onClose={() => setShowQR(false)} userId={session?.user?.id} />}
     </div>
   );
 };

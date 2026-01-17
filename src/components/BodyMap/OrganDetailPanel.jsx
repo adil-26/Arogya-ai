@@ -89,7 +89,8 @@ const BODY_DOMAINS = {
 
 const OrganDetailPanel = ({ organId, existingIssue, onUpdate, onClose }) => {
     const [issuesList, setIssuesList] = useState([]);
-    const [step, setStep] = useState('domain');
+    const [step, setStep] = useState('summary'); // Default to summary/dashboard view
+    const [activeTab, setActiveTab] = useState('current'); // 'current' | 'history' | 'ai'
     const [formData, setFormData] = useState({ domain: '', specificPart: '', issue: '', severity: 'mild', painLevel: 5, frequency: 'daily', procedureDate: '', note: '' });
 
     const config = BODY_DOMAINS[organId] || BODY_DOMAINS.default;
@@ -101,20 +102,23 @@ const OrganDetailPanel = ({ organId, existingIssue, onUpdate, onClose }) => {
         setFormData({ domain: '', specificPart: '', issue: '', severity: 'mild', painLevel: 5, frequency: 'daily', procedureDate: '', note: '' });
         setAiAnalysis(null); // Reset AI on change
 
-        // Priority: Initial List > Single Existing Issue > Empty
         if (existingIssue && Array.isArray(existingIssue)) {
             setIssuesList(existingIssue);
-            setStep('summary');
-            fetchAiAnalysis(); // Trigger AI when viewing summary
         } else if (existingIssue && existingIssue.issue) {
             setIssuesList([existingIssue]);
-            setStep('summary');
-            fetchAiAnalysis();
         } else {
             setIssuesList([]);
-            setStep('domain');
         }
+        setStep('summary'); // Always show summary first
+        setAiAnalysis(null);
     }, [organId, existingIssue]);
+
+    // Fetch AI when switching to AI tab
+    useEffect(() => {
+        if (activeTab === 'ai' && !aiAnalysis) {
+            fetchAiAnalysis();
+        }
+    }, [activeTab, organId]);
 
     const fetchAiAnalysis = async () => {
         setIsLoadingAi(true);
@@ -237,7 +241,7 @@ const OrganDetailPanel = ({ organId, existingIssue, onUpdate, onClose }) => {
             <h4>Details: {formData.issue}</h4>
             {formData.specificPart && <div className="highlight-tag">Location: {formData.specificPart}</div>}
 
-            {!isStatusIssue ? (
+            {!isStatusIssue && (
                 <>
                     <div className="form-group" style={{ marginTop: '16px' }}>
                         <label>Pain Level (1-10)</label>
@@ -257,15 +261,20 @@ const OrganDetailPanel = ({ organId, existingIssue, onUpdate, onClose }) => {
                         </div>
                     </div>
                 </>
-            ) : (
-                <div className="form-group" style={{ marginTop: '16px' }}>
-                    <label>Date of Procedure / Event</label>
-                    <div className="input-with-icon">
-                        <Calendar size={16} />
-                        <input type="date" className="date-input" onChange={(e) => setFormData({ ...formData, procedureDate: e.target.value })} />
-                    </div>
-                </div>
             )}
+
+            <div className="form-group" style={{ marginTop: '16px' }}>
+                <label>Date Started / Occurred</label>
+                <div className="input-with-icon">
+                    <Calendar size={16} />
+                    <input
+                        type="date"
+                        className="date-input"
+                        value={formData.procedureDate}
+                        onChange={(e) => setFormData({ ...formData, procedureDate: e.target.value })}
+                    />
+                </div>
+            </div>
 
             <div className="form-group">
                 <label>Medical Notes (Optional)</label>
@@ -280,66 +289,113 @@ const OrganDetailPanel = ({ organId, existingIssue, onUpdate, onClose }) => {
             <button className="btn-save full-width" onClick={handleSave}>
                 <Save size={18} /> Save Record
             </button>
+        </div >
+    );
+
+    const renderTabs = () => (
+        <div className="panel-tabs">
+            <button
+                className={`tab-btn ${activeTab === 'current' ? 'active' : ''}`}
+                onClick={() => setActiveTab('current')}
+            >
+                Current Issues
+            </button>
+            <button
+                className={`tab-btn ${activeTab === 'history' ? 'active' : ''}`}
+                onClick={() => setActiveTab('history')}
+            >
+                History ({issuesList.length})
+            </button>
+            <button
+                className={`tab-btn ${activeTab === 'ai' ? 'active' : ''}`}
+                onClick={() => setActiveTab('ai')}
+            >
+                AI Analysis
+            </button>
         </div>
     );
 
+    const renderTabContent = () => {
+        switch (activeTab) {
+            case 'current':
+                return (
+                    <div className="tab-content">
+                        <div className="summary-header">
+                            <h4>Active Details</h4>
+                            <button className="btn-add-new" onClick={() => { handleAddNew(); setStep('domain'); }}>
+                                <Plus size={16} /> Add Issue
+                            </button>
+                        </div>
+
+                        {/* Visual for Teeth/Eyes if applicable */}
+                        {formData.domain === 'Teeth' && (
+                            <div className="visual-showcase-box">
+                                <TeethView readOnly={true} markedParts={issuesList} />
+                            </div>
+                        )}
+
+                        {issuesList.length === 0 ? (
+                            <div className="empty-state-mini">
+                                <p>No active issues recorded.</p>
+                                <button className="btn-link" onClick={() => { handleAddNew(); setStep('domain'); }}>Log Current Issue</button>
+                            </div>
+                        ) : (
+                            <div className="records-list">
+                                {issuesList.map((item, idx) => (
+                                    <div key={idx} className="record-card-mini">
+                                        <div className="record-icon">
+                                            <AlertTriangle size={18} color="#ef4444" />
+                                        </div>
+                                        <div className="record-details">
+                                            <span className="record-title">{item.issue}</span>
+                                            <span className="record-meta">{item.domain} • {item.date}</span>
+                                        </div>
+                                        <span className={`severity-badge ${item.severity}`}>{item.severity}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                );
+            case 'history':
+                return (
+                    <div className="tab-content">
+                        <div className="timeline-mini">
+                            {issuesList.map((item, idx) => (
+                                <div key={idx} className="timeline-mini-item">
+                                    <div className="mini-date">{item.date}</div>
+                                    <div className="mini-dot"></div>
+                                    <div className="mini-content">
+                                        <strong>{item.issue}</strong>
+                                        <p>{item.note || 'No notes'}</p>
+                                    </div>
+                                </div>
+                            ))}
+                            {issuesList.length === 0 && <p className="text-muted">No history available.</p>}
+                        </div>
+                    </div>
+                );
+            case 'ai':
+                return (
+                    <div className="tab-content">
+                        {isLoadingAi ? (
+                            <div className="ai-loading">Analyzing...</div>
+                        ) : (
+                            <div className="ai-insight-box">
+                                <div className="ai-header"><Activity size={16} /> Analysis</div>
+                                <p className="ai-text">{aiAnalysis || "No analysis available yet."}</p>
+                            </div>
+                        )}
+                    </div>
+                );
+            default: return null;
+        }
+    };
+
     const renderSummary = () => (
         <div className="panel-step summary-step">
-            <div className="summary-header">
-                <h3>{config.name} History</h3>
-                <button className="btn-add-new" onClick={handleAddNew}>
-                    <Plus size={16} /> Add Note
-                </button>
-            </div>
-
-            {/* Visual Showcase (Read Only) */}
-            {issuesList.length > 0 && formData.domain === 'Teeth' && (
-                <div className="visual-showcase-box">
-                    <h5>Visual Status Map</h5>
-                    <TeethView readOnly={true} markedParts={issuesList} />
-                </div>
-            )}
-
-            {issuesList.length === 0 ? (
-                <div className="empty-state">
-                    <p>No records yet.</p>
-                    <button className="btn-link" onClick={handleAddNew}>Log First Issue</button>
-                </div>
-            ) : (
-                <div className="records-list">
-                    {issuesList.map((item, idx) => (
-                        <div key={idx} className="record-card-mini">
-                            <div className="record-icon">
-                                {['Missing/Removed', 'Implant'].includes(item.issue) ? <FileText size={18} /> : <AlertTriangle size={18} color="#D32F2F" />}
-                            </div>
-                            <div className="record-details">
-                                <span className="record-title">{item.issue}</span>
-                                <span className="record-meta">{item.domain} {item.specificPart ? `• ${item.specificPart}` : ''}</span>
-                                {item.note && <p className="record-note">"{item.note}"</p>}
-                            </div>
-                            {!['Missing/Removed', 'Implant'].includes(item.issue) && (
-                                <span className={`severity-badge ${item.severity}`}>{item.severity}</span>
-                            )}
-                        </div>
-                    ))}
-                </div>
-            )}
-
-            {issuesList.length > 0 && (
-                <div className="ai-insight-box">
-                    <div className="ai-header"><Activity size={16} /> <span>Aarogya Analysis (Powered by AI)</span></div>
-
-                    {isLoadingAi ? (
-                        <div className="ai-loading">
-                            <span className="spinner-dot"></span> Analyzing records...
-                        </div>
-                    ) : (
-                        <p className="ai-text">
-                            {aiAnalysis || "Analyzing your health pattern..."}
-                        </p>
-                    )}
-                </div>
-            )}
+            {renderTabs()}
+            {renderTabContent()}
         </div>
     );
 

@@ -14,21 +14,33 @@ export default async function DashboardPage() {
     }
 
     // Fetch fresh user data to check onboarding status and role
-    const user = await prisma.user.findUnique({
-        where: { email: session.user.email }
-    });
-
     // Role-based access control - redirect non-patients
-    if (user) {
-        if (user.role === 'admin') {
-            redirect('/admin');
-        }
-        if (user.role === 'doctor') {
-            redirect('/doctor');
-        }
+    // Trust session role first to avoid DB call for redirects
+    if (session.user.role === 'admin') redirect('/admin');
+    if (session.user.role === 'doctor') redirect('/doctor');
+
+    // 2. Fetch User + Medical History in ONE query to save connections
+    let user = null;
+    try {
+        user = await prisma.user.findUnique({
+            where: { id: session.user.id },
+            include: {
+                medicalHistory: {
+                    select: { completionStatus: true }
+                }
+            }
+        });
+    } catch (error) {
+        console.error("Dashboard DB Error (Non-fatal):", error.message);
+        // Fallback: If DB fails, we rely purely on session data.
+        // We'll skip the strict onboarding/role checks from DB and assume session is correct.
     }
 
-    if (user && user.role === 'patient') {
+    if (user) {
+        // Double check role from DB in case session is stale
+        if (user.role === 'admin') redirect('/admin');
+        if (user.role === 'doctor') redirect('/doctor');
+
         // Check if essential profile fields are missing
         const isProfileIncomplete = !user.dob || !user.bloodGroup || !user.gender || !user.phone;
 
@@ -37,9 +49,11 @@ export default async function DashboardPage() {
         }
     }
 
+    const completionStatus = user?.medicalHistory?.completionStatus || 0;
+
     return (
         <AppShell>
-            <HealthDashboard />
+            <HealthDashboard completionStatus={completionStatus} />
         </AppShell>
     );
 }

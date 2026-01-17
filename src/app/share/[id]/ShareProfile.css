@@ -1,0 +1,152 @@
+.share-container {
+    max-width: 600px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background-color: #f8fafc;
+    font-family: 'Inter', sans-serif;
+    padding-bottom: 40px;
+}
+
+.share-container.error-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.share-header {
+    background: linear-gradient(135deg, #2563EB, #1E40AF);
+    color: white;
+    padding: 30px 20px;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
+    position: relative;
+}
+
+.header-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.share-header h1 {
+    margin: 0 0 20px 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.vital-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.vital-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.vital-item .label {
+    display: block;
+    font-size: 0.75rem;
+    opacity: 0.8;
+    margin-bottom: 4px;
+}
+
+.vital-item .value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.vital-item .value.critical {
+    color: #FCD34D;
+    /* Amber for visibility */
+}
+
+.share-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: -10px;
+    /* Overlap slightly if needed, or keeping it clean */
+}
+
+.info-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.critical-card {
+    border-left: 5px solid #DC2626;
+    background: #FEF2F2;
+}
+
+.contact-card {
+    border: 2px solid #16A34A;
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #1e293b;
+}
+
+.chip-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip {
+    background: #F1F5F9;
+    color: #475569;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.contact-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #16A34A;
+    text-align: center;
+    margin: 10px 0;
+    letter-spacing: 1px;
+}
+
+.footer-note {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+    .share-container {
+        padding-top: 40px;
+    }
+
+    .share-header {
+        border-radius: 24px;
+    }
+}

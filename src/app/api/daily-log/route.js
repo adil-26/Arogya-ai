@@ -14,24 +14,17 @@ export async function GET(request) {
     try {
         const session = await getServerSession(authOptions);
 
-        if (!session?.user?.email) {
+        if (!session?.user?.id) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
-        const user = await prisma.user.findUnique({
-            where: { email: session.user.email }
-        });
-
-        if (!user) {
-            return NextResponse.json({ error: "User not found" }, { status: 404 });
-        }
-
+        const userId = session.user.id;
         const today = getTodayDate();
 
         // Find or create today's log
         let log = await prisma.dailyLog.findFirst({
             where: {
-                userId: user.id,
+                userId: userId,
                 date: {
                     gte: today,
                     lt: new Date(today.getTime() + 24 * 60 * 60 * 1000)
@@ -63,17 +56,11 @@ export async function POST(request) {
     try {
         const session = await getServerSession(authOptions);
 
-        if (!session?.user?.email) {
+        if (!session?.user?.id) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
-        const user = await prisma.user.findUnique({
-            where: { email: session.user.email }
-        });
-
-        if (!user) {
-            return NextResponse.json({ error: "User not found" }, { status: 404 });
-        }
+        const userId = session.user.id;
 
         const data = await request.json();
         const today = getTodayDate();
@@ -82,7 +69,7 @@ export async function POST(request) {
         // Find existing log for today
         let existingLog = await prisma.dailyLog.findFirst({
             where: {
-                userId: user.id,
+                userId: userId,
                 date: {
                     gte: today,
                     lt: tomorrow
@@ -107,7 +94,7 @@ export async function POST(request) {
             // Create new log for today
             log = await prisma.dailyLog.create({
                 data: {
-                    userId: user.id,
+                    userId: userId,
                     date: today,
                     water: data.water || 0,
                     sleep: data.sleep || 7,
@@ -130,24 +117,18 @@ export async function PUT(request) {
     try {
         const session = await getServerSession(authOptions);
 
-        if (!session?.user?.email) {
+        if (!session?.user?.id) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
-        const user = await prisma.user.findUnique({
-            where: { email: session.user.email }
-        });
-
-        if (!user) {
-            return NextResponse.json({ error: "User not found" }, { status: 404 });
-        }
+        const userId = session.user.id;
 
         const sevenDaysAgo = new Date();
         sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
         const logs = await prisma.dailyLog.findMany({
             where: {
-                userId: user.id,
+                userId: userId,
                 date: { gte: sevenDaysAgo }
             },
             orderBy: { date: 'desc' }

@@ -46,6 +46,21 @@ export const authOptions = {
                     throw new Error("No user found with this email");
                 }
 
+                // Portal/Role Check (If we want strict page-based login)
+                // 3. Strict Portal Role Validation (Fix for cross-portal login issue)
+                if (credentials?.portal) {
+                    const portal = credentials.portal.toLowerCase();
+                    const userRole = user.role ? user.role.toLowerCase() : null;
+
+                    if (!userRole) {
+                        throw new Error("Access Denied: User has no assigned role");
+                    }
+
+                    if (userRole !== portal) {
+                        throw new Error(`Access denied. ${portal} portal does not allow ${user.role} login`);
+                    }
+                }
+
                 // 2. Password Check (Simple)
                 // if (credentials.password !== user.password) {
                 //     throw new Error("Invalid password");
@@ -86,41 +101,28 @@ export const authOptions = {
             }
             return true;
         },
-        async jwt({ token, user, account, trigger }) {
-            console.log("JWT callback - user:", user?.email, "trigger:", trigger);
+        async jwt({ token, user, account, trigger, session }) {
+            // console.log("JWT callback - trigger:", trigger);
 
-            // Initial sign in - user object is available
+            // Initial sign in - User object is available from authorize() or provider
             if (user) {
-                token.role = user.role || 'patient';
                 token.id = user.id;
+                token.role = user.role || 'patient';
+                token.name = user.name;
                 token.email = user.email;
+                return token;
             }
 
-            // Fetch fresh data from database on every request
-            if (token.email) {
-                try {
-                    const dbUser = await prisma.user.findUnique({
-                        where: { email: token.email },
-                        select: { id: true, role: true, name: true, email: true }
-                    });
-
-                    if (dbUser) {
-                        token.id = dbUser.id;
-                        token.role = dbUser.role || 'patient';
-                        token.name = dbUser.name;
-
-                        // Ensure role is set in database
-                        if (!dbUser.role) {
-                            await prisma.user.update({
-                                where: { email: token.email },
-                                data: { role: 'patient' }
-                            });
-                        }
-                    }
-                } catch (error) {
-                    console.error("JWT callback database error:", error);
-                }
+            // Update Trigger - Only fetch DB if explicitly requested (e.g. profile update)
+            if (trigger === "update" && session) {
+                // console.log("JWT Update Triggered");
+                return { ...token, ...session.user };
             }
+
+            // OPTIMIZATION: Do NOT fetch DB on every request. 
+            // Trust the token unless we have a specific reason to refresh.
+            // If we really need fresh data, we should implement a dedicated "refresh_profile" trigger mechanism
+            // or a lighter weight check (e.g. Redis)
 
             return token;
         },

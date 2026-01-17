@@ -1,25 +1,29 @@
 import React, { useState } from 'react';
-import HumanBodySVG from './HumanBodySVG';
-import { RotateCw, AlertCircle } from 'lucide-react';
+import HumanBodyImage from './HumanBodyImage';
+import { RotateCw, AlertCircle, User } from 'lucide-react';
 import './BodyMap.css';
 
-const BodyMapContainer = ({ onOrganSelect }) => {
+const BodyMapContainer = ({ onOrganSelect, userGender = 'male' }) => {
     const [view, setView] = useState('front');
+    const [gender, setGender] = useState(userGender.toLowerCase()); // Auto-detect from prop
     const [selectedPart, setSelectedPart] = useState(null);
+
+    // Sync if prop changes (e.g. data load)
+    React.useEffect(() => {
+        if (userGender) setGender(userGender.toLowerCase());
+    }, [userGender]);
 
     const toggleView = () => {
         setView(prev => prev === 'front' ? 'back' : 'front');
     };
 
-    const handlePartClick = (partId) => {
-        // ID Normalization Concept: Map specific SVG parts to broader "Domains" used in Config
-        let domainId = partId;
-        if (partId === 'abdomen') domainId = 'stomach';
-        if (partId.includes('arm')) domainId = 'arms';
-        if (partId.includes('leg')) domainId = 'legs';
+    const toggleGender = () => {
+        setGender(prev => prev === 'male' ? 'female' : 'male');
+    };
 
-        setSelectedPart(domainId);
-        if (onOrganSelect) onOrganSelect(domainId);
+    const handlePartClick = (partId) => {
+        setSelectedPart(partId);
+        if (onOrganSelect) onOrganSelect(partId);
     };
 
     return (
@@ -39,13 +43,15 @@ const BodyMapContainer = ({ onOrganSelect }) => {
                         Back
                     </button>
                 </div>
+                {/* Gender Toggle Removed - Auto-detected via prop */}
                 <button className="btn-icon-round" onClick={toggleView} title="Rotate Model">
                     <RotateCw size={18} />
                 </button>
             </div>
 
-            <div className="svg-wrapper">
-                <HumanBodySVG
+            <div className="svg-wrapper" style={{ background: 'none' }}>
+                <HumanBodyImage
+                    gender={gender}
                     view={view}
                     selectedPart={selectedPart}
                     onPartClick={handlePartClick}

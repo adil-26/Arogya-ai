@@ -1,29 +1,58 @@
 'use client';
 import React, { useState } from 'react';
-import HumanBodySVG from '../../components/BodyMap/HumanBodySVG';
+import HumanBodyImage from '../../components/BodyMap/HumanBodyImage';
 import OrganDetailPanel from '../../components/BodyMap/OrganDetailPanel'; // Reusing for consistency
 import VisualHealthLogger from '../../components/HealthLog/VisualHealthLogger';
 import MedicalConditionsModal, { COMMON_CONDITIONS } from '../../components/MedicalProfile/MedicalConditionsModal';
 import { FileText, Calendar, Download, PlusCircle, UserCog, Activity } from 'lucide-react';
 import './MedicalHistoryPage.css';
 
+import HealthSummaryCard from '../../components/medical-history/HealthSummaryCard';
+import AllergyAlertBanner from '../../components/medical-history/AllergyAlertBanner';
+import FamilyHealthTree from '../../components/medical-history/FamilyHealthTree';
+import EmptyStateWithSuggestions from '../../components/medical-history/EmptyStateWithSuggestions';
+import HealthScoreWidget from '../../components/medical-history/HealthScoreWidget';
+import QuickTimelineWidget from '../../components/medical-history/QuickTimelineWidget';
+
 const MedicalHistoryPage = () => {
-    const [selectedOrgan, setSelectedOrgan] = useState('head'); // Default to head for showcase
+    const [selectedOrgan, setSelectedOrgan] = useState(null); // Default to null for Empty State
     const [isMobilePanelOpen, setIsMobilePanelOpen] = useState(false); // Mobile Bottom Sheet State
+    const [activeLayer, setActiveLayer] = useState('all'); // 'all' | 'surgery' | 'accident' | 'issue'
 
     // Real History Data State
     const [historyData, setHistoryData] = useState([]);
+
+    // New Summary State
+    const [healthSummary, setHealthSummary] = useState({
+        bloodGroup: 'Unknown',
+        conditionCount: 0,
+        medicationCount: 0,
+        surgeryCount: 0,
+        familyRisks: [],
+        allergyCount: 0
+    });
+    const [allergies, setAllergies] = useState([]);
 
     // Fetch Data on Mount
     React.useEffect(() => {
         async function fetchHistory() {
             try {
-                const [issuesRes, conditionsRes] = await Promise.all([
+                const [issuesRes, conditionsRes, historyRes] = await Promise.all([
                     fetch('/api/body-issues'),
-                    fetch('/api/conditions')
+                    fetch('/api/conditions'),
+                    fetch('/api/medical-history')
                 ]);
 
                 let combinedHistory = [];
+                let summaryData = {
+                    bloodGroup: 'Unknown',
+                    conditionCount: 0,
+                    medicationCount: 0,
+                    surgeryCount: 0,
+                    familyRisks: [],
+                    allergyCount: 0
+                };
+                let fetchedAllergies = [];
 
                 if (issuesRes.ok) {
                     const issues = await issuesRes.json();
@@ -43,6 +72,8 @@ const MedicalHistoryPage = () => {
 
                 if (conditionsRes.ok) {
                     const conditions = await conditionsRes.json();
+                    summaryData.conditionCount = conditions.length;
+
                     const formattedConditions = conditions.map(c => ({
                         id: `cond-${c.id}`,
                         domain: 'Medical Condition',
@@ -56,6 +87,114 @@ const MedicalHistoryPage = () => {
                     combinedHistory = [...combinedHistory, ...formattedConditions];
                 }
 
+                if (historyRes.ok) {
+                    const history = await historyRes.json();
+                    console.log("Health History Fetched:", history); // DEBUG log
+
+                    // Profile Data
+                    if (history.user) {
+                        summaryData.bloodGroup = history.user.bloodGroup || 'Unknown';
+                        summaryData.gender = history.user.gender || 'male'; // Capture Gender
+                    }
+
+                    // 0. Birth & Childhood (For Timeline)
+                    if (history.birthHistory) {
+                        const b = history.birthHistory;
+                        combinedHistory.push({
+                            id: 'birth-event',
+                            domain: 'Life History',
+                            specificPart: 'Birth',
+                            issue: `Born ${b.birthTerm || ''}`,
+                            severity: b.birthTerm === 'premature' ? 'moderate' : 'mild',
+                            date: b.dob ? new Date(b.dob).getFullYear() : 'Birth',
+                            note: `Weight: ${b.birthWeight || 'N/A'}, Delivery: ${b.deliveryType || 'N/A'}`,
+                            type: 'birth'
+                        });
+                    }
+                    if (history.childhoodHistory) {
+                        const c = history.childhoodHistory;
+                        if (c.childhoodIllnesses && c.childhoodIllnesses.length > 0) {
+                            c.childhoodIllnesses.forEach((ill, idx) => {
+                                combinedHistory.push({
+                                    id: `child-ill-${idx}`,
+                                    domain: 'Childhood History',
+                                    specificPart: 'General',
+                                    issue: ill,
+                                    severity: 'mild',
+                                    date: 'Childhood',
+                                    note: 'Childhood Illness',
+                                    type: 'childhood'
+                                });
+                            });
+                        }
+                    }
+
+                    // 1. Surgeries
+                    if (history.surgeries) {
+                        summaryData.surgeryCount = history.surgeries.length;
+                        const formattedSurgeries = history.surgeries.map(s => ({
+                            id: `surg-${s.id}`,
+                            domain: 'Surgery',
+                            organId: s.bodyPart ? s.bodyPart.toLowerCase() : 'general',
+                            specificPart: s.bodyPart,
+                            issue: s.type,
+                            severity: 'moderate',
+                            date: s.year ? `Year: ${s.year}` : 'Unknown Date',
+                            note: s.hospital ? `At ${s.hospital}` : 'Surgical Procedure',
+                            type: 'surgery'
+                        }));
+                        combinedHistory = [...combinedHistory, ...formattedSurgeries];
+                    }
+
+                    // 2. Accidents & Injuries
+                    if (history.accidents) {
+                        history.accidents.forEach(acc => {
+                            if (acc.injuries) {
+                                const accInjuries = acc.injuries.map(inj => ({
+                                    id: `inj-${inj.id}`,
+                                    domain: 'Accident',
+                                    organId: inj.bodyPart ? inj.bodyPart.toLowerCase() : 'general',
+                                    specificPart: inj.bodyPart,
+                                    issue: `${inj.injuryType} (Accident)`,
+                                    severity: 'severe',
+                                    date: acc.year ? `Year: ${acc.year}` : 'Unknown Date',
+                                    note: `Accident Type: ${acc.type}`,
+                                    type: 'accident'
+                                }));
+                                combinedHistory = [...combinedHistory, ...accInjuries];
+                            }
+                        });
+                    }
+
+                    // 3. Allergies
+                    if (history.allergies) {
+                        fetchedAllergies = history.allergies; // For banner
+                        summaryData.allergyCount = history.allergies.length;
+
+                        const formattedAllergies = history.allergies.map(a => ({
+                            id: `alg-${a.id}`,
+                            domain: 'Allergy',
+                            specificPart: 'Systemic',
+                            organId: 'general',
+                            issue: `${a.allergen} Allergy`,
+                            severity: a.severity || 'moderate',
+                            date: 'Active',
+                            note: `Type: ${a.type} - Reaction: ${a.reaction || 'N/A'}`,
+                            type: 'allergy'
+                        }));
+                        combinedHistory = [...combinedHistory, ...formattedAllergies];
+                    }
+
+                    // 4. Family Risks
+                    if (history.familyHistory) {
+                        const risks = new Set();
+                        history.familyHistory.forEach(f => {
+                            f.conditions.forEach(c => risks.add(c));
+                        });
+                        summaryData.familyRisks = Array.from(risks);
+                    }
+                }
+
                 // If empty, keep mock data for demo purposes or show empty
                 if (combinedHistory.length > 0) {
                     setHistoryData(combinedHistory);
@@ -65,6 +204,9 @@ const MedicalHistoryPage = () => {
                         { id: 1, domain: 'Head & Neck', specificPart: 'Teeth', issue: 'No Records Yet', date: 'Today', note: 'Start adding issues in the Dashboard!' }
                     ]);
                 }
+
+                setHealthSummary(summaryData);
+                setAllergies(fetchedAllergies);
 
             } catch (error) {
                 console.error("Failed to fetch history:", error);
@@ -179,18 +321,32 @@ const MedicalHistoryPage = () => {
 
     const renderShowcase = () => {
         const item = historyData[showcaseIndex];
+
+        if (!item) {
+            return (
+                <div className="showcase-view-container">
+                    <div className="empty-state" style={{ padding: '40px', textAlign: 'center' }}>
+                        <p>No valid history records to showcase.</p>
+                    </div>
+                </div>
+            );
+        }
+
         // Map domain to body part ID for highlighting
-        let highlightPart = item.domain.toLowerCase();
+        let highlightPart = item.domain ? item.domain.toLowerCase() : '';
         if (highlightPart.includes('head')) highlightPart = 'head';
 
         return (
             <div className="showcase-view-container">
                 <div className="showcase-content">
                     {/* Visual Side */}
-                    <div className="showcase-visual">
-                        <HumanBodySVG
+                    <div key={`visual-${item.id}`} className="showcase-visual">
+                        <HumanBodyImage
                             view="front"
+                            gender={healthSummary.gender ? healthSummary.gender.toLowerCase() : 'male'}
                             selectedPart={highlightPart}
+                            activeLayer="all"
+                            markerData={historyData} // Show markers in showcase too
                             onPartClick={() => { }}
                             height={450}
                         />
@@ -270,6 +426,7 @@ const MedicalHistoryPage = () => {
 
     return (
         <div className="history-page-container">
+            <AllergyAlertBanner allergies={allergies} />
             <header className="history-header">
                 <div className="header-content">
                     <div>
@@ -317,21 +474,37 @@ const MedicalHistoryPage = () => {
                 </div>
             </header>
 
+            {/* Removed HealthSummaryCard from here to move to grid */}
+
             {viewMode === 'visual' ? (
                 <div className="history-content-grid">
                     {/* Left: Interactive Model Navigation */}
                     <div className="history-sidebar">
-                        <h4>Select Region</h4>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                            <h4>Select Region</h4>
+                            {/* Layer Toggles */}
+                            <div className="layer-toggles" style={{ display: 'flex', gap: '6px' }}>
+                                <button className={`layer-btn ${activeLayer === 'all' ? 'active' : ''}`} onClick={() => setActiveLayer('all')} title="Show All">All</button>
+                                <button className={`layer-btn ${activeLayer === 'surgery' ? 'active' : ''}`} onClick={() => setActiveLayer('surgery')} title="Past Surgeries">🔪</button>
+                                <button className={`layer-btn ${activeLayer === 'accident' ? 'active' : ''}`} onClick={() => setActiveLayer('accident')} title="Injuries">🤕</button>
+                            </div>
+                        </div>
+
                         <div className="body-nav-container">
-                            <HumanBodySVG
+                            <HumanBodyImage
                                 view="front"
+                                gender={healthSummary.gender ? healthSummary.gender.toLowerCase() : 'male'} // Pass dynamic gender
                                 selectedPart={selectedOrgan}
+                                markerData={historyData}
+                                activeLayer={activeLayer}
                                 onPartClick={(id) => {
                                     // Normalize ID logic
                                     let domain = id;
                                     if (id === 'abdomen') domain = 'stomach';
-                                    if (id.includes('arm')) domain = 'arms';
-                                    if (id.includes('leg')) domain = 'legs';
+                                    if (id.includes('arm') || id.includes('shoulder') || id.includes('hand')) domain = 'arms';
+                                    if (id.includes('leg') || id.includes('knee') || id.includes('foot') || id.includes('thigh')) domain = 'legs';
+                                    if (id.includes('chest') || id.includes('heart') || id.includes('lung')) domain = 'chest';
+
                                     setSelectedOrgan(domain);
                                     setIsMobilePanelOpen(true); // Open Bottom Sheet on Mobile
                                 }}
@@ -339,37 +512,77 @@ const MedicalHistoryPage = () => {
                         </div>
                     </div>
 
+                    {/* Mobile Backdrop */}
+                    <div
+                        className={`mobile-backdrop ${isMobilePanelOpen ? 'open' : ''}`}
+                        onClick={() => setIsMobilePanelOpen(false)}
+                    />
+
                     {/* Right: Detailed View (Read Only Mode) */}
                     <div className={`history-detail-view ${isMobilePanelOpen ? 'mobile-open' : ''}`}>
                         {/* Mobile Close Handle */}
                         <div className="mobile-drag-handle" onClick={() => setIsMobilePanelOpen(false)}></div>
 
-                        <OrganDetailPanel
-                            organId={selectedOrgan}
-                            existingIssue={
-                                historyData.filter(h => {
-                                    // Robust matching: Check if organ ID or domain matches selected view
-                                    if (!h.organId) return false;
-                                    const hOrgan = h.organId.toLowerCase();
-                                    const sOrgan = selectedOrgan.toLowerCase();
+                        {selectedOrgan ? (
+                            <OrganDetailPanel
+                                organId={selectedOrgan}
+                                existingIssue={
+                                    historyData.filter(h => {
+                                        // Robust matching: Check if organ ID or domain matches selected view
+                                        if (!h.organId) return false;
+                                        const hOrgan = h.organId.toLowerCase();
+                                        const sOrgan = selectedOrgan.toLowerCase();
 
-                                    // Head/Neck
-                                    if (sOrgan === 'head' && (hOrgan === 'head' || hOrgan === 'neck' || hOrgan === 'brain' || hOrgan === 'eyes' || hOrgan === 'teeth')) return true;
-                                    // Chest
-                                    if (sOrgan === 'chest' && (hOrgan === 'chest' || hOrgan === 'heart' || hOrgan === 'lungs')) return true;
-                                    // Stomach/Abdomen
-                                    if (sOrgan === 'stomach' && (hOrgan === 'stomach' || hOrgan === 'abdomen' || hOrgan === 'liver' || hOrgan === 'kidneys' || hOrgan === 'plevis')) return true;
-                                    // Limbs
-                                    if (sOrgan.includes('arm') && hOrgan.includes('arm')) return true;
-                                    if (sOrgan.includes('leg') && hOrgan.includes('leg')) return true;
+                                        // Head/Neck
+                                        if (sOrgan === 'head' && (hOrgan === 'head' || hOrgan === 'neck' || hOrgan === 'brain' || hOrgan === 'eyes' || hOrgan === 'teeth')) return true;
+                                        // Chest
+                                        if (sOrgan === 'chest' && (hOrgan === 'chest' || hOrgan === 'heart' || hOrgan === 'lungs')) return true;
+                                        // Stomach/Abdomen
+                                        if (sOrgan === 'stomach' && (hOrgan === 'stomach' || hOrgan === 'abdomen' || hOrgan === 'liver' || hOrgan === 'kidneys' || hOrgan === 'plevis')) return true;
+                                        // Limbs
+                                        if (sOrgan.includes('arm') && hOrgan.includes('arm')) return true;
+                                        if (sOrgan.includes('leg') && hOrgan.includes('leg')) return true;
 
-                                    return hOrgan === sOrgan;
-                                })
-                            }
-                            onClose={() => setIsMobilePanelOpen(false)}
-                            onUpdate={(data) => console.log('History Update:', data)}
-                        />
+                                        return hOrgan === sOrgan;
+                                    })
+                                }
+                                onClose={() => { setSelectedOrgan(null); setIsMobilePanelOpen(false); }}
+                                onUpdate={(data) => console.log('History Update:', data)}
+                            />
+                        ) : (
+                            <EmptyStateWithSuggestions
+                                onAction={(action) => {
+                                    if (action === 'log_symptom') setShowHealthLogger(true);
+                                    // Handle other actions
+                                }}
+                            />
+                        )}
                     </div>
+                    {/* Right Panel: Health Summary & Scores (New 3rd Column) */}
+                    <div className="history-summary-sidebar">
+                        <HealthSummaryCard data={healthSummary} />
+
+                        {/* Placeholder for Quick Timeline */}
+                        <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                            <h4 style={{ margin: '0 0 12px 0', fontSize: '1rem', color: '#334155' }}>Quick Timeline</h4>
+                            <div style={{ fontSize: '0.9rem', color: '#64748b' }}>
+                                <p>• 2018 - Car Accident</p>
+                                <p>• 2020 - Surgery</p>
+                                <p>• 2024 - Active Issues</p>
+                            </div>
+                        </div>
+
+                        {/* Placeholder for Actions */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            <button className="btn-secondary-action" style={{ width: '100%', justifyContent: 'center' }}>
+                                Export PDF
+                            </button>
+                            <button className="btn-secondary-action" style={{ width: '100%', justifyContent: 'center', background: 'white', color: '#0F766E', border: '1px solid #0F766E' }}>
+                                Email Doctor
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
             ) : viewMode === 'timeline' ? (
                 renderTimeline()
@@ -378,6 +591,12 @@ const MedicalHistoryPage = () => {
             ) : (
                 <div className="report-view-container">
                     {renderMedicalProfile()}
+
+                    {/* Family Tree Integration */}
+                    {healthSummary.familyRisks && healthSummary.familyRisks.length > 0 && (
+                        <FamilyHealthTree risks={healthSummary.familyRisks} />
+                    )}
+
                     {renderReport().props.children} {/* Reuse the existing report list content */}
                 </div>
             )}
