@@ -80,3 +80,36 @@
     font-size: 0.85rem;
     border: 1px dashed rgba(0, 0, 0, 0.1);
 }
+
+/* Markdown Rendering Styles for AI Messages */
+.chat-message.ai .message-bubble h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 12px 0 6px 0;
+    color: #1e40af;
+}
+
+.chat-message.ai .message-bubble strong {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.chat-message.ai .message-bubble p {
+    margin: 6px 0;
+}
+
+.chat-message.ai .message-bubble hr {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 12px 0;
+}
+
+.chat-message.ai .message-bubble ul,
+.chat-message.ai .message-bubble ol {
+    margin: 8px 0;
+    padding-left: 20px;
+}
+
+.chat-message.ai .message-bubble li {
+    margin: 4px 0;
+}

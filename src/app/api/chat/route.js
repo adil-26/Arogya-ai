@@ -4,20 +4,20 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from '@/lib/prisma';
 import acupointData from '@/data/acupoints.json';
 
-// Simple keyword search for acupoints (RAG-lite)
-function getRelevantAcupoints(query) {
-    if (!query) return [];
-    const lowerQuery = query.toLowerCase();
+// Smart keyword search for acupoints (RAG-lite)
+// Accepts both user query and context keywords (e.g., from their health issues)
+function getRelevantAcupoints(query, contextKeywords = []) {
+    const searchTerms = [query, ...contextKeywords].filter(Boolean).map(t => t.toLowerCase());
+    if (searchTerms.length === 0) return [];
 
     return acupointData.acupoints.filter(point => {
-        // Search in name, code, or what it treats
-        return (
-            point.name.toLowerCase().includes(lowerQuery) ||
-            point.code.toLowerCase().includes(lowerQuery) ||
-            point.treats.some(t => lowerQuery.includes(t.replace(':', ' '))) || // Match "pain chest" from "pain:chest"
-            point.treats.some(t => lowerQuery.includes(t.split(':')[0])) // Match "headache"
+        return searchTerms.some(term =>
+            point.name.toLowerCase().includes(term) ||
+            point.code.toLowerCase().includes(term) ||
+            point.treats.some(t => term.includes(t.replace(':', ' '))) ||
+            point.treats.some(t => term.includes(t.split(':')[0]))
         );
-    }).slice(0, 5); // Limit to top 5 to save tokens
+    }).slice(0, 7); // Top 7 for broader coverage
 }
 
 // API Handler for AI Chat
@@ -52,40 +52,52 @@ export async function POST(request) {
 
             const isPremium = user?.isPremium || false;
 
-            const [issues, records, appointments] = await Promise.all([
+            const [issues, records, appointments, history, medications] = await Promise.all([
                 prisma.bodyIssue.findMany({ where: { userId } }),
                 prisma.medicalRecord.findMany({ where: { userId }, orderBy: { date: 'desc' }, take: 5 }),
-                prisma.appointment.findMany({ where: { userId }, orderBy: { date: 'desc' }, take: 3 })
+                prisma.appointment.findMany({ where: { userId }, orderBy: { date: 'desc' }, take: 3 }),
+                prisma.patientMedicalHistory.findUnique({
+                    where: { userId },
+                    include: { surgeries: true, allergies: true, familyHistory: true }
+                }),
+                prisma.medication.findMany({ where: { userId, isActive: true } })
             ]);
 
-            // 2. Format Context for AI
+            // 2. Format Context for AI - FULL HISTORY
             let contextSummary = `
             PATIENT MEDICAL CONTEXT:
-            - Active Health Issues: ${issues.length > 0 ? issues.map(i => `${i.issue} in ${i.specificPart} (${i.severity})`).join(', ') : "None recorded"}
-            - Recent Medical Reports: ${records.length > 0 ? records.map(r => `${r.title} (${r.type}) on ${r.date}`).join(', ') : "None"}
-            - Appointments: ${appointments.length > 0 ? appointments.map(a => `Dr. ${a.doctorName} (${a.specialty}) on ${a.date}`).join(', ') : "None"}
+            - Active Health Issues: ${issues.length > 0 ? issues.map(i => `${i.issue} in ${i.specificPart} (${i.severity})`).join(', ') : "None"}
+            - Current Medications: ${medications.length > 0 ? medications.map(m => `${m.name} (${m.dosage})`).join(', ') : "None"}
+            - Allergies: ${history?.allergies?.length > 0 ? history.allergies.map(a => `${a.allergen} (${a.severity || 'unknown severity'})`).join(', ') : "None known"}
+            - Past Surgeries: ${history?.surgeries?.length > 0 ? history.surgeries.map(s => `${s.type} on ${s.bodyPart} (${s.year})`).join(', ') : "None"}
+            - Family History: ${history?.familyHistory?.length > 0 ? history.familyHistory.map(f => `${f.relation}: ${f.conditions?.join(', ')}`).join('; ') : "None"}
+            - Recent Reports: ${records.length > 0 ? records.map(r => `${r.title} (${r.type})`).join(', ') : "None"}
             `;
 
             // 3. Premium Logic: Acupressure Injection
             let systemInstructions = "";
 
             if (isPremium) {
-                // Search for relevant acupoints based on user's message
-                const relevantPoints = getRelevantAcupoints(lastUserMessage);
+                // Collect keywords from Active Issues for auto-context (e.g., 'Headache', 'Asthma')
+                const issueKeywords = issues.map(i => i.issue);
+                // Search acupoints using BOTH user query AND their health issues
+                const relevantPoints = getRelevantAcupoints(lastUserMessage, issueKeywords);
 
                 if (relevantPoints.length > 0) {
                     const pointDetails = relevantPoints.map(p =>
-                        `- ${p.code} (${p.name}): ${p.location}. Treats: ${p.treats.join(', ')}. Caution: ${p.cautions}`
-                    ).join('\n');
+                        `📍 **${p.code}** - ${p.name} (${p.chinese} / ${p.pinyin})
+   • Meridian: ${p.meridian}
+   • Location: ${p.location}
+   • Treats: ${p.treats.map(t => t.replace(':', ': ')).join(', ')}
+   • ⚠️ Caution: ${p.cautions}`
+                    ).join('\n\n');
 
                     contextSummary += `
                     
-                    PREMIUM KNOWLEDGE (ACUPRESSURE):
-                    The user has Premium access. Here is verified data from the Acupoint Database relevant to their query:
+                    PREMIUM ACUPRESSURE DATABASE:
                     
-                    ${pointDetails}
+${pointDetails}
                     
-                    INSTRUCTION: You can recommend these specific points. Describe the location clearly.
                     `;
                 } else {
                     contextSummary += `\nPREMIUM ACCESS: Active. (No specific acupoints matched this query, rely on general medical knowledge).`;
@@ -108,19 +120,42 @@ export async function POST(request) {
             }));
 
             const systemPrompt = `
-            You are Aarogya, a dedicated medical AI assistant.
+            You are **Aarogya**, a warm and knowledgeable Ayurvedic & Acupressure wellness assistant.
             
             YOUR KNOWLEDGE CLUSTER:
             ${contextSummary}
             
             ${systemInstructions}
 
-            STRICT GUIDELINES:
-            1. **Medical Focus Only**: Answer health, symptom, and doctor questions.
-            2. **Use Context**: Refer to the patient's specific history (e.g., "Since you have Migraines...").
-            3. **Doctor-Relatable**: Suggest consulting their specific doctors if available.
-            4. **Disclaimer**: Always add: "This is for wellness support and not a medical replacement."
+            **CRITICAL RULES (MUST FOLLOW):**
+            
+            ❌ **NEVER** list all meridians or say "I have access to Lung Meridian (11 points), Large Intestine (20 points)..." - this is useless to the user.
+            ❌ **NEVER** give generic overviews of the acupressure system.
+            ✅ **ALWAYS** recommend 2-3 SPECIFIC acupoints based on the user's ACTIVE HEALTH ISSUES shown above.
+            ✅ **ALWAYS** use the acupoint data provided in "PREMIUM ACUPRESSURE DATABASE" section.
+            
+            **RESPONSE FORMAT FOR ACUPOINTS:**
+            
+            ---
+            ### 🌟 [Point Code] - [English Name]
+            **Chinese:** [Chinese Name] | **Pinyin:** [Pinyin]
+            
+            📍 **How to Find It:**
+            [Simple step-by-step instructions using body landmarks the user can feel]
+            
+            ✨ **Benefits:** [What it helps with, in friendly language]
+            
+            ⚠️ **Caution:** [Any warnings]
+            
+            ---
+            
+            **BEHAVIOR:**
+            1. Start by acknowledging the user's specific conditions (e.g., "I see you have Headache and Asthma...").
+            2. Recommend ONLY 2-3 most relevant points from the PREMIUM ACUPRESSURE DATABASE.
+            3. If no acupoint data matches, give general wellness advice - do NOT invent point locations.
+            4. End with: "💙 This is for wellness support and not a medical replacement."
             `;
+
 
             // Keep conversation history short to save context (System + Last 5 messages)
             const conversation = [

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Bot, User, Paperclip, FileText } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 import './ChatMessage.css';
 
 const ChatMessage = ({ message }) => {
@@ -21,7 +22,11 @@ const ChatMessage = ({ message }) => {
             </div>
             <div className="message-content">
                 <div className="message-bubble">
-                    {message.text}
+                    {isAI ? (
+                        <ReactMarkdown>{message.text}</ReactMarkdown>
+                    ) : (
+                        message.text
+                    )}
                     {message.attachment && (
                         <div className="attachment-preview">
                             <FileText size={16} />
