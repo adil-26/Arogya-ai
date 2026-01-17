@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Paperclip, AlertTriangle, ShieldCheck, Trash2, Sparkles, Mic, Image } from 'lucide-react';
+import { Send, Paperclip, AlertTriangle, ShieldCheck, Trash2, Sparkles, Mic, MicOff, Volume2, VolumeX, Image } from 'lucide-react';
 import ChatMessage from '../../components/chat/ChatMessage';
+import VoiceOrb from '../../components/chat/VoiceOrb';
+import { useVoice } from '../../hooks/useVoice';
 import './ChatPage.css';
 
 const ChatPage = () => {
@@ -8,7 +10,32 @@ const ChatPage = () => {
     const [input, setInput] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const [historyLoaded, setHistoryLoaded] = useState(false);
+    const [showVoiceModal, setShowVoiceModal] = useState(false);
     const messagesEndRef = useRef(null);
+
+    // Voice capabilities
+    const { isListening, isSpeaking, transcript, setTranscript, startListening, stopListening, speak, stopSpeaking } = useVoice();
+    const wasListeningRef = useRef(false);
+    const handleVoiceSendRef = useRef(null);
+
+    // Auto-fill input when user speaks (for text input fallback)
+    useEffect(() => {
+        if (transcript) {
+            setInput(transcript);
+        }
+    }, [transcript]);
+
+    // Speech-to-Speech: Auto-send when listening stops
+    useEffect(() => {
+        // Detect transition from listening -> not listening (speech ended)
+        if (wasListeningRef.current && !isListening && showVoiceModal) {
+            // User stopped speaking, auto-send if transcript exists
+            if (transcript?.trim()) {
+                handleVoiceSendRef.current?.(transcript);
+            }
+        }
+        wasListeningRef.current = isListening;
+    }, [isListening, showVoiceModal, transcript]);
 
     const defaultMessage = {
         id: 1,
@@ -140,6 +167,62 @@ const ChatPage = () => {
         }
     };
 
+    // Speech-to-Speech: Auto-send and auto-speak response
+    const handleVoiceSend = async (spokenText) => {
+        if (!spokenText?.trim()) return;
+
+        const userMsg = {
+            id: Date.now(),
+            sender: 'user',
+            text: spokenText,
+            timestamp: new Date().toISOString()
+        };
+
+        const updatedMessages = [...messages, userMsg];
+        setMessages(updatedMessages);
+        setInput('');
+        setTranscript('');
+        setIsTyping(true);
+
+        try {
+            const apiMessages = updatedMessages.map(m => ({
+                role: m.sender === 'user' ? 'user' : 'assistant',
+                content: m.text
+            }));
+
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ messages: apiMessages })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const aiMsg = {
+                    id: Date.now() + 1,
+                    sender: 'ai',
+                    text: data.reply,
+                    timestamp: new Date().toISOString()
+                };
+                setMessages(prev => [...prev, aiMsg]);
+
+                // Auto-speak the AI response (strip markdown)
+                const cleanText = data.reply.replace(/[#*_`]/g, '').replace(/---/g, '');
+                speak(cleanText);
+            } else {
+                throw new Error("Chat failed");
+            }
+        } catch (error) {
+            console.error("Voice Chat Error", error);
+            speak("Sorry, I'm having trouble connecting. Please try again.");
+        } finally {
+            setIsTyping(false);
+        }
+    };
+
+    // Keep ref updated for the auto-send effect
+    handleVoiceSendRef.current = handleVoiceSend;
+
     const handleKeyPress = (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
@@ -251,15 +334,41 @@ const ChatPage = () => {
 
             {/* Input Area */}
             <div className="chat-input-area">
+                {/* Mic Button - Opens Voice Modal */}
+                <button
+                    className={`btn-voice ${isListening ? 'active' : ''}`}
+                    onClick={() => setShowVoiceModal(true)}
+                    title="Voice Input"
+                >
+                    <Mic size={18} />
+                </button>
+
                 <div className="input-wrapper">
                     <textarea
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         onKeyDown={handleKeyPress}
-                        placeholder="Describe your symptoms or ask a question..."
+                        placeholder={isListening ? 'Listening...' : 'Describe your symptoms or ask a question...'}
                         rows={1}
                     />
                 </div>
+
+                {/* Speaker Button - Read last AI message */}
+                <button
+                    className={`btn-voice ${isSpeaking ? 'active' : ''}`}
+                    onClick={() => {
+                        if (isSpeaking) {
+                            stopSpeaking();
+                        } else {
+                            const lastAiMsg = [...messages].reverse().find(m => m.sender === 'ai');
+                            if (lastAiMsg) speak(lastAiMsg.text.replace(/[#*_`]/g, '')); // Strip markdown
+                        }
+                    }}
+                    title={isSpeaking ? 'Stop Speaking' : 'Read AI Response'}
+                >
+                    {isSpeaking ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                </button>
+
                 <button
                     className="btn-send"
                     onClick={handleSend}
@@ -268,6 +377,29 @@ const ChatPage = () => {
                     <Send size={18} />
                 </button>
             </div>
+
+            {/* Voice Orb Modal */}
+            <VoiceOrb
+                isActive={showVoiceModal}
+                isListening={isListening}
+                isSpeaking={isSpeaking}
+                transcript={transcript}
+                isProcessing={isTyping}
+                onClose={() => {
+                    setShowVoiceModal(false);
+                    stopListening();
+                    stopSpeaking();
+                }}
+                onStartListening={startListening}
+                onStopListening={() => {
+                    stopListening();
+                    // Speech-to-Speech: Auto-send and AI will auto-speak
+                    if (transcript?.trim()) {
+                        handleVoiceSend(transcript);
+                        // Keep modal open - it will show "Speaking" state
+                    }
+                }}
+            />
         </div>
     );
 };

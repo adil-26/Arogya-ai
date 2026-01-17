@@ -8,15 +8,16 @@ import ArmView from './parts/ArmView';
 import PelvisView from './parts/PelvisView';
 import './OrganDetailPanel.css';
 
-// Mock Config for Domains and Issues
+
+// Mock Config for Domains and Issues with Organ Images
 const BODY_DOMAINS = {
     head: {
         name: 'Head & Neck',
         subDomains: [
-            { id: 'Brain', label: 'Brain', hasVisual: false },
-            { id: 'Eyes', label: 'Eyes', hasVisual: true },
-            { id: 'Teeth', label: 'Teeth', hasVisual: true },
-            { id: 'Ears', label: 'Ears', hasVisual: false }
+            { id: 'Brain', label: 'Brain', hasVisual: false, image: '/images/organs/brain_icon.png' },
+            { id: 'Eyes', label: 'Eyes', hasVisual: true, image: '/images/organs/eye_icon.png' },
+            { id: 'Teeth', label: 'Teeth', hasVisual: true, image: '/images/organs/teeth_icon.png' },
+            { id: 'Ears', label: 'Ears', hasVisual: false, image: null }
         ],
         commonIssues: {
             'Brain': ['Migraine', 'Headache', 'Dizziness', 'Concussion'],
@@ -28,8 +29,8 @@ const BODY_DOMAINS = {
     chest: {
         name: 'Chest Area',
         subDomains: [
-            { id: 'Heart', label: 'Heart', hasVisual: false },
-            { id: 'Lungs', label: 'Lungs', hasVisual: false }
+            { id: 'Heart', label: 'Heart', hasVisual: false, image: '/images/organs/heart_icon.png' },
+            { id: 'Lungs', label: 'Lungs', hasVisual: false, image: '/images/organs/lungs_icon.png' }
         ],
         commonIssues: {
             'Heart': ['Palpitations', 'Chest Pain', 'High BP'],
@@ -40,11 +41,11 @@ const BODY_DOMAINS = {
     stomach: {
         name: 'Abdomen',
         subDomains: [
-            { id: 'Stomach', label: 'Stomach', hasVisual: true },
-            { id: 'Liver', label: 'Liver', hasVisual: true },
-            { id: 'Intestines', label: 'Intestines', hasVisual: true },
-            { id: 'Kidneys', label: 'Kidneys', hasVisual: true },
-            { id: 'Pelvis', label: 'Lower Abdomen / Pelvis', hasVisual: true }
+            { id: 'Stomach', label: 'Stomach', hasVisual: true, image: '/images/organs/stomach_icon.png' },
+            { id: 'Liver', label: 'Liver', hasVisual: true, image: '/images/organs/liver_icon.png' },
+            { id: 'Intestines', label: 'Intestines', hasVisual: true, image: null },
+            { id: 'Kidneys', label: 'Kidneys', hasVisual: true, image: '/images/organs/kidney_icon.png' },
+            { id: 'Pelvis', label: 'Lower Abdomen / Pelvis', hasVisual: true, image: null }
         ],
         commonIssues: {
             'Stomach': ['Stomach Ache', 'Acidity', 'Reflux', 'Ulcer'],
@@ -57,9 +58,9 @@ const BODY_DOMAINS = {
     arms: {
         name: 'Arms & Hands',
         subDomains: [
-            { id: 'Shoulder', label: 'Shoulder', hasVisual: true },
-            { id: 'Arm', label: 'Arm (General)', hasVisual: true }, // General uses Arm View
-            { id: 'Hand', label: 'Hand/Wrist', hasVisual: true }
+            { id: 'Shoulder', label: 'Shoulder', hasVisual: true, image: '/images/organs/shoulder_icon.png' },
+            { id: 'Arm', label: 'Arm (General)', hasVisual: true, image: null },
+            { id: 'Hand', label: 'Hand/Wrist', hasVisual: true, image: '/images/organs/hand_icon.png' }
         ],
         commonIssues: {
             'Shoulder': ['Frozen Shoulder', 'Dislocation', 'Pain'],
@@ -70,9 +71,9 @@ const BODY_DOMAINS = {
     legs: {
         name: 'Legs & Feet',
         subDomains: [
-            { id: 'Thigh', label: 'Thigh/Hip', hasVisual: true },
-            { id: 'Knee', label: 'Knee', hasVisual: true }, // Uses Leg View
-            { id: 'Foot', label: 'Foot/Ankle', hasVisual: true }
+            { id: 'Thigh', label: 'Thigh/Hip', hasVisual: true, image: null },
+            { id: 'Knee', label: 'Knee', hasVisual: true, image: '/images/organs/knee_icon.png' },
+            { id: 'Foot', label: 'Foot/Ankle', hasVisual: true, image: '/images/organs/foot_icon.png' }
         ],
         commonIssues: {
             'Knee': ['ACL Tear', 'Arthritis', 'Pain', 'Swelling'],
@@ -162,10 +163,16 @@ const OrganDetailPanel = ({ organId, existingIssue, onUpdate, onClose }) => {
         setStep('domain');
     };
 
+
     const handleDomainSelect = (sub) => {
-        setFormData({ ...formData, domain: sub.id });
-        if (sub.hasVisual) setStep('visual_selection');
-        else setStep('issue');
+        setFormData({ ...formData, domain: sub.id, specificPart: sub.label });
+        // Skip visual selection if organ has an image - go directly to issue
+        // Only show visual_selection for teeth/eyes that need pinpoint
+        if (sub.id === 'Teeth' || sub.id === 'Eyes') {
+            setStep('visual_selection');
+        } else {
+            setStep('issue');
+        }
     };
 
     const isStatusIssue = ['Missing/Removed', 'Implant', 'Root Canal', 'Crown'].includes(formData.issue);
@@ -173,14 +180,21 @@ const OrganDetailPanel = ({ organId, existingIssue, onUpdate, onClose }) => {
     const renderDomainSelection = () => (
         <div className="panel-step">
             <h4>Select Region</h4>
-            <div className="selection-grid">
+            <div className="organ-card-grid">
                 {(config.subDomains || []).map(sub => (
                     <button
                         key={sub.id}
-                        className={`selection-btn ${formData.domain === sub.id ? 'active' : ''}`}
+                        className={`organ-card ${formData.domain === sub.id ? 'active' : ''}`}
                         onClick={() => handleDomainSelect(sub)}
                     >
-                        {sub.label} <ChevronRight size={16} />
+                        {sub.image ? (
+                            <img src={sub.image} alt={sub.label} className="organ-image" />
+                        ) : (
+                            <div className="organ-placeholder">
+                                <Activity size={32} />
+                            </div>
+                        )}
+                        <span className="organ-label">{sub.label}</span>
                     </button>
                 ))}
                 {(!config.subDomains || config.subDomains.length === 0) && (

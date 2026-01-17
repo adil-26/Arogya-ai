@@ -332,3 +332,86 @@
     margin-bottom: 12px;
     font-weight: 500;
 }
+
+/* ============================================ */
+/* ORGAN IMAGE CARD GRID */
+/* ============================================ */
+
+.organ-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 8px 0;
+}
+
+.organ-card {
+    background: linear-gradient(145deg, #ffffff, #f8fafc);
+    border: 2px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.organ-card:hover {
+    border-color: #00796B;
+    background: linear-gradient(145deg, #E0F2F1, #ffffff);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 121, 107, 0.15);
+}
+
+.organ-card.active {
+    border-color: #00796B;
+    background: linear-gradient(145deg, #B2DFDB, #E0F2F1);
+    box-shadow: 0 4px 16px rgba(0, 121, 107, 0.25);
+}
+
+.organ-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.organ-card:hover .organ-image {
+    transform: scale(1.1);
+}
+
+.organ-placeholder {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #E0F2F1, #B2DFDB);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00796B;
+}
+
+.organ-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1E293B;
+    text-align: center;
+}
+
+.organ-card:hover .organ-label {
+    color: #00796B;
+}
+
+.organ-card.active .organ-label {
+    color: #004D40;
+}
+
+/* Responsive - Single column on very small screens */
+@media (max-width: 400px) {
+    .organ-card-grid {
+        grid-template-columns: 1fr;
+    }
+}
