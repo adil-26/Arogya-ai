@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ThreeDBodyMap from '../../BodyMap/3D/ThreeDBodyMap'; // New 3D Component
+import HumanBodyImage from '../../BodyMap/HumanBodyImage';
 import { Plus, Trash2, Activity } from 'lucide-react';
 
 const AccidentHistoryStep = ({ onNext, onBack, data, isSaving }) => {
@@ -109,9 +109,15 @@ const AccidentHistoryStep = ({ onNext, onBack, data, isSaving }) => {
 
                             <p style={{ fontWeight: '500', marginBottom: '10px' }}>Tag Injured Areas (Tap Body Part):</p>
 
-                            {/* Body Map Integration */}
-                            <div style={{ height: '500px', border: '1px solid #e2e8f0', borderRadius: '16px', overflow: 'hidden', marginBottom: '20px' }}>
-                                <ThreeDBodyMap onOrganSelect={handleOrganSelect} />
+                            {/* 2D Body Map - Cleaner and faster */}
+                            <div style={{ display: 'flex', justifyContent: 'center', padding: '20px', background: '#f8fafc', borderRadius: '16px', marginBottom: '20px' }}>
+                                <HumanBodyImage
+                                    view="front"
+                                    gender="male"
+                                    selectedPart={selectedBodyPart}
+                                    onPartClick={handleOrganSelect}
+                                    height={400}
+                                />
                             </div>
 
                             {selectedBodyPart && (
