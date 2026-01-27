@@ -18,7 +18,7 @@ export default function TourGuide() {
                     {
                         element: '#root',
                         popover: {
-                            title: 'Welcome to Aarogya AI 👋',
+                            title: 'Welcome to E2Care 👋',
                             description: 'Let us show you around your new personal health dashboard.',
                             side: "left",
                             align: 'start'

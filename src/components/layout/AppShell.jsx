@@ -114,7 +114,7 @@ const AppShell = ({ children }) => {
 
       <aside className={`sidebar desktop-only ${isSidebarOpen ? 'open' : ''}`}>
         <div className="brand">
-          <h2>Aarogya AI</h2>
+          <h2>E2Care</h2>
           <button className="mobile-close-btn" onClick={closeSidebar}>
             <X size={24} />
           </button>

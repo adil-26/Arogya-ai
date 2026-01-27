@@ -10,7 +10,7 @@ export default function LoginSelectionPage() {
         <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#F3F4F6' }}>
             <div style={{ width: '100%', maxWidth: '900px', padding: '20px' }}>
                 <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-                    <h1 style={{ color: '#111827', fontSize: '2.5rem', marginBottom: '10px', fontWeight: '800' }}>Welcome to Aarogya AI</h1>
+                    <h1 style={{ color: '#111827', fontSize: '2.5rem', marginBottom: '10px', fontWeight: '800' }}>Welcome to E2Care</h1>
                     <p style={{ color: '#6B7280', fontSize: '1.2rem' }}>Please select your login type to continue</p>
                 </div>
 

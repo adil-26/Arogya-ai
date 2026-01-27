@@ -53,9 +53,11 @@ const MedicalHistoryPage = () => {
                     allergyCount: 0
                 };
                 let fetchedAllergies = [];
+                let bodyIssuesCount = 0;
 
                 if (issuesRes.ok) {
                     const issues = await issuesRes.json();
+                    bodyIssuesCount = issues.length; // Count active body issues
                     const formattedIssues = issues.map(i => ({
                         id: `issue-${i.id}`,
                         organId: i.organId, // IMPORTANT: Used for filtering
@@ -72,7 +74,8 @@ const MedicalHistoryPage = () => {
 
                 if (conditionsRes.ok) {
                     const conditions = await conditionsRes.json();
-                    summaryData.conditionCount = conditions.length;
+                    // Active Conditions = Chronic conditions + Body Issues
+                    summaryData.conditionCount = conditions.length + bodyIssuesCount;
 
                     const formattedConditions = conditions.map(c => ({
                         id: `cond-${c.id}`,

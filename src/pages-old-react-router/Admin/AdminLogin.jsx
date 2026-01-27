@@ -23,7 +23,7 @@ const AdminLogin = () => {
         <div className="admin-login-container">
             <div className="login-card">
                 <div className="brand-logo">
-                    <h2>Aarogya AI</h2>
+                    <h2>E2Care</h2>
                     <span>Admin Portal</span>
                 </div>
 

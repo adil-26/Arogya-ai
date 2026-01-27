@@ -41,7 +41,7 @@ function DoctorSignupForm() {
         <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#ECFDF5' }}>
             <div style={{ background: 'white', padding: '40px', borderRadius: '16px', width: '100%', maxWidth: '500px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)', borderTop: '4px solid #10B981' }}>
                 <h2 style={{ color: '#065F46', marginTop: 0 }}>Doctor Partner Program</h2>
-                <p style={{ color: '#6B7280', marginBottom: '20px' }}>Join the Aarogya Network</p>
+                <p style={{ color: '#6B7280', marginBottom: '20px' }}>Join the E2Care Network</p>
 
                 <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '15px' }}>
                     <input type="text" placeholder="Dr. Full Name" required

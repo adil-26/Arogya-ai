@@ -40,7 +40,7 @@ const ChatPage = () => {
     const defaultMessage = {
         id: 1,
         sender: 'ai',
-        text: "👋 Hello! I'm **Aarogya AI**, your health assistant.\n\nI can help you:\n• Understand symptoms\n• Explain medical reports\n• Provide diet & wellness tips\n\n⚠️ *I'm an AI assistant, not a doctor. Always consult a healthcare professional for serious concerns.*",
+        text: "👋 Hello! I'm **Arogya**, your health assistant.\n\nI can help you:\n• Understand symptoms\n• Explain medical reports\n• Provide diet & wellness tips\n\n⚠️ *I'm an AI assistant, not a doctor. Always consult a healthcare professional for serious concerns.*",
         timestamp: new Date().toISOString()
     };
 
@@ -255,7 +255,7 @@ const ChatPage = () => {
                         <span>🤖</span>
                     </div>
                 </div>
-                <p className="chat-loading-text">Starting Aarogya AI...</p>
+                <p className="chat-loading-text">Starting Arogya...</p>
             </div>
         );
     }
@@ -270,7 +270,7 @@ const ChatPage = () => {
                         <span className="pulse-dot"></span>
                     </div>
                     <div className="header-text">
-                        <h2>Aarogya AI</h2>
+                        <h2>Arogya</h2>
                         <span className="online-badge">
                             <span className="status-dot"></span>
                             Online • Ready to help

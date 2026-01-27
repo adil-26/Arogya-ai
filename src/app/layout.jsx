@@ -1,7 +1,7 @@
 import './globals.css';
 
 export const metadata = {
-    title: 'Aarogya AI - Advanced Health Dashboard',
+    title: 'E2Care - Advanced Health Dashboard',
     description: 'AI-powered personal health management and visual medical records.',
 };
 

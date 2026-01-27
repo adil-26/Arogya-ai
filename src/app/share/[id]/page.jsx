@@ -119,7 +119,7 @@ export default async function SharedProfilePage({ params }) {
                 )}
 
                 <div className="footer-note">
-                    <p>Verified by Arogya AI • {new Date().toLocaleDateString()}</p>
+                    <p>Verified by E2Care • {new Date().toLocaleDateString()}</p>
                 </div>
             </main>
         </div>

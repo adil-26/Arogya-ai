@@ -51,7 +51,7 @@ export async function POST(request) {
                     body: JSON.stringify({
                         model: "llama-3.3-70b-versatile", // Valid Groq Model
                         messages: [
-                            { role: "system", content: "You are a medical AI assistant named Aarogya. Analyze the patient records briefly and provide health insights. Be professional, empathetic, and concise." },
+                            { role: "system", content: "You are a medical AI assistant named Arogya. Analyze the patient records briefly and provide health insights. Be professional, empathetic, and concise." },
                             { role: "user", content: `Patient Data Context: ${JSON.stringify(context)}` }
                         ],
                         temperature: 0.7
