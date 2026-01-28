@@ -24,7 +24,7 @@ export default async function SharedProfilePage({ params }) {
         return <ShareGate userId={id} />;
     }
 
-    // 3. Authorized: Fetch vital medical info only (Restriction for privacy)
+    // 3. Authorized: Fetch FULL medical info
     const user = await prisma.user.findUnique({
         where: { id: id },
         select: {
@@ -37,16 +37,23 @@ export default async function SharedProfilePage({ params }) {
                 where: { status: 'active' },
                 select: { name: true, type: true }
             },
+            medications: {
+                where: { isActive: true },
+                select: { name: true, dosage: true, frequency: true }
+            },
             medicalHistory: {
                 select: {
-                    allergies: {
-                        select: { allergen: true, type: true, severity: true }
+                    birthHistory: true,
+                    childhoodHistory: true,
+                    femaleHistory: {
+                        include: { pregnancies: true }
                     },
-                    surgeries: {
-                        select: { type: true, year: true }
-                    },
+                    maleHistory: true,
+                    familyHistory: true,
+                    allergies: true,
+                    surgeries: true,
                     accidents: {
-                        select: { type: true, year: true, accidentDate: true }
+                        include: { injuries: true }
                     }
                 }
             }
@@ -72,6 +79,8 @@ export default async function SharedProfilePage({ params }) {
         return Math.abs(ageDate.getUTCFullYear() - 1970);
     };
 
+    const mh = user.medicalHistory || {};
+
     return (
         <div className="share-container">
             <header className="share-header">
@@ -90,24 +99,25 @@ export default async function SharedProfilePage({ params }) {
             </header>
 
             <main className="share-content">
-                {/* Allergies - HIGH PRIORITY */}
-                {user.medicalHistory?.allergies?.length > 0 && (
+                {/* 1. Critical Allergies */}
+                {mh.allergies?.length > 0 && (
                     <section className="info-card critical-card">
                         <h2 className="card-title text-red-600">
                             <AlertCircle size={20} /> Allergies
                         </h2>
                         <ul className="list-disc pl-5">
-                            {user.medicalHistory.allergies.map((allergy, idx) => (
+                            {mh.allergies.map((a, idx) => (
                                 <li key={idx} className="mb-1">
-                                    <strong>{allergy.allergen}</strong>
-                                    {allergy.severity && <span className="text-sm text-red-600 ml-2">({allergy.severity})</span>}
+                                    <strong>{a.allergen}</strong> ({a.type})
+                                    {a.severity && <span className="text-sm text-red-600 ml-2"> - {a.severity}</span>}
+                                    {a.reaction && <div className="text-xs text-gray-500">Reaction: {a.reaction}</div>}
                                 </li>
                             ))}
                         </ul>
                     </section>
                 )}
 
-                {/* Active Conditions */}
+                {/* 2. Active Conditions */}
                 <section className="info-card">
                     <h2 className="card-title">
                         <Heart size={20} className="text-pink-500" /> Medical Conditions
@@ -123,20 +133,118 @@ export default async function SharedProfilePage({ params }) {
                     )}
                 </section>
 
-                {/* Surgeries & Accidents (Brief) */}
-                {(user.medicalHistory?.surgeries?.length > 0 || user.medicalHistory?.accidents?.length > 0) && (
+                {/* 3. Current Medications */}
+                {user.medications?.length > 0 && (
                     <section className="info-card">
-                        <h2 className="card-title text-blue-600">History Summary</h2>
-                        <ul className="text-sm text-gray-700 space-y-2">
-                            {user.medicalHistory?.surgeries?.map((s, i) => (
-                                <li key={`s-${i}`}>Surgery: {s.type} ({s.year})</li>
-                            ))}
-                            {user.medicalHistory?.accidents?.map((a, i) => (
-                                <li key={`a-${i}`}>Accident: {a.type} ({a.year})</li>
+                        <h2 className="card-title text-blue-600">Current Medications</h2>
+                        <ul className="space-y-2">
+                            {user.medications.map((m, i) => (
+                                <li key={i} className="text-sm border-b pb-1 last:border-0">
+                                    <strong>{m.name}</strong> - {m.dosage} ({m.frequency})
+                                </li>
                             ))}
                         </ul>
                     </section>
                 )}
+
+                {/* 4. Surgeries */}
+                {mh.surgeries?.length > 0 && (
+                    <section className="info-card">
+                        <h2 className="card-title">Surgical History</h2>
+                        <div className="space-y-3">
+                            {mh.surgeries.map((s, i) => (
+                                <div key={i} className="text-sm bg-gray-50 p-2 rounded">
+                                    <div className="font-semibold">{s.type} ({s.year || new Date(s.surgeryDate).getFullYear()})</div>
+                                    {s.hospital && <div>🏥 {s.hospital}</div>}
+                                    {s.surgeon && <div>👨‍⚕️ Dr. {s.surgeon}</div>}
+                                    {s.notes && <div className="text-gray-500 italic">"{s.notes}"</div>}
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                {/* 5. Accidents */}
+                {mh.accidents?.length > 0 && (
+                    <section className="info-card">
+                        <h2 className="card-title">Major Accidents</h2>
+                        <div className="space-y-3">
+                            {mh.accidents.map((a, i) => (
+                                <div key={i} className="text-sm bg-gray-50 p-2 rounded">
+                                    <div className="font-semibold">{a.type} ({a.year || new Date(a.accidentDate).getFullYear()})</div>
+                                    {a.treatment && <div>Treatment: {a.treatment}</div>}
+                                    {a.residualEffects && <div className="text-red-500 text-xs">Residual: {a.residualEffects}</div>}
+                                    {a.injuries?.length > 0 && (
+                                        <ul className="list-disc pl-4 mt-1 text-xs text-gray-600">
+                                            {a.injuries.map((inj, j) => <li key={j}>{inj.injuryType} on {inj.bodyPart}</li>)}
+                                        </ul>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                {/* 6. Family History */}
+                {mh.familyHistory?.length > 0 && (
+                    <section className="info-card">
+                        <h2 className="card-title">Family History</h2>
+                        <ul className="space-y-1 text-sm">
+                            {mh.familyHistory.map((f, i) => (
+                                <li key={i}>
+                                    <strong>{f.relation}:</strong> {f.conditions.join(', ')}
+                                    {f.ageDiagnosed && <span className="text-xs text-gray-500"> (Diagnosed at {f.ageDiagnosed})</span>}
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
+
+                {/* 7. Birth & Childhood (Collapsed/Secondary) */}
+                {(mh.birthHistory || mh.childhoodHistory) && (
+                    <section className="info-card">
+                        <h2 className="card-title">Early Life History</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            {mh.birthHistory && (
+                                <div>
+                                    <h4 className="font-semibold mb-1">Birth</h4>
+                                    <p>Type: {mh.birthHistory.deliveryType} ({mh.birthHistory.birthTerm})</p>
+                                    <p>Weight: {mh.birthHistory.birthWeight}</p>
+                                    {mh.birthHistory.complications?.length > 0 && <p className="text-red-500">Complications: {mh.birthHistory.complications.join(', ')}</p>}
+                                </div>
+                            )}
+                            {mh.childhoodHistory && (
+                                <div>
+                                    <h4 className="font-semibold mb-1">Childhood</h4>
+                                    <p>Vaccinations: {mh.childhoodHistory.vaccinationStatus}</p>
+                                    {mh.childhoodHistory.childhoodIllnesses?.length > 0 && <p>Illnesses: {mh.childhoodHistory.childhoodIllnesses.join(', ')}</p>}
+                                </div>
+                            )}
+                        </div>
+                    </section>
+                )}
+
+                {/* 8. Reproductive History (Gender Specific) */}
+                {user.gender?.toLowerCase() === 'female' && mh.femaleHistory && (
+                    <section className="info-card">
+                        <h2 className="card-title">Reproductive Health</h2>
+                        <div className="text-sm">
+                            <p>Menarche Age: {mh.femaleHistory.menarcheAge}</p>
+                            <p>Cycle: {mh.femaleHistory.cycleRegularity}</p>
+                            {mh.femaleHistory.pregnancies?.length > 0 && (
+                                <div className="mt-2">
+                                    <strong>Pregnancies:</strong>
+                                    <ul className="list-disc pl-4">
+                                        {mh.femaleHistory.pregnancies.map((p, i) => (
+                                            <li key={i}>{p.outcome} ({p.year}) - {p.deliveryType}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                        </div>
+                    </section>
+                )}
+
 
 
                 {/* Emergency Contact */}
