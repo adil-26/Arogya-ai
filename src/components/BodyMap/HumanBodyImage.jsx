@@ -2,7 +2,7 @@ import React from 'react';
 
 const HumanBodyImage = ({ gender = 'male', view = 'front', selectedPart, onPartClick }) => {
     // Image path based on props
-    const imagePath = `/images/bodymap/${gender}-${view}.png`;
+    const imagePath = `/images/bodymap/${gender.toLowerCase()}-${view}.png`;
 
     // Interaction Zoning (Percentage based for responsiveness)
     // Format: { id: 'partId', top: '10%', left: '20%', width: '10%', height: '10%' }

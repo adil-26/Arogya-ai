@@ -58,16 +58,15 @@ export async function POST(request) {
 
         switch (section) {
             case 'birth':
+                const { notes: birthNotes, ...birthRes } = data;
                 updateData.birthHistory = {
                     upsert: {
-                        create: data,
-                        update: data
+                        create: { ...data },
+                        update: { ...data }
                     }
                 };
                 break;
             case 'childhood':
-                // For hospitalizations, we might need to delete existing and recreate, or handle separately.
-                // Simple approach: Transactional update for arrays if needed, but here simple nested update
                 const { hospitalizations, ...childhoodFields } = data;
                 updateData.childhoodHistory = {
                     upsert: {
@@ -112,18 +111,34 @@ export async function POST(request) {
                 };
                 break;
             case 'family':
-                // Extract array if wrapped
                 const familyData = Array.isArray(data) ? data : (data.familyHistory || []);
                 updateData.familyHistory = {
                     deleteMany: {},
-                    create: familyData
+                    create: familyData.map(f => ({
+                        relation: f.relation,
+                        conditions: f.conditions,
+                        onsetAge: f.onsetAge,
+                        relativeAge: f.relativeAge?.toString(), // Ensure string if DB expects it or Int? Schema check needed. 
+                        // Plan said Int for relativeAge. Let's cast to int safe.
+                        relativeAge: f.relativeAge ? parseInt(f.relativeAge) : null,
+                        relativeDOB: f.relativeDOB ? new Date(f.relativeDOB) : null,
+                        notes: f.notes
+                    }))
                 };
                 break;
             case 'surgery':
                 const surgeryData = Array.isArray(data) ? data : (data.surgeries || []);
                 updateData.surgeries = {
                     deleteMany: {},
-                    create: surgeryData
+                    create: surgeryData.map(s => ({
+                        type: s.type,
+                        year: parseInt(s.year),
+                        complications: s.complications || s.notes, // fallback/combine
+                        hospital: s.hospital,
+                        surgeon: s.surgeon,
+                        notes: s.notes,
+                        imageUrl: s.imageUrl
+                    }))
                 };
                 break;
             case 'allergy':

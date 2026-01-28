@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import { Plus, Trash2, Scissors } from 'lucide-react';
+import VoiceInput from '../../common/VoiceInput';
+import { Plus, Trash2, Scissors, Upload } from 'lucide-react';
 
-const SurgicalHistoryStep = ({ onNext, onBack, data, isSaving }) => {
+const SurgicalHistoryStep = ({ onNext, onBack, data, isSaving, language }) => {
     const [surgeries, setSurgeries] = useState(data?.surgeries || []);
     const [showForm, setShowForm] = useState(false);
 
     // New entry state
-    const [newSurgery, setNewSurgery] = useState({ type: '', year: '', complications: '' });
+    const [newSurgery, setNewSurgery] = useState({
+        type: '', year: '', complications: '',
+        hospital: '', surgeon: '', notes: '', imageUrl: ''
+    });
 
     const handleAdd = () => {
         if (!newSurgery.type || !newSurgery.year) return;
         setSurgeries([...surgeries, { ...newSurgery, id: Date.now().toString() }]);
-        setNewSurgery({ type: '', year: '', complications: '' });
+        setNewSurgery({ type: '', year: '', complications: '', hospital: '', surgeon: '', notes: '', imageUrl: '' });
         setShowForm(false);
     };
 
@@ -29,8 +33,8 @@ const SurgicalHistoryStep = ({ onNext, onBack, data, isSaving }) => {
                 <div className="step-icon-hero">
                     <Scissors size={48} />
                 </div>
-                <h2>Surgical History</h2>
-                <p>Have you had any surgeries in the past?</p>
+                <h2>{language === 'hi' ? 'सर्जिकल इतिहास' : 'Surgical History'}</h2>
+                <p>{language === 'hi' ? 'क्या आपकी कोई सर्जरी हुई है?' : 'Have you had any surgeries in the past?'}</p>
             </div>
 
             {surgeries.length === 0 && !showForm && (
@@ -83,6 +87,37 @@ const SurgicalHistoryStep = ({ onNext, onBack, data, isSaving }) => {
                                     value={newSurgery.year}
                                     onChange={e => setNewSurgery({ ...newSurgery, year: e.target.value })}
                                 />
+                                <input
+                                    className="text-input"
+                                    placeholder={language === 'hi' ? "अस्पताल का नाम" : "Hospital Name"}
+                                    value={newSurgery.hospital}
+                                    onChange={e => setNewSurgery({ ...newSurgery, hospital: e.target.value })}
+                                />
+                                <input
+                                    className="text-input"
+                                    placeholder={language === 'hi' ? " सर्जन का नाम" : "Surgeon Name"}
+                                    value={newSurgery.surgeon}
+                                    onChange={e => setNewSurgery({ ...newSurgery, surgeon: e.target.value })}
+                                />
+                                <div style={{ position: 'relative' }}>
+                                    <textarea
+                                        className="text-input"
+                                        placeholder={language === 'hi' ? "अन्य विवरण / जटिलताएं..." : "Complications / Notes..."}
+                                        value={newSurgery.notes || newSurgery.complications} // fallback for legacy
+                                        onChange={e => setNewSurgery({ ...newSurgery, notes: e.target.value, complications: e.target.value })}
+                                        style={{ minHeight: '60px', paddingRight: '40px' }}
+                                    />
+                                    <div style={{ position: 'absolute', right: '5px', top: '5px' }}>
+                                        <VoiceInput onTranscript={(text) => setNewSurgery(prev => ({ ...prev, notes: (prev.notes ? prev.notes + ' ' : '') + text }))} />
+                                    </div>
+                                </div>
+                                <div style={{ border: '1px dashed #cbd5e1', padding: '10px', borderRadius: '6px', textAlign: 'center', cursor: 'pointer', background: '#f8fafc' }}>
+                                    <Upload size={16} style={{ marginBottom: '5px' }} />
+                                    <p style={{ fontSize: '0.8rem', margin: 0, color: '#64748b' }}>
+                                        {language === 'hi' ? "रिपोर्ट/तस्वीर अपलोड करें" : "Upload Report/Image (Coming Soon)"}
+                                    </p>
+                                    <input type="file" style={{ opacity: 0, position: 'absolute', pointerEvents: 'none' }} />
+                                </div>
                                 <button
                                     onClick={handleAdd}
                                     style={{ padding: '10px', background: '#2563eb', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer' }}

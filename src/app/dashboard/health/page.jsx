@@ -53,7 +53,7 @@ export default async function DashboardPage() {
 
     return (
         <AppShell>
-            <HealthDashboard completionStatus={completionStatus} />
+            <HealthDashboard completionStatus={completionStatus} userGender={user?.gender} />
         </AppShell>
     );
 }

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import VoiceInput from '../../common/VoiceInput';
 import { School } from 'lucide-react'; // Icon import
 
-const ChildhoodHistoryStep = ({ onNext, onBack, data, isSaving }) => {
+const ChildhoodHistoryStep = ({ onNext, onBack, data, isSaving, language }) => {
     const [formData, setFormData] = useState({
         developmentalDelays: data?.childhoodHistory?.developmentalDelays || 'None',
         childhoodIllnesses: data?.childhoodHistory?.childhoodIllnesses || [],
         vaccinationStatus: data?.childhoodHistory?.vaccinationStatus || '',
-        hospitalizations: data?.childhoodHistory?.hospitalizations || []
+        hospitalizations: data?.childhoodHistory?.hospitalizations || [],
+        ongoingIssues: data?.childhoodHistory?.ongoingIssues || '',
+        notes: data?.childhoodHistory?.notes || ''
     });
 
     const toggleIllness = (value) => {
@@ -32,8 +35,8 @@ const ChildhoodHistoryStep = ({ onNext, onBack, data, isSaving }) => {
                 <div className="step-icon-hero">
                     <School size={48} />
                 </div>
-                <h2>Childhood History (0-18 years)</h2>
-                <p>Growing up, did you have any health issues?</p>
+                <h2>{language === 'hi' ? 'बचपन का इतिहास (0-18 वर्ष)' : 'Childhood History (0-18 years)'}</h2>
+                <p>{language === 'hi' ? 'बचपन में क्या आपको कोई स्वास्थ्य समस्या थी?' : 'Growing up, did you have any health issues?'}</p>
             </div>
 
             <div className="question-card">

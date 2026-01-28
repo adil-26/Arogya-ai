@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+import VoiceInput from '../../common/VoiceInput';
 import { Plus, Trash2, Users } from 'lucide-react';
 
-const FamilyHistoryStep = ({ onNext, onBack, data, isSaving }) => {
+const FamilyHistoryStep = ({ onNext, onBack, data, isSaving, language }) => {
     // Array of family members with conditions
     // Start with default template if empty
     const [familyMembers, setFamilyMembers] = useState(
         data?.familyHistory?.length > 0 ? data.familyHistory : [
-            { relation: 'Mother', conditions: [] },
-            { relation: 'Father', conditions: [] }
+            { relation: 'Mother', conditions: [], onsetAge: '', relativeAge: '', relativeDOB: '', notes: '' },
+            { relation: 'Father', conditions: [], onsetAge: '', relativeAge: '', relativeDOB: '', notes: '' }
         ]
     );
 
@@ -31,7 +32,13 @@ const FamilyHistoryStep = ({ onNext, onBack, data, isSaving }) => {
     };
 
     const addMember = () => {
-        setFamilyMembers([...familyMembers, { relation: 'Sibling', conditions: [] }]);
+        setFamilyMembers([...familyMembers, { relation: 'Sibling', conditions: [], onsetAge: '', relativeAge: '', relativeDOB: '', notes: '' }]);
+    };
+
+    const updateMemberField = (index, field, value) => {
+        const updated = [...familyMembers];
+        updated[index][field] = value;
+        setFamilyMembers(updated);
     };
 
     const removeMember = (index) => {
@@ -50,8 +57,8 @@ const FamilyHistoryStep = ({ onNext, onBack, data, isSaving }) => {
                 <div className="step-icon-hero">
                     <Users size={48} />
                 </div>
-                <h2>Family Medical History</h2>
-                <p>Do any of these conditions run in your family?</p>
+                <h2>{language === 'hi' ? 'पारिवारिक चिकित्सा इतिहास' : 'Family Medical History'}</h2>
+                <p>{language === 'hi' ? 'क्या आपके परिवार में कोई आनुवंशिक बीमारी है?' : 'Do any of these conditions run in your family?'}</p>
             </div>
 
             {familyMembers.map((member, index) => (
@@ -78,6 +85,46 @@ const FamilyHistoryStep = ({ onNext, onBack, data, isSaving }) => {
                                 {cond}
                             </button>
                         ))}
+                    </div>
+
+                    <div style={{ marginTop: '15px', display: 'grid', gap: '10px' }}>
+                        <input
+                            className="text-input"
+                            placeholder={language === 'hi' ? "समस्या कब शुरू हुई? (उदा. 45 वर्ष की आयु में)" : "When did it start? (e.g. at age 45)"}
+                            value={member.onsetAge || ''}
+                            onChange={(e) => updateMemberField(index, 'onsetAge', e.target.value)}
+                        />
+
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                            <input
+                                className="text-input"
+                                type="number"
+                                placeholder={language === 'hi' ? "वर्तमान आयु (Age)" : "Current Age (Approx)"}
+                                value={member.relativeAge || ''}
+                                onChange={(e) => updateMemberField(index, 'relativeAge', e.target.value)}
+                            />
+                            <input
+                                className="text-input"
+                                type={member.relativeDOB ? "date" : "text"}
+                                onFocus={(e) => e.target.type = 'date'}
+                                placeholder={language === 'hi' ? "जन्म तिथि (DOB)" : "Date of Birth (Optional)"}
+                                value={member.relativeDOB || ''}
+                                onChange={(e) => updateMemberField(index, 'relativeDOB', e.target.value)}
+                            />
+                        </div>
+
+                        <div style={{ position: 'relative' }}>
+                            <textarea
+                                className="text-input"
+                                placeholder={language === 'hi' ? "अतिरिक्त टिप्पणियाँ..." : "Additional notes..."}
+                                value={member.notes || ''}
+                                onChange={(e) => updateMemberField(index, 'notes', e.target.value)}
+                                style={{ width: '100%', minHeight: '60px', paddingRight: '40px' }}
+                            />
+                            <div style={{ position: 'absolute', right: '5px', top: '5px' }}>
+                                <VoiceInput onTranscript={(text) => updateMemberField(index, 'notes', (member.notes ? member.notes + ' ' : '') + text)} />
+                            </div>
+                        </div>
                     </div>
                 </div>
             ))}

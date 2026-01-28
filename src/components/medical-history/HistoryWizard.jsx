@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { Languages } from 'lucide-react';
 import ProgressBar from './ProgressBar';
 import BirthHistoryStep from './steps/BirthHistoryStep';
 import ChildhoodHistoryStep from './steps/ChildhoodHistoryStep';
@@ -28,6 +29,7 @@ const HistoryWizard = ({ initialData, userGender }) => {
     const router = useRouter();
     const [currentStepIndex, setCurrentStepIndex] = useState(0);
     const [historyData, setHistoryData] = useState(initialData || {});
+    const [language, setLanguage] = useState('en'); // 'en' or 'hi'
     // If gender is missing in profile, we might need to ask or default. 
     // For now assume passed from server or user profile.
 
@@ -80,7 +82,8 @@ const HistoryWizard = ({ initialData, userGender }) => {
             onNext: handleNext,
             onBack: handleBack,
             data: historyData, // Pass full data to allow cross-checking if needed
-            isSaving
+            isSaving,
+            language
         };
 
         switch (currentStep.id) {
@@ -90,7 +93,7 @@ const HistoryWizard = ({ initialData, userGender }) => {
             case 'family': return <FamilyHistoryStep {...props} />;
             case 'surgery': return <SurgicalHistoryStep {...props} />;
             case 'allergy': return <AllergyHistoryStep {...props} />;
-            case 'accident': return <AccidentHistoryStep {...props} />;
+            case 'accident': return <AccidentHistoryStep {...props} userGender={userGender} />;
             case 'review': return <ReviewStep {...props} />;
             default: return <div>Unknown Step</div>;
         }
@@ -98,7 +101,16 @@ const HistoryWizard = ({ initialData, userGender }) => {
 
     return (
         <div className="wizard-container">
-            <ProgressBar progress={progress} stepTitle={STEPS[currentStepIndex].title} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                <ProgressBar progress={progress} stepTitle={STEPS[currentStepIndex].title} />
+                <button
+                    onClick={() => setLanguage(prev => prev === 'en' ? 'hi' : 'en')}
+                    style={{ display: 'flex', alignItems: 'center', gap: '5px', background: 'white', border: '1px solid #e2e8f0', padding: '6px 12px', borderRadius: '20px', cursor: 'pointer', fontSize: '0.9rem' }}
+                >
+                    <Languages size={16} />
+                    {language === 'en' ? 'English' : 'हिंदी'}
+                </button>
+            </div>
 
             <div className="wizard-content">
                 {renderStep()}

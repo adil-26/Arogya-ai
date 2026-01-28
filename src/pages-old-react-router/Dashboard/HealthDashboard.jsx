@@ -15,7 +15,7 @@ import ProfileCompletionWidget from '../../components/dashboard/ProfileCompletio
 import ShareQRModal from '../../components/dashboard/ShareQRModal';
 import './HealthDashboard.css';
 
-const HealthDashboard = ({ completionStatus = 0 }) => {
+const HealthDashboard = ({ completionStatus = 0, userGender }) => {
   const { data: session, status } = useSession();
   const router = useRouter(); // Use Next.js Router
   const [selectedOrgan, setSelectedOrgan] = useState(null);
@@ -126,7 +126,7 @@ const HealthDashboard = ({ completionStatus = 0 }) => {
 
   const patient = {
     name: session?.user?.name || "Patient",
-    gender: "Male", // This could also come from session or DB profile fetch
+    gender: userGender || "Male", // Use prop or default
     avatar: session?.user?.image || null
   };
 

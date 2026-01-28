@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import VoiceInput from '../../common/VoiceInput';
 
-const BirthHistoryStep = ({ onNext, onBack, data, isSaving }) => {
+const BirthHistoryStep = ({ onNext, onBack, data, isSaving, language }) => {
     // Initialize form with existing data or defaults
     const [formData, setFormData] = useState({
         birthTerm: data?.birthHistory?.birthTerm || '',
         birthWeight: data?.birthHistory?.birthWeight || '',
         deliveryType: data?.birthHistory?.deliveryType || '',
         complications: data?.birthHistory?.complications || [],
-        motherHealthIssues: data?.birthHistory?.motherHealthIssues || []
+        motherHealthIssues: data?.birthHistory?.motherHealthIssues || [],
+        notes: data?.birthHistory?.notes || ''
     });
 
     const handleOptionSelect = (field, value) => {
@@ -33,8 +35,8 @@ const BirthHistoryStep = ({ onNext, onBack, data, isSaving }) => {
     return (
         <div className="step-container">
             <div className="step-heading">
-                <h2>Birth History</h2>
-                <p>Let's start from the very beginning.</p>
+                <h2>{language === 'hi' ? 'जन्म इतिहास' : 'Birth History'}</h2>
+                <p>{language === 'hi' ? 'आइए शुरुआत से शुरू करें।' : "Let's start from the very beginning."}</p>
             </div>
 
             <div className="question-card">

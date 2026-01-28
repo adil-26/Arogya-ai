@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import HumanBodyImage from '../../BodyMap/HumanBodyImage';
 import { Plus, Trash2, Activity } from 'lucide-react';
 
-const AccidentHistoryStep = ({ onNext, onBack, data, isSaving }) => {
+const AccidentHistoryStep = ({ onNext, onBack, data, isSaving, userGender }) => {
     const [accidents, setAccidents] = useState(data?.accidents || []);
     const [showForm, setShowForm] = useState(false);
 
@@ -113,7 +113,7 @@ const AccidentHistoryStep = ({ onNext, onBack, data, isSaving }) => {
                             <div style={{ display: 'flex', justifyContent: 'center', padding: '20px', background: '#f8fafc', borderRadius: '16px', marginBottom: '20px' }}>
                                 <HumanBodyImage
                                     view="front"
-                                    gender="male"
+                                    gender={userGender || 'male'}
                                     selectedPart={selectedBodyPart}
                                     onPartClick={handleOrganSelect}
                                     height={400}
