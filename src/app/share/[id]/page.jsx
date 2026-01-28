@@ -130,6 +130,28 @@ export default async function SharedProfilePage({ params }) {
                 </div>
             </header>
 
+            {/* Health Snapshot Summary */}
+            <div className="px-4 -mt-6 mb-6 relative z-10">
+                <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="bg-blue-50 p-3 rounded-lg border border-blue-100 text-center">
+                        <div className="text-xl font-bold text-blue-700">{user.conditions?.length || 0}</div>
+                        <div className="text-xs text-blue-600 font-medium">Conditions</div>
+                    </div>
+                    <div className="bg-green-50 p-3 rounded-lg border border-green-100 text-center">
+                        <div className="text-xl font-bold text-green-700">{user.medications?.length || 0}</div>
+                        <div className="text-xs text-green-600 font-medium">Medications</div>
+                    </div>
+                    <div className="bg-red-50 p-3 rounded-lg border border-red-100 text-center">
+                        <div className="text-xl font-bold text-red-700">{mh.allergies?.length || 0}</div>
+                        <div className="text-xs text-red-600 font-medium">Allergies</div>
+                    </div>
+                    <div className="bg-slate-50 p-3 rounded-lg border border-slate-100 text-center">
+                        <div className="text-xl font-bold text-slate-700">{mh.surgeries?.length || 0}</div>
+                        <div className="text-xs text-slate-600 font-medium">Surgeries</div>
+                    </div>
+                </div>
+            </div>
+
             <main className="share-content">
                 {/* 1. Personal Info */}
                 <section className="info-card">
