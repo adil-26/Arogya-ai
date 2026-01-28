@@ -39,7 +39,7 @@ const RecordsPage = () => {
                 // Scale factor for 800px width -> A4 (595pt)
                 await doc.html(reportRef.current, {
                     callback: function (pdf) {
-                        pdf.save("Aarogya_Medical_Report.pdf");
+                        pdf.save("E2Care_Medical_Report.pdf");
                         setIsGenerating(false);
                     },
                     x: 0,

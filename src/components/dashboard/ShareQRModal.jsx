@@ -2,16 +2,18 @@ import React from 'react';
 import { X } from 'lucide-react';
 
 const ShareQRModal = ({ onClose, userId }) => {
-    // Get base URL (safely for SSR/Client)
-    const [baseUrl, setBaseUrl] = React.useState('');
+    // Force production URL for sharing
+    const baseUrl = 'https://e2care.in';
 
+    /* 
     React.useEffect(() => {
         if (typeof window !== 'undefined') {
             setBaseUrl(window.location.origin);
         }
-    }, []);
+    }, []); 
+    */
 
-    const shareUrl = userId && baseUrl ? `${baseUrl}/share/${userId}` : '';
+    const shareUrl = userId ? `${baseUrl}/share/${userId}` : '';
 
     return (
         <div style={{

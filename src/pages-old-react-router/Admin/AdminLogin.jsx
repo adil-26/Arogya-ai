@@ -11,11 +11,11 @@ const AdminLogin = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         // Mock Authentication
-        if (email === 'admin@aarogya.ai' && password === 'admin') {
+        if (email === 'admin@e2care.in' && password === 'admin') {
             localStorage.setItem('isAdmin', 'true');
             navigate('/admin/dashboard');
         } else {
-            alert('Invalid Credentials! (Use admin@aarogya.ai / admin)');
+            alert('Invalid Credentials! (Use admin@e2care.in / admin)');
         }
     };
 
@@ -36,7 +36,7 @@ const AdminLogin = () => {
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="admin@aarogya.ai"
+                                placeholder="admin@e2care.in"
                                 required
                             />
                         </div>
