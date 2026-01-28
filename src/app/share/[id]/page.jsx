@@ -29,13 +29,28 @@ export default async function SharedProfilePage({ params }) {
         where: { id: id },
         select: {
             name: true,
+            email: true,
+            image: true,
+            phone: true,
+            address: true,
             bloodGroup: true,
             dob: true,
             gender: true,
             emergencyContact: true,
+
+            // Medical Data
             conditions: {
                 where: { status: 'active' },
                 select: { name: true, type: true }
+            },
+            bodyIssues: {
+                where: { status: 'active' },
+                select: { issue: true, organId: true, severity: true, note: true }
+            },
+            metrics: {
+                orderBy: { recordedAt: 'desc' },
+                take: 5,
+                select: { type: true, value: true, unit: true, recordedAt: true }
             },
             medications: {
                 where: { isActive: true },
@@ -85,7 +100,20 @@ export default async function SharedProfilePage({ params }) {
         <div className="share-container">
             <header className="share-header">
                 <div className="header-badge">MEDICAL ID</div>
-                <h1>{user.name}</h1>
+                <div className="flex items-center gap-4 mb-4">
+                    {user.image ? (
+                        <img src={user.image} alt={user.name} className="w-20 h-20 rounded-full border-4 border-white shadow-sm object-cover" />
+                    ) : (
+                        <div className="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 font-bold text-2xl border-4 border-white shadow-sm">
+                            {user.name?.charAt(0) || 'U'}
+                        </div>
+                    )}
+                    <div>
+                        <h1>{user.name}</h1>
+                        <p className="text-sm opacity-90">{user.email}</p>
+                    </div>
+                </div>
+
                 <div className="vital-grid">
                     <div className="vital-item">
                         <span className="label">Blood Type</span>
@@ -99,7 +127,22 @@ export default async function SharedProfilePage({ params }) {
             </header>
 
             <main className="share-content">
-                {/* 1. Critical Allergies */}
+                {/* 1. Personal Info */}
+                <section className="info-card">
+                    <h2 className="card-title text-gray-700">Personal Details</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <span className="text-gray-500 block text-xs">Phone</span>
+                            <span className="font-medium">{user.phone || '--'}</span>
+                        </div>
+                        <div>
+                            <span className="text-gray-500 block text-xs">Address</span>
+                            <span className="font-medium">{user.address || '--'}</span>
+                        </div>
+                    </div>
+                </section>
+
+                {/* 2. Critical Allergies */}
                 {mh.allergies?.length > 0 && (
                     <section className="info-card critical-card">
                         <h2 className="card-title text-red-600">
@@ -117,23 +160,55 @@ export default async function SharedProfilePage({ params }) {
                     </section>
                 )}
 
-                {/* 2. Active Conditions */}
+                {/* 3. Active Conditions & Body Issues */}
                 <section className="info-card">
                     <h2 className="card-title">
-                        <Heart size={20} className="text-pink-500" /> Medical Conditions
+                        <Heart size={20} className="text-pink-500" /> Current Health Status
                     </h2>
-                    {user.conditions?.length > 0 ? (
-                        <div className="chip-container">
-                            {user.conditions.map((c, idx) => (
-                                <span key={idx} className="chip">{c.name}</span>
-                            ))}
+
+                    {user.conditions?.length > 0 && (
+                        <div className="mb-4">
+                            <h3 className="text-sm font-semibold text-gray-600 mb-2">Diagnosed Conditions</h3>
+                            <div className="chip-container">
+                                {user.conditions.map((c, idx) => (
+                                    <span key={idx} className="chip">{c.name}</span>
+                                ))}
+                            </div>
                         </div>
-                    ) : (
-                        <p className="text-gray-500">No active conditions listed.</p>
+                    )}
+
+                    {user.bodyIssues?.length > 0 && (
+                        <div>
+                            <h3 className="text-sm font-semibold text-gray-600 mb-2">Current Symptoms (Body Map)</h3>
+                            <ul className="space-y-2">
+                                {user.bodyIssues.map((b, idx) => (
+                                    <li key={idx} className="text-sm bg-orange-50 p-2 rounded border border-orange-100">
+                                        <div className="font-medium text-orange-800">{b.issue} ({b.organId})</div>
+                                        {b.note && <div className="text-xs text-gray-600 mt-1">{b.note}</div>}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     )}
                 </section>
 
-                {/* 3. Current Medications */}
+                {/* 4. Recent Vitals */}
+                {user.metrics?.length > 0 && (
+                    <section className="info-card">
+                        <h2 className="card-title text-green-600">Recent Vitals</h2>
+                        <div className="grid grid-cols-2 gap-3">
+                            {user.metrics.map((m, i) => (
+                                <div key={i} className="text-center p-2 bg-gray-50 rounded">
+                                    <div className="text-xs text-gray-500 uppercase">{m.type}</div>
+                                    <div className="font-bold text-lg">{m.value} <span className="text-xs font-normal text-gray-400">{m.unit}</span></div>
+                                    <div className="text-[10px] text-gray-400">{new Date(m.recordedAt).toLocaleDateString()}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                {/* 5. Current Medications */}
                 {user.medications?.length > 0 && (
                     <section className="info-card">
                         <h2 className="card-title text-blue-600">Current Medications</h2>
@@ -147,7 +222,7 @@ export default async function SharedProfilePage({ params }) {
                     </section>
                 )}
 
-                {/* 4. Surgeries */}
+                {/* 6. Surgeries */}
                 {mh.surgeries?.length > 0 && (
                     <section className="info-card">
                         <h2 className="card-title">Surgical History</h2>
@@ -164,7 +239,7 @@ export default async function SharedProfilePage({ params }) {
                     </section>
                 )}
 
-                {/* 5. Accidents */}
+                {/* 7. Accidents */}
                 {mh.accidents?.length > 0 && (
                     <section className="info-card">
                         <h2 className="card-title">Major Accidents</h2>
@@ -185,7 +260,7 @@ export default async function SharedProfilePage({ params }) {
                     </section>
                 )}
 
-                {/* 6. Family History */}
+                {/* 8. Family History */}
                 {mh.familyHistory?.length > 0 && (
                     <section className="info-card">
                         <h2 className="card-title">Family History</h2>
@@ -200,7 +275,7 @@ export default async function SharedProfilePage({ params }) {
                     </section>
                 )}
 
-                {/* 7. Birth & Childhood (Collapsed/Secondary) */}
+                {/* 9. Birth & Childhood (Collapsed/Secondary) */}
                 {(mh.birthHistory || mh.childhoodHistory) && (
                     <section className="info-card">
                         <h2 className="card-title">Early Life History</h2>
@@ -224,7 +299,7 @@ export default async function SharedProfilePage({ params }) {
                     </section>
                 )}
 
-                {/* 8. Reproductive History (Gender Specific) */}
+                {/* 10. Reproductive History (Gender Specific) */}
                 {user.gender?.toLowerCase() === 'female' && mh.femaleHistory && (
                     <section className="info-card">
                         <h2 className="card-title">Reproductive Health</h2>
@@ -244,6 +319,7 @@ export default async function SharedProfilePage({ params }) {
                         </div>
                     </section>
                 )}
+
 
 
 
