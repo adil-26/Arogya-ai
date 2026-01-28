@@ -59,7 +59,11 @@ export default async function SharedProfilePage({ params }) {
             medicalHistory: {
                 select: {
                     birthHistory: true,
-                    childhoodHistory: true,
+                    childhoodHistory: {
+                        include: {
+                            hospitalizations: true
+                        }
+                    },
                     femaleHistory: {
                         include: { pregnancies: true }
                     },
@@ -293,6 +297,16 @@ export default async function SharedProfilePage({ params }) {
                                     <h4 className="font-semibold mb-1">Childhood</h4>
                                     <p>Vaccinations: {mh.childhoodHistory.vaccinationStatus}</p>
                                     {mh.childhoodHistory.childhoodIllnesses?.length > 0 && <p>Illnesses: {mh.childhoodHistory.childhoodIllnesses.join(', ')}</p>}
+                                    {mh.childhoodHistory.hospitalizations?.length > 0 && (
+                                        <div className="mt-1">
+                                            <span className="text-xs font-semibold">Hospitalizations:</span>
+                                            <ul className="list-disc pl-3 text-xs text-gray-600">
+                                                {mh.childhoodHistory.hospitalizations.map((h, k) => (
+                                                    <li key={k}>{h.reason} (Age {h.age}) - {h.durationDays} days</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
                                 </div>
                             )}
                         </div>
