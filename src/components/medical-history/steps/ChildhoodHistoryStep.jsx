@@ -40,7 +40,10 @@ const ChildhoodHistoryStep = ({ onNext, onBack, data, isSaving, language }) => {
             </div>
 
             <div className="question-card">
-                <h3>1. Did you have any developmental delays?</h3>
+                <h3>{language === 'hi' ? '1. विकासात्मक उपलब्धियां (Developmental Milestones)' : '1. Developmental Milestones History'}</h3>
+                <p className="helper-text" style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '10px' }}>
+                    {language === 'hi' ? '(क्या बच्चे ने चलना, बोलना सही समय पर शुरू किया?)' : '(Did the child achieve walking, talking etc. on time?)'}
+                </p>
                 <div className="options-grid">
                     {['No delays', 'Late Walking', 'Late Talking', 'Learning Difficulty', 'Behavioral Issues'].map(opt => (
                         <button
@@ -55,7 +58,10 @@ const ChildhoodHistoryStep = ({ onNext, onBack, data, isSaving, language }) => {
             </div>
 
             <div className="question-card">
-                <h3>2. Which childhood illnesses did you have?</h3>
+                <h3>{language === 'hi' ? '2. बचपन की बीमारियाँ (Childhood Illnesses)' : '2. Major Childhood Illnesses'}</h3>
+                <p className="helper-text" style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '10px' }}>
+                    {language === 'hi' ? '(क्या आपको इनमें से कोई गंभीर संक्रमण हुआ था?)' : '(Did you suffer from any of these specific infections?)'}
+                </p>
                 <div className="options-grid">
                     {['Measles', 'Mumps', 'Chickenpox', 'Whooping Cough', 'Frequent Ear Infections', 'Asthma'].map(opt => (
                         <button
@@ -70,7 +76,10 @@ const ChildhoodHistoryStep = ({ onNext, onBack, data, isSaving, language }) => {
             </div>
 
             <div className="question-card">
-                <h3>3. Vaccination Status</h3>
+                <h3>{language === 'hi' ? '3. टीकाकरण की स्थिति (Vaccination Status)' : '3. Vaccination History'}</h3>
+                <p className="helper-text" style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '10px' }}>
+                    {language === 'hi' ? '(क्या सभी टीके समय पर लगवाए गए थे?)' : '(Were all scheduled vaccines administered on time?)'}
+                </p>
                 <div className="options-grid">
                     {['Fully Vaccinated', 'Partially Vaccinated', 'Not Vaccinated', 'Unknown'].map(opt => (
                         <button

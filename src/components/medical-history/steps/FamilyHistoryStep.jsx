@@ -57,8 +57,8 @@ const FamilyHistoryStep = ({ onNext, onBack, data, isSaving, language }) => {
                 <div className="step-icon-hero">
                     <Users size={48} />
                 </div>
-                <h2>{language === 'hi' ? 'पारिवारिक चिकित्सा इतिहास' : 'Family Medical History'}</h2>
-                <p>{language === 'hi' ? 'क्या आपके परिवार में कोई आनुवंशिक बीमारी है?' : 'Do any of these conditions run in your family?'}</p>
+                <h2>{language === 'hi' ? 'पारिवारिक चिकित्सा इतिहास (Family Medical History)' : 'Family Medical History'}</h2>
+                <p>{language === 'hi' ? 'क्या आपके माता-पिता या भाई-बहनों को कोई गंभीर बीमारी है?' : 'Do any major diseases run in your immediate family?'}</p>
             </div>
 
             {familyMembers.map((member, index) => (
@@ -74,6 +74,9 @@ const FamilyHistoryStep = ({ onNext, onBack, data, isSaving, language }) => {
                             </button>
                         )}
                     </div>
+                    <p className="helper-text" style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '10px' }}>
+                        {language === 'hi' ? `क्या ${member.relation === 'Mother' ? 'माताजी' : member.relation === 'Father' ? 'पिताजी' : member.relation} को इनमें से कोई समस्या है?` : `Does ${member.relation} have any of these conditions?`}
+                    </p>
 
                     <div className="options-grid">
                         {CONDITIONS_LIST.map(cond => (
@@ -90,7 +93,7 @@ const FamilyHistoryStep = ({ onNext, onBack, data, isSaving, language }) => {
                     <div style={{ marginTop: '15px', display: 'grid', gap: '10px' }}>
                         <input
                             className="text-input"
-                            placeholder={language === 'hi' ? "समस्या कब शुरू हुई? (उदा. 45 वर्ष की आयु में)" : "When did it start? (e.g. at age 45)"}
+                            placeholder={language === 'hi' ? "बीमारी कब शुरू हुई? (Onset Age)" : "At what age did the condition start?"}
                             value={member.onsetAge || ''}
                             onChange={(e) => updateMemberField(index, 'onsetAge', e.target.value)}
                         />
@@ -99,7 +102,7 @@ const FamilyHistoryStep = ({ onNext, onBack, data, isSaving, language }) => {
                             <input
                                 className="text-input"
                                 type="number"
-                                placeholder={language === 'hi' ? "वर्तमान आयु (Age)" : "Current Age (Approx)"}
+                                placeholder={language === 'hi' ? "वर्तमान आयु (Current Age)" : "Current Age (Approx)"}
                                 value={member.relativeAge || ''}
                                 onChange={(e) => updateMemberField(index, 'relativeAge', e.target.value)}
                             />
@@ -116,7 +119,7 @@ const FamilyHistoryStep = ({ onNext, onBack, data, isSaving, language }) => {
                         <div style={{ position: 'relative' }}>
                             <textarea
                                 className="text-input"
-                                placeholder={language === 'hi' ? "अतिरिक्त टिप्पणियाँ..." : "Additional notes..."}
+                                placeholder={language === 'hi' ? "कोई अन्य विवरण? (Notes)" : "Any other details? (Notes)"}
                                 value={member.notes || ''}
                                 onChange={(e) => updateMemberField(index, 'notes', e.target.value)}
                                 style={{ width: '100%', minHeight: '60px', paddingRight: '40px' }}
@@ -137,7 +140,7 @@ const FamilyHistoryStep = ({ onNext, onBack, data, isSaving, language }) => {
                     cursor: 'pointer', marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px'
                 }}
             >
-                <Plus size={18} /> Add Sibling / Grandparent
+                <Plus size={18} /> {language === 'hi' ? 'अन्य सदस्य जोड़ें (Add Member)' : 'Add Sibling / Family Member'}
             </button>
 
             <div className="wizard-footer">

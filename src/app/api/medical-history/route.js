@@ -58,11 +58,34 @@ export async function POST(request) {
 
         switch (section) {
             case 'birth':
-                const { notes: birthNotes, ...birthRes } = data;
                 updateData.birthHistory = {
                     upsert: {
-                        create: { ...data },
-                        update: { ...data }
+                        create: {
+                            birthTerm: data.birthTerm,
+                            birthWeight: data.birthWeight,
+                            deliveryType: data.deliveryType,
+                            complications: data.complications,
+                            motherHealthIssues: data.motherHealthIssues,
+                            notes: data.notes,
+                            birthCry: data.birthCry,
+                            birthSkinColor: data.birthSkinColor,
+                            birthStool: data.birthStool,
+                            birthFeeding: data.birthFeeding,
+                            birthSleep: data.birthSleep
+                        },
+                        update: {
+                            birthTerm: data.birthTerm,
+                            birthWeight: data.birthWeight,
+                            deliveryType: data.deliveryType,
+                            complications: data.complications,
+                            motherHealthIssues: data.motherHealthIssues,
+                            notes: data.notes,
+                            birthCry: data.birthCry,
+                            birthSkinColor: data.birthSkinColor,
+                            birthStool: data.birthStool,
+                            birthFeeding: data.birthFeeding,
+                            birthSleep: data.birthSleep
+                        }
                     }
                 };
                 break;
