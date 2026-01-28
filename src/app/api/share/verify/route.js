@@ -35,7 +35,7 @@ export async function POST(req) {
         cookieStore.set(`med_share_access_${userId}`, 'granted', {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            maxAge: 60 * 60, // 1 hour access
+            // No maxAge: Session cookie (expires when browser/tab closes)
             path: '/'
         });
 
