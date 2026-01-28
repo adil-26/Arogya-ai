@@ -69,6 +69,9 @@ model User {
   // Secure Sharing
   sharePin          String?
   sharePinExpiry    DateTime?
+
+  // Health Reports
+  healthReports     HealthReport[]
 }
 
 // Notification System
@@ -561,3 +564,52 @@ model AccidentInjury {
   injuryType      String
 }
 
+// ============================================
+// HEALTH REPORTS & AI ANALYSIS MODELS
+// ============================================
+
+model HealthReport {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  title     String?  // Copied from file name or auto-generated
+  type      String   // "Blood Work", "MRI", "CT Scan", "X-Ray"
+  fileUrl   String
+  reportDate DateTime // From OCR or upload date
+  
+  status    String   @default("processing") // processing, completed, failed
+  
+  results   TestResult[]
+  findings  ImagingFinding[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TestResult {
+  id          String   @id @default(uuid())
+  reportId    String
+  report      HealthReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  
+  category    String?  // e.g. "CBC", "Lipid Panel"
+  parameter   String   // "Hemoglobin"
+  value       Float
+  unit        String   // "g/dL"
+  refMin      Float?
+  refMax      Float?
+  status      String   // "Normal", "High", "Low"
+  isNewTest   Boolean  @default(false)
+}
+
+model ImagingFinding {
+  id          String   @id @default(uuid())
+  reportId    String
+  report      HealthReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  
+  impression  String?
+  conclusion  String?
+  
+  bodyPart    String   // "Lumbar Spine"
+  locationId  String?  // ID for Three.js mapping, e.g. "spine_lumbar"
+}

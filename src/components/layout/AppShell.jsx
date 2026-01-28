@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Calendar, FileText, MessageSquare, Settings, Menu, X, Bell, Gift, Wallet, User, LogOut, ChevronDown, MoreVertical, Pill, BookOpen } from 'lucide-react';
+import { LayoutDashboard, Calendar, FileText, MessageSquare, Settings, Menu, X, Bell, Gift, Wallet, User, LogOut, ChevronDown, MoreVertical, Pill, BookOpen, Activity } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
 import './AppShell.css';
 
@@ -26,6 +26,7 @@ const AppShell = ({ children }) => {
   const navItems = [
     { path: '/dashboard/health', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/history', label: 'History', icon: FileText },
+    { path: '/dashboard/reports', label: 'Health Reports', icon: Activity }, // Added
     { path: '/appointments', label: 'Appointments', icon: Calendar },
     { path: '/dashboard/messages', label: 'Messages', icon: MessageSquare },
     { path: '/records', label: 'Records', icon: FileText },

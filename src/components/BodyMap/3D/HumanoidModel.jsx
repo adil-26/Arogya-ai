@@ -18,7 +18,10 @@ const HolographicMaterial = ({ color = "#00f0ff", selected = false }) => {
 };
 
 const BodyPart = ({ position, args, type, name, onClick, selectedPart }) => {
-    const isSelected = selectedPart === name;
+    // Support both single string and array for heatmap mode
+    const isSelected = Array.isArray(selectedPart)
+        ? selectedPart.includes(name)
+        : selectedPart === name;
 
     return (
         <group position={position} onClick={(e) => { e.stopPropagation(); onClick(name); }}>

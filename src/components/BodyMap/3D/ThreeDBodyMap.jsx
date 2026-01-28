@@ -4,11 +4,12 @@ import { OrbitControls, Stars, Grid } from '@react-three/drei';
 import HumanoidModel from './HumanoidModel';
 import { Scan, RotateCw, Maximize2 } from 'lucide-react';
 
-const ThreeDBodyMap = ({ onOrganSelect }) => {
-    const [selectedPart, setSelectedPart] = useState(null);
+const ThreeDBodyMap = ({ onOrganSelect, selectedPartOverride }) => {
+    const [internalPart, setInternalPart] = useState(null);
+    const selectedPart = selectedPartOverride || internalPart;
 
     const handlePartClick = (partName) => {
-        setSelectedPart(partName);
+        setInternalPart(partName);
         if (onOrganSelect) onOrganSelect(partName);
     };
 
@@ -97,7 +98,7 @@ const ThreeDBodyMap = ({ onOrganSelect }) => {
                 <button style={{
                     background: 'rgba(0,240,255,0.1)', border: '1px solid #00f0ff', color: '#00f0ff',
                     padding: '10px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center'
-                }} onClick={() => setSelectedPart(null)} title="Scanning Mode">
+                }} onClick={() => setInternalPart(null)} title="Scanning Mode">
                     <Scan size={20} />
                 </button>
             </div>
