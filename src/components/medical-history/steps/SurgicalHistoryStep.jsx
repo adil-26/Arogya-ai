@@ -6,16 +6,25 @@ const SurgicalHistoryStep = ({ onNext, onBack, data, isSaving, language }) => {
     const [surgeries, setSurgeries] = useState(data?.surgeries || []);
     const [showForm, setShowForm] = useState(false);
 
+    // Common Surgeries List
+    const COMMON_SURGERIES = [
+        'Cataract Surgery', 'C-Section', 'Gallbladder Removal', 'Appendectomy',
+        'Knee Replacement', 'Hip Replacement', 'Hernia Repair', 'Hysterectomy',
+        'Heart Bypass (CABG)', 'Tonsillectomy', 'Angioplasty', 'Fracture Repair',
+        'Carotid Endarterectomy', 'Mastectomy', 'Prostatectomy', 'Lasik Eye Surgery',
+        'Thyroidectomy', 'Spinal Fusion', 'Kidney Stone Removal'
+    ];
+
     // New entry state
     const [newSurgery, setNewSurgery] = useState({
-        type: '', year: '', complications: '',
+        type: '', year: '', surgeryDate: '', complications: '',
         hospital: '', surgeon: '', notes: '', imageUrl: ''
     });
 
     const handleAdd = () => {
-        if (!newSurgery.type || !newSurgery.year) return;
+        if (!newSurgery.type || (!newSurgery.year && !newSurgery.surgeryDate)) return;
         setSurgeries([...surgeries, { ...newSurgery, id: Date.now().toString() }]);
-        setNewSurgery({ type: '', year: '', complications: '', hospital: '', surgeon: '', notes: '', imageUrl: '' });
+        setNewSurgery({ type: '', year: '', surgeryDate: '', complications: '', hospital: '', surgeon: '', notes: '', imageUrl: '' });
         setShowForm(false);
     };
 
@@ -63,7 +72,9 @@ const SurgicalHistoryStep = ({ onNext, onBack, data, isSaving, language }) => {
                         <div key={i} className="question-card" style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <div>
                                 <strong>{s.type}</strong>
-                                <span style={{ display: 'block', color: '#64748b', fontSize: '0.9rem' }}>Year: {s.year}</span>
+                                <span style={{ display: 'block', color: '#64748b', fontSize: '0.9rem' }}>
+                                    {s.surgeryDate ? `Date: ${s.surgeryDate}` : `Year: ${s.year}`}
+                                </span>
                             </div>
                             <button onClick={() => handleRemove(s.id || s.type)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}>
                                 <Trash2 size={18} />
@@ -75,18 +86,44 @@ const SurgicalHistoryStep = ({ onNext, onBack, data, isSaving, language }) => {
                         <div className="question-card" style={{ border: '2px solid #2563eb' }}>
                             <h3 style={{ marginTop: 0 }}>{language === 'hi' ? 'सर्जरी का विवरण जोड़ें' : 'Add Surgery Details'}</h3>
                             <div style={{ display: 'grid', gap: '12px' }}>
-                                <input
-                                    className="text-input"
-                                    placeholder={language === 'hi' ? "सर्जरी का नाम / प्रकार (Surgery Name)" : "Surgery Name / Procedure Type"}
-                                    value={newSurgery.type}
-                                    onChange={e => setNewSurgery({ ...newSurgery, type: e.target.value })}
-                                />
-                                <input
-                                    className="text-input" type="number"
-                                    placeholder={language === 'hi' ? "वर्ष (Year)" : "Year of Surgery"}
-                                    value={newSurgery.year}
-                                    onChange={e => setNewSurgery({ ...newSurgery, year: e.target.value })}
-                                />
+
+                                {/* Common Surgeries List + Custom Input */}
+                                <div>
+                                    <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.9rem', color: '#64748b' }}>
+                                        {language === 'hi' ? 'सर्जरी का नाम' : 'Surgery Name / Procedure'}
+                                    </label>
+                                    <input
+                                        className="text-input"
+                                        list="common-surgeries"
+                                        placeholder={language === 'hi' ? "चुनें या टाइप करें..." : "Select or Type..."}
+                                        value={newSurgery.type}
+                                        onChange={e => setNewSurgery({ ...newSurgery, type: e.target.value })}
+                                        style={{ width: '100%' }}
+                                    />
+                                    <datalist id="common-surgeries">
+                                        {COMMON_SURGERIES.map(s => <option key={s} value={s} />)}
+                                    </datalist>
+                                </div>
+
+                                {/* Date Picker */}
+                                <div>
+                                    <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.9rem', color: '#64748b' }}>
+                                        {language === 'hi' ? 'सर्जरी की तारीख' : 'Date of Surgery'}
+                                    </label>
+                                    <input
+                                        className="text-input"
+                                        type="date"
+                                        value={newSurgery.surgeryDate}
+                                        onChange={e => {
+                                            const val = e.target.value;
+                                            // Auto-fill year for backward compat
+                                            const year = val ? val.split('-')[0] : '';
+                                            setNewSurgery({ ...newSurgery, surgeryDate: val, year: year });
+                                        }}
+                                        style={{ width: '100%' }}
+                                    />
+                                </div>
+
                                 <input
                                     className="text-input"
                                     placeholder={language === 'hi' ? "अस्पताल का नाम (Hospital Name)" : "Hospital Name"}

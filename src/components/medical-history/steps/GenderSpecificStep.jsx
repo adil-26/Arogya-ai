@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { User, Heart } from 'lucide-react';
 
-const GenderSpecificStep = ({ onNext, onBack, data, isSaving, userGender }) => {
-    // Determine gender normalization
-    const isFemale = userGender?.toLowerCase() === 'female';
-    const isMale = userGender?.toLowerCase() === 'male';
+const GenderSpecificStep = ({ onNext, onBack, data, isSaving, userGender, language }) => {
+    // Local state for gender in case it's missing or 'Other'
+    const [currentGender, setCurrentGender] = useState(userGender?.toLowerCase() || '');
+
+    // Determine normalization based on local selection
+    const normalizedGender = currentGender.trim().toLowerCase();
+    const isFemale = normalizedGender === 'female' || normalizedGender === 'f' || normalizedGender === 'woman';
+    const isMale = normalizedGender === 'male' || normalizedGender === 'm' || normalizedGender === 'man';
 
     // State for Female
     const [femaleData, setFemaleData] = useState({
@@ -37,10 +41,33 @@ const GenderSpecificStep = ({ onNext, onBack, data, isSaving, userGender }) => {
         return (
             <div className="step-container">
                 <div className="step-heading">
-                    <h2>Reproductive History</h2>
-                    <p>This section is skipped as it requires gender specification.</p>
+                    <div className="step-icon-hero">
+                        <User size={48} />
+                    </div>
+                    <h2>{language === 'hi' ? 'प्रजनन स्वास्थ्य' : 'Reproductive Health'}</h2>
+                    <p>{language === 'hi' ? 'कृपया आगे बढ़ने के लिए अपना लिंग चुनें।' : 'Please select your gender to proceed with relevant questions.'}</p>
                 </div>
-                <div className="wizard-footer">
+
+                <div className="options-grid" style={{ maxWidth: '400px', margin: '0 auto' }}>
+                    <button
+                        className="option-btn"
+                        onClick={() => setCurrentGender('female')}
+                        style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}
+                    >
+                        <Heart size={32} color="#ec4899" />
+                        <span>{language === 'hi' ? 'महिला (Female)' : 'Female'}</span>
+                    </button>
+                    <button
+                        className="option-btn"
+                        onClick={() => setCurrentGender('male')}
+                        style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}
+                    >
+                        <User size={32} color="#3b82f6" />
+                        <span>{language === 'hi' ? 'पुरुष (Male)' : 'Male'}</span>
+                    </button>
+                </div>
+
+                <div className="wizard-footer" style={{ marginTop: '40px' }}>
                     <button className="btn-back" onClick={onBack}>Back</button>
                     <button className="btn-next" onClick={handleNext}>Skip Section</button>
                 </div>
@@ -54,8 +81,8 @@ const GenderSpecificStep = ({ onNext, onBack, data, isSaving, userGender }) => {
                 <div className="step-icon-hero">
                     {isFemale ? <Heart size={48} /> : <User size={48} />}
                 </div>
-                <h2>{isFemale ? 'Gynecological History' : 'Men\'s Health History'}</h2>
-                <p>Private and confidential questions about your reproductive health.</p>
+                <h2>{isFemale ? (language === 'hi' ? 'स्त्री रोग इतिहास' : 'Gynecological History') : (language === 'hi' ? 'पुरुष स्वास्थ्य इतिहास' : 'Men\'s Health History')}</h2>
+                <p>{language === 'hi' ? 'आपके प्रजनन स्वास्थ्य के बारे में निजी और गोपनीय प्रश्न।' : 'Private and confidential questions about your reproductive health.'}</p>
             </div>
 
             {isFemale && (

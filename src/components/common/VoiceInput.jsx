@@ -41,6 +41,11 @@ const VoiceInput = ({ onTranscript, placeholder = "Tap mic to speak..." }) => {
 
             window.recognition.onerror = (event) => {
                 console.error("Speech recognition error", event.error);
+                if (event.error === 'not-allowed') {
+                    alert("Microphone access blocked. Please click the lock icon in your address bar and allow microphone permissions.");
+                } else if (event.error === 'service-not-allowed') {
+                    alert("Voice recognition service not available. Please try again or use a supported browser like Chrome.");
+                }
                 setIsListening(false);
             };
 

@@ -150,12 +150,13 @@ export async function POST(request) {
                 };
                 break;
             case 'surgery':
-                const surgeryData = Array.isArray(data) ? data : (data.surgeries || []);
+                const surgeryList = data.surgery || []; // data.surgery comes from step
                 updateData.surgeries = {
                     deleteMany: {},
-                    create: surgeryData.map(s => ({
+                    create: surgeryList.map(s => ({
                         type: s.type,
-                        year: parseInt(s.year),
+                        year: s.year ? parseInt(s.year) : null,
+                        surgeryDate: s.surgeryDate ? new Date(s.surgeryDate) : null,
                         complications: s.complications || s.notes, // fallback/combine
                         hospital: s.hospital,
                         surgeon: s.surgeon,
@@ -165,19 +166,40 @@ export async function POST(request) {
                 };
                 break;
             case 'allergy':
-                const allergyData = Array.isArray(data) ? data : (data.allergies || []);
+                const allergyList = data.allergy || [];
                 updateData.allergies = {
                     deleteMany: {},
-                    create: allergyData
+                    create: allergyList.map(a => ({
+                        type: a.type,
+                        allergen: a.allergen,
+                        reaction: a.reaction,
+                        severity: a.severity,
+                        status: a.status,
+                        onset: a.onset,
+                        duration: a.duration,
+                        medication: a.medication,
+                        notes: a.notes,
+                        imageUrl: a.imageUrl
+                    }))
                 };
                 break;
             case 'accident':
-                const accidentData = Array.isArray(data) ? data : (data.accidents || []);
+                const accidentList = data.accident || [];
                 updateData.accidents = {
                     deleteMany: {},
-                    create: accidentData.map(acc => ({
-                        ...acc,
-                        injuries: { create: acc.injuries || [] }
+                    create: accidentList.map(a => ({
+                        type: a.type,
+                        year: a.year ? parseInt(a.year) : null,
+                        accidentDate: a.accidentDate ? new Date(a.accidentDate) : null,
+                        hospital: a.hospital,
+                        treatment: a.treatment,
+                        residualEffects: a.residualEffects,
+                        injuries: {
+                            create: (a.injuries || []).map(i => ({
+                                bodyPart: i.bodyPart,
+                                injuryType: i.injuryType
+                            }))
+                        }
                     }))
                 };
                 break;

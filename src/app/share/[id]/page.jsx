@@ -1,18 +1,30 @@
 import { prisma } from '@/lib/prisma';
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { AlertCircle, FileText, Phone, User, Heart, Activity } from 'lucide-react';
+import { AlertCircle, Phone, Heart } from 'lucide-react';
 import './ShareProfile.css';
+import { cookies } from 'next/headers';
+import ShareGate from '@/components/share/ShareGate';
 
 // Force dynamic rendering since this depends on the ID param
 export const dynamic = 'force-dynamic';
 
 export default async function SharedProfilePage({ params }) {
-    const { id } = await params;
+    const resolvedParams = await params; // Properly await params in Next.js 15+
+    const { id } = resolvedParams;
 
     if (!id) return notFound();
 
-    // Fetch vital medical info only (Restriction for privacy)
+    // 1. Check for Authorization Cookie
+    const cookieStore = await cookies();
+    const hasAccess = cookieStore.get(`med_share_access_${id}`);
+
+    // 2. Gate: If no secure cookie, show PIN entry screen
+    if (!hasAccess) {
+        return <ShareGate userId={id} />;
+    }
+
+    // 3. Authorized: Fetch vital medical info only (Restriction for privacy)
     const user = await prisma.user.findUnique({
         where: { id: id },
         select: {
@@ -32,6 +44,9 @@ export default async function SharedProfilePage({ params }) {
                     },
                     surgeries: {
                         select: { type: true, year: true }
+                    },
+                    accidents: {
+                        select: { type: true, year: true, accidentDate: true }
                     }
                 }
             }
@@ -107,6 +122,22 @@ export default async function SharedProfilePage({ params }) {
                         <p className="text-gray-500">No active conditions listed.</p>
                     )}
                 </section>
+
+                {/* Surgeries & Accidents (Brief) */}
+                {(user.medicalHistory?.surgeries?.length > 0 || user.medicalHistory?.accidents?.length > 0) && (
+                    <section className="info-card">
+                        <h2 className="card-title text-blue-600">History Summary</h2>
+                        <ul className="text-sm text-gray-700 space-y-2">
+                            {user.medicalHistory?.surgeries?.map((s, i) => (
+                                <li key={`s-${i}`}>Surgery: {s.type} ({s.year})</li>
+                            ))}
+                            {user.medicalHistory?.accidents?.map((a, i) => (
+                                <li key={`a-${i}`}>Accident: {a.type} ({a.year})</li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
+
 
                 {/* Emergency Contact */}
                 {user.emergencyContact && (

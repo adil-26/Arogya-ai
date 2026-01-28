@@ -65,7 +65,10 @@ model User {
   
   // Medical History System
   medicalHistory      PatientMedicalHistory?
-
+  
+  // Secure Sharing
+  sharePin          String?
+  sharePinExpiry    DateTime?
 }
 
 // Notification System
@@ -502,10 +505,14 @@ model Surgery {
   patientHistory  PatientMedicalHistory @relation(fields: [historyId], references: [id], onDelete: Cascade)
   
   type            String
-  bodyPart        String
-  year            Int
+  bodyPart        String? // Made optional as we might not always have it from the new UI
+  year            Int?    // Made optional as we might have full date
+  surgeryDate     DateTime?
   hospital        String?
+  surgeon         String?
   complications   String?
+  notes           String?
+  imageUrl        String?
 }
 
 model Allergy {
@@ -517,6 +524,12 @@ model Allergy {
   allergen        String // Penicillin, Peanuts
   reaction        String?
   severity        String?
+  status          String? // Active, Recovered
+  onset           String?
+  duration        String?
+  medication      String?
+  notes           String?
+  imageUrl        String?
 }
 
 model AccidentHistory {
@@ -525,12 +538,17 @@ model AccidentHistory {
   patientHistory  PatientMedicalHistory @relation(fields: [historyId], references: [id], onDelete: Cascade)
   
   type            String // vehicle, fall, etc
-  year            Int
-  age             Int
+  year            Int?
+  accidentDate    DateTime?
+  age             Int?
   
   injuries        AccidentInjury[]
   treatment       String?
+  hospital        String?
   hospitalDays    Int?
+  residualEffects String?
+  notes           String?
+  // Deprecated/Legacy fields could be kept or removed:
   lastingEffects  String[]
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth'; // Direct import from lib/auth
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import HistoryWizard from '@/components/medical-history/HistoryWizard';
@@ -17,39 +17,58 @@ export default async function MedicalHistoryPage() {
     let userGender = 'Other';
 
     try {
-        // Attempt server-side fetch with timeout safety
-        // We use Promise.race to timeout strict server fetches if DB is slow
-        // But here simpler try/catch for the whole block is enough for now
-
-        const historyPromise = prisma.patientMedicalHistory.findUnique({
-            where: { userId: session.user.id },
+        // Fetch User and History
+        const user = await prisma.user.findUnique({
+            where: { id: session.user.id },
             include: {
-                birthHistory: true,
-                childhoodHistory: true,
-                femaleHistory: true,
-                maleHistory: true,
-                familyHistory: true,
-                surgeries: true,
-                allergies: true,
-                accidents: true
+                medicalHistory: {
+                    include: {
+                        birthHistory: true,
+                        childhoodHistory: true,
+                        femaleHistory: true,
+                        maleHistory: true,
+                        familyHistory: true,
+                        surgeries: true,
+                        allergies: true,
+                        accidents: true
+                    }
+                }
             }
         });
 
-        const userPromise = prisma.user.findUnique({
-            where: { id: session.user.id },
-            select: { gender: true }
-        });
+        if (user) {
+            userGender = user.gender || 'Other';
 
-        // Run in parallel
-        const [history, user] = await Promise.all([historyPromise, userPromise]);
+            // If medicalHistory is an array (hasMany) vs single relation (hasOne)
+            // Schema implies One-to-One usually for MedicalHistory, but let's check structure
+            // Provided code used findUnique on PatientMedicalHistory, assuming independent model?
+            // Dashboard used `user.medicalHistory`. Let's stick to the previous successful pattern if possible.
+            // But wait, the previous code in this file used `prisma.patientMedicalHistory.findUnique`.
+            // Let's keep the user fetch robust.
 
-        existingHistory = history;
-        userGender = user?.gender || 'Other';
+            existingHistory = user.medicalHistory ? (Array.isArray(user.medicalHistory) ? user.medicalHistory[0] : user.medicalHistory) : null;
+
+            // Double check if we need to fetch independent table if relation is not set up perfectly?
+            if (!existingHistory) {
+                existingHistory = await prisma.patientMedicalHistory.findUnique({
+                    where: { userId: session.user.id },
+                    include: {
+                        birthHistory: true,
+                        childhoodHistory: true,
+                        femaleHistory: true,
+                        maleHistory: true,
+                        familyHistory: true,
+                        surgeries: true,
+                        allergies: true,
+                        accidents: true
+                    }
+                });
+            }
+        }
 
     } catch (error) {
-        console.warn("⚠️ Server-side history fetch timed out (Connection Limit 1). Failover to client-side fetch active.");
-        // Fallback: We will let the client component fetch data if initialData is null
-        // This prevents the whole page from crashing with 500
+        console.error("Medical History Page DB Error:", error);
+        // Fallback to client-side
     }
 
     return (
