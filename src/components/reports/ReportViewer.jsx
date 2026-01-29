@@ -1,29 +1,40 @@
 'use client';
 import React, { useState } from 'react';
-import { ArrowLeft, FileText, Activity, BarChart3, AlertTriangle, CheckCircle, TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { ArrowLeft, FileText, Calendar, CheckCircle, AlertCircle, TrendingUp, TrendingDown, Minus, Eye, BarChart3, Table, FileSearch } from 'lucide-react';
+import AppShell from '@/components/layout/AppShell';
+
+const statusColors = {
+    normal: { bg: 'bg-green-50', text: 'text-green-700', border: 'border-green-200', icon: CheckCircle },
+    low: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200', icon: TrendingDown },
+    high: { bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-200', icon: TrendingUp },
+    critical: { bg: 'bg-red-100', text: 'text-red-800', border: 'border-red-300', icon: AlertCircle }
+};
 
 export default function ReportViewer({ report, onBack }) {
     const [activeTab, setActiveTab] = useState('summary');
+    const [showRawText, setShowRawText] = useState(false);
 
-    // Parse analysis JSON
     const analysis = report.analysisJson || {};
     const results = analysis.results || report.results || [];
-    const metadata = analysis.metadata || {};
+    const summary = analysis.summary || analysis.interpretation || 'No AI summary available yet.';
 
-    const getStatusIcon = (status) => {
-        if (status === 'High') return <TrendingUp className="w-4 h-4 text-red-500" />;
-        if (status === 'Low') return <TrendingDown className="w-4 h-4 text-blue-500" />;
-        return <Minus className="w-4 h-4 text-green-500" />;
-    };
+    const tabs = [
+        { id: 'summary', label: 'Summary', icon: FileSearch },
+        { id: 'details', label: 'Details', icon: Table },
+        { id: 'graphs', label: 'Trends', icon: BarChart3 }
+    ];
 
-    const getStatusColor = (status) => {
-        if (status === 'High') return 'bg-red-50 border-red-200 text-red-700';
-        if (status === 'Low') return 'bg-blue-50 border-blue-200 text-blue-700';
-        return 'bg-green-50 border-green-200 text-green-700';
+    const getStatus = (result) => {
+        if (!result.status) {
+            if (result.flag === 'H' || result.flag === 'high') return 'high';
+            if (result.flag === 'L' || result.flag === 'low') return 'low';
+            return 'normal';
+        }
+        return result.status.toLowerCase();
     };
 
     const formatDate = (dateString) => {
-        if (!dateString) return 'N/A';
+        if (!dateString) return 'Unknown';
         return new Date(dateString).toLocaleDateString('en-IN', {
             day: 'numeric',
             month: 'long',
@@ -31,222 +42,257 @@ export default function ReportViewer({ report, onBack }) {
         });
     };
 
-    // Calculate summary stats
-    const normalCount = results.filter(r => r.status === 'Normal').length;
-    const abnormalCount = results.filter(r => r.status === 'High' || r.status === 'Low').length;
+    // Group results by category if available
+    const groupedResults = results.reduce((acc, result) => {
+        const category = result.category || 'General';
+        if (!acc[category]) acc[category] = [];
+        acc[category].push(result);
+        return acc;
+    }, {});
 
     return (
-        <div className="min-h-screen bg-slate-50">
-            {/* Header */}
-            <div className="bg-white border-b border-slate-200 sticky top-0 z-10">
-                <div className="max-w-6xl mx-auto px-4 py-4">
-                    <div className="flex items-center gap-4">
-                        <button
-                            onClick={onBack}
-                            className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
-                        >
-                            <ArrowLeft className="w-5 h-5 text-slate-600" />
-                        </button>
-
-                        <div className="flex-1">
-                            <h1 className="text-xl font-bold text-slate-800">
-                                {report.title || 'Health Report'}
-                            </h1>
-                            <p className="text-sm text-slate-500">
-                                {report.type} • {formatDate(report.reportDate)}
-                            </p>
-                        </div>
-
-                        <div className="flex items-center gap-2">
-                            {report.status === 'completed' ? (
-                                <span className="flex items-center gap-1 px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm">
-                                    <CheckCircle className="w-4 h-4" />
-                                    Analysis Complete
-                                </span>
-                            ) : (
-                                <span className="flex items-center gap-1 px-3 py-1 bg-yellow-50 text-yellow-700 rounded-full text-sm">
-                                    <AlertTriangle className="w-4 h-4" />
-                                    {report.status}
-                                </span>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Tabs */}
-                    <div className="flex gap-1 mt-4">
-                        {['summary', 'details', 'graph'].map((tab) => (
+        <AppShell>
+            <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+                {/* Header */}
+                <div className="bg-white border-b border-slate-200 sticky top-0 z-10">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4">
+                        <div className="flex items-center gap-4">
                             <button
-                                key={tab}
-                                onClick={() => setActiveTab(tab)}
-                                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize ${activeTab === tab
-                                        ? 'bg-blue-100 text-blue-700'
-                                        : 'text-slate-600 hover:bg-slate-100'
-                                    }`}
+                                onClick={onBack}
+                                className="p-2 hover:bg-slate-100 rounded-xl transition-colors"
                             >
-                                {tab === 'summary' && <FileText className="w-4 h-4 inline mr-1" />}
-                                {tab === 'details' && <Activity className="w-4 h-4 inline mr-1" />}
-                                {tab === 'graph' && <BarChart3 className="w-4 h-4 inline mr-1" />}
-                                {tab}
+                                <ArrowLeft className="w-5 h-5 text-slate-600" />
                             </button>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
-            {/* Content */}
-            <div className="max-w-6xl mx-auto px-4 py-6">
-                {activeTab === 'summary' && (
-                    <div className="space-y-6">
-                        {/* Quick Stats */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <div className="bg-white rounded-xl p-4 border border-slate-200">
-                                <p className="text-sm text-slate-500">Total Parameters</p>
-                                <p className="text-2xl font-bold text-slate-800">{results.length}</p>
-                            </div>
-                            <div className="bg-white rounded-xl p-4 border border-green-200 bg-green-50">
-                                <p className="text-sm text-green-600">Normal</p>
-                                <p className="text-2xl font-bold text-green-700">{normalCount}</p>
-                            </div>
-                            <div className="bg-white rounded-xl p-4 border border-red-200 bg-red-50">
-                                <p className="text-sm text-red-600">Abnormal</p>
-                                <p className="text-2xl font-bold text-red-700">{abnormalCount}</p>
-                            </div>
-                            <div className="bg-white rounded-xl p-4 border border-slate-200">
-                                <p className="text-sm text-slate-500">Report Date</p>
-                                <p className="text-lg font-semibold text-slate-800">{formatDate(report.reportDate)}</p>
-                            </div>
-                        </div>
-
-                        {/* AI Summary */}
-                        {analysis.summary && (
-                            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-200">
-                                <h3 className="text-lg font-semibold text-slate-800 mb-3 flex items-center gap-2">
-                                    <Activity className="w-5 h-5 text-blue-600" />
-                                    AI Analysis Summary
-                                </h3>
-                                <p className="text-slate-700 leading-relaxed">{analysis.summary}</p>
-                            </div>
-                        )}
-
-                        {/* Key Findings */}
-                        {abnormalCount > 0 && (
-                            <div className="bg-white rounded-xl p-6 border border-slate-200">
-                                <h3 className="text-lg font-semibold text-slate-800 mb-4">Key Findings</h3>
-                                <div className="space-y-3">
-                                    {results.filter(r => r.status !== 'Normal').map((result, idx) => (
-                                        <div key={idx} className={`p-4 rounded-lg border ${getStatusColor(result.status)}`}>
-                                            <div className="flex items-center justify-between">
-                                                <div className="flex items-center gap-2">
-                                                    {getStatusIcon(result.status)}
-                                                    <span className="font-medium">{result.parameter}</span>
-                                                </div>
-                                                <span className="font-bold">{result.value} {result.unit}</span>
-                                            </div>
-                                            {result.refMin && result.refMax && (
-                                                <p className="text-sm mt-1 opacity-75">
-                                                    Reference: {result.refMin} - {result.refMax} {result.unit}
-                                                </p>
-                                            )}
-                                        </div>
-                                    ))}
+                            <div className="flex-1 min-w-0">
+                                <h1 className="text-lg sm:text-xl font-bold text-slate-800 truncate">
+                                    {report.title || 'Health Report'}
+                                </h1>
+                                <div className="flex items-center gap-3 text-sm text-slate-500">
+                                    <span className="flex items-center gap-1">
+                                        <Calendar className="w-4 h-4" />
+                                        {formatDate(report.reportDate)}
+                                    </span>
+                                    <span className="px-2 py-0.5 bg-teal-100 text-teal-700 rounded-md text-xs font-semibold">
+                                        {report.type}
+                                    </span>
                                 </div>
                             </div>
-                        )}
+                        </div>
                     </div>
-                )}
+                </div>
 
-                {activeTab === 'details' && (
-                    <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
-                        <table className="w-full">
-                            <thead className="bg-slate-50 border-b border-slate-200">
-                                <tr>
-                                    <th className="text-left px-4 py-3 text-sm font-semibold text-slate-600">Parameter</th>
-                                    <th className="text-left px-4 py-3 text-sm font-semibold text-slate-600">Value</th>
-                                    <th className="text-left px-4 py-3 text-sm font-semibold text-slate-600">Reference Range</th>
-                                    <th className="text-left px-4 py-3 text-sm font-semibold text-slate-600">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {results.map((result, idx) => (
-                                    <tr key={idx} className="border-b border-slate-100 hover:bg-slate-50">
-                                        <td className="px-4 py-3 font-medium text-slate-800">{result.parameter}</td>
-                                        <td className="px-4 py-3 text-slate-700">
-                                            {result.value} <span className="text-slate-400">{result.unit}</span>
-                                        </td>
-                                        <td className="px-4 py-3 text-slate-500">
-                                            {result.refMin && result.refMax ? `${result.refMin} - ${result.refMax}` : '-'}
-                                        </td>
-                                        <td className="px-4 py-3">
-                                            <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(result.status)}`}>
-                                                {getStatusIcon(result.status)}
-                                                {result.status}
-                                            </span>
-                                        </td>
-                                    </tr>
-                                ))}
-                                {results.length === 0 && (
-                                    <tr>
-                                        <td colSpan="4" className="px-4 py-8 text-center text-slate-500">
-                                            No test results available
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
+                {/* Tabs */}
+                <div className="bg-white border-b border-slate-200">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6">
+                        <div className="flex gap-1">
+                            {tabs.map(tab => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`flex items-center gap-2 px-4 sm:px-6 py-3 font-semibold text-sm border-b-2 transition-colors ${activeTab === tab.id
+                                            ? 'border-teal-600 text-teal-600 bg-teal-50/50'
+                                            : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'
+                                        }`}
+                                >
+                                    <tab.icon className="w-4 h-4" />
+                                    <span className="hidden sm:inline">{tab.label}</span>
+                                </button>
+                            ))}
+                        </div>
                     </div>
-                )}
+                </div>
 
-                {activeTab === 'graph' && (
-                    <div className="bg-white rounded-xl border border-slate-200 p-6">
-                        <h3 className="text-lg font-semibold text-slate-800 mb-6">Test Results Visualization</h3>
+                {/* Content */}
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6">
 
-                        {results.length > 0 ? (
-                            <div className="space-y-4">
-                                {results.slice(0, 10).map((result, idx) => {
-                                    // Calculate percentage within reference range
-                                    const min = result.refMin || 0;
-                                    const max = result.refMax || result.value * 1.5;
-                                    const range = max - min;
-                                    let percentage = ((result.value - min) / range) * 100;
-                                    percentage = Math.max(0, Math.min(100, percentage));
+                    {/* Summary Tab */}
+                    {activeTab === 'summary' && (
+                        <div className="space-y-6">
+                            {/* AI Summary Card */}
+                            <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                                <div className="flex items-start gap-4">
+                                    <div className="w-12 h-12 bg-gradient-to-br from-teal-100 to-cyan-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <FileSearch className="w-6 h-6 text-teal-600" />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-bold text-slate-800 mb-2">AI Analysis Summary</h3>
+                                        <p className="text-slate-600 leading-relaxed">{summary}</p>
+                                    </div>
+                                </div>
+                            </div>
 
-                                    return (
-                                        <div key={idx} className="space-y-1">
-                                            <div className="flex justify-between text-sm">
-                                                <span className="font-medium text-slate-700">{result.parameter}</span>
-                                                <span className={`font-semibold ${result.status === 'Normal' ? 'text-green-600' : 'text-red-600'}`}>
-                                                    {result.value} {result.unit}
-                                                </span>
-                                            </div>
-                                            <div className="relative h-6 bg-slate-100 rounded-full overflow-hidden">
-                                                {/* Reference range background */}
-                                                <div className="absolute inset-y-0 left-0 right-0 bg-green-100" style={{ left: '20%', right: '20%' }}></div>
-
-                                                {/* Value indicator */}
+                            {/* Key Findings */}
+                            {results.length > 0 && (
+                                <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                                    <h3 className="font-bold text-slate-800 mb-4">Key Findings</h3>
+                                    <div className="grid gap-3">
+                                        {results.filter(r => getStatus(r) !== 'normal').slice(0, 5).map((result, i) => {
+                                            const status = getStatus(result);
+                                            const StatusIcon = statusColors[status]?.icon || CheckCircle;
+                                            return (
                                                 <div
-                                                    className={`absolute top-1 bottom-1 w-2 rounded-full transition-all ${result.status === 'Normal' ? 'bg-green-500' : result.status === 'High' ? 'bg-red-500' : 'bg-blue-500'
-                                                        }`}
-                                                    style={{ left: `calc(${percentage}% - 4px)` }}
-                                                ></div>
+                                                    key={i}
+                                                    className={`flex items-center gap-3 p-4 rounded-xl ${statusColors[status]?.bg} border ${statusColors[status]?.border}`}
+                                                >
+                                                    <StatusIcon className={`w-5 h-5 ${statusColors[status]?.text}`} />
+                                                    <div className="flex-1">
+                                                        <span className="font-semibold text-slate-800">{result.name || result.testName}</span>
+                                                        <span className="mx-2 text-slate-400">•</span>
+                                                        <span className={`font-bold ${statusColors[status]?.text}`}>
+                                                            {result.value} {result.unit}
+                                                        </span>
+                                                    </div>
+                                                    <span className={`text-xs font-semibold uppercase ${statusColors[status]?.text}`}>
+                                                        {status}
+                                                    </span>
+                                                </div>
+                                            );
+                                        })}
+                                        {results.filter(r => getStatus(r) !== 'normal').length === 0 && (
+                                            <div className="flex items-center gap-3 p-4 rounded-xl bg-green-50 border border-green-200">
+                                                <CheckCircle className="w-5 h-5 text-green-600" />
+                                                <span className="font-semibold text-green-700">All values within normal range</span>
                                             </div>
-                                            <div className="flex justify-between text-xs text-slate-400">
-                                                <span>{min}</span>
-                                                <span>Normal Range</span>
-                                                <span>{max}</span>
-                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Raw Text Toggle */}
+                            {report.rawOcrText && (
+                                <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                                    <button
+                                        onClick={() => setShowRawText(!showRawText)}
+                                        className="w-full px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors"
+                                    >
+                                        <div className="flex items-center gap-3">
+                                            <Eye className="w-5 h-5 text-slate-500" />
+                                            <span className="font-semibold text-slate-700">View Raw OCR Text</span>
                                         </div>
-                                    );
-                                })}
-                            </div>
-                        ) : (
-                            <div className="text-center py-12 text-slate-500">
-                                <BarChart3 className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                                <p>No data available for visualization</p>
-                            </div>
-                        )}
-                    </div>
-                )}
+                                        <span className="text-sm text-slate-500">{showRawText ? 'Hide' : 'Show'}</span>
+                                    </button>
+                                    {showRawText && (
+                                        <div className="px-6 pb-6">
+                                            <pre className="bg-slate-900 text-slate-200 p-4 rounded-xl text-sm overflow-x-auto font-mono whitespace-pre-wrap">
+                                                {report.rawOcrText}
+                                            </pre>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {/* Details Tab */}
+                    {activeTab === 'details' && (
+                        <div className="space-y-6">
+                            {Object.entries(groupedResults).length > 0 ? (
+                                Object.entries(groupedResults).map(([category, categoryResults]) => (
+                                    <div key={category} className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                                        <div className="px-6 py-4 bg-slate-50 border-b border-slate-200">
+                                            <h3 className="font-bold text-slate-800">{category}</h3>
+                                        </div>
+                                        <div className="overflow-x-auto">
+                                            <table className="w-full">
+                                                <thead>
+                                                    <tr className="border-b border-slate-100">
+                                                        <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Test Name</th>
+                                                        <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Result</th>
+                                                        <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase hidden sm:table-cell">Reference</th>
+                                                        <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {categoryResults.map((result, i) => {
+                                                        const status = getStatus(result);
+                                                        const StatusIcon = statusColors[status]?.icon || Minus;
+                                                        return (
+                                                            <tr key={i} className="border-b border-slate-50 last:border-0 hover:bg-slate-50">
+                                                                <td className="px-6 py-4 font-medium text-slate-800">
+                                                                    {result.name || result.testName}
+                                                                </td>
+                                                                <td className="px-6 py-4">
+                                                                    <span className="font-bold text-slate-800">{result.value}</span>
+                                                                    <span className="text-slate-500 ml-1">{result.unit}</span>
+                                                                </td>
+                                                                <td className="px-6 py-4 text-slate-500 hidden sm:table-cell">
+                                                                    {result.referenceRange || result.normalRange || '-'}
+                                                                </td>
+                                                                <td className="px-6 py-4">
+                                                                    <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold ${statusColors[status]?.bg} ${statusColors[status]?.text}`}>
+                                                                        <StatusIcon className="w-3 h-3" />
+                                                                        {status.charAt(0).toUpperCase() + status.slice(1)}
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    })}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center">
+                                    <Table className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+                                    <p className="text-slate-500">No detailed results available</p>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {/* Graphs Tab */}
+                    {activeTab === 'graphs' && (
+                        <div className="space-y-6">
+                            {results.length > 0 ? (
+                                <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+                                    <h3 className="font-bold text-slate-800 mb-6">Test Results Overview</h3>
+                                    <div className="space-y-4">
+                                        {results.slice(0, 10).map((result, i) => {
+                                            const status = getStatus(result);
+                                            const value = parseFloat(result.value) || 0;
+                                            const maxValue = value * 1.5; // Approximate max for visualization
+                                            const percentage = Math.min((value / maxValue) * 100, 100);
+
+                                            return (
+                                                <div key={i} className="space-y-2">
+                                                    <div className="flex justify-between items-center">
+                                                        <span className="font-medium text-slate-700 text-sm">
+                                                            {result.name || result.testName}
+                                                        </span>
+                                                        <span className={`font-bold text-sm ${statusColors[status]?.text}`}>
+                                                            {result.value} {result.unit}
+                                                        </span>
+                                                    </div>
+                                                    <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
+                                                        <div
+                                                            className={`h-full rounded-full transition-all ${status === 'normal' ? 'bg-gradient-to-r from-green-400 to-green-500' :
+                                                                    status === 'high' ? 'bg-gradient-to-r from-red-400 to-red-500' :
+                                                                        status === 'low' ? 'bg-gradient-to-r from-blue-400 to-blue-500' :
+                                                                            'bg-gradient-to-r from-amber-400 to-amber-500'
+                                                                }`}
+                                                            style={{ width: `${percentage}%` }}
+                                                        />
+                                                    </div>
+                                                    {result.referenceRange && (
+                                                        <p className="text-xs text-slate-400">Reference: {result.referenceRange}</p>
+                                                    )}
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center">
+                                    <BarChart3 className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+                                    <p className="text-slate-500">No trend data available yet</p>
+                                    <p className="text-slate-400 text-sm mt-1">Upload more reports to see trends over time</p>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
             </div>
-        </div>
+        </AppShell>
     );
 }
