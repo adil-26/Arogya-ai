@@ -11,13 +11,18 @@ const ReportAnalyzer = ({ report, onCancel, onSaveComplete }) => {
     const startExtraction = async () => {
         setStatus('extracting');
         try {
+            console.log("Starting OCR for URL:", report.fileUrl); // DEBUG LOG
             const res = await fetch('/api/reports/ocr', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ fileUrl: report.fileUrl })
             });
 
-            if (!res.ok) throw new Error('OCR failed');
+            if (!res.ok) {
+                const errData = await res.json().catch(() => ({}));
+                console.error("SERVER ERROR DETAILS:", errData);
+                throw new Error(errData.details || errData.error || 'OCR failed');
+            }
             const result = await res.json();
 
             setExtractedText(result.text);

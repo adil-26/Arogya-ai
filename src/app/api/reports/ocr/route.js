@@ -1,69 +1,69 @@
 import { NextResponse } from 'next/server';
-import { join } from 'path';
-import { readFile } from 'fs/promises';
+import { createWorker } from 'tesseract.js';
+import { prisma } from '@/lib/prisma';
 
 export async function POST(request) {
     try {
         const body = await request.json();
-        const { fileUrl } = body;
+        const { reportId, fileUrl } = body;
 
-        console.log("OCR Request (Vision-Powered):", { fileUrl });
+        if (!reportId || !fileUrl) {
+            return NextResponse.json({ error: 'Missing reportId or fileUrl' }, { status: 400 });
+        }
 
-        // 1. Fetch File from URL (Supabase Storage)
+        console.log("OCR Request (Tesseract.js):", { reportId, fileUrl });
+
+        // Fetch the image
         const fileResponse = await fetch(fileUrl);
         if (!fileResponse.ok) {
-            throw new Error(`Failed to fetch image from URL: ${fileResponse.statusText}`);
+            throw new Error(`Failed to fetch image: ${fileResponse.statusText}`);
         }
 
         const arrayBuffer = await fileResponse.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
-        const base64Image = buffer.toString('base64');
-        const dataUrl = `data:${fileResponse.headers.get('content-type') || 'image/jpeg'};base64,${base64Image}`;
 
-        // 3. Send to Groq Vision for "Optical Character Recognition"
-        const API_KEY = process.env.GROQ_API_KEY;
-        if (!API_KEY) {
-            throw new Error("GROQ_API_KEY is not configured");
-        }
+        // Initialize Tesseract worker
+        console.log("Initializing Tesseract.js worker...");
+        const worker = await createWorker('eng');
 
-        console.log("Sending to Groq Vision (Llama-3.2-11b-vision-preview)...");
+        // Recognize text
+        console.log("Running OCR...");
+        const { data: { text } } = await worker.recognize(buffer);
 
-        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${API_KEY}`
-            },
-            body: JSON.stringify({
-                model: "llama-3.2-11b-vision-preview",
-                messages: [
-                    {
-                        role: "user",
-                        content: [
-                            { type: "text", text: "Please extract all the readable text from this medical report image. Return ONLY the raw text content. Do not add any conversational filler like 'Here is the text'." },
-                            { type: "image_url", image_url: { url: dataUrl } }
-                        ]
-                    }
-                ],
-                temperature: 0.1,
-                max_tokens: 4096
-            })
+        // Terminate worker
+        await worker.terminate();
+        console.log("OCR Complete. Text length:", text.length);
+
+        // Save raw text to database
+        await prisma.healthReport.update({
+            where: { id: reportId },
+            data: {
+                rawOcrText: text,
+                status: 'ocr_complete'
+            }
         });
 
-        if (!response.ok) {
-            const err = await response.text();
-            throw new Error(`Groq API Error: ${err}`);
-        }
-
-        const data = await response.json();
-        const rawText = data.choices[0]?.message?.content || "No text found.";
-
-        console.log("Vision OCR Complete. Length:", rawText.length);
-
-        return NextResponse.json({ text: rawText });
+        return NextResponse.json({
+            text,
+            reportId,
+            status: 'ocr_complete'
+        });
 
     } catch (error) {
-        console.error("OCR Failed:", error);
+        console.error("OCR CRITICAL FAILURE:", error);
+        console.error("Error Stack:", error.stack);
+
+        // Update report status to failed
+        try {
+            const body = await request.json().catch(() => ({}));
+            if (body.reportId) {
+                await prisma.healthReport.update({
+                    where: { id: body.reportId },
+                    data: { status: 'failed' }
+                });
+            }
+        } catch (e) { /* ignore */ }
+
         return NextResponse.json({
             error: "Failed to extract text",
             details: error.message

@@ -578,7 +578,11 @@ model HealthReport {
   fileUrl   String
   reportDate DateTime // From OCR or upload date
   
-  status    String   @default("processing") // processing, completed, failed
+  status    String   @default("processing") // processing, ocr_complete, analyzing, completed, failed
+  
+  // NEW: Store raw OCR text and AI analysis
+  rawOcrText   String?  // Raw text extracted by Tesseract
+  analysisJson Json?    // Structured JSON from AI analysis
   
   results   TestResult[]
   findings  ImagingFinding[]
