@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
+import { supabase } from '@/lib/supabase';
 
 // GET: List all library items (filtered by category or access level)
 export async function GET(request) {
@@ -47,22 +46,36 @@ export async function POST(request) {
             return NextResponse.json({ error: "Title and file are required" }, { status: 400 });
         }
 
-        // Create uploads directory if not exists
-        const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'library');
-        await mkdir(uploadDir, { recursive: true });
-
-        // Generate unique filename
+        // Sanitize file name
         const timestamp = Date.now();
-        const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-        const fileName = `${timestamp}_${originalName}`;
-        const filePath = path.join(uploadDir, fileName);
+        const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+        const fileName = `${timestamp}_${safeName}`;
+        const filePath = `library/${fileName}`; // Organize in library folder
 
-        // Write file to disk
+        // Upload to Supabase Storage
         const bytes = await file.arrayBuffer();
-        await writeFile(filePath, Buffer.from(bytes));
+        const buffer = Buffer.from(bytes);
 
-        // Save to database
-        const fileUrl = `/uploads/library/${fileName}`;
+        const { data: uploadData, error: uploadError } = await supabase
+            .storage
+            .from('reports') // Reusing 'reports' bucket or ideally a 'library' bucket if exists. Falling back to reports for simplicity based on user interaction.
+            .upload(filePath, buffer, {
+                contentType: file.type,
+                upsert: false
+            });
+
+        if (uploadError) {
+            console.error("Supabase Storage Upload Error:", uploadError);
+            throw new Error(`Storage upload failed: ${uploadError.message}`);
+        }
+
+        // Get Public URL
+        const { data: urlData } = supabase
+            .storage
+            .from('reports')
+            .getPublicUrl(filePath);
+
+        const fileUrl = urlData.publicUrl;
 
         const newItem = await prisma.libraryItem.create({
             data: {
