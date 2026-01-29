@@ -9,14 +9,16 @@ export async function POST(request) {
 
         console.log("OCR Request (Vision-Powered):", { fileUrl });
 
-        // 1. Resolve File Path (Local)
-        const relativePath = fileUrl.startsWith('/') ? fileUrl.slice(1) : fileUrl;
-        const filePath = join(process.cwd(), 'public', relativePath);
+        // 1. Fetch File from URL (Supabase Storage)
+        const fileResponse = await fetch(fileUrl);
+        if (!fileResponse.ok) {
+            throw new Error(`Failed to fetch image from URL: ${fileResponse.statusText}`);
+        }
 
-        // 2. Read File as Base64
-        const fileBuffer = await readFile(filePath);
-        const base64Image = fileBuffer.toString('base64');
-        const dataUrl = `data:image/jpeg;base64,${base64Image}`;
+        const arrayBuffer = await fileResponse.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+        const base64Image = buffer.toString('base64');
+        const dataUrl = `data:${fileResponse.headers.get('content-type') || 'image/jpeg'};base64,${base64Image}`;
 
         // 3. Send to Groq Vision for "Optical Character Recognition"
         const API_KEY = process.env.GROQ_API_KEY;
