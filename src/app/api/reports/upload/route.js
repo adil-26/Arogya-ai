@@ -2,8 +2,7 @@ import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { prisma } from '@/lib/prisma';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
+import { supabase } from '@/lib/supabase';
 
 export async function POST(request) {
     const session = await getServerSession(authOptions);
@@ -24,17 +23,33 @@ export async function POST(request) {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
 
-        // Save file locally (In prod, use S3/Supabase Storage)
-        const uploadDir = join(process.cwd(), 'public/uploads/reports');
-        await mkdir(uploadDir, { recursive: true });
-
+        // Sanitize file name
         const timestamp = Date.now();
         const safeName = file.name.replace(/[^a-z0-9.]/yi, '_');
         const fileName = `${timestamp}_${safeName}`;
-        const filePath = join(uploadDir, fileName);
+        const filePath = `${session.user.id}/${fileName}`; // Organize by user ID
 
-        await writeFile(filePath, buffer);
-        const fileUrl = `/uploads/reports/${fileName}`;
+        // Upload to Supabase Storage
+        const { data: uploadData, error: uploadError } = await supabase
+            .storage
+            .from('reports') // Ensure this bucket exists in Supabase
+            .upload(filePath, buffer, {
+                contentType: file.type,
+                upsert: false
+            });
+
+        if (uploadError) {
+            console.error("Supabase Storage Upload Error:", uploadError);
+            throw new Error(`Storage upload failed: ${uploadError.message}`);
+        }
+
+        // Get Public URL
+        const { data: urlData } = supabase
+            .storage
+            .from('reports')
+            .getPublicUrl(filePath);
+
+        const fileUrl = urlData.publicUrl;
 
         // Create DB Record
         const report = await prisma.healthReport.create({
@@ -44,14 +59,17 @@ export async function POST(request) {
                 type: type,
                 fileUrl: fileUrl,
                 reportDate: new Date(date),
-                status: 'processing' // AI Analysis will come next
+                status: 'processing'
             }
         });
 
         return NextResponse.json(report);
 
     } catch (error) {
-        console.error("Upload error:", error);
-        return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
+        console.error("Upload route error:", error);
+        return NextResponse.json(
+            { error: error.message || 'Upload failed' },
+            { status: 500 }
+        );
     }
 }
