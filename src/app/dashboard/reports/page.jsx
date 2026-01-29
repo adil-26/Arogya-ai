@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { Plus, FileText, Loader, Activity, TrendingUp, Search, X } from 'lucide-react';
+import { Plus, FileText, Activity, TrendingUp, Search, X, Filter, ChevronRight, SlidersHorizontal, RefreshCw, Calendar, LayoutGrid, List, Sparkles, Brain, Target } from 'lucide-react';
 import ReportCard from '@/components/reports/ReportCard';
 import ReportUploader from '@/components/reports/ReportUploader';
 import ReportViewer from '@/components/reports/ReportViewer';
@@ -12,6 +12,8 @@ export default function ReportsPage() {
     const [showUploadModal, setShowUploadModal] = useState(false);
     const [viewingReport, setViewingReport] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [filterStatus, setFilterStatus] = useState('all');
+    const [viewMode, setViewMode] = useState('list');
 
     useEffect(() => {
         fetchReports();
@@ -47,13 +49,17 @@ export default function ReportsPage() {
             });
 
             if (!ocrRes.ok) {
+                const errData = await ocrRes.json().catch(() => ({}));
+                console.error('OCR failed:', errData.error, errData.details);
+                alert(`OCR Processing Error: ${errData.details || 'Unknown Error'}`);
                 await fetchReports();
                 return;
             }
 
             const ocrData = await ocrRes.json();
+            console.log('OCR complete, starting analysis...');
 
-            await fetch('/api/reports/analyze', {
+            const analyzeRes = await fetch('/api/reports/analyze', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -62,6 +68,11 @@ export default function ReportsPage() {
                     category: reportType || 'Blood Work'
                 })
             });
+
+            if (!analyzeRes.ok) {
+                const errData = await analyzeRes.json().catch(() => ({}));
+                console.error('Analysis failed:', errData.error, errData.details);
+            }
 
             await fetchReports();
         } catch (error) {
@@ -83,15 +94,29 @@ export default function ReportsPage() {
 
     const viewReport = async (report) => {
         try {
+            setViewingReport(report);
             const res = await fetch(`/api/reports/${report.id}`);
             if (res.ok) {
                 const fullReport = await res.json();
+                console.log("Full Report Data Loaded:", fullReport);
                 setViewingReport(fullReport);
             }
         } catch (error) {
             console.error('Error fetching report:', error);
         }
     };
+
+    const totalReports = reports.length;
+    const completedReports = reports.filter(r => r.status === 'completed').length;
+    const processingReports = reports.filter(r => r.status !== 'completed' && r.status !== 'failed').length;
+    const completionRate = totalReports > 0 ? Math.round((completedReports / totalReports) * 100) : 0;
+
+    const filteredReports = reports.filter(r => {
+        const matchesSearch = r.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            r.type?.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesFilter = filterStatus === 'all' || r.status === filterStatus;
+        return matchesSearch && matchesFilter;
+    });
 
     if (viewingReport) {
         return (
@@ -102,183 +127,153 @@ export default function ReportsPage() {
         );
     }
 
-    // Stats & Filtering
-    const totalReports = reports.length;
-    const completedReports = reports.filter(r => r.status === 'completed').length;
-    const processingReports = reports.filter(r => r.status !== 'completed' && r.status !== 'failed').length;
-    const hasReports = reports.length > 0;
-
-    const filteredReports = reports.filter(r =>
-        r.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        r.type?.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
     return (
         <AppShell>
-            <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 pb-24 sm:pb-8">
-                <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-
-                    {/* Header */}
-                    <div className="mb-6">
-                        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">
-                            Health Reports
-                        </h1>
-                        <p className="text-slate-500 mt-1 text-sm sm:text-base">
-                            Upload, analyze, and track your medical reports
-                        </p>
-                    </div>
-
-                    {/* Stats - Horizontally Scrollable */}
-                    {hasReports && (
-                        <div className="mb-6 -mx-4 px-4 sm:mx-0 sm:px-0">
-                            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-                                {/* Total */}
-                                <div className="flex-shrink-0 w-32 sm:w-auto sm:flex-1 bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-12 h-12 bg-gradient-to-br from-teal-100 to-cyan-100 rounded-xl flex items-center justify-center">
-                                            <FileText className="w-6 h-6 text-teal-600" />
-                                        </div>
-                                        <div>
-                                            <p className="text-xs text-slate-500 font-semibold uppercase">Total</p>
-                                            <p className="text-2xl font-extrabold text-slate-800">{totalReports}</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Analyzed */}
-                                <div className="flex-shrink-0 w-32 sm:w-auto sm:flex-1 bg-white rounded-2xl p-4 sm:p-5 border border-green-200 shadow-sm">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-12 h-12 bg-gradient-to-br from-green-100 to-emerald-100 rounded-xl flex items-center justify-center">
-                                            <TrendingUp className="w-6 h-6 text-green-600" />
-                                        </div>
-                                        <div>
-                                            <p className="text-xs text-slate-500 font-semibold uppercase">Analyzed</p>
-                                            <p className="text-2xl font-extrabold text-green-600">{completedReports}</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Processing */}
-                                <div className="flex-shrink-0 w-32 sm:w-auto sm:flex-1 bg-white rounded-2xl p-4 sm:p-5 border border-amber-200 shadow-sm">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-12 h-12 bg-gradient-to-br from-amber-100 to-yellow-100 rounded-xl flex items-center justify-center">
-                                            <Activity className="w-6 h-6 text-amber-600 animate-pulse" />
-                                        </div>
-                                        <div>
-                                            <p className="text-xs text-slate-500 font-semibold uppercase">Processing</p>
-                                            <p className="text-2xl font-extrabold text-amber-600">{processingReports}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Search & Desktop Upload Button */}
-                    {hasReports && (
-                        <div className="flex gap-3 mb-6">
-                            <div className="flex-1 relative">
-                                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                                <input
-                                    type="text"
-                                    placeholder="Search reports..."
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 text-slate-700"
-                                />
-                                {searchQuery && (
-                                    <button
-                                        onClick={() => setSearchQuery('')}
-                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                                    >
-                                        <X className="w-5 h-5" />
-                                    </button>
-                                )}
-                            </div>
-                            <button
-                                onClick={() => setShowUploadModal(true)}
-                                className="hidden sm:flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-xl hover:shadow-xl hover:shadow-teal-500/25 transition-all font-semibold whitespace-nowrap"
-                            >
-                                <Plus className="w-5 h-5" />
-                                Upload
-                            </button>
-                        </div>
-                    )}
-
-                    {/* Main Content */}
-                    {loading ? (
-                        /* Skeleton Loading */
-                        <div className="space-y-4">
-                            {[1, 2, 3].map(i => (
-                                <div key={i} className="bg-white rounded-2xl border border-slate-200 p-5 animate-pulse">
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-14 h-14 bg-slate-200 rounded-xl"></div>
-                                        <div className="flex-1">
-                                            <div className="h-5 bg-slate-200 rounded w-48 mb-3"></div>
-                                            <div className="h-4 bg-slate-100 rounded w-32"></div>
-                                        </div>
-                                        <div className="h-8 bg-slate-100 rounded-full w-24"></div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    ) : !hasReports ? (
-                        /* Empty State */
-                        <div className="bg-white rounded-3xl border border-slate-200 shadow-sm">
-                            <div className="flex flex-col items-center justify-center text-center py-20 px-8">
-                                <div className="w-24 h-24 bg-gradient-to-br from-teal-100 to-cyan-100 rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-teal-100">
-                                    <FileText className="w-12 h-12 text-teal-500" />
-                                </div>
-                                <h3 className="text-2xl font-bold text-slate-800 mb-3">No Reports Yet</h3>
-                                <p className="text-slate-500 max-w-md mb-10 leading-relaxed">
-                                    Upload your first medical report and our AI will automatically
-                                    extract and analyze the data for you.
+            <div className="min-h-screen bg-slate-50/50">
+                {/* 1. Header Section - Calm & Clear */}
+                <div className="bg-white border-b border-slate-200">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                            <div>
+                                <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+                                    Medical Archives
+                                </h1>
+                                <p className="text-slate-500 mt-1 text-sm sm:text-base">
+                                    Manage your health reports and view AI insights.
                                 </p>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                {/* Desktop Upload Button */}
                                 <button
                                     onClick={() => setShowUploadModal(true)}
-                                    className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-xl hover:shadow-2xl hover:shadow-teal-500/30 transition-all font-bold text-lg"
+                                    className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white rounded-lg font-semibold text-sm transition-all shadow-sm active:scale-95"
                                 >
-                                    <Plus className="w-6 h-6" />
-                                    Upload Your First Report
+                                    <Plus className="w-4 h-4" />
+                                    Upload Report
                                 </button>
                             </div>
                         </div>
+
+                        {/* 2. Stats Row - Compact & Neutral */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                            {[
+                                { label: 'Total Archives', value: totalReports },
+                                { label: 'Analyzed', value: completedReports },
+                                { label: 'Pending', value: processingReports },
+                                { label: 'Health Score', value: '98%', highlight: true }
+                            ].map((stat, idx) => (
+                                <div key={idx} className="bg-slate-50 border border-slate-100 rounded-xl p-4 flex flex-col items-start hover:border-slate-200 transition-colors">
+                                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{stat.label}</p>
+                                    <p className={`text-2xl font-bold mt-1 ${stat.highlight ? 'text-teal-600' : 'text-slate-900'}`}>{stat.value}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Mobile FAB */}
+                <button
+                    onClick={() => setShowUploadModal(true)}
+                    className="md:hidden fixed bottom-6 right-6 z-50 w-14 h-14 bg-teal-600 text-white rounded-full shadow-xl flex items-center justify-center active:scale-90 transition-transform"
+                >
+                    <Plus className="w-6 h-6" />
+                </button>
+
+                {/* 3. Main Content - The List */}
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+
+                    {/* Search & Filters */}
+                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+                        {/* Search Pills */}
+                        <div className="flex items-center gap-2 p-1 bg-white border border-slate-200 rounded-lg w-full md:w-auto">
+                            <Search className="w-4 h-4 text-slate-400 ml-3" />
+                            <input
+                                type="text"
+                                placeholder="Search..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="flex-1 border-none focus:ring-0 text-sm text-slate-800 placeholder:text-slate-400 py-2 bg-transparent"
+                            />
+                            {searchQuery && (
+                                <button onClick={() => setSearchQuery('')} className="p-1 mr-1 hover:bg-slate-100 rounded-md">
+                                    <X className="w-3 h-3 text-slate-400" />
+                                </button>
+                            )}
+                        </div>
+
+                        {/* Filter Toggles */}
+                        <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-lg">
+                            {['all', 'completed', 'processing'].map(status => (
+                                <button
+                                    key={status}
+                                    onClick={() => setFilterStatus(status)}
+                                    className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${filterStatus === status
+                                        ? 'bg-white text-slate-900 shadow-sm'
+                                        : 'text-slate-500 hover:text-slate-700 hover:bg-slate-200/50'
+                                        }`}
+                                >
+                                    {status.charAt(0).toUpperCase() + status.slice(1)}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Reports List */}
+                    {loading && reports.length === 0 ? (
+                        <div className="space-y-3">
+                            {[1, 2, 3].map(i => (
+                                <div key={i} className="bg-white h-20 rounded-xl border border-slate-100 animate-pulse" />
+                            ))}
+                        </div>
                     ) : filteredReports.length === 0 ? (
-                        /* No Search Results */
-                        <div className="text-center py-16">
-                            <Search className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-                            <p className="text-slate-500">No reports matching "{searchQuery}"</p>
+                        <div className="bg-white rounded-xl border border-dashed border-slate-200 py-16 flex flex-col items-center justify-center text-center">
+                            <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center mb-4">
+                                <FileText className="w-6 h-6 text-slate-300" />
+                            </div>
+                            <h3 className="text-lg font-semibold text-slate-900">No reports found</h3>
+                            <p className="text-slate-500 text-sm mt-1 max-w-xs">
+                                {searchQuery ? "Try adjusting your search terms." : "Upload your first medical report to get started."}
+                            </p>
                         </div>
                     ) : (
-                        /* Reports List */
                         <div className="space-y-3">
                             {filteredReports.map((report) => (
                                 <ReportCard
                                     key={report.id}
                                     report={report}
                                     onClick={() => viewReport(report)}
+                                    // onDelete={handleDelete} // Consider making this secondary or hidden
                                     onDelete={handleDelete}
+                                    onRetry={() => triggerProcessing(report.id, report.fileUrl, report.type)}
                                 />
                             ))}
                         </div>
                     )}
                 </div>
 
-                {/* Floating Action Button (Mobile) */}
-                {hasReports && (
-                    <button
-                        onClick={() => setShowUploadModal(true)}
-                        className="sm:hidden fixed bottom-24 right-6 w-14 h-14 bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-full shadow-xl shadow-teal-500/30 flex items-center justify-center z-40 hover:scale-110 transition-transform"
-                    >
-                        <Plus className="w-7 h-7" />
-                    </button>
+                {/* 4. Intelligent Guide (Show when few reports) */}
+                {reports.length > 0 && reports.length < 3 && (
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 mb-6">
+                        <div className="bg-sky-50 border border-sky-100 rounded-xl p-4 flex items-start sm:items-center gap-3">
+                            <div className="p-2 bg-sky-100 rounded-lg text-sky-600">
+                                <Sparkles className="w-5 h-5" />
+                            </div>
+                            <div className="flex-1">
+                                <h4 className="font-semibold text-sky-900 text-sm">Improve AI Accuracy</h4>
+                                <p className="text-sky-700 text-xs sm:text-sm mt-0.5">Upload at least 3 reports to unlock detailed health trend analysis and personalized scoring.</p>
+                            </div>
+                            <button onClick={() => setShowUploadModal(true)} className="text-xs font-bold text-sky-700 hover:underline shrink-0 mt-1 sm:mt-0">
+                                Upload Now
+                            </button>
+                        </div>
+                    </div>
                 )}
             </div>
 
-            {/* Upload Modal */}
+            {/* Upload Modal (Refined) */}
             {showUploadModal && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-auto">
+                <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200">
+                    <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-hidden animate-in zoom-in-95 duration-200 ring-1 ring-slate-900/5">
                         <ReportUploader
                             onUploadComplete={handleUploadComplete}
                             onCancel={() => setShowUploadModal(false)}

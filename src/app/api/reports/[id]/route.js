@@ -54,7 +54,7 @@ export async function DELETE(request, { params }) {
     }
 }
 
-// GET /api/reports/[id] - Fetch a single report with full details
+// GET /api/reports/[id] - Fetch a single report with full details and historical trends
 export async function GET(request, { params }) {
     const session = await getServerSession(authOptions);
     if (!session) {
@@ -64,6 +64,7 @@ export async function GET(request, { params }) {
     const { id } = await params;
 
     try {
+        // 1. Fetch current report with its results
         const report = await prisma.healthReport.findFirst({
             where: {
                 id: id,
@@ -79,9 +80,46 @@ export async function GET(request, { params }) {
             return NextResponse.json({ error: 'Report not found' }, { status: 404 });
         }
 
-        return NextResponse.json(report);
+        // 2. Fetch historical trends for the parameters in this report
+        const parameters = report.results.map(r => r.parameter).filter(Boolean);
+
+        let trends = [];
+        if (parameters.length > 0) {
+            trends = await prisma.testResult.findMany({
+                where: {
+                    report: {
+                        userId: session.user.id,
+                        status: 'completed'
+                    },
+                    parameter: { in: parameters }
+                },
+                select: {
+                    parameter: true,
+                    value: true,
+                    unit: true,
+                    status: true,
+                    report: {
+                        select: {
+                            reportDate: true,
+                            id: true
+                        }
+                    }
+                },
+                orderBy: {
+                    report: {
+                        reportDate: 'asc'
+                    }
+                }
+            });
+        }
+
+        // 3. Return report with attached trends
+        return NextResponse.json({
+            ...report,
+            historicalTrends: trends
+        });
     } catch (error) {
-        console.error("Error fetching report:", error);
-        return NextResponse.json({ error: 'Failed to fetch report' }, { status: 500 });
+        console.error("Error fetching report details and trends:", error);
+        return NextResponse.json({ error: 'Failed to fetch report details' }, { status: 500 });
     }
 }

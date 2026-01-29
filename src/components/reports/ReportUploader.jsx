@@ -66,13 +66,26 @@ const ReportUploader = ({ onUploadComplete, onCancel }) => {
     });
 
     const reportTypes = [
-        { name: 'Blood Work', color: 'bg-red-500', icon: '🩸' },
-        { name: 'MRI', color: 'bg-purple-500', icon: '🧠' },
-        { name: 'CT Scan', color: 'bg-blue-500', icon: '📊' },
-        { name: 'X-Ray', color: 'bg-slate-500', icon: '🦴' },
-        { name: 'Urine Test', color: 'bg-amber-500', icon: '🧪' },
-        { name: 'ECG', color: 'bg-pink-500', icon: '💓' }
+        { name: 'Blood Work', icon: Activity },
+        { name: 'MRI', icon: Activity }, // Using generic for now or specific if available
+        { name: 'CT Scan', icon: FileType },
+        { name: 'X-Ray', icon: FileType },
+        { name: 'Urine Test', icon: Activity },
+        { name: 'ECG', icon: Activity }
     ];
+
+    // Better icon mapping
+    const getIcon = (name) => {
+        switch (name) {
+            case 'Blood Work': return <Activity className="w-5 h-5" />;
+            case 'MRI': return <Activity className="w-5 h-5" />;
+            case 'CT Scan': return <Activity className="w-5 h-5" />;
+            case 'X-Ray': return <Activity className="w-5 h-5" />;
+            case 'Urine Test': return <Activity className="w-5 h-5" />;
+            case 'ECG': return <Activity className="w-5 h-5" />;
+            default: return <FileText className="w-5 h-5" />;
+        }
+    };
 
     const progressSteps = [
         { id: 'uploading', label: 'Uploading' },
@@ -86,222 +99,207 @@ const ReportUploader = ({ onUploadComplete, onCancel }) => {
         const currentIndex = progressSteps.findIndex(s => s.id === uploadProgress);
 
         return (
-            <div className="p-8">
-                <div className="text-center mb-8">
-                    <div className={`w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center ${uploadProgress === 'done'
-                            ? 'bg-green-100'
-                            : 'bg-teal-100'
+            <div className="p-8 sm:p-12 flex flex-col items-center justify-center min-h-[400px]">
+                <div className="text-center mb-10 w-full max-w-md">
+                    <div className={`w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center transition-all duration-500 ${uploadProgress === 'done'
+                        ? 'bg-green-50'
+                        : 'bg-teal-50'
                         }`}>
                         {uploadProgress === 'done' ? (
-                            <CheckCircle className="w-10 h-10 text-green-600" />
+                            <CheckCircle className="w-10 h-10 text-green-600 animate-in zoom-in" />
                         ) : (
-                            <Activity className="w-10 h-10 text-teal-600 animate-spin" />
+                            <Activity className="w-10 h-10 text-teal-600 animate-pulse" />
                         )}
                     </div>
-                    <h3 className="text-xl font-bold text-slate-800 mb-2">
-                        {uploadProgress === 'done' ? 'Upload Complete!' : 'Processing Your Report'}
+                    <h3 className="text-xl font-bold text-slate-900 mb-2">
+                        {uploadProgress === 'done' ? 'Analysis Complete' : 'Processing Report'}
                     </h3>
-                    <p className="text-slate-500">
+                    <p className="text-slate-500 text-sm">
                         {uploadProgress === 'done'
-                            ? 'Your report is ready for analysis'
-                            : 'Please wait while we process your file'}
+                            ? 'Your health insights are ready.'
+                            : 'This usually takes about 10-20 seconds.'}
                     </p>
                 </div>
 
                 {/* Progress Steps */}
-                <div className="flex justify-between items-center mb-8">
-                    {progressSteps.map((pStep, index) => (
-                        <React.Fragment key={pStep.id}>
-                            <div className="flex flex-col items-center">
-                                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm ${index <= currentIndex
-                                        ? uploadProgress === 'done'
-                                            ? 'bg-green-500 text-white'
-                                            : 'bg-teal-500 text-white'
-                                        : 'bg-slate-200 text-slate-500'
-                                    }`}>
-                                    {index < currentIndex ? <Check className="w-5 h-5" /> : index + 1}
-                                </div>
-                                <span className={`text-xs mt-2 font-medium ${index <= currentIndex ? 'text-slate-800' : 'text-slate-400'
-                                    }`}>
-                                    {pStep.label}
-                                </span>
-                            </div>
-                            {index < progressSteps.length - 1 && (
-                                <div className={`flex-1 h-1 mx-2 rounded ${index < currentIndex
-                                        ? uploadProgress === 'done' ? 'bg-green-500' : 'bg-teal-500'
-                                        : 'bg-slate-200'
-                                    }`} />
-                            )}
-                        </React.Fragment>
-                    ))}
-                </div>
+                <div className="w-full max-w-md space-y-4">
+                    {progressSteps.map((pStep, index) => {
+                        const isActive = index === currentIndex;
+                        const isCompleted = index < currentIndex;
 
-                {/* File Info */}
-                <div className="bg-slate-50 rounded-xl p-4 flex items-center gap-4">
-                    <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center">
-                        <FileType className="w-6 h-6 text-teal-600" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-slate-800 truncate">{selectedFile?.name}</p>
-                        <p className="text-sm text-slate-500">{reportType} • {testDate}</p>
-                    </div>
+                        return (
+                            <div key={pStep.id} className="flex items-center gap-4">
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-colors ${isCompleted ? 'bg-teal-600 border-teal-600 text-white' :
+                                    isActive ? 'border-teal-600 text-teal-600' :
+                                        'border-slate-200 text-slate-300'
+                                    }`}>
+                                    {isCompleted ? <Check className="w-4 h-4" /> : <span className="text-xs font-bold">{index + 1}</span>}
+                                </div>
+                                <span className={`text-sm font-medium ${isActive ? 'text-slate-900' : 'text-slate-500'}`}>{pStep.label}</span>
+                                {isActive && <Activity className="w-4 h-4 text-teal-600 animate-spin ml-auto" />}
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
         );
     }
 
     return (
-        <div>
+        <div className="flex flex-col h-full">
             {/* Header */}
-            <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+            <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-white sticky top-0 z-10">
                 <div>
-                    <h2 className="text-xl font-bold text-slate-800">Upload Report</h2>
-                    <p className="text-slate-500 text-sm mt-1">Step {step} of 2</p>
+                    <h2 className="text-lg font-bold text-slate-900">Upload New Report</h2>
                 </div>
-                <button onClick={onCancel} className="p-2 hover:bg-slate-100 rounded-lg transition-colors">
-                    <X className="w-5 h-5 text-slate-500" />
+                <button onClick={onCancel} className="p-2 hover:bg-slate-100 rounded-full transition-colors">
+                    <X className="w-5 h-5 text-slate-400" />
                 </button>
             </div>
 
-            {/* Step Indicators */}
-            <div className="px-6 py-4 border-b border-slate-100 bg-slate-50">
-                <div className="flex items-center justify-center gap-3">
-                    <div className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold ${step === 1 ? 'bg-teal-600 text-white' : 'bg-teal-100 text-teal-700'
-                        }`}>
-                        <Calendar className="w-4 h-4" />
-                        Details
-                    </div>
-                    <ChevronRight className="w-5 h-5 text-slate-400" />
-                    <div className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold ${step === 2 ? 'bg-teal-600 text-white' : 'bg-slate-200 text-slate-500'
-                        }`}>
-                        <UploadCloud className="w-4 h-4" />
-                        Upload
-                    </div>
+            {/* Steps Visualizer */}
+            <div className="px-6 py-4 bg-slate-50/50 border-b border-slate-100">
+                <div className="flex items-center gap-2 text-sm">
+                    <span className={`font-bold ${step === 1 ? 'text-teal-700' : 'text-slate-500'}`}>1. Details</span>
+                    <ChevronRight className="w-4 h-4 text-slate-300" />
+                    <span className={`font-bold ${step === 2 ? 'text-teal-700' : 'text-slate-500'}`}>2. Upload & Review</span>
+                </div>
+                <div className="h-1 w-full bg-slate-200 rounded-full mt-3 overflow-hidden">
+                    <div className={`h-full bg-teal-500 transition-all duration-300 ${step === 1 ? 'w-1/2' : 'w-full'}`}></div>
                 </div>
             </div>
 
             {/* Content */}
-            <div className="p-6 sm:p-8">
+            <div className="p-6 sm:p-8 flex-1 overflow-y-auto custom-scrollbar">
                 {step === 1 ? (
-                    /* Step 1: Metadata */
-                    <div className="space-y-6">
+                    <div className="space-y-8 animate-in slide-in-from-right-4 duration-300">
+                        {/* Report Type */}
+                        <div>
+                            <label className="block text-sm font-bold text-slate-700 mb-1">
+                                What type of report is this?
+                            </label>
+                            <p className="text-xs text-slate-500 mb-4">This helps AI choose the correct analysis model.</p>
+                            <div className="grid grid-cols-2 gap-3">
+                                {reportTypes.map(type => (
+                                    <button
+                                        key={type.name}
+                                        onClick={() => setReportType(type.name)}
+                                        className={`px-4 py-3 rounded-xl text-sm font-semibold transition-all border flex items-center gap-3 text-left ${reportType === type.name
+                                            ? 'bg-teal-50 border-teal-200 text-teal-700 ring-1 ring-teal-200'
+                                            : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50'
+                                            }`}
+                                    >
+                                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${reportType === type.name ? 'bg-teal-100' : 'bg-slate-100'}`}>
+                                            {getIcon(type.name)}
+                                        </div>
+                                        <span>{type.name}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
                         {/* Date Picker */}
                         <div>
-                            <label className="block text-sm font-bold text-slate-700 mb-3">
-                                When was this test done?
+                            <label className="block text-sm font-bold text-slate-700 mb-4">
+                                Date of Test
                             </label>
                             <input
                                 type="date"
                                 value={testDate}
                                 onChange={(e) => setTestDate(e.target.value)}
                                 max={new Date().toISOString().split('T')[0]}
-                                className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 text-slate-700 font-semibold text-lg"
+                                className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 text-slate-900 font-medium outline-none transition-all"
                             />
                         </div>
 
-                        {/* Report Type */}
-                        <div>
-                            <label className="block text-sm font-bold text-slate-700 mb-3">
-                                Report Type
-                            </label>
-                            <div className="grid grid-cols-2 gap-3">
-                                {reportTypes.map(type => (
-                                    <button
-                                        key={type.name}
-                                        onClick={() => setReportType(type.name)}
-                                        className={`px-4 py-4 rounded-xl text-sm font-bold transition-all border-2 flex items-center gap-3 ${reportType === type.name
-                                                ? 'bg-teal-600 text-white border-teal-600 shadow-lg shadow-teal-500/20'
-                                                : 'bg-white text-slate-600 border-slate-200 hover:border-teal-400'
-                                            }`}
-                                    >
-                                        <span className="text-lg">{type.icon}</span>
-                                        {type.name}
-                                    </button>
-                                ))}
+                        <div className="pt-2">
+                            <button
+                                onClick={() => setStep(2)}
+                                className="w-full py-3.5 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
+                            >
+                                Continue to Upload
+                                <ChevronRight className="w-4 h-4" />
+                            </button>
+                            <div className="flex items-center justify-center gap-2 mt-4 text-slate-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+                                <p className="text-[10px] font-medium uppercase tracking-wide">Your reports are encrypted & never shared.</p>
                             </div>
                         </div>
-
-                        {/* Next Button */}
-                        <button
-                            onClick={() => setStep(2)}
-                            className="w-full py-4 bg-gradient-to-r from-teal-600 to-cyan-600 text-white font-bold rounded-xl hover:shadow-lg hover:shadow-teal-500/25 transition-all flex items-center justify-center gap-2"
-                        >
-                            Continue
-                            <ChevronRight className="w-5 h-5" />
-                        </button>
                     </div>
                 ) : (
-                    /* Step 2: Upload */
-                    <div className="space-y-6">
-                        {/* Summary */}
-                        <div className="bg-slate-50 rounded-xl p-4 flex items-center gap-4">
-                            <span className="text-2xl">{reportTypes.find(t => t.name === reportType)?.icon}</span>
-                            <div>
-                                <p className="font-semibold text-slate-800">{reportType}</p>
-                                <p className="text-sm text-slate-500">{new Date(testDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
+                    <div className="space-y-6 animate-in slide-in-from-right-4 duration-300">
+                        {/* Selection Summary */}
+                        <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 bg-white rounded-lg border border-slate-200 flex items-center justify-center text-slate-600">
+                                    {getIcon(reportType)}
+                                </div>
+                                <div>
+                                    <p className="font-bold text-slate-900 text-sm">{reportType}</p>
+                                    <p className="text-xs text-slate-500">{new Date(testDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
+                                </div>
                             </div>
-                            <button onClick={() => setStep(1)} className="ml-auto text-teal-600 text-sm font-semibold hover:underline">
-                                Edit
+                            <button onClick={() => setStep(1)} className="text-xs font-bold text-teal-700 hover:underline">
+                                Change
                             </button>
                         </div>
 
                         {/* Dropzone */}
-                        <div
-                            {...getRootProps()}
-                            className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all min-h-[200px] flex flex-col items-center justify-center ${selectedFile
-                                    ? 'border-green-400 bg-green-50'
-                                    : isDragActive
-                                        ? 'border-teal-500 bg-teal-50'
-                                        : 'border-slate-300 bg-slate-50 hover:border-teal-400'
-                                }`}
-                        >
-                            <input {...getInputProps()} />
-
-                            {selectedFile ? (
-                                <div className="flex flex-col items-center">
-                                    <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-4">
-                                        <Check className="w-8 h-8 text-white" />
-                                    </div>
-                                    <p className="font-bold text-green-700 mb-1">{selectedFile.name}</p>
-                                    <p className="text-green-600 text-sm">Click to change file</p>
+                        {!selectedFile ? (
+                            <div
+                                {...getRootProps()}
+                                className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all min-h-[220px] flex flex-col items-center justify-center group ${isDragActive
+                                    ? 'border-teal-500 bg-teal-50/50'
+                                    : 'border-slate-200 bg-slate-50/30 hover:border-teal-400 hover:bg-slate-50'
+                                    }`}
+                            >
+                                <input {...getInputProps()} />
+                                <div className="w-16 h-16 bg-white rounded-full shadow-sm border border-slate-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                    <UploadCloud className="w-8 h-8 text-teal-600" />
                                 </div>
-                            ) : (
-                                <div className="flex flex-col items-center">
-                                    <div className="w-20 h-20 bg-teal-100 rounded-full flex items-center justify-center mb-5">
-                                        <UploadCloud className="w-10 h-10 text-teal-600" />
+                                <p className="font-bold text-slate-900 mb-1">
+                                    Tap to upload report
+                                </p>
+                                <p className="text-slate-400 text-xs">
+                                    PDF, JPG or PNG (Max 10MB)
+                                </p>
+                            </div>
+                        ) : (
+                            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                                <div className="flex items-start gap-4 mb-6">
+                                    <div className="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <FileText className="w-6 h-6 text-teal-600" />
                                     </div>
-                                    <p className="font-bold text-slate-700 text-lg mb-2">
-                                        {isDragActive ? "Drop it here!" : "Click or drag file"}
-                                    </p>
-                                    <p className="text-slate-500">PNG, JPG or PDF • Max 10MB</p>
+                                    <div className="flex-1 min-w-0">
+                                        <p className="font-bold text-slate-900 truncate">{selectedFile.name}</p>
+                                        <p className="text-xs text-slate-500 mt-0.5">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB • Ready to analyze</p>
+                                    </div>
+                                    <button onClick={() => setSelectedFile(null)} className="text-slate-400 hover:text-red-500 transition-colors">
+                                        <X className="w-5 h-5" />
+                                    </button>
                                 </div>
-                            )}
-                        </div>
 
-                        {error && (
-                            <div className="p-4 bg-red-50 text-red-600 text-sm rounded-xl flex items-center gap-3 border border-red-200">
-                                <AlertCircle size={20} />
-                                <span className="font-medium">{error}</span>
+                                {error && (
+                                    <div className="mb-6 p-4 bg-red-50 border border-red-100 rounded-xl flex items-center gap-3 text-red-600 text-sm">
+                                        <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                                        <span>{error}</span>
+                                    </div>
+                                )}
+
+                                <button
+                                    onClick={handleUpload}
+                                    disabled={uploading}
+                                    className="w-full py-4 bg-teal-600 text-white font-bold rounded-xl hover:bg-teal-700 transition-all shadow-lg shadow-teal-500/20 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                >
+                                    <Activity className="w-5 h-5" />
+                                    Analyze Report Now
+                                </button>
                             </div>
                         )}
 
-                        {/* Buttons */}
-                        <div className="flex gap-4">
-                            <button
-                                onClick={() => setStep(1)}
-                                className="flex-1 py-4 text-slate-600 font-semibold border-2 border-slate-200 rounded-xl hover:bg-slate-50 transition-colors"
-                            >
-                                Back
-                            </button>
-                            <button
-                                onClick={handleUpload}
-                                disabled={!selectedFile || uploading}
-                                className={`flex-1 py-4 font-bold rounded-xl transition-all flex items-center justify-center gap-2 ${selectedFile && !uploading
-                                        ? 'bg-gradient-to-r from-teal-600 to-cyan-600 text-white hover:shadow-lg hover:shadow-teal-500/25'
-                                        : 'bg-slate-100 text-slate-400 cursor-not-allowed'
-                                    }`}
-                            >
-                                Analyze Report
+                        <div className="flex justify-center">
+                            <button onClick={() => setStep(1)} className="text-sm font-semibold text-slate-400 hover:text-slate-600">
+                                Go Back
                             </button>
                         </div>
                     </div>

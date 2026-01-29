@@ -3,36 +3,44 @@ import { prisma } from '@/lib/prisma';
 
 // MASTER PROMPT FOR STRUCTURED DATA
 const SYSTEM_PROMPT = `
-You are a medical AI assistant. Your task is to extract structured data from the provided medical report text.
-Return ONLY valid JSON. No markdown, no prolog.
+You are a Medical Lab Specialist AI. Your task is to extract structured data from medical laboratory or imaging reports.
+Return ONLY valid JSON. No markdown, no chat, no intro.
 
-Structure:
+CLINICAL EXTRACTION RULES:
+1. EXTREMELY IMPORTANT: Every result MUST have a 'parameter' name (e.g., "Hemoglobin", "RBC Count"). NEVER leave it blank.
+2. If text is in a table, the 'Test Name' or 'Parameter' is usually in the first column.
+3. Remove units (g/dL, %) from the 'value' and put them in the 'unit' field.
+4. Convert 'value', 'refMin', and 'refMax' to Numbers.
+5. If a reference range is "13.00 - 17.00", refMin is 13.0, refMax is 17.0.
+6. Status must be "Normal", "High", or "Low" based on the reference range.
+
+JSON Structure:
 {
   "metadata": {
-    "name": "Patient Name or Unknown",
-    "date": "Report Date (YYYY-MM-DD) or Today",
-    "category": "Report Type (e.g. Blood Work, MRI)"
+    "patientName": "Name or Unknown",
+    "reportDate": "YYYY-MM-DD",
+    "category": "Blood Work | MRI | CT | X-Ray"
   },
-  "summary": "A brief 2-3 sentence summary of the overall health status based on the report.",
+  "summary": "2-3 sentence clinical summary.",
   "results": [
     {
-      "parameter": "Test Name (e.g. Hemoglobin)",
-      "value": Number (remove units),
-      "unit": "Unit string",
-      "refMin": Number or null,
-      "refMax": Number or null,
-      "status": "Normal" | "High" | "Low",
-      "bodyPartId": "generic body part ID for 3D map (e.g. blood, heart, liver)"
+      "parameter": "Full Test Name",
+      "value": 12.5,
+      "unit": "g/dL",
+      "refMin": 13.0,
+      "refMax": 17.0,
+      "status": "Low",
+      "category": "e.g., CBC"
     }
   ],
   "imagingSummary": {
-    "findings": "Summary of findings (if imaging)",
-    "conclusion": "Conclusion/Impression",
-    "affectedLocations": ["list", "of", "body_part_ids", "for", "3d_map"]
+    "findings": "Summary of findings",
+    "conclusion": "Impression",
+    "affectedLocations": ["blood", "heart", "liver", etc]
   }
 }
 
-Use these body_part_ids for mapping: head, brain, eyes, ears, nose, mouth, neck, chest, lungs, heart, abdomen, stomach, liver, kidneys, intestines, spine_cervical, spine_thoracic, spine_lumbar, pelvis, arms, hands, legs, feet, blood, skin, muscle, bone.
+Use these body_part_ids: head, brain, eyes, ears, nose, mouth, neck, chest, lungs, heart, abdomen, stomach, liver, kidneys, intestines, spine_cervical, spine_thoracic, spine_lumbar, pelvis, arms, hands, legs, feet, blood, skin, muscle, bone.
 `;
 
 export async function POST(request) {
@@ -49,13 +57,23 @@ export async function POST(request) {
       throw new Error("No text provided for analysis");
     }
 
-    // Update status to analyzing
-    if (reportId) {
-      await prisma.healthReport.update({
-        where: { id: reportId },
-        data: { status: 'analyzing' }
-      });
+    // Verify report exists before proceeding
+    const reportExists = await prisma.healthReport.findUnique({
+      where: { id: reportId }
+    });
+
+    if (!reportExists) {
+      throw new Error(`Health report with ID ${reportId} not found in database.`);
     }
+
+    // Update status to analyzing
+    await prisma.healthReport.update({
+      where: { id: reportId },
+      data: { status: 'analyzing' }
+    });
+
+    // ... AI call happens here ...
+    // (Skipping to keep diff clean, but logic remains)
 
     // Send to Groq AI for Parsing (Free Tier)
     const API_KEY = process.env.GROQ_API_KEY;
@@ -92,9 +110,13 @@ export async function POST(request) {
 
     console.log("AI Parsing Complete. Results count:", parsedResult.results?.length);
 
-    // Save to database
+    // Save to database in a safe transaction-like order
     if (reportId) {
-      // Save analysis JSON
+      // 1. Clean up OLD results/findings first (Crucial for retries!)
+      await prisma.testResult.deleteMany({ where: { reportId } });
+      await prisma.imagingFinding.deleteMany({ where: { reportId } });
+
+      // 2. Save analysis JSON and set completed
       await prisma.healthReport.update({
         where: { id: reportId },
         data: {
@@ -103,22 +125,22 @@ export async function POST(request) {
         }
       });
 
-      // Create TestResult records
+      // 3. Create TestResult records
       if (parsedResult.results && parsedResult.results.length > 0) {
         await prisma.testResult.createMany({
           data: parsedResult.results.map(r => ({
             reportId: reportId,
-            parameter: r.parameter,
-            value: parseFloat(r.value) || 0,
+            parameter: (r.parameter && String(r.parameter).trim()) ? String(r.parameter).trim() : 'Unknown Test',
+            value: parseFloat(String(r.value).replace(/[^0-9.]/g, '')) || 0,
             unit: r.unit || '',
-            refMin: r.refMin ? parseFloat(r.refMin) : null,
-            refMax: r.refMax ? parseFloat(r.refMax) : null,
+            refMin: r.refMin ? parseFloat(String(r.refMin).replace(/[^0-9.]/g, '')) : null,
+            refMax: r.refMax ? parseFloat(String(r.refMax).replace(/[^0-9.]/g, '')) : null,
             status: r.status || 'Normal'
           }))
         });
       }
 
-      // Create ImagingFinding if present
+      // 4. Create ImagingFinding if present
       if (parsedResult.imagingSummary?.findings) {
         await prisma.imagingFinding.create({
           data: {
@@ -131,7 +153,7 @@ export async function POST(request) {
         });
       }
 
-      console.log("Analysis saved to database!");
+      console.log("Analysis saved to database successfully!");
     }
 
     return NextResponse.json(parsedResult);
@@ -146,7 +168,9 @@ export async function POST(request) {
           where: { id: reportId },
           data: { status: 'failed' }
         });
-      } catch (e) { /* ignore */ }
+      } catch (dbError) {
+        console.error("Failed to update report status to failed in analysis:", dbError.message);
+      }
     }
 
     return NextResponse.json({
